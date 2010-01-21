@@ -1,0 +1,101 @@
+/********************************************************************* Global */
+body {
+    background-color: white;
+    color: WindowText;
+    font-size: 10pt;
+    font-family: sans;
+    margin: 2px;
+}
+
+a {
+    color: #a00;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #a00;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #a00;
+    text-decoration: underline;
+}
+
+/*************************************************************** Items global */
+div.item {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-repeat: no-repeat;
+}
+
+div.item.current {
+    background-color: Highlight;
+    color: white;
+}
+
+/*********************************************************** Items by actions */
+div.item.all div.img {
+    margin-left: 5px;
+    width: 16px;
+    height: 16px;
+    background-image: url("action.png");
+    background-position: -176px 0;
+}
+
+div.item.all div.text {
+    margin-left: 26px;
+    float: left;
+}
+
+div.item.downloading div.img {
+    margin-left: 5px;
+    width: 16px;
+    height: 16px;
+    background-image: url("action.png");
+    background-position: 0 0;
+}
+
+div.item.downloading div.text {
+    margin-left: 26px;
+    float: left;
+}
+
+div.item.completed div.img {
+    margin-left: 5px;
+    width: 16px;
+    height: 16px;
+    background-image: url("action.png");
+    background-position: -16px 0;
+}
+
+div.item.completed div.text {
+    margin-left: 26px;
+    float: left;
+}
+
+div.item.active div.img {
+    margin-left: 5px;
+    width: 16px;
+    height: 16px;
+    background-image: url("action.png");
+    background-position: -160px 0;
+}
+
+div.item.active div.text {
+    margin-left: 26px;
+    float: left;
+}
+
+div.item.inactive div.img {
+    margin-left: 5px;
+    width: 16px;
+    height: 16px;
+    background-image: url("action.png");
+    background-position: -192px 0;
+}
+
+div.item.inactive div.text {
+    margin-left: 26px;
+    float: left;
+}

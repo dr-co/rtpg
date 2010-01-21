@@ -1,0 +1,208 @@
+use warnings;
+use strict;
+use utf8;
+use open ':utf8';
+
+=head1 Config
+
+Конфигурация
+
+=cut
+package RTPG::Config;
+use base qw(Exporter);
+use lib qw(.. ../);
+
+use File::Basename;
+use File::Spec;
+
+our @EXPORT = qw(cfg DieDumper Dumper);
+
+###############################################################################
+# This section contains some paths for use in this program
+# Edit this for some OS
+# I think no any place to change. If it`s wrong, please inform me.
+# (Except config file)
+################################################################################
+use constant RTPG_SYSTEM_CONFIG_PATH  => '/etc/rtpg/rtpg.conf';
+use constant RTPG_CONFIG_PATH         => '~/.rtpg/rtpg.conf';
+###############################################################################
+
+=head2 cfg
+
+Получение конфига
+
+=cut
+my $config;
+sub cfg
+{
+    # Кеширование конфига
+    return $config if $config;
+    $config = RTPG::Config->new;
+    return $config;
+}
+
+sub new
+{
+    my $class = shift;
+    my %opts;
+
+    $opts{dir}{config} = [
+        RTPG_SYSTEM_CONFIG_PATH,
+        RTPG_CONFIG_PATH,
+    ];
+
+    $opts{title} = "RTPG";
+
+    # Проверка на локальность пользователя
+    $opts{user}{ip} = $ENV{REMOTE_ADDR};
+    $opts{user}{local} =
+        ( $opts{user}{ip} =~ m/^(10\.|172\.16\.|192\.168\.|127\.0\.)/ ) ?1 :0;
+
+    # Переменные окружения
+    $opts{env} = \%ENV;
+
+    $opts{dir}{base} = File::Spec->rel2abs( dirname(__FILE__) . '/../..' );
+    # Удалим лишние вход/выход из поддиректорий
+    while( $opts{dir}{base} =~ s{(?:/[a-zA-Z0-9._]+/\.\.)}{}g ) {;}
+
+    # Другие директории
+    $opts{dir}{templates} =    $opts{dir}{base} . '/templates';
+    $opts{dir}{cache} =        $opts{dir}{templates} . '/cache';
+
+    # Абсолютные пути к ресурсам
+    $opts{dir}{htdocs} =   $opts{dir}{base} . '/htdocs';
+    $opts{dir}{css} =      $opts{dir}{htdocs} . '/css';
+    $opts{dir}{img} =      $opts{dir}{htdocs} . '/img';
+    $opts{dir}{js} =       $opts{dir}{htdocs} . '/js';
+
+    # относительные пути к ресурсам
+    $opts{url}{base} =     $ENV{SERVER_NAME};
+#    $opts{url}{css} =      $opts{url}{base} . '/css';
+#    $opts{url}{img} =      $opts{url}{base} . '/img';
+#    $opts{url}{js} =       $opts{url}{base} . '/js';
+
+    my $self = bless \%opts, $class;
+
+    # Load params from file
+    $self->load_from_files;
+
+    # Get skin files path
+    $self->{dir}{skin}{base} = $self->{dir}{templates} . '/' .
+                               $self->get('current_skin');
+    $self->{url}{skin}{base} = 'skins/' . $self->get('current_skin');
+
+    return $self;
+}
+
+sub load_from_files
+{
+    my ($self) = @_;
+
+    # Set default params
+    $self->{param} = {};
+
+    # Flag successful loaded
+    my $loaded = 'no';
+
+    # Loading: first default config, next over users config
+    for my $config ( @{$self->{dir}{config}} )
+    {
+        # Get abcoulete path
+        ($config) = glob $config;
+
+        # Next if file not exists
+        next unless -f $config;
+
+        # Open config file
+        open my $file, '<', $config
+            or warn sprintf('Can`t read config file %s : %s', $config, $!);
+        next unless $file;
+
+        # Read and parse file. Next hash write over previus configuration hash
+        %{ $self->{param} } = (
+            %{ $self->{param} },
+            (
+                map{ split m/\s*=\s*/, $_, 2 }
+                grep m/=/,
+                map { s/#\s.*//; s/^\s*#.*//; s/\s+$//; s/^\s+//; $_ } <$file>
+            )
+        );
+
+        # Close file and mark successful loaded
+        close $file;
+        $loaded = 'yes';
+    }
+
+    # Exit if no one config exists
+    die 'Config file not exists' unless $loaded eq 'yes';
+
+    return 1;
+}
+
+
+=head2 get $name
+
+Get parameter by $name.
+
+=cut
+
+sub get
+{
+    my ($self, $name) = @_;
+    return $self->{param}{$name};
+}
+
+=head2 set $name, $value
+
+Set new $value for parameter by $name.
+
+=cut
+
+sub set
+{
+    my ($self, $name, $value) = @_;
+    $self->{param}{$name} = $value;
+}
+
+
+=head2 DieDumper
+
+Print all params and die
+
+=cut
+
+sub DieDumper
+{
+    require Data::Dumper;
+    $Data::Dumper::Indent = 1;
+    $Data::Dumper::Terse = 1;
+    $Data::Dumper::Useqq = 1;
+    $Data::Dumper::Deepcopy = 1;
+    $Data::Dumper::Maxdepth = 0;
+    my $dump = Data::Dumper->Dump([@_]);
+    # юникодные символы преобразуем в них самих
+    # вметсто \x{уродство}
+    $dump=~s/(\\x\{[\da-fA-F]+\})/eval "qq{$1}"/eg;
+    die $dump;
+}
+
+=head2 Dumper
+
+Get all params description
+
+=cut
+
+sub Dumper
+{
+    require Data::Dumper;
+    $Data::Dumper::Indent = 1;
+    $Data::Dumper::Terse = 1;
+    $Data::Dumper::Useqq = 1;
+    $Data::Dumper::Deepcopy = 1;
+    $Data::Dumper::Maxdepth = 0;
+    my $dump = Data::Dumper->Dump([@_]);
+
+    return $dump;
+}
+
+1;

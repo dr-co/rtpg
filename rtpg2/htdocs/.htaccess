@@ -1,0 +1,5 @@
+IndexOptions Charset=UTF-8
+
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/index.cgi
+RewriteRule ^(.*\.cgi)$ /index.cgi?show=$1

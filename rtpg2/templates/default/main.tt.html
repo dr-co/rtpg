@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+    <head>
+        <title>[% config.title %]</title>
+
+        <base href="http://[% config.url.base %]"/>
+
+        <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+        <meta name="author" content="Dmitry E. Oboukhov, Roman V. Nikolaev" />
+        <meta name="keywords" content="RTPG rTorrent Perl Gui" />
+
+        [% FOR css = config.url.skin.css.list %]
+            <link rel="stylesheet" type="text/css" href="[% css %]" />
+        [% END %]
+
+        <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+
+        [% FOR js = config.url.skin.js.list %]
+            <script type="text/javascript" src="[% js %]"></script>
+        [% END %]
+
+    </head>
+
+    <div id="content">[% content || '&nbsp;' %]</div>
+
+</html>

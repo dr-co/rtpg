@@ -1,0 +1,99 @@
+/********************************************************************* Global */
+body {
+    background-color: white;
+    color: WindowText;
+    font-size: 10pt;
+    font-family: sans;
+    padding: 0px;
+    margin: 0px;
+}
+
+table.list {
+    width: 100%;
+}
+
+/*********************************************************************** Head */
+table.list thead th {
+    color: CaptionText;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-color: ActiveCaption;
+}
+
+/************************************************************** Torrents list */
+table.list tbody td.img {
+    text-align: center;
+    width: 16px;
+    padding: 0px;
+    margin: 0px;
+}
+
+table.list tbody td.name {
+    text-align: left;
+}
+
+table.list tbody td.num {
+    text-align: center;
+    width: 2%;
+}
+
+table.list tbody td.size {
+    text-align: right;
+    width: 5%;
+}
+
+table.list tbody td.done {
+    text-align: center;
+    width: 10%;
+}
+
+table.list tbody td.status {
+    text-align: left;
+    width: 10%;
+}
+
+table.list tbody td.seeds {
+    text-align: right;
+    width: 5%;
+}
+
+table.list tbody td.peers {
+    text-align: right;
+    width: 5%;
+}
+
+table.list tbody td.down_speed {
+    text-align: right;
+    width: 5%;
+}
+
+table.list tbody td.up_speed {
+    text-align: right;
+    width: 5%;
+}
+
+table.list tbody td.rate {
+    text-align: right;
+    width: 5%;
+}
+
+/*********************************************************** List alternation */
+table.list tbody.odd td.name {
+
+}
+
+table.list tbody.even td.name {
+    background-color: #fafafa;
+}
+
+/************************************************************** Status images */
+table.list tbody td.img div.img.downloading{
+    width: 16px;
+    height: 16px;
+    border: 0px;
+    background-image: url("action.png");
+    background-position: 0 0;
+    text-align: center;
+    vertical-align: middle;
+    top: 0px;
+}
