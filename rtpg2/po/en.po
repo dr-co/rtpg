@@ -1,0 +1,12 @@
+#: templates/index.tt.html: translate part: #1
+msgid ""
+"Config file was not defined or found. Please define RTPG_CONFIG the variable "
+"in options of your virtual server."
+msgstr ""
+
+#: templates/index.tt.html: translate part: #2
+msgid "File not found"
+msgstr ""
+
+msgid "Error"
+msgstr ""

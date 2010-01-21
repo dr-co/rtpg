@@ -1,0 +1,18 @@
+Source: rtpg
+Maintainer: Dmitry E. Oboukhov <unera@debian.org>
+Section: web
+Priority: optional
+Build-Depends: cdbs, debhelper (>= 5), po-debconf
+Standards-Version: 3.8.3
+Homepage: http://rtpg.uvw.ru
+Vcs-browser: http://svn.uvw.ru/rtpg
+
+Package: rtpg-www
+Architecture: all
+Depends: librpc-xml-perl, libjson-xs-perl, libjs-jquery, libtemplate-perl,
+ rtorrent (>= 0.7.9), debconf, apache2 | httpd, ${misc:Depends},
+ liblocale-po-perl
+Recommends: libapache2-mod-scgi, apache2
+Description: web based front end for rTorrent
+ RTPG (rTorrent Perl GUI) is a simple web interface for rTorrent. Users
+ can scan/delete/add torrents and set their respective priorities.

@@ -11,10 +11,11 @@ use open ':utf8';
 
 package RTPG::Template;
 use base qw(Template);
-use lib qw(.. ../ );
+use lib qw(.. ../ lib/);
 
 use CGI;
 use RTPG::Config;
+use RTPG::Locale;
 
 sub new
 {
@@ -45,10 +46,10 @@ sub process
 {
     my $self = shift;
 
-    # Получение выдачи #########################################################
+    # Get output ###############################################################
     my ($header, $output) = ('', '');
 
-    # Получим заголовок
+    # Get header
     $header = CGI->new->header(
         -charset        => 'utf-8',
         -type           => 'text/html',
@@ -56,38 +57,40 @@ sub process
         -expires        => 'now'
     );
 
-    # Добавим стандартные параметры
+    # Add common params
     push @_, {
             common  => { },
-            config  => cfg()
+            config  => cfg(),
+            gettext => sub{ return RTPG::Locale::gettext(@_) },
         };
-    # Парсинг шаблона
+    # Get body
     $self->SUPER::process(@_, \$output);
 
-    # Если была ошибка то выведим соответствующую страницу
+    # Load error page if error
     if( $self->error() )
     {
-        # Поменяем страницу
+        # Change to error page
         shift @_;
         unshift @_, 'error.tt.html';
 
-        # Добавим сообщение об ошибке
+        # Get error message
         my ($message, $status) = ($self->error(), 503);
-        # Если шаблон не найден (станицы нет) то выведим 404
-        $status = 404, $message = 'File not found'
+        # If template not found return 404 status
+        $status = 404, $message = RTPG::Locale::gettext('File not found')
             if $message =~ m/^file error - .* not found$/;
 
+        # Add error message
         $_[1]{error} = {
             message => $message,
             status  => $status,
         };
 
-        # Выведим страницу либо просто сообщение если шаблоны совсем не работают
+        # Get error page body or error message only if Template not work
         $self->SUPER::process(@_, \$output);
         $output .= $self->error() if $self->error();
     }
 
-    # Вывод ####################################################################
+    # Output ###################################################################
     print $header;
     print $output;
 }

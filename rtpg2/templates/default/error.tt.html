@@ -1,5 +1,7 @@
 <div id="error">
-    <h1>Ошибка [% error.status | html %]</h1>
+    <h1>
+        [% gettext('Error') _ ' ' _ error.status | html %]
+    </h1>
     <br/><br/>
     <small>[% error.message | html %]</small>
 </div>

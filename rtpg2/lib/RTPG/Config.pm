@@ -66,17 +66,18 @@ sub new
     while( $opts{dir}{base} =~ s{(?:/[a-zA-Z0-9._]+/\.\.)}{}g ) {;}
 
     # Другие директории
-    $opts{dir}{templates} =    $opts{dir}{base} . '/templates';
-    $opts{dir}{cache} =        $opts{dir}{templates} . '/cache';
+    $opts{dir}{templates}   = $opts{dir}{base}      . '/templates';
+    $opts{dir}{cache}       = $opts{dir}{templates} . '/cache';
+    $opts{dir}{po}          = $opts{dir}{base}      . '/po';
 
     # Абсолютные пути к ресурсам
-    $opts{dir}{htdocs} =   $opts{dir}{base} . '/htdocs';
-    $opts{dir}{css} =      $opts{dir}{htdocs} . '/css';
-    $opts{dir}{img} =      $opts{dir}{htdocs} . '/img';
-    $opts{dir}{js} =       $opts{dir}{htdocs} . '/js';
+    $opts{dir}{htdocs}      = $opts{dir}{base}      . '/htdocs';
+    $opts{dir}{css}         = $opts{dir}{htdocs}    . '/css';
+    $opts{dir}{img}         = $opts{dir}{htdocs}    . '/img';
+    $opts{dir}{js}          = $opts{dir}{htdocs}    . '/js';
 
     # относительные пути к ресурсам
-    $opts{url}{base} =     $ENV{SERVER_NAME};
+    $opts{url}{base}        = $ENV{SERVER_NAME};
 #    $opts{url}{css} =      $opts{url}{base} . '/css';
 #    $opts{url}{img} =      $opts{url}{base} . '/img';
 #    $opts{url}{js} =       $opts{url}{base} . '/js';

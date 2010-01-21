@@ -10,6 +10,7 @@ use open ':utf8';
 use CGI::Carp qw(fatalsToBrowser);
 use RTPG::Config;
 use RTPG::Template;
+use RTPG::Locale;
 
 # Get page name ################################################################
 my $show = CGI::param('show') || 'index';
