@@ -9,4 +9,25 @@ msgid "File not found"
 msgstr ""
 
 msgid "Error"
-msgstr "My Error"
+msgstr ""
+
+msgid "sec."
+msgstr ""
+
+msgid "min."
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "Downloading"
+msgstr ""
+
+msgid "Completed"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""

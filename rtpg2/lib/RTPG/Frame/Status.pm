@@ -22,6 +22,9 @@ sub get
 {
     my ($class, %opts) = @_;
 
+    # Get current state
+    $opts{$_} = cfg->get($_) for qw();
+
     my $self = bless \%opts, $class;
 
     return $self;

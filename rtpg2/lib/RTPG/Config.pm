@@ -12,6 +12,7 @@ package RTPG::Config;
 use base qw(Exporter);
 use lib qw(.. ../);
 
+use CGI;
 use File::Basename;
 use File::Spec;
 
@@ -23,8 +24,10 @@ our @EXPORT = qw(cfg DieDumper Dumper);
 # I think no any place to change. If it`s wrong, please inform me.
 # (Except config file)
 ################################################################################
-use constant RTPG_SYSTEM_CONFIG_PATH  => '/etc/rtpg/rtpg.conf';
-use constant RTPG_CONFIG_PATH         => '~/.rtpg/rtpg.conf';
+#use constant RTPG_SYSTEM_CONFIG_PATH  => '/etc/rtpg/rtpg.conf';
+#use constant RTPG_CONFIG_PATH         => '~/.rtpg/rtpg.conf';
+use constant RTPG_SYSTEM_CONFIG_PATH  => '/home/rubin/workspace/rtpg2/config/rtpg.conf';
+use constant RTPG_CONFIG_PATH         => '/home/rubin/workspace/rtpg2/config/rtpg.conf';
 ###############################################################################
 
 =head2 cfg
@@ -88,8 +91,11 @@ sub new
     $self->load_from_files;
 
     # Get skin files path
-    $self->{dir}{skin}{base} = $self->{dir}{templates} . '/' .
-                               $self->get('skin');
+    $self->{dir}{skin}{files}   = $opts{dir}{htdocs} . '/skins';
+    $self->{dir}{skin}{current} = $self->{dir}{skin}{files} . '/' .
+                                  $self->get('skin');
+    $self->{dir}{skin}{base}    = $self->{dir}{templates} . '/' .
+                                  $self->get('skin');
     $self->{url}{skin}{base} = 'skins/' . $self->get('skin');
 
     return $self;
@@ -150,7 +156,10 @@ Get parameter by $name.
 sub get
 {
     my ($self, $name) = @_;
-    return $self->{param}{$name};
+    my $value = CGI::param($name)       || CGI::cookie($name)   ||
+                $self->{param}{$name}   || '';
+
+    return $value;
 }
 
 =head2 set $name, $value
@@ -162,9 +171,51 @@ Set new $value for parameter by $name.
 sub set
 {
     my ($self, $name, $value) = @_;
+
+    # Permanent set new state into cookies
+    push @{ $self->{cookies} },
+        CGI::cookie(-name => $name, -value => $value, -expires => '+2y')
+            unless $value eq CGI::cookie($name);
+
     $self->{param}{$name} = $value;
 }
 
+=head2 cookies
+
+Get cookies to response
+
+=cut
+sub cookies { return shift->{cookies}; }
+
+=head2 skins
+
+Get list of aviable skins
+
+=cut
+sub skins
+{
+    my ($self) = @_;
+
+    # Get paths to skins
+    my @paths = glob sprintf( '%s/*', $self->{dir}{skin}{files});
+
+    # Get skins titles
+    my %skins;
+    for my $path ( @paths )
+    {
+        # Get name as last part of path
+        my ($name) = $path =~ m|^.*/(.*?)$|;
+        # Set fullpath
+        my $file = sprintf '%s/%s/title.txt', $self->{dir}{skin}{files}, $name;
+        # Get title from file
+        my $title = `cat $file`;
+        s/^\s+//, s/\s+$//, s/[^\w\s.,]//g for $title;
+        # Set skin description
+        $skins{$name} = $title || ucfirst( lc $name );
+    }
+
+    return \%skins;
+}
 
 =head2 DieDumper
 

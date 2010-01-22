@@ -41,10 +41,10 @@ sub new
     my ($class, %opts) = @_;
 
     # Set default
-    $opts{language} ||= 'en';
+    $opts{language} ||= cfg->get('locale');
 
     # Get aviable translations
-    my @langs = map { m|/(\w*?).po$| } glob sprintf '%s/*.po', cfg()->{dir}{po};
+    my @langs = aviable();
     warn 'No translation files' unless @langs;
 
     # Check for pod file and drop to default if not exists
@@ -115,4 +115,14 @@ sub gettext
     return $string;
 }
 
+=head2 aviable
+
+Get aviable translations
+
+=cut
+sub aviable
+{
+    # Get aviable translations
+    return [ map { m|/(\w*?).po$| } glob sprintf '%s/*.po', cfg()->{dir}{po} ];
+}
 1;

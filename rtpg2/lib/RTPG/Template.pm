@@ -25,13 +25,12 @@ sub new
     $Template::Stash::SCALAR_OPS->{dump} =
     $Template::Stash::HASH_OPS->{dump} =
     $Template::Stash::LIST_OPS->{dump} = sub {'###'.Dumper(@_).'###'};
-
     my $obj = $class->SUPER::new(
         RELATIVE        => 1,
         ABSOLUTE        => 1,
         RECURSION       => 1,
-        INCLUDE_PATH    => cfg()->{dir}{skin}{base} . ':' .
-                           cfg()->{dir}{templates},
+        INCLUDE_PATH    => cfg->{dir}{skin}{base} . ':' .
+                           cfg->{dir}{templates},
         PRE_CHOMP       => 1,
         POST_CHOMP      => 1,
         TRIM            => 1,
@@ -64,8 +63,7 @@ sub process
         -type           => 'text/html',
         -Cache_Control  => 'no-cache, no-store, max-age=0, must-revalidate',
         -expires        => 'now',
-        (%$opts and exists $opts->{data} and exists $opts->{data}{cookies})
-                        ? (-cookie => $opts->{data}{cookies})
+        (cfg->cookies)  ? (-cookie => cfg->cookies)
                         : (),
     );
 
@@ -73,7 +71,9 @@ sub process
     $opts = {
         common  => { },
         config  => cfg(),
-        gettext => sub{ return RTPG::Locale::gettext(@_) },
+        gettext => sub{ return RTPG::Locale::gettext(@_)    },
+        langs   => sub{ return RTPG::Locale::aviable()      },
+        skins   => sub{ return cfg->skins()                 },
         %$opts
     };
 

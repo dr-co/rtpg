@@ -9,7 +9,7 @@ RTPG::
 
 =cut
 
-package RTPG::Frame::List;
+package RTPG::Frame::Index;
 use lib qw(.. ../);
 use CGI;
 use RTPG::Config;
@@ -25,7 +25,7 @@ sub get
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(action);
+    $opts{$_} = cfg->get($_) for qw(locale);
 
     my $self = bless \%opts, $class;
 

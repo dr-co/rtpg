@@ -25,3 +25,24 @@ msgstr "Файл не найден"
 
 msgid "Error"
 msgstr "Ошибка"
+
+msgid "sec."
+msgstr "сек."
+
+msgid "min."
+msgstr "мин."
+
+msgid "All"
+msgstr "Все"
+
+msgid "Downloading"
+msgstr "Закачивающиеся"
+
+msgid "Completed"
+msgstr "Завершенные"
+
+msgid "Active"
+msgstr "Активные"
+
+msgid "Inactive"
+msgstr "Неактивные"

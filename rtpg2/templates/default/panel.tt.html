@@ -28,14 +28,24 @@
     </div>
     <div class="param skin">
         <select id="skin">
-            <option value="default">Default</option>
-            <option value="modern">Modern</option>
+            [% FOR sk IN skins %]
+                <option
+                    value="[% sk.key | html %]"
+                    [% IF data.skin == sk.key %]selected="selected"[% END %]>
+                        [% sk.value | html %]
+                </option>
+            [% END %]
         </select>
     </div>
     <div class="param locale">
         <select id="locale">
-            <option value="en">EN</option>
-            <option value="ru">RU</option>
+            [% FOR lg = langs %]
+                <option
+                    value="[% lg | html %]"
+                    [% IF data.locale == lg %]selected="selected"[% END %]>
+                        [% lg | upper | html %]
+                </option>
+            [% END %]
         </select>
     </div>
 </div>

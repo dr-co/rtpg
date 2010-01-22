@@ -32,11 +32,6 @@ $(document).ready(function(){
 
 function on_change_locale()
 {
-    jQuery.getJSON(
-        'ajax.cgi',
-        {
-            locale: $(this).val()
-        },
-        function(data) { $(this).val( data.locale ) }
-    );
+    // Update window with new locale
+    window.parent.document.location = 'index.cgi?locale=' + $(this).val();
 }

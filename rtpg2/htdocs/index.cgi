@@ -21,23 +21,28 @@ use RTPG::Locale;
 
 my %params;
 
-# Get page name ################################################################
+# Get params ###################################################################
 my $show = CGI::param('show') || 'index';
 $show =~ s/\.cgi.*//g;
 
-# Load module and get data #####################################################
-if( $show ne 'index' )
+for my $name ( qw(locale refresh skin action) )
 {
-    my $module = 'RTPG::Frame::' . ucfirst lc $show;
-    eval "require $module";
-    if( $@ )
-    {
-        $show = 'error';
-        $params{error} = { message => $@, status => 503 };
-    }
-
-    $params{data} = $module->get;
+    # Get new parameter value
+    my $value = CGI::param($name);
+    # Set new state if value exists
+    cfg->set($name, $value) if $value;
 }
+
+# Load module and get data #####################################################
+my $module = 'RTPG::Frame::' . ucfirst lc $show;
+eval "require $module";
+if( $@ )
+{
+    $show = 'error';
+    $params{error} = { message => $@, status => 503 };
+}
+
+$params{data} = $module->get;
 
 # Files for this page ##########################################################
 my ($css, $js) = (

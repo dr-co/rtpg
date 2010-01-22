@@ -11,6 +11,8 @@ RTPG::
 
 package RTPG::Frame::Action;
 use lib qw(.. ../);
+use CGI;
+use RTPG::Config;
 
 =head2 get
 
@@ -22,18 +24,8 @@ sub get
 {
     my ($class, %opts) = @_;
 
-    # Get parameters
-    for my $name ( qw(action) )
-    {
-        # Get current state
-        $opts{$name} = CGI::param($name) || CGI::cookie($name) ||
-                        cfg->get($name)  || '';
-
-        # Permanent set new state into cookies
-        push @{ $opts{cookies} },
-            CGI::cookie(-name => $name, -value => $opts{$name}, -expires => '+2y')
-                unless $opts{$name} eq CGI::cookie($name);
-    }
+    # Get current state
+    $opts{$_} = cfg->get($_) for qw(action);
 
     my $self = bless \%opts, $class;
 
