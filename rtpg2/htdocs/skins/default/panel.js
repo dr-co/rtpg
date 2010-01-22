@@ -23,5 +23,20 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
-    This file contain styles for frameset
+    This file contain java scripts for Action frame
 */
+
+$(document).ready(function(){
+    $('#locale').bind('change', on_change_locale);
+});
+
+function on_change_locale()
+{
+    jQuery.getJSON(
+        'ajax.cgi',
+        {
+            locale: $(this).val()
+        },
+        function(data) { $(this).val( data.locale ) }
+    );
+}

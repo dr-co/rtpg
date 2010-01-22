@@ -1,6 +1,92 @@
+/*
+
+AUTHORS
+
+ Copyright (C) 2010 Dmitry E. Oboukhov <unera@debian.org>
+ Copyright (C) 2010 Nikolaev Roman <rshadow@rambler.ru>
+
+LICENSE
+
+This program is free software: you can redistribute  it  and/or  modify  it
+under the terms of the GNU General Public License as published by the  Free
+Software Foundation, either version 3 of the License, or (at  your  option)
+any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even  the  implied  warranty  of  MERCHANTABILITY  or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public  License  for
+more details.
+
+You should have received a copy of the GNU  General  Public  License  along
+with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
+/* This file contain styles for Panel frame */
+/********************************************************************* Global */
 body {
     background-color: Menu;
     color: MenuText;
     font-size: 10pt;
     font-family: sans;
+    white-space: nowrap;
+    margin: 0px;
+    padding: 4px;
+}
+
+span.panel.separator {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 1px;
+    max-width: 1px;
+    background-color: ThreeDShadow;
+}
+
+/******************************************************************** Buttons */
+#panel {
+    clear: both;
+    float: left;
+}
+
+input.panel {
+    width: 24px;
+    height: 24px;
+    background-image: url("panel.png");
+    background-repeat: no-repeat;
+    border: none;
+    background-color: Menu;
+}
+
+input.panel.delete {
+    background-position: -72px 0;
+}
+
+input.panel.start {
+    background-position: -96px 0;
+}
+
+input.panel.pause {
+    background-position: -120px 0;
+}
+
+input.panel.stop {
+    background-position: -144px 0;
+}
+
+input.panel.priority_up {
+    background-position: -168px 0;
+}
+
+input.panel.priority_down {
+    background-position: -192px 0;
+}
+
+/******************************************************************* Settings */
+#settings {
+    float: right;
+    right: 0px;
+}
+
+div.param {
+    float: left
 }

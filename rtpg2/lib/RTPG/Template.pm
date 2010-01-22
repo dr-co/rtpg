@@ -20,6 +20,12 @@ use RTPG::Locale;
 sub new
 {
     my $class = shift;
+
+    $Template::Stash::ROOT_OPS->{dump} =
+    $Template::Stash::SCALAR_OPS->{dump} =
+    $Template::Stash::HASH_OPS->{dump} =
+    $Template::Stash::LIST_OPS->{dump} = sub {'###'.Dumper(@_).'###'};
+
     my $obj = $class->SUPER::new(
         RELATIVE        => 1,
         ABSOLUTE        => 1,
@@ -39,12 +45,15 @@ sub new
 
 =head2 process
 
-Вывод шаблона
+Output template.
 
 =cut
+
 sub process
 {
-    my $self = shift;
+    my ($self, $template, $opts) = @_;
+
+    $opts = {} if !defined $opts or !%$opts;
 
     # Get output ###############################################################
     my ($header, $output) = ('', '');
@@ -54,39 +63,45 @@ sub process
         -charset        => 'utf-8',
         -type           => 'text/html',
         -Cache_Control  => 'no-cache, no-store, max-age=0, must-revalidate',
-        -expires        => 'now'
+        -expires        => 'now',
+        (%$opts and exists $opts->{data} and exists $opts->{data}{cookies})
+                        ? (-cookie => $opts->{data}{cookies})
+                        : (),
     );
 
     # Add common params
-    push @_, {
-            common  => { },
-            config  => cfg(),
-            gettext => sub{ return RTPG::Locale::gettext(@_) },
-        };
+    $opts = {
+        common  => { },
+        config  => cfg(),
+        gettext => sub{ return RTPG::Locale::gettext(@_) },
+        %$opts
+    };
+
     # Get body
-    $self->SUPER::process(@_, \$output);
+    $self->SUPER::process($template, $opts, \$output);
 
     # Load error page if error
     if( $self->error() )
     {
         # Change to error page
-        shift @_;
-        unshift @_, 'error.tt.html';
+        $template = 'error.tt.html';
 
-        # Get error message
-        my ($message, $status) = ($self->error(), 503);
         # If template not found return 404 status
-        $status = 404, $message = RTPG::Locale::gettext('File not found')
-            if $message =~ m/^file error - .* not found$/;
-
-        # Add error message
-        $_[1]{error} = {
-            message => $message,
-            status  => $status,
-        };
+        if( $self->error() =~ m/^file error - .* not found$/ )
+        {
+            $opts->{error} = {
+                message => RTPG::Locale::gettext('File not found'),
+                status => 404
+            };
+        }
+        # Get error message
+        else
+        {
+            $opts->{error} = { message => $self->error(), status => 503 };
+        }
 
         # Get error page body or error message only if Template not work
-        $self->SUPER::process(@_, \$output);
+        $self->SUPER::process($template, $opts, \$output);
         $output .= $self->error() if $self->error();
     }
 

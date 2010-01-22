@@ -23,5 +23,15 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
-    This file contain styles for frameset
+    This file contain java scripts for List frame
 */
+
+$(document).ready(function(){
+    $('#list table.list tbody').bind('click', on_click_list);
+});
+
+function on_click_list()
+{
+    $('#list table.list tbody').removeClass('selected');
+    $(this).addClass('selected');
+}

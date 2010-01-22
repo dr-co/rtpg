@@ -9,4 +9,4 @@ msgid "File not found"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "My Error"

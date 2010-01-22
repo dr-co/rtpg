@@ -1,3 +1,31 @@
+/*
+
+AUTHORS
+
+ Copyright (C) 2010 Dmitry E. Oboukhov <unera@debian.org>
+ Copyright (C) 2010 Nikolaev Roman <rshadow@rambler.ru>
+
+LICENSE
+
+This program is free software: you can redistribute  it  and/or  modify  it
+under the terms of the GNU General Public License as published by the  Free
+Software Foundation, either version 3 of the License, or (at  your  option)
+any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even  the  implied  warranty  of  MERCHANTABILITY  or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public  License  for
+more details.
+
+You should have received a copy of the GNU  General  Public  License  along
+with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
+/*
+    This file contain styles for List frame
+*/
+
 /********************************************************************* Global */
 body {
     background-color: white;
@@ -21,6 +49,15 @@ table.list thead th {
 }
 
 /************************************************************** Torrents list */
+table.list tbody{
+    cursor: pointer;
+}
+
+table.list tbody td.select {
+    text-align: left;
+    width: 1%;
+}
+
 table.list tbody td.img {
     text-align: center;
     width: 16px;
@@ -96,4 +133,12 @@ table.list tbody td.img div.img.downloading{
     text-align: center;
     vertical-align: middle;
     top: 0px;
+}
+
+/*************************************************************** Selected row */
+table.list tbody.selected,
+table.list tbody.selected tr,
+table.list tbody.selected td{
+    background-color: Highlight !important;
+    color: HighlightText !important;
 }

@@ -1,36 +1,40 @@
-<table class="list">
-<thead>
-    <tr>
-        <th colspan="2">Name</th>
-        <th>#</th>
-        <th>Size</th>
-        <th>Done</th>
-        <th>Status</th>
-        <th>Seeds</th>
-        <th>Peers</th>
-        <th>Down Speed</th>
-        <th>Up Speed</th>
-        <th>Rate</th>
-    </tr>
-</thead>
-[% SET a = [1,2,3,4,5,6,7]%]
-[% FOR i = a %]
-    [% SET class = [] %]
-    [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
-    <tbody class="[% class.join(' ') %]">
+<div id="list">
+    <table class="list">
+    <thead>
         <tr>
-            <td class="img"><div class="img downloading"/></td>
-            <td class="name">AAAAA BBBB VVVVV GGGG</td>
-            <td class="num">1</td>
-            <td class="size">1Gb</td>
-            <td class="done">%</td>
-            <td class="status">Downloading</td>
-            <td class="seeds">12</td>
-            <td class="peers">19</td>
-            <td class="down_speed">1 Mb/s</td>
-            <td class="up_speed">4 Kb/s</td>
-            <td class="rate">0.4</td>
+            <th/>
+            <th colspan="2">Name</th>
+            <th>#</th>
+            <th>Size</th>
+            <th>Done</th>
+            <th>Status</th>
+            <th>Seeds</th>
+            <th>Peers</th>
+            <th>Down Speed</th>
+            <th>Up Speed</th>
+            <th>Rate</th>
         </tr>
-    </tbody>
-[% END %]
-</table>
+    </thead>
+    [% SET a = [1,2,3,4,5,6,7]%]
+    [% FOR i = a %]
+        [% SET class = [] %]
+        [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
+        <tbody class="[% class.join(' ') %]">
+            <tr>
+                <td class="select"><input type="checkbox" value="[%# torrent.id %]"/></td>
+                <td class="img"><div class="img downloading"/></td>
+                <td class="name">AAAAA BBBB VVVVV GGGG</td>
+                <td class="num">1</td>
+                <td class="size">1Gb</td>
+                <td class="done">%</td>
+                <td class="status">Downloading</td>
+                <td class="seeds">12</td>
+                <td class="peers">19</td>
+                <td class="down_speed">1 Mb/s</td>
+                <td class="up_speed">4 Kb/s</td>
+                <td class="rate">0.4</td>
+            </tr>
+        </tbody>
+    [% END %]
+    </table>
+</div>

@@ -1,27 +1,42 @@
 <div id="action">
-    <div class="item all current">
+    <div class="item all [% IF data.action == 'all'%]selected[% END %]">
         <div class="img">&nbsp;</div>
-        <div class="text">All</div>
-        <div class="count">&nbsp;([%  %])</div>
+        <input
+            type="button"
+            class="all"
+            value="[% gettext('All') %]"/>
+        <div class="count">[% '5' %]</div>
     </div>
-    <div class="item downloading">
+    <div class="item downloading [% IF data.action == 'downloading'%]selected[% END %]">
         <div class="img">&nbsp;</div>
-        <div class="text">Downloading</div>
-        <div class="count">&nbsp;([%  %])</div>
+        <input
+            type="button"
+            class="downloading"
+            value="[% gettext('Downloading') %]"/>
+        <div class="count">[% '5' %]</div>
     </div>
-    <div class="item completed">
+    <div class="item completed [% IF data.action == 'completed'%]selected[% END %]">
         <div class="img">&nbsp;</div>
-        <div class="text">Completed</div>
-        <div class="count">&nbsp;([%  %])</div>
+        <input
+            type="button"
+            class="completed"
+            value="[% gettext('Completed') %]"/>
+        <div class="count">[% '5' %]</div>
     </div>
-    <div class="item active">
+    <div class="item active [% IF data.action == 'active'%]selected[% END %]">
         <div class="img">&nbsp;</div>
-        <div class="text">Active</div>
-        <div class="count">&nbsp;([%  %])</div>
+        <input
+            type="button"
+            class="active"
+            value="[% gettext('Active') %]"/>
+        <div class="count">[% '5' %]</div>
     </div>
-    <div class="item inactive">
+    <div class="item inactive [% IF data.action == 'inactive'%]selected[% END %]">
         <div class="img">&nbsp;</div>
-        <div class="text">Inactive</div>
-        <div class="count">&nbsp;([%  %])</div>
+        <input
+            type="button"
+            class="inactive"
+            value="[% gettext('Inactive') %]"/>
+        <div class="count">[% '5' %]</div>
     </div>
 </div>

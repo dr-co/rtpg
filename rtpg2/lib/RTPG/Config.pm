@@ -89,8 +89,8 @@ sub new
 
     # Get skin files path
     $self->{dir}{skin}{base} = $self->{dir}{templates} . '/' .
-                               $self->get('current_skin');
-    $self->{url}{skin}{base} = 'skins/' . $self->get('current_skin');
+                               $self->get('skin');
+    $self->{url}{skin}{base} = 'skins/' . $self->get('skin');
 
     return $self;
 }
