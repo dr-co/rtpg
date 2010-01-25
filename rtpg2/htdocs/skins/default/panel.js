@@ -27,10 +27,21 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 $(document).ready(function(){
+    // Panel buttons
+    $('input.panel.refresh').bind('click', on_refresh);
+
+    // Additional params
     $('#locale').bind('change', on_change_locale);
     $('#refresh').bind('change', on_change_refresh);
     $('#skin').bind('change', on_change_skin);
 });
+
+function on_refresh()
+{
+    // Update all windows
+    window.parent.document.location = 'index.cgi;
+}
+
 
 function on_change_locale()
 {
@@ -40,8 +51,9 @@ function on_change_locale()
 
 function on_change_refresh()
 {
+    $.cookie('refresh', $(this).val());
     // Update window with new refrash rate
-    window.parent.document.location = 'index.cgi?refresh=' + $(this).val();
+//    window.parent.document.location = 'index.cgi?refresh=' + $(this).val();
 }
 
 function on_change_skin()

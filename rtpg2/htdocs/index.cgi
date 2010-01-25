@@ -20,7 +20,7 @@ use RTPG::Template;
 use RTPG::Locale;
 use RTPG;
 
-my %params;
+my %params = (version => $VERSION);
 
 # Setting up rtorrent ##########################################################
 RTPG::rtorrent( url => cfg->get('rpc_uri') );

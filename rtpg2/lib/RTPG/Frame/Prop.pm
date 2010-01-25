@@ -25,10 +25,11 @@ sub get
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(current);
+    $opts{$_} = cfg->get($_) for qw(current debug);
     ($opts{info}, $opts{error}) = RTPG::rtorrent->torrent_info( $opts{current} );
 
-#    DieDumper \%opts;
+    # If debug option aviable die with first list item
+    DieDumper \%opts if $opts{debug};
 
     my $self = bless \%opts, $class;
 
