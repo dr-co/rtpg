@@ -11,6 +11,9 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
+msgid "Never"
+msgstr ""
+
 msgid "sec."
 msgstr ""
 
@@ -20,14 +23,41 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-msgid "Downloading"
+msgid "Started"
 msgstr ""
 
-msgid "Completed"
+msgid "Stopped"
 msgstr ""
 
-msgid "Active"
+msgid "Incomplete"
 msgstr ""
 
-msgid "Inactive"
+msgid "Complete"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Done"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Seeds"
+msgstr ""
+
+msgid "Peers"
+msgstr ""
+
+msgid "Down Speed"
+msgstr ""
+
+msgid "Up Speed"
+msgstr ""
+
+msgid "Rate"
 msgstr ""

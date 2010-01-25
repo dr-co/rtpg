@@ -11,6 +11,8 @@ RTPG::
 
 package RTPG::Frame::Prop;
 use lib qw(.. ../);
+use RTPG;
+use RTPG::Config;
 
 =head2 get
 
@@ -23,7 +25,10 @@ sub get
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw();
+    $opts{$_} = cfg->get($_) for qw(current);
+    ($opts{info}, $opts{error}) = RTPG::rtorrent->torrent_info( $opts{current} );
+
+#    DieDumper \%opts;
 
     my $self = bless \%opts, $class;
 

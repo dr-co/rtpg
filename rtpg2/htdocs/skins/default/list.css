@@ -114,6 +114,14 @@ table.list tbody td.rate {
     width: 5%;
 }
 
+table.list tbody td.rate.positive {
+    color: green;
+}
+
+table.list tbody td.rate.negative {
+    color: #700;
+}
+
 /*********************************************************** List alternation */
 table.list tbody.odd td.name {
 
@@ -124,17 +132,43 @@ table.list tbody.even td.name {
 }
 
 /************************************************************** Status images */
-table.list tbody td.img div.img.downloading{
+table.list tbody td.img div.img{
     width: 16px;
     height: 16px;
     border: 0px;
     background-image: url("action.png");
-    background-position: 0 0;
     text-align: center;
     vertical-align: middle;
     top: 0px;
 }
 
+table.list tbody td.img div.img.downloading{
+    background-position: 0 0;
+}
+
+table.list tbody td.img div.img.seeding{
+    background-position: -16px 0;
+}
+
+table.list tbody td.img div.img.hashing{
+    background-position: -112px 0;
+}
+
+table.list tbody td.img div.img.active{
+    background-position: -160px 0;
+}
+
+table.list tbody td.img div.img.inactive{
+    background-position: -192px 0;
+}
+
+table.list tbody td.img div.img.seeding_inactive{
+    background-position: -144px 0;
+}
+
+table.list tbody td.img div.img.downloading_inactive{
+    background-position: -128px 0;
+}
 /*************************************************************** Selected row */
 table.list tbody.selected,
 table.list tbody.selected tr,

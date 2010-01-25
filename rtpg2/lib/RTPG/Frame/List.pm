@@ -12,6 +12,7 @@ RTPG::
 package RTPG::Frame::List;
 use lib qw(.. ../);
 use CGI;
+use RTPG;
 use RTPG::Config;
 
 =head2 get
@@ -25,7 +26,11 @@ sub get
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(action);
+    $opts{$_} = cfg->get($_) for qw(action current);
+
+    $opts{list} = RTPG::rtorrent->torrents_list( $opts{action} );
+
+#    DieDumper $opts{list}->[0];
 
     my $self = bless \%opts, $class;
 

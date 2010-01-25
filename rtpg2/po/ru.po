@@ -26,6 +26,9 @@ msgstr "Файл не найден"
 msgid "Error"
 msgstr "Ошибка"
 
+msgid "Never"
+msgstr "Никогда"
+
 msgid "sec."
 msgstr "сек."
 
@@ -35,14 +38,41 @@ msgstr "мин."
 msgid "All"
 msgstr "Все"
 
-msgid "Downloading"
-msgstr "Закачивающиеся"
-
-msgid "Completed"
-msgstr "Завершенные"
-
-msgid "Active"
+msgid "Started"
 msgstr "Активные"
 
-msgid "Inactive"
+msgid "Stopped"
 msgstr "Неактивные"
+
+msgid "Incomplete"
+msgstr "Закачивающиеся"
+
+msgid "Complete"
+msgstr "Завершенные"
+
+msgid "Name"
+msgstr "Список торрентов"
+
+msgid "Size"
+msgstr "Размер"
+
+msgid "Done"
+msgstr "Загружено"
+
+msgid "Status"
+msgstr "Состояние"
+
+msgid "Seeds"
+msgstr "Сидов"
+
+msgid "Peers"
+msgstr "Пиров"
+
+msgid "Down Speed"
+msgstr "Приём"
+
+msgid "Up Speed"
+msgstr "Отдача"
+
+msgid "Rate"
+msgstr "Рейтинг"

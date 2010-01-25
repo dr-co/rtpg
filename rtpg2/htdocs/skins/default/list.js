@@ -32,6 +32,12 @@ $(document).ready(function(){
 
 function on_click_list()
 {
+    // Set current selected
     $('#list table.list tbody').removeClass('selected');
     $(this).addClass('selected');
+
+    // Update prop frame
+    var objDocList = window.parent.frames[3].document;
+    objDocList.location = 'prop.cgi?current=' +
+                          $(this).find(':input[name="hash[]"]').val();
 }

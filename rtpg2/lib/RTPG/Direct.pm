@@ -1,6 +1,9 @@
 #!/usr/bin/perl
-
+use warnings;
+use strict;
 use utf8;
+use open ':utf8';
+
 package RTPG::Direct;
 
 =head1 NAME
@@ -66,32 +69,32 @@ use Encode qw(decode encode);
 
 sub new
 {
-	my $inv=shift;
-	my $class=ref($inv) || $inv;
-	my %opts=@_;
+    my $inv=shift;
+    my $class=ref($inv) || $inv;
+    my %opts=@_;
 
-	for (keys %opts)
-	{
-		croak "Unknown option name: $_" unless /^(url)$/;
-	}
+    for (keys %opts)
+    {
+        croak "Unknown option name: $_" unless /^(url)$/;
+    }
     return bless \%opts, $class;
 }
 
 sub _connect_to
 {
-	my $self=shift;
-	my $c;
-	if ($self->{url} =~ m{ ^/ }x)
-	{
-		require IO::Socket::UNIX;
-		$c=IO::Socket::UNIX->new(Peer => $self->{url});
-	}
-	else
-	{
-		require IO::Socket::INET;
-	    $c = IO::Socket::INET->new(PeerAddr => $self->{url});
-	}
-	$self->{connect_error}=decode utf8=> $! unless $c;
+    my $self=shift;
+    my $c;
+    if ($self->{url} =~ m{ ^/ }x)
+    {
+        require IO::Socket::UNIX;
+        $c=IO::Socket::UNIX->new(Peer => $self->{url});
+    }
+    else
+    {
+        require IO::Socket::INET;
+        $c = IO::Socket::INET->new(PeerAddr => $self->{url});
+    }
+    $self->{connect_error}=decode utf8=> $! unless $c;
     return $c;
 }
 
@@ -110,7 +113,7 @@ sub send_request
     { use bytes; $hl = length $header; }
 
     print $c "$hl:$header,$request";
-    
+
     my $response; { local $/; $response = <$c> };
     $response=(split /\n\s?\n/, $response, 2)[1];
     my $result=RPC::XML::ParserFactory->new()->parse($response);

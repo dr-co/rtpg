@@ -11,6 +11,7 @@ RTPG::
 
 package RTPG::Frame::Status;
 use lib qw(.. ../);
+use RTPG;
 
 =head2 get
 
@@ -22,8 +23,7 @@ sub get
 {
     my ($class, %opts) = @_;
 
-    # Get current state
-    $opts{$_} = cfg->get($_) for qw();
+    $opts{info} = RTPG::rtorrent->system_information;
 
     my $self = bless \%opts, $class;
 

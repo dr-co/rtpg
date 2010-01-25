@@ -1,42 +1,42 @@
 <div id="action">
-    <div class="item all [% IF data.action == 'all'%]selected[% END %]">
+    <div class="item default [% IF data.action == 'default'%]selected[% END %]">
         <div class="img">&nbsp;</div>
         <input
             type="button"
-            class="all"
+            class="default"
             value="[% gettext('All') %]"/>
         <div class="count">[% '5' %]</div>
     </div>
-    <div class="item downloading [% IF data.action == 'downloading'%]selected[% END %]">
+    <div class="item incomplete [% IF data.action == 'incomplete'%]selected[% END %]">
         <div class="img">&nbsp;</div>
         <input
             type="button"
-            class="downloading"
-            value="[% gettext('Downloading') %]"/>
+            class="incomplete"
+            value="[% gettext('Incomplete') %]"/>
         <div class="count">[% '5' %]</div>
     </div>
-    <div class="item completed [% IF data.action == 'completed'%]selected[% END %]">
+    <div class="item complete [% IF data.action == 'complete'%]selected[% END %]">
         <div class="img">&nbsp;</div>
         <input
             type="button"
-            class="completed"
-            value="[% gettext('Completed') %]"/>
+            class="complete"
+            value="[% gettext('Complete') %]"/>
         <div class="count">[% '5' %]</div>
     </div>
-    <div class="item active [% IF data.action == 'active'%]selected[% END %]">
+    <div class="item started [% IF data.action == 'started'%]selected[% END %]">
         <div class="img">&nbsp;</div>
         <input
             type="button"
-            class="active"
-            value="[% gettext('Active') %]"/>
+            class="started"
+            value="[% gettext('Started') %]"/>
         <div class="count">[% '5' %]</div>
     </div>
-    <div class="item inactive [% IF data.action == 'inactive'%]selected[% END %]">
+    <div class="item stopped [% IF data.action == 'stopped'%]selected[% END %]">
         <div class="img">&nbsp;</div>
         <input
             type="button"
-            class="inactive"
-            value="[% gettext('Inactive') %]"/>
+            class="stopped"
+            value="[% gettext('Stopped') %]"/>
         <div class="count">[% '5' %]</div>
     </div>
 </div>

@@ -28,10 +28,24 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 $(document).ready(function(){
     $('#locale').bind('change', on_change_locale);
+    $('#refresh').bind('change', on_change_refresh);
+    $('#skin').bind('change', on_change_skin);
 });
 
 function on_change_locale()
 {
     // Update window with new locale
     window.parent.document.location = 'index.cgi?locale=' + $(this).val();
+}
+
+function on_change_refresh()
+{
+    // Update window with new refrash rate
+    window.parent.document.location = 'index.cgi?refresh=' + $(this).val();
+}
+
+function on_change_skin()
+{
+    // Update window with new skin
+    window.parent.document.location = 'index.cgi?skin=' + $(this).val();
 }

@@ -10,6 +10,7 @@ Translate strings use *.po files
 =cut
 
 package RTPG::Locale;
+use base qw(Exporter);
 use lib qw(.. ../);
 
 use Locale::PO;

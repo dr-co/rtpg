@@ -18,14 +18,18 @@ use CGI::Carp qw(fatalsToBrowser);
 use RTPG::Config;
 use RTPG::Template;
 use RTPG::Locale;
+use RTPG;
 
 my %params;
+
+# Setting up rtorrent ##########################################################
+RTPG::rtorrent( url => cfg->get('rpc_uri') );
 
 # Get params ###################################################################
 my $show = CGI::param('show') || 'index';
 $show =~ s/\.cgi.*//g;
 
-for my $name ( qw(locale refresh skin action) )
+for my $name ( qw(locale refresh skin action current) )
 {
     # Get new parameter value
     my $value = CGI::param($name);
@@ -50,7 +54,7 @@ my ($css, $js) = (
     cfg->{url}{skin}{base} . '/' . $show . '.js',
 );
 cfg->{url}{skin}{css} = $css if -f $css;
-cfg->{url}{skin}{js}  = $js if -f $js;
+cfg->{url}{skin}{js}  = $js  if -f $js;
 
 # Output #######################################################################
 my $template = RTPG::Template->new;

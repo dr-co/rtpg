@@ -89,22 +89,22 @@ div.item div.count {
 
 /*********************************************************** Items by actions */
 
-div.item.all div.img {
+div.item.default div.img {
     background-position: -176px 0;
 }
 
-div.item.downloading div.img {
-    background-position: 0 0;
-}
-
-div.item.completed div.img {
-    background-position: -16px 0;
-}
-
-div.item.active div.img {
+div.item.started div.img {
     background-position: -160px 0;
 }
 
-div.item.inactive div.img {
+div.item.stopped div.img {
     background-position: -192px 0;
+}
+
+div.item.incomplete div.img {
+    background-position: 0 0;
+}
+
+div.item.complete div.img {
+    background-position: -16px 0;
 }

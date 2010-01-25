@@ -3,36 +3,64 @@
     <thead>
         <tr>
             <th/>
-            <th colspan="2">Name</th>
+            <th colspan="2">[% gettext('Name') %]</th>
             <th>#</th>
-            <th>Size</th>
-            <th>Done</th>
-            <th>Status</th>
-            <th>Seeds</th>
-            <th>Peers</th>
-            <th>Down Speed</th>
-            <th>Up Speed</th>
-            <th>Rate</th>
+            <th>[% gettext('Size') %]</th>
+            <th>[% gettext('Done') %]</th>
+            <th>[% gettext('Status') %]</th>
+            <th>[% gettext('Seeds') %]</th>
+            <th>[% gettext('Peers') %]</th>
+            <th>[% gettext('Down Speed') %]</th>
+            <th>[% gettext('Up Speed') %]</th>
+            <th>[% gettext('Rate') %]</th>
         </tr>
     </thead>
-    [% SET a = [1,2,3,4,5,6,7]%]
-    [% FOR i = a %]
+    [% FOR torrent = data.list %]
         [% SET class = [] %]
         [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
+        [% IF data.current == torrent.hash; class.push('selected'); END %]
         <tbody class="[% class.join(' ') %]">
             <tr>
-                <td class="select"><input type="checkbox" value="[%# torrent.id %]"/></td>
-                <td class="img"><div class="img downloading"/></td>
-                <td class="name">AAAAA BBBB VVVVV GGGG</td>
-                <td class="num">1</td>
-                <td class="size">1Gb</td>
-                <td class="done">%</td>
-                <td class="status">Downloading</td>
-                <td class="seeds">12</td>
-                <td class="peers">19</td>
-                <td class="down_speed">1 Mb/s</td>
-                <td class="up_speed">4 Kb/s</td>
-                <td class="rate">0.4</td>
+                <td class="select">
+                    <input
+                        type="checkbox"
+                        name="hash[]"
+                        value="[% torrent.hash %]"/>
+                </td>
+                <td class="img">
+                    [% IF torrent.hashing %]<div class="img hashing"/>
+                    [% ELSIF torrent.complete %]
+                        [% IF torrent.is_active %]<div class="img seeding"/>
+                        [% ELSE %]<div class="img seeding_inactive"/>
+                        [% END %]
+                    [% ELSE %]
+                        [% IF torrent.is_active %]<div class="img downloading"/>
+                        [% ELSE %]<div class="img downloading_inactive"/>
+                        [% END %]
+                    [% END %]
+                </td>
+                <td class="name">[% torrent.name %]</td>
+                <td class="num">1!!!</td>
+                <td class="size">[% torrent.human_size %]</td>
+                <td class="done">[% torrent.percent %]</td>
+                <td class="status">
+                    [% IF torrent.hashing %][% gettext('Hashing') %]
+                    [% ELSIF torrent.complete %]
+                        [% IF torrent.is_active %][% gettext('Seeding') %]
+                        [% ELSE %][% gettext('Finished') %]
+                        [% END %]
+                    [% ELSE %][% gettext('Downloading') %]
+                    [% END %]
+                </td>
+                <td class="seeds">12!!!</td>
+                <td class="peers">19!!!</td>
+                <td class="down_speed">1 Mb/s!!!</td>
+                <td class="up_speed">4 Kb/s!!!</td>
+                [% SET class = ['rate'] %]
+                [% IF torrent.ratio >= 1.0; class.push('positive'); ELSE; class.push('negative'); END%]
+                <td class="[% class.join(' ') %]">
+                    [% torrent.ratio %]
+                </td>
             </tr>
         </tbody>
     [% END %]

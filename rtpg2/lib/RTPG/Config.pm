@@ -207,9 +207,13 @@ sub skins
         my ($name) = $path =~ m|^.*/(.*?)$|;
         # Set fullpath
         my $file = sprintf '%s/%s/title.txt', $self->{dir}{skin}{files}, $name;
-        # Get title from file
-        my $title = `cat $file`;
-        s/^\s+//, s/\s+$//, s/[^\w\s.,]//g for $title;
+        # Get title from file if file accessible
+        my $title;
+        if( -f $file and -r _ and -s _ )
+        {
+            $title = `cat $file`;
+            s/^\s+//, s/\s+$//, s/[^\w\s.,]//g for $title;
+        }
         # Set skin description
         $skins{$name} = $title || ucfirst( lc $name );
     }

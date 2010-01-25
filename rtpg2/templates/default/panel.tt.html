@@ -13,17 +13,27 @@
         <select id="refresh">
             [% SET str_sec = gettext('sec.') %]
             [% SET str_min = gettext('min.') %]
-            <option value="0">[% gettext('Never') %]</option>
-            <option value="5">5 [% str_sec %]</option>
-            <option value="10">10 [% str_sec %]</option>
-            <option value="15">15 [% str_sec %]</option>
-            <option value="30">30 [% str_sec %]</option>
-            <option value="60">1 [% str_min %]</option>
-            <option value="120">2 [% str_min %]</option>
-            <option value="180">3 [% str_min %]</option>
-            <option value="300">5 [% str_min %]</option>
-            <option value="600">10 [% str_min %]</option>
-            <option value="1800">30 [% str_min %]</option>
+            [% SET time = [
+                    {'0'     => gettext('Never')},
+                    {'5'     => '5  ' _ str_sec},
+                    {'10'    => '10 ' _ str_sec},
+                    {'15'    => '15 ' _ str_sec},
+                    {'30'    => '30 ' _ str_sec},
+                    {'60'    => '1  ' _ str_min},
+                    {'120'   => '2  ' _ str_min},
+                    {'180'   => '3  ' _ str_min},
+                    {'300'   => '5  ' _ str_min},
+                    {'600'   => '10 ' _ str_min},
+                    {'1800'  => '30 ' _ str_min},
+                ]
+            %]
+            [% FOR tm = time %]
+                <option
+                    value="[% tm.keys.0 %]"
+                    [% IF data.refresh == tm.keys.0 %]selected="selected"[% END %]>
+                        [% tm.values.0 %]
+                </option>
+            [% END %]
         </select>
     </div>
     <div class="param skin">
