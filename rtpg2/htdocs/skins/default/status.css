@@ -34,3 +34,9 @@ body {
     margin: 0px;
     padding: 4px;
 }
+
+/********************************************************************* Errors */
+div.error {
+    color: #700;
+    text-align: center;
+}

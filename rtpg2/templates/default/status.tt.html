@@ -1,3 +1,5 @@
+[%# On error show message and exit %]
+[% IF data.error %]<div class="error">[% data.error %]</div>[% RETURN %][% END %]
 <div id="#status">
     <span title="Used: rtorrent [% data.info.client_version %], library [% data.info.library_version %] ">
         RTPG v.[% version %]

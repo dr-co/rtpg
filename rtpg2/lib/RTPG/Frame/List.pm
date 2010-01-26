@@ -28,7 +28,8 @@ sub get
     # Get current state
     $opts{$_} = cfg->get($_) for qw(action current debug);
 
-    $opts{list} = RTPG::rtorrent->torrents_list( $opts{action} );
+    ($opts{list}, $opts{error}) =
+        RTPG::rtorrent->torrents_list( $opts{action} );
 
     # If debug option aviable die with first list item
     DieDumper \%opts if $opts{debug};

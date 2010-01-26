@@ -1,3 +1,5 @@
+[%# On error show message and exit %]
+[% IF data.error %]<div class="error">[% data.error %]</div>[% RETURN %][% END %]
 <div id="list">
     <table class="list">
     <thead>
@@ -15,7 +17,7 @@
             <th>[% gettext('Rate') %]</th>
         </tr>
     </thead>
-    [% FOR torrent = data.list %]
+    [% FOR torrent = data.list.array %]
         [% SET class = [] %]
         [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
         [% IF data.current == torrent.hash; class.push('selected'); END %]

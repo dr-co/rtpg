@@ -23,7 +23,7 @@ sub get
 {
     my ($class, %opts) = @_;
 
-    $opts{info} = RTPG::rtorrent->system_information;
+    ($opts{info}, $opts{error}) = RTPG::rtorrent->system_information;
 
     my $self = bless \%opts, $class;
 

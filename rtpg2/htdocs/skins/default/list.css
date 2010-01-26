@@ -176,3 +176,9 @@ table.list tbody.selected td{
     background-color: Highlight !important;
     color: HighlightText !important;
 }
+
+/********************************************************************* Errors */
+div.error {
+    color: #700;
+    text-align: center;
+}

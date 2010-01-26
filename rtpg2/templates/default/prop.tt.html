@@ -1,6 +1,4 @@
-[% IF data.error %]
-    <div class="error">[% data.error %]</div>
-    [% RETURN %]
-[% END %]
+[%# On error show message and exit %]
+[% IF data.error %]<div class="error">[% data.error %]</div>[% RETURN %][% END %]
 <div id="prop">
 </div>
