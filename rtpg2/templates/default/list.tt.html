@@ -6,7 +6,7 @@
         <tr>
             <th/>
             <th colspan="2">[% gettext('Name') %]</th>
-            <th>#</th>
+            <th>[% gettext('Priority') %]</th>
             <th>[% gettext('Size') %]</th>
             <th>[% gettext('Done') %]</th>
             <th>[% gettext('Status') %]</th>
@@ -17,7 +17,7 @@
             <th>[% gettext('Rate') %]</th>
         </tr>
     </thead>
-    [% FOR torrent = data.list.array %]
+    [% FOR torrent = data.list.list %]
         [% SET class = [] %]
         [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
         [% IF data.current == torrent.hash; class.push('selected'); END %]
@@ -42,9 +42,12 @@
                     [% END %]
                 </td>
                 <td class="name">[% torrent.name %]</td>
-                <td class="num">1!!!</td>
+                <td class="num">[% gettext(torrent.priority_str) %]</td>
                 <td class="size">[% torrent.human_size %]</td>
-                <td class="done">[% torrent.percent %]</td>
+                <td class="done">
+                    [% torrent.percent %]
+                    <div class="percent" style="width: [% torrent.percent %];" />
+                </td>
                 <td class="status">
                     [% IF torrent.hashing %][% gettext('Hashing') %]
                     [% ELSIF torrent.complete %]

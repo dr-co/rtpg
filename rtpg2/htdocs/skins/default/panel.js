@@ -39,7 +39,7 @@ $(document).ready(function(){
 function on_refresh()
 {
     // Update all windows
-    window.parent.document.location = 'index.cgi;
+    window.parent.document.location = 'index.cgi';
 }
 
 
@@ -51,9 +51,9 @@ function on_change_locale()
 
 function on_change_refresh()
 {
-    $.cookie('refresh', $(this).val());
     // Update window with new refrash rate
-//    window.parent.document.location = 'index.cgi?refresh=' + $(this).val();
+    var objDocList = window.parent.frames[2].document;
+    objDocList.location = 'list.cgi?refresh=' + $(this).val();
 }
 
 function on_change_skin()

@@ -49,12 +49,10 @@ if( $@ )
 $params{data} = $module->get;
 
 # Files for this page ##########################################################
-my ($css, $js) = (
-    cfg->{url}{skin}{base} . '/' . $show . '.css',
-    cfg->{url}{skin}{base} . '/' . $show . '.js',
-);
-cfg->{url}{skin}{css} = $css if -f $css;
-cfg->{url}{skin}{js}  = $js  if -f $js;
+cfg->{url}{skin}{css} = cfg->{url}{skin}{base} . '/' . $show . '.css'
+    if -f cfg->{dir}{skin}{current} . '/' . $show . '.css';
+cfg->{url}{skin}{js}  = cfg->{url}{skin}{base} . '/' . $show . '.js'
+    if -f cfg->{dir}{skin}{current} . '/' . $show . '.js';
 
 # Output #######################################################################
 my $template = RTPG::Template->new;

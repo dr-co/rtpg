@@ -5,7 +5,7 @@
             type="button"
             class="default"
             value="[% gettext('All') %]"/>
-        <div class="count">[% '5' %]</div>
+        <div class="count">[% '?' %]</div>
     </div>
     <div class="item incomplete [% IF data.action == 'incomplete'%]selected[% END %]">
         <div class="img">&nbsp;</div>
@@ -13,7 +13,7 @@
             type="button"
             class="incomplete"
             value="[% gettext('Incomplete') %]"/>
-        <div class="count">[% '5' %]</div>
+        <div class="count">[% '?' %]</div>
     </div>
     <div class="item complete [% IF data.action == 'complete'%]selected[% END %]">
         <div class="img">&nbsp;</div>
@@ -21,7 +21,7 @@
             type="button"
             class="complete"
             value="[% gettext('Complete') %]"/>
-        <div class="count">[% '5' %]</div>
+        <div class="count">[% '?' %]</div>
     </div>
     <div class="item started [% IF data.action == 'started'%]selected[% END %]">
         <div class="img">&nbsp;</div>
@@ -29,7 +29,7 @@
             type="button"
             class="started"
             value="[% gettext('Started') %]"/>
-        <div class="count">[% '5' %]</div>
+        <div class="count">[% '?' %]</div>
     </div>
     <div class="item stopped [% IF data.action == 'stopped'%]selected[% END %]">
         <div class="img">&nbsp;</div>
@@ -37,6 +37,9 @@
             type="button"
             class="stopped"
             value="[% gettext('Stopped') %]"/>
-        <div class="count">[% '5' %]</div>
+        <div class="count">[% '?' %]</div>
     </div>
+</div>
+<div id="logo">
+    <img alt="RTPG [% version %]" src="[% config.url.skin.base _ '/logo.png' %]">
 </div>

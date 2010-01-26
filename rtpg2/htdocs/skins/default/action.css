@@ -21,11 +21,7 @@ You should have received a copy of the GNU  General  Public  License  along
 with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
-
-/*
-    This file contain styles for Action frame
-*/
-
+/* This file contain styles for Action frame */
 /********************************************************************* Global */
 body {
     background-color: white;
@@ -62,8 +58,8 @@ div.item.selected {
     color: HighlightText;
 }
 
-div.item div.img{
-    clear:both;
+div.item div.img {
+    clear: both;
     float: left;
     margin-left: 5px;
     width: 16px;
@@ -88,7 +84,6 @@ div.item div.count {
 }
 
 /*********************************************************** Items by actions */
-
 div.item.default div.img {
     background-position: -176px 0;
 }
@@ -107,4 +102,13 @@ div.item.incomplete div.img {
 
 div.item.complete div.img {
     background-position: -16px 0;
+}
+
+/*********************************************************************** Logo */
+#logo {
+    width: 100%;
+    text-align: center;
+    height: 64px;
+    bottom: 5%;
+    position: fixed;
 }

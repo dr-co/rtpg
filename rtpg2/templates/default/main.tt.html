@@ -8,8 +8,9 @@
         <base href="http://[% config.url.base %]"/>
 
         <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-        <meta name="author" content="Dmitry E. Oboukhov, Roman V. Nikolaev" />
+        <meta name="author"   content="Dmitry E. Oboukhov, Roman V. Nikolaev" />
         <meta name="keywords" content="RTPG rTorrent Perl Gui" />
+        <meta name="robots"   content="noindex, nofollow" />
 
         [% FOR css = config.url.skin.css.list %]
             <link rel="stylesheet" type="text/css" href="[% css %]" />
@@ -23,9 +24,7 @@
         [% FOR js = config.url.skin.js.list %]
             <script type="text/javascript" src="[% js %]"></script>
         [% END %]
-
     </head>
 
     <div id="content">[% content || '&nbsp;' %]</div>
-
 </html>

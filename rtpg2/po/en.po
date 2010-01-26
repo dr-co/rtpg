@@ -38,6 +38,9 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+msgid "Priority"
+msgstr ""
+
 msgid "Size"
 msgstr ""
 
@@ -60,4 +63,25 @@ msgid "Up Speed"
 msgstr ""
 
 msgid "Rate"
+msgstr ""
+
+msgid "Downloading"
+msgstr ""
+
+msgid "Seeding"
+msgstr ""
+
+msgid "Hashing"
+msgstr ""
+
+msgid "off"
+msgstr ""
+
+msgid "low"
+msgstr ""
+
+msgid "normal"
+msgstr ""
+
+msgid "high"
 msgstr ""

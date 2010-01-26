@@ -22,10 +22,7 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-/*
-    This file contain styles for List frame
-*/
-
+/* This file contain styles for List frame */
 /********************************************************************* Global */
 body {
     background-color: white;
@@ -43,8 +40,7 @@ table.list {
 /*********************************************************************** Head */
 table.list thead th {
     color: CaptionText;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding: 4px;
     background-color: ActiveCaption;
 }
 
@@ -169,12 +165,23 @@ table.list tbody td.img div.img.seeding_inactive{
 table.list tbody td.img div.img.downloading_inactive{
     background-position: -128px 0;
 }
+
 /*************************************************************** Selected row */
 table.list tbody.selected,
 table.list tbody.selected tr,
 table.list tbody.selected td{
     background-color: Highlight !important;
     color: HighlightText !important;
+}
+
+/********************************************************** Percent indicator */
+table.list tbody td.done div.percent{
+    background-color: InfoBackground;
+    border: 1px Highlight solid;
+    height: 4px;
+    min-height: 4px;
+    min-width: 0%;
+    max-width: 100%;
 }
 
 /********************************************************************* Errors */

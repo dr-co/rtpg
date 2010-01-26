@@ -27,7 +27,14 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 $(document).ready(function(){
+    // On torrent select
     $('#list table.list tbody').bind('click', on_click_list);
+
+    alert($.cookie('refresh'));
+    // Start timer
+    setTimeout(
+        function(){ $(document).location = 'list.cgi' },
+        $.cookie('refresh') * 1000);
 });
 
 function on_click_list()
