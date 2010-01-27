@@ -3,14 +3,13 @@ use strict;
 use utf8;
 use open ':utf8';
 
-=head1 Config
+=head1 NAME
 
-Конфигурация
+RTPG::WWW::Config configuration module.
 
 =cut
-package RTPG::Config;
+package RTPG::WWW::Config;
 use base qw(Exporter);
-use lib qw(.. ../);
 
 use CGI;
 use File::Basename;
@@ -32,15 +31,15 @@ use constant RTPG_CONFIG_PATH         => '/home/rubin/workspace/rtpg2/config/rtp
 
 =head2 cfg
 
-Получение конфига
+Get cached config object
 
 =cut
 my $config;
 sub cfg
 {
-    # Кеширование конфига
+    # Cache config
     return $config if $config;
-    $config = RTPG::Config->new;
+    $config = RTPG::WWW::Config->new;
     return $config;
 }
 
@@ -64,9 +63,9 @@ sub new
     # Переменные окружения
     $opts{env} = \%ENV;
 
-    $opts{dir}{base} = File::Spec->rel2abs( dirname(__FILE__) . '/../..' );
+    $opts{dir}{base} = File::Spec->rel2abs( dirname(__FILE__) . '/../../..' );
     # Удалим лишние вход/выход из поддиректорий
-    while( $opts{dir}{base} =~ s{(?:/[a-zA-Z0-9._]+/\.\.)}{}g ) {;}
+    while( $opts{dir}{base} =~ s{(?:/[^\./]+/\.\.)}{}g ) {;}
 
     # Другие директории
     $opts{dir}{templates}   = $opts{dir}{base}      . '/templates';

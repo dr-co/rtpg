@@ -3,18 +3,17 @@ use strict;
 use utf8;
 use open ':utf8';
 
-=head1 RTPG::Locale
+=head1 RTPG::WWW::Locale
 
 Translate strings use *.po files
 
 =cut
 
-package RTPG::Locale;
+package RTPG::WWW::Locale;
 use base qw(Exporter);
-use lib qw(.. ../);
 
 use Locale::PO;
-use RTPG::Config;
+use RTPG::WWW::Config;
 
 our @EXPORT_OK = qw(po gettext);
 
@@ -30,7 +29,7 @@ sub po
 {
     # Chache po object
     return $po if $po;
-    return $po = RTPG::Locale->new(@_);
+    return $po = RTPG::WWW::Locale->new(@_);
 }
 
 =head2 new
@@ -93,7 +92,7 @@ sub gettext
     my ($self, $string);
 
     # If OOP
-    if('RTPG::Locale' eq ref $param1)
+    if('RTPG::WWW::Locale' eq ref $param1)
     {
         $self = $param1;
         $string = $param2;

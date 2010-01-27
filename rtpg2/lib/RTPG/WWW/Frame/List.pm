@@ -5,14 +5,14 @@ use open ':utf8';
 
 =head1 NAME
 
-RTPG::
+RTPG::WWW::Frame::List
 
 =cut
 
-package RTPG::Frame::Prop;
-use lib qw(.. ../);
+package RTPG::WWW::Frame::List;
+use CGI;
 use RTPG;
-use RTPG::Config;
+use RTPG::WWW::Config;
 
 =head2 get
 
@@ -25,8 +25,10 @@ sub get
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(current debug);
-    ($opts{info}, $opts{error}) = RTPG::rtorrent->torrent_info( $opts{current} );
+    $opts{$_} = cfg->get($_) for qw(action current debug);
+
+    ($opts{list}, $opts{error}) = RTPG->new(url => cfg->get('rpc_uri'))->
+        torrents_list( $opts{action} );
 
     # If debug option aviable die with first list item
     DieDumper \%opts if $opts{debug};

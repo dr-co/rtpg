@@ -15,15 +15,12 @@ use lib qw(lib ../lib ../);
 our $VERSION = "0.2.0";
 
 use CGI::Carp qw(fatalsToBrowser);
-use RTPG::Config;
-use RTPG::Template;
-use RTPG::Locale;
+use RTPG::WWW::Config;
+use RTPG::WWW::Template;
+use RTPG::WWW::Locale;
 use RTPG;
 
 my %params = (version => $VERSION);
-
-# Setting up rtorrent ##########################################################
-RTPG::rtorrent( url => cfg->get('rpc_uri') );
 
 # Get params ###################################################################
 my $show = CGI::param('show') || 'index';
@@ -38,7 +35,7 @@ for my $name ( qw(locale refresh skin action current) )
 }
 
 # Load module and get data #####################################################
-my $module = 'RTPG::Frame::' . ucfirst lc $show;
+my $module = 'RTPG::WWW::Frame::' . ucfirst lc $show;
 eval "require $module";
 if( $@ )
 {
@@ -55,5 +52,5 @@ cfg->{url}{skin}{js}  = cfg->{url}{skin}{base} . '/' . $show . '.js'
     if -f cfg->{dir}{skin}{current} . '/' . $show . '.js';
 
 # Output #######################################################################
-my $template = RTPG::Template->new;
+my $template = RTPG::WWW::Template->new;
 $template->process( $show . '.tt.html', \%params );

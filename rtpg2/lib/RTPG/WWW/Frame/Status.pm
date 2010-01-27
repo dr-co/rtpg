@@ -5,12 +5,11 @@ use open ':utf8';
 
 =head1 NAME
 
-RTPG::
+RTPG::WWW::Frame::Status
 
 =cut
 
-package RTPG::Frame::Status;
-use lib qw(.. ../);
+package RTPG::WWW::Frame::Status;
 use RTPG;
 
 =head2 get
@@ -23,7 +22,8 @@ sub get
 {
     my ($class, %opts) = @_;
 
-    ($opts{info}, $opts{error}) = RTPG::rtorrent->system_information;
+    ($opts{info}, $opts{error}) = RTPG->new(url => cfg->get('rpc_uri'))->
+        system_information;
 
     my $self = bless \%opts, $class;
 

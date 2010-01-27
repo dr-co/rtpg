@@ -5,13 +5,12 @@ use open ':utf8';
 
 =head1 NAME
 
-RTPG::
+RTPG::WWW::Frame::Panel
 
 =cut
 
-package RTPG::Frame::Panel;
-use lib qw(.. ../);
-use RTPG::Config;
+package RTPG::WWW::Frame::Panel;
+use RTPG::WWW::Config;
 
 =head2 get
 
