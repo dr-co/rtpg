@@ -69,7 +69,7 @@ sub new
 
     # Другие директории
     $opts{dir}{templates}   = $opts{dir}{base}      . '/templates';
-    $opts{dir}{cache}       = $opts{dir}{templates} . '/cache';
+    $opts{dir}{cache}       = $opts{dir}{base}      . '/cache';
     $opts{dir}{po}          = $opts{dir}{base}      . '/po';
 
     # Абсолютные пути к ресурсам

@@ -1,20 +1,37 @@
 [%# On error show message and exit %]
-[% IF data.error %]<div class="error">[% data.error %]</div>[% RETURN %][% END %]
+[% IF data.error %]
+    <div class="error">[% gettext('data.error') %]</div>
+    [% RETURN %]
+[% END %]
+[%# Main torrents list %]
 <div id="list">
-    <table class="list">
+    <table class="list" summary="[% gettext('Main torrents list') %]">
+    <colgroup>
+        <col/>
+        <col span="2"/>
+        <col/>
+        <col/>
+        <col/>
+        <col/>
+        <col/>
+        <col/>
+        <col/>
+        <col/>
+        <col/>
+    </colgroup>
     <thead>
         <tr>
             <th/>
-            <th colspan="2">[% gettext('Name') %]</th>
-            <th>[% gettext('Priority') %]</th>
-            <th>[% gettext('Size') %]</th>
-            <th>[% gettext('Done') %]</th>
-            <th>[% gettext('Status') %]</th>
-            <th>[% gettext('Seeds') %]</th>
-            <th>[% gettext('Peers') %]</th>
-            <th>[% gettext('Down Speed') %]</th>
-            <th>[% gettext('Up Speed') %]</th>
-            <th>[% gettext('Rate') %]</th>
+            <th abbr="[% gettext('Nm') %]" colspan="2">[% gettext('Name') %]</th>
+            <th abbr="[% gettext('Pr') %]">[% gettext('Priority') %]</th>
+            <th abbr="[% gettext('Sz') %]">[% gettext('Size') %]</th>
+            <th abbr="[% gettext('Dn') %]">[% gettext('Done') %]</th>
+            <th abbr="[% gettext('St') %]">[% gettext('Status') %]</th>
+            <th abbr="[% gettext('Se') %]">[% gettext('Seeds') %]</th>
+            <th abbr="[% gettext('Pe') %]">[% gettext('Peers') %]</th>
+            <th abbr="[% gettext('DS') %]">[% gettext('Down Speed') %]</th>
+            <th abbr="[% gettext('US') %]">[% gettext('Up Speed') %]</th>
+            <th abbr="[% gettext('Rt') %]">[% gettext('Rate') %]</th>
         </tr>
     </thead>
     [% FOR torrent = data.list.list %]
@@ -63,7 +80,9 @@
                 <td class="down_speed">[% torrent.human_down_rate %]</td>
                 <td class="up_speed">[% torrent.human_up_rate %]</td>
                 [% SET class = ['rate'] %]
-                [% IF torrent.ratio >= 1.0; class.push('positive'); ELSE; class.push('negative'); END%]
+                [% IF torrent.ratio >= 1.0; class.push('positive');
+                   ELSE; class.push('negative');
+                   END %]
                 <td class="[% class.join(' ') %]">
                     [% torrent.ratio %]
                 </td>

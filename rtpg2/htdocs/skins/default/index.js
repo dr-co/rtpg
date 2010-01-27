@@ -27,17 +27,22 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 $(document).ready(function(){
-    // Save frame position on resize
-    $('#frms_main').resize( alert( $(this).id() ); on_resize() );
-    $('#frms_middle').resize( alert( $(this).id() ); on_resize() );
-    $('#frms_content').resize( alert( $(this).id() ); on_resize() );
+    // Restore frames positions
+//    $('#frms_middle').attr('cols', $.cookie('frms_middle'));
+//    $('#frms_content').attr('rows', $.cookie('frms_content'));
 
-    $('#frm_action').resize( alert( $(this).id() ); on_resize() );
+    // Save frame position on resize
+    $('#frms_main').bind('resize', function(){ alert( $(this).id() )} );
+    $('#frms_middle').bind('resize', function(){ alert( $(this).id() )} );
+    $('#frms_content').bind('resize', function(){ alert( $(this).id() )} );
+
+
 });
 
-function on_resize()
-{
-    $.each($('frameset'), function( i, objFrameset ){
-        $.cookie(objFrameset.id(), objFrameset.attr('rows'));
-    });
-}
+//function on_resize()
+//{
+//    alert( $(this).id() );
+//    $.each($('frameset'), function( i, objFrameset ){
+//        $.cookie(objFrameset.id(), objFrameset.attr('rows'));
+//    });
+//}

@@ -30,7 +30,6 @@ $(document).ready(function(){
     // On torrent select
     $('#list table.list tbody').bind('click', on_click_list);
 
-    alert($.cookie('refresh'));
     // Start timer
     setTimeout(
         function(){ $(document).location = 'list.cgi' },
