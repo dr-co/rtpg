@@ -174,6 +174,10 @@ table.list tbody.selected td{
     color: HighlightText !important;
 }
 
+/*************************************************************** Selected row */
+table.list tbody.inactive{
+}
+
 /********************************************************** Percent indicator */
 table.list tbody td.done div.percent{
     background-color: InfoBackground;

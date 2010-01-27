@@ -11,6 +11,7 @@ RTPG::WWW::Frame::Status
 
 package RTPG::WWW::Frame::Status;
 use RTPG;
+use RTPG::WWW::Config;
 
 =head2 get
 

@@ -21,6 +21,7 @@
         [% SET class = [] %]
         [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
         [% IF data.current == torrent.hash; class.push('selected'); END %]
+        [% UNLESS torrent.is_active; class.push('inactive'); END %]
         <tbody class="[% class.join(' ') %]">
             <tr>
                 <td class="select">
@@ -58,9 +59,9 @@
                     [% END %]
                 </td>
                 <td class="seeds">12!!!</td>
-                <td class="peers">19!!!</td>
-                <td class="down_speed">1 Mb/s!!!</td>
-                <td class="up_speed">4 Kb/s!!!</td>
+                <td class="peers">[% torrent.peers_connected %]</td>
+                <td class="down_speed">[% torrent.human_down_rate %]</td>
+                <td class="up_speed">[% torrent.human_up_rate %]</td>
                 [% SET class = ['rate'] %]
                 [% IF torrent.ratio >= 1.0; class.push('positive'); ELSE; class.push('negative'); END%]
                 <td class="[% class.join(' ') %]">
