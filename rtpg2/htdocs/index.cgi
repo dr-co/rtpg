@@ -10,7 +10,7 @@ use warnings;
 use strict;
 use utf8;
 use open ':utf8';
-use lib qw(lib ../lib ../);
+use lib qw(../lib);
 
 our $VERSION = "0.2.0";
 
