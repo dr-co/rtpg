@@ -85,11 +85,6 @@ table.list tbody td.status {
     width: 10%;
 }
 
-table.list tbody td.seeds {
-    text-align: right;
-    width: 5%;
-}
-
 table.list tbody td.peers {
     text-align: right;
     width: 5%;

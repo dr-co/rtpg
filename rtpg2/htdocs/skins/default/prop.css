@@ -20,9 +20,8 @@ more details.
 You should have received a copy of the GNU  General  Public  License  along
 with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
-/* This file contain styles for Prop frame */
-/********************************************************************* Global */
+*/ /* This file contain styles for Prop frame */
+    /********************************************************************* Global */
 body {
     background-color: Window;
     color: WindowText;
@@ -34,4 +33,54 @@ body {
 div.error {
     color: #700;
     text-align: center;
+}
+
+div.inlays div.item {
+    float: left;
+}
+
+div.properties {
+    clear: both;
+    float: left;
+    width: 100%;
+}
+
+div.properties table {
+    width: 100%;
+}
+
+div.properties table thead,div.properties table thead tr,div.properties table thead tr td
+    {
+    text-align: left;
+    color: CaptionText;
+    background-color: ActiveCaption;
+    padding-right: 10px;
+}
+
+div.properties table tbody,div.properties table tbody tr,div.properties table tbody tr td
+    {
+    text-align: left;
+    color: CaptionText;
+    background-color: InactiveCaption;
+    padding-right: 10px;
+}
+
+div.properties table tbody tr th {
+    text-align: left;
+    padding-left: 1%;
+    font-weight: normal;
+}
+
+div.properties table.downloaded thead td {
+    border: 1px ThreeDShadow solid;
+    height: 50px;
+}
+
+div.properties table.transfer {
+}
+
+div.properties table.tracker {
+}
+
+div.properties table.general {
 }

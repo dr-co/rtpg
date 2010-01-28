@@ -2,4 +2,211 @@
 [% IF data.error %]<div class="error">[% data.error %]</div>[% RETURN %][% END %]
 [% UNLESS data.info; RETURN; END %]
 <div id="prop">
+    <div class="inlays">
+        <div class="item info">
+            <input
+                type="button"
+                class="info"
+                value="[% gettext('Info') %]"/>
+        </div>
+        <div class="item peers">
+            <input
+                type="button"
+                class="peers"
+                value="[% gettext('Peers') %]"/>
+        </div>
+        <div class="item files">
+            <input
+                type="button"
+                class="files"
+                value="[% gettext('Files') %]"/>
+        </div>
+        <div class="item trackers">
+            <input
+                type="button"
+                class="trackers"
+                value="[% gettext('Trackers') %]"/>
+        </div>
+        <div class="item chunks">
+            <input
+                type="button"
+                class="chunks"
+                value="[% gettext('Chunks') %]"/>
+        </div>
+        <div class="item transfer">
+            <input
+                type="button"
+                class="transfer"
+                value="[% gettext('Transfer') %]"/>
+        </div>
+    </div>
+    <div class="properties">
+        [% SWITCH data.prop %]
+            [% CASE 'info';     INCLUDE Info        %]
+            [% CASE 'peers';    INCLUDE Peers       %]
+            [% CASE 'files';    INCLUDE Files       %]
+            [% CASE 'trackers'; INCLUDE Trackers    %]
+            [% CASE 'chunks';   INCLUDE Chunks      %]
+            [% CASE 'transfer'; INCLUDE Transfer    %]
+            [% CASE DEFAULT %]
+                [% gettext('Unknown property page') %]
+        [% END %]
+    </div>
 </div>
+
+[% BLOCK Info %]
+<table class="downloaded">
+    <colgroup>
+        <col width="10%"/>
+        <col width="90%"/>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>[% gettext('Downloaded') %]</th>
+            <td>| | | | | |</td>
+        </tr>
+    </thead>
+</table>
+
+<table class="transfer">
+    <colgroup>
+        <col width="11%"/>
+        <col width="23%"/>
+        <col width="10%"/>
+        <col width="23%"/>
+        <col width="10%"/>
+        <col width="23%"/>
+    </colgroup>
+    <thead>
+        <tr><th colspan="6">[% gettext('Transfer') %]</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>[% gettext('Downloaded') %]</th>
+            <td>[% data.info.human_done %]</td>
+            <th>[% gettext('Down Speed') %]</th>
+            <td>[% data.info.human_down_rate %]</td>
+            <th>[% gettext('Peers connected') %]</th>
+            <td>
+                [%
+                    data.info.peers_connected
+                    _ ' '
+                    _ gettext('from')
+                    _ ' '
+                    _ data.info.peers_max
+                %]
+            </td>
+        </tr>
+        <tr>
+            <th>[% gettext('Uploaded') %]</th>
+            <td>[% data.info.human_up_total %]</td>
+            <th>[% gettext('Up Speed') %]</th>
+            <td>[% data.info.human_up_rate %]</td>
+            <th>[% gettext('Peers not connected') %]</th>
+            <td>[% data.info.peers_not_connected %]</td>
+        </tr>
+            <th>[%  %]</th>
+            <td>[%  %]</td>
+            <th>[%  %]</th>
+            <td>[%  %]</td>
+            <th>[% gettext('Peers exchange') %]</th>
+            <td>
+                [% IF data.info.peer_exchange %]
+                    [% gettext('on') %]
+                [% ELSE %]
+                    [% gettext('off') %]
+                [% END %]
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="tracker">
+    <colgroup>
+        <col width="11%"/>
+        <col width="23%"/>
+        <col width="10%"/>
+        <col width="23%"/>
+        <col width="10%"/>
+        <col width="23%"/>
+    </colgroup>
+    <thead>
+        <tr><th colspan="6">[% gettext('Tracker') %]</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>[%# gettext('') %]</th>
+            <td>[%# data.info %]</td>
+            <th>[%# gettext('') %]</th>
+            <td>[%# data.info %]</td>
+            <th>[%# gettext('') %]</th>
+            <td>[%# data.info %]</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="general">
+    <colgroup>
+        <col width="10%"/>
+        <col width="40%"/>
+        <col width="10%"/>
+        <col width="40%"/>
+    </colgroup>
+    <thead>
+        <tr><th colspan="4">[% gettext('General') %]</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>[% gettext('Directory') %]</th>
+            <td>[% data.info.directory %]</td>
+            <th>[% gettext('Chunks') %]</th>
+            <td>
+                [%
+                    data.info.size_chunks
+                    _ ' '
+                    _ gettext('x')
+                    _ ' '
+                    _ data.info.chunk_size
+                %]
+                ([% data.info.completed_chunks _ ' ' _ gettext('done') %])
+            </td>
+        </tr>
+        <tr>
+            <th>[% gettext('Total size') %]</th>
+            <td>
+                [% data.info.human_size %]
+                ([% data.info.human_done _ ' ' _ gettext('done') %])
+            </td>
+            <th>[% gettext('Hash') %]</th>
+            <td>[% data.info.hash %]</td>
+        </tr>
+        <tr>
+            <th>[% gettext('Created On') %]</th>
+            <td>[% data.info.creation_date %]</td>
+            <th>[% gettext('Local ID') %]</th>
+            <td>[% data.info.local_id %]</td>
+        </tr>
+        <tr>
+            <th>[% gettext('Comment') %]</th>
+            <td>[% data.info.name %]</td>
+            <th>[%# %]</th>
+            <td>[%# %]</td>
+        </tr>
+    </tbody>
+</table>
+[% END %]
+
+[% BLOCK Peers %]
+[% END %]
+
+[% BLOCK Files %]
+[% END %]
+
+[% BLOCK Trackers %]
+[% END %]
+
+[% BLOCK Chunks %]
+[% END %]
+
+[% BLOCK Transfer %]
+[% END %]

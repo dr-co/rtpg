@@ -26,7 +26,7 @@ my %params = (version => $VERSION);
 my $show = CGI::param('show') || 'index';
 $show =~ s/\.cgi.*//g;
 
-for my $name ( qw(locale refresh skin action current) )
+for my $name ( qw(locale refresh skin action current prop) )
 {
     # Get new parameter value
     my $value = CGI::param($name);

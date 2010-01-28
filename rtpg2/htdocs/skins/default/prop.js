@@ -27,39 +27,12 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 $(document).ready(function(){
-    // Panel buttons
-    $('input.panel.refresh').bind('click', on_refresh);
-
-    // Additional params
-    $('#locale').bind('change', on_change_locale);
-    $('#refresh').bind('change', on_change_refresh);
-    $('#skin').bind('change', on_change_skin);
+    // Show new prop page
+    $('div.inlays div.item input').bind('click', on_prop);
 });
 
-function on_refresh()
-{
-    // Update all windows
-    window.parent.document.location = 'index.cgi';
-}
-
-
-function on_change_locale()
+function on_prop()
 {
     // Update window with new locale
-    window.parent.document.location = 'index.cgi?locale=' + $(this).val();
-}
-
-function on_change_refresh()
-{
-    // Update window with new refrash rate
-    var objDocList = window.parent.frames[2].document;
-    objDocList.location = 'list.cgi?refresh=' + $(this).val();
-    var objDocProp = window.parent.frames[3].document;
-    objDocProp.location = 'prop.cgi';
-}
-
-function on_change_skin()
-{
-    // Update window with new skin
-    window.parent.document.location = 'index.cgi?skin=' + $(this).val();
+    document.location = 'prop.cgi?prop=' + $(this).attr('class');
 }

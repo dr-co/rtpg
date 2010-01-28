@@ -17,7 +17,6 @@
         <col/>
         <col/>
         <col/>
-        <col/>
     </colgroup>
     <thead>
         <tr>
@@ -27,7 +26,6 @@
             <th abbr="[% gettext('Sz') %]">[% gettext('Size') %]</th>
             <th abbr="[% gettext('Dn') %]">[% gettext('Done') %]</th>
             <th abbr="[% gettext('St') %]">[% gettext('Status') %]</th>
-            <th abbr="[% gettext('Se') %]">[% gettext('Seeds') %]</th>
             <th abbr="[% gettext('Pe') %]">[% gettext('Peers') %]</th>
             <th abbr="[% gettext('DS') %]">[% gettext('Down Speed') %]</th>
             <th abbr="[% gettext('US') %]">[% gettext('Up Speed') %]</th>
@@ -75,7 +73,6 @@
                     [% ELSE %][% gettext('Downloading') %]
                     [% END %]
                 </td>
-                <td class="seeds">12!!!</td>
                 <td class="peers">[% torrent.peers_connected %]</td>
                 <td class="down_speed">[% torrent.human_down_rate %]</td>
                 <td class="up_speed">[% torrent.human_up_rate %]</td>

@@ -24,7 +24,7 @@ sub get
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(current debug);
+    $opts{$_} = cfg->get($_) for qw(current prop debug);
     ($opts{info}, $opts{error}) = RTPG->new(url => cfg->get('rpc_uri'))->
         torrent_info( $opts{current} )
             if $opts{current};
