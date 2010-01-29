@@ -44,6 +44,11 @@ if( $@ )
 }
 
 $params{data} = $module->get;
+if( $params{data}{error} )
+{
+    $show = 'error';
+    $params{error} = { message => $params{data}{error}, status => 503 };
+}
 
 # Files for this page ##########################################################
 cfg->{url}{skin}{css} = cfg->{url}{skin}{base} . '/' . $show . '.css'

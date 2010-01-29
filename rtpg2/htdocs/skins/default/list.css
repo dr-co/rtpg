@@ -182,9 +182,3 @@ table.list tbody td.done div.percent{
     min-width: 0%;
     max-width: 100%;
 }
-
-/********************************************************************* Errors */
-div.error {
-    color: #700;
-    text-align: center;
-}

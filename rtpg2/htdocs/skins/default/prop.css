@@ -29,12 +29,6 @@ body {
     font-family: sans;
 }
 
-/********************************************************************* Errors */
-div.error {
-    color: #700;
-    text-align: center;
-}
-
 div.inlays div.item {
     float: left;
 }

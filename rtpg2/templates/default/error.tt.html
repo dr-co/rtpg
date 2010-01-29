@@ -3,5 +3,5 @@
         [% gettext('Error') _ ' ' _ error.status | html %]
     </h1>
     <br/><br/>
-    <small>[% error.message | html %]</small>
+    <div class="message">[% gettext(error.message) | html %]</div>
 </div>
