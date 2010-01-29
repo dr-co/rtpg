@@ -29,9 +29,12 @@ body {
     font-family: sans;
 }
 
+/********************************************************************* Inlays */
 div.inlays div.item {
     float: left;
 }
+
+/***************************************************************** Properties */
 
 div.properties {
     clear: both;
@@ -43,20 +46,21 @@ div.properties table {
     width: 100%;
 }
 
-div.properties table thead,div.properties table thead tr,div.properties table thead tr td
-    {
+div.properties table thead,
+div.properties table thead tr,
+div.properties table thead tr th
+{
     text-align: left;
     color: CaptionText;
     background-color: ActiveCaption;
-    padding-right: 10px;
 }
 
-div.properties table tbody,div.properties table tbody tr,div.properties table tbody tr td
-    {
+div.properties table tbody,
+div.properties table tbody tr,
+div.properties table tbody tr td
+{
     text-align: left;
-    color: CaptionText;
-    background-color: InactiveCaption;
-    padding-right: 10px;
+    padding-right: 3%;
 }
 
 div.properties table tbody tr th {
@@ -65,16 +69,21 @@ div.properties table tbody tr th {
     font-weight: normal;
 }
 
+/********************************************************************* Fields */
+
 div.properties table.downloaded thead td {
     border: 1px ThreeDShadow solid;
     height: 50px;
 }
 
 div.properties table.transfer {
+
 }
 
 div.properties table.tracker {
+
 }
 
 div.properties table.general {
+
 }
