@@ -28,11 +28,16 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 $(document).ready(function(){
     // Show new prop page
-    $('div.inlays div.item input').bind('click', on_prop);
+    $('div.inlays div.item').bind('click', on_prop);
+
+    // Start refresh timer
+    setTimeout(
+        function(){document.location = 'prop.cgi';},
+        $.cookie('refresh') * 1000);
 });
 
 function on_prop()
 {
     // Update window with new locale
-    document.location = 'prop.cgi?prop=' + $(this).attr('class');
+    document.location = 'prop.cgi?prop=' + $(this).attr('id');
 }

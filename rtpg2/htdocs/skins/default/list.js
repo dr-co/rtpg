@@ -28,11 +28,12 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 $(document).ready(function(){
     // On torrent select
-    $('#list table.list tbody').bind('click', on_click_list);
+    $('#list table.list tbody > tr').find('> td:gt(0)')
+        .bind('click', on_click_list);
 
-    // Start timer
+    // Start refresh timer
     setTimeout(
-        function(){ $(document).location = 'list.cgi' },
+        function(){document.location = 'list.cgi';},
         $.cookie('refresh') * 1000);
 });
 
@@ -40,10 +41,10 @@ function on_click_list()
 {
     // Set current selected
     $('#list table.list tbody').removeClass('selected');
-    $(this).addClass('selected');
+    $(this).parents('tbody:first').addClass('selected');
 
     // Update prop frame
     var objDocList = window.parent.frames[3].document;
     objDocList.location = 'prop.cgi?current=' +
-                          $(this).find(':input[name="hash[]"]').val();
+        $(this).parents('tbody:first').find(':input[name="hash[]"]').val();
 }

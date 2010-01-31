@@ -49,6 +49,10 @@ table.list tbody{
     cursor: pointer;
 }
 
+table.list tbody tr td:first-child{
+    cursor: auto !important;
+}
+
 table.list tbody td.select {
     text-align: left;
     width: 1%;
@@ -67,42 +71,34 @@ table.list tbody td.name {
 
 table.list tbody td.num {
     text-align: center;
-    width: 2%;
 }
 
 table.list tbody td.size {
     text-align: right;
-    width: 5%;
 }
 
 table.list tbody td.done {
     text-align: center;
-    width: 10%;
 }
 
 table.list tbody td.status {
     text-align: left;
-    width: 10%;
 }
 
 table.list tbody td.peers {
     text-align: right;
-    width: 5%;
 }
 
 table.list tbody td.down_speed {
     text-align: right;
-    width: 5%;
 }
 
 table.list tbody td.up_speed {
     text-align: right;
-    width: 5%;
 }
 
 table.list tbody td.rate {
     text-align: right;
-    width: 5%;
 }
 
 table.list tbody td.rate.positive {
@@ -169,7 +165,11 @@ table.list tbody.selected td{
     color: HighlightText !important;
 }
 
-/*************************************************************** Selected row */
+table.list tbody.selected td.img{
+    background-color: white !important;
+}
+
+/*************************************************************** Inactive row */
 table.list tbody.inactive{
 }
 

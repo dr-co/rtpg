@@ -23,8 +23,8 @@ use RTPG;
 my %params = (version => $VERSION);
 
 # Get params ###################################################################
-my $show = CGI::param('show') || 'index';
-$show =~ s/\.cgi.*//g;
+$params{show} = CGI::param('show') || 'index';
+$params{show} =~ s/\.cgi.*//g;
 
 for my $name ( qw(locale refresh skin action current prop) )
 {
@@ -35,27 +35,27 @@ for my $name ( qw(locale refresh skin action current prop) )
 }
 
 # Load module and get data #####################################################
-my $module = 'RTPG::WWW::Frame::' . ucfirst lc $show;
+my $module = 'RTPG::WWW::Frame::' . ucfirst lc $params{show};
 eval "require $module";
 if( $@ )
 {
-    $show = 'error';
-    $params{error} = { message => $@, status => 503 };
+    $params{show}   = 'error';
+    $params{error}  = { message => $@, status => 503 };
 }
 
 $params{data} = $module->get;
 if( $params{data}{error} )
 {
-    $show = 'error';
-    $params{error} = { message => $params{data}{error}, status => 503 };
+    $params{show}   = 'error';
+    $params{error}  = { message => $params{data}{error}, status => 503 };
 }
 
 # Files for this page ##########################################################
-cfg->{url}{skin}{css} = cfg->{url}{skin}{base} . '/' . $show . '.css'
-    if -f cfg->{dir}{skin}{current} . '/' . $show . '.css';
-cfg->{url}{skin}{js}  = cfg->{url}{skin}{base} . '/' . $show . '.js'
-    if -f cfg->{dir}{skin}{current} . '/' . $show . '.js';
+cfg->{url}{skin}{css} = cfg->{url}{skin}{base} . '/' . $params{show} . '.css'
+    if -f cfg->{dir}{skin}{current} . '/' . $params{show} . '.css';
+cfg->{url}{skin}{js}  = cfg->{url}{skin}{base} . '/' . $params{show} . '.js'
+    if -f cfg->{dir}{skin}{current} . '/' . $params{show} . '.js';
 
 # Output #######################################################################
 my $template = RTPG::WWW::Template->new;
-$template->process( $show . '.tt.html', \%params );
+$template->process( $params{show} . '.tt.html', \%params );

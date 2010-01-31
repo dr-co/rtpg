@@ -36,7 +36,14 @@ $(document).ready(function(){
     $('#frms_middle').bind('resize', function(){ alert( $(this).id() )} );
     $('#frms_content').bind('resize', function(){ alert( $(this).id() )} );
 
-
+//alert( window.frames(3).bind('resize', function(){ alert( $(this).id() )} ); );
+//    $(window.parent.frames[2]).bind(
+//        'resize',
+//        function(){
+//            $(document).ready(function(){
+//                alert( $(window.parent.frames[2]).parent().attr('row') );
+//            });
+//        });
 });
 
 //function on_resize()

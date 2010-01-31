@@ -21,7 +21,10 @@ You should have received a copy of the GNU  General  Public  License  along
 with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
+#frms_main {
+    border: 1px ActiveBorder solid;
+}
 
-/*
-    This file contain styles for frameset
-*/
+#frms_middle {
+    border: 4px ActiveBorder solid;
+}

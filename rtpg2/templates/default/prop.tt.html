@@ -1,44 +1,25 @@
-[% UNLESS data.info; RETURN; END %]
-<div id="prop">
+<body class="[% data.prop %]">
     <div class="inlays">
-        <div class="item info">
-            <input
-                type="button"
-                class="info"
-                value="[% gettext('Info') %]"/>
+        <div id="info" class="item info [% IF data.prop == 'info'%]selected[% END %]">
+            [% gettext('Info') %]
         </div>
-        <div class="item peers">
-            <input
-                type="button"
-                class="peers"
-                value="[% gettext('Peers') %]"/>
+        <div id="peers" class="item peers [% IF data.prop == 'peers'%]selected[% END %]">
+            [% gettext('Peers') %]
         </div>
-        <div class="item files">
-            <input
-                type="button"
-                class="files"
-                value="[% gettext('Files') %]"/>
+        <div id="files" class="item files [% IF data.prop == 'files'%]selected[% END %]">
+            [% gettext('Files') %]
         </div>
-        <div class="item trackers">
-            <input
-                type="button"
-                class="trackers"
-                value="[% gettext('Trackers') %]"/>
+        <div id="trackers" class="item trackers [% IF data.prop == 'trackers'%]selected[% END %]">
+            [% gettext('Trackers') %]
         </div>
-        <div class="item chunks">
-            <input
-                type="button"
-                class="chunks"
-                value="[% gettext('Chunks') %]"/>
+        <div id="chunks" class="item chunks [% IF data.prop == 'chunks'%]selected[% END %]">
+            [% gettext('Chunks') %]
         </div>
-        <div class="item transfer">
-            <input
-                type="button"
-                class="transfer"
-                value="[% gettext('Transfer') %]"/>
+        <div id="transfer" class="item transfer [% IF data.prop == 'transfer'%]selected[% END %]">
+            [% gettext('Transfer') %]
         </div>
     </div>
-    <div class="properties">
+    <div class="properties [% data.prop %]">
         [% SWITCH data.prop %]
             [% CASE 'info';     INCLUDE Info        %]
             [% CASE 'peers';    INCLUDE Peers       %]
@@ -50,30 +31,33 @@
                 [% gettext('Unknown property page') %]
         [% END %]
     </div>
-</div>
-
-[% BLOCK Info %]
+</body>
+[% BLOCK Info ############################################################### %]
 <table class="downloaded">
     <colgroup>
         <col width="10%"/>
-        <col width="90%"/>
+        <col width="80%"/>
+        <col width="10%"/>
     </colgroup>
     <thead>
         <tr>
             <th>[% gettext('Downloaded') %]</th>
-            <td>| | | | | |</td>
+            <td class="percent">
+                <div class="percent" style="width: [% data.info.percent %];" />
+            </td>
+            <td class="spercent">[% data.info.percent %]</td>
         </tr>
     </thead>
 </table>
 
 <table class="transfer">
     <colgroup>
-        <col width="11%"/>
-        <col width="23%"/>
         <col width="10%"/>
         <col width="23%"/>
         <col width="10%"/>
         <col width="23%"/>
+        <col width="10%"/>
+        <col width="24%"/>
     </colgroup>
     <thead>
         <tr><th colspan="6">[% gettext('Transfer') %]</th></tr>
@@ -103,38 +87,25 @@
             <th>[% gettext('Peers not connected') %]</th>
             <td>[% data.info.peers_not_connected %]</td>
         </tr>
-            <th>[%  %]</th>
-            <td>[%  %]</td>
-            <th>[%  %]</th>
-            <td>[%  %]</td>
-            <th>[% gettext('Peers exchange') %]</th>
-            <td>
-                [% IF data.info.peer_exchange %]
-                    [% gettext('on') %]
-                [% ELSE %]
-                    [% gettext('off') %]
-                [% END %]
-            </td>
-        </tr>
     </tbody>
 </table>
 
 <table class="tracker">
     <colgroup>
-        <col width="11%"/>
-        <col width="23%"/>
         <col width="10%"/>
         <col width="23%"/>
         <col width="10%"/>
         <col width="23%"/>
+        <col width="10%"/>
+        <col width="24%"/>
     </colgroup>
     <thead>
         <tr><th colspan="6">[% gettext('Tracker') %]</th></tr>
     </thead>
     <tbody>
         <tr>
-            <th>[%# gettext('') %]</th>
-            <td>[%# data.info %]</td>
+            <th>[% gettext('Message') %]</th>
+            <td class="message">[% data.info.message %]</td>
             <th>[%# gettext('') %]</th>
             <td>[%# data.info %]</td>
             <th>[%# gettext('') %]</th>
@@ -192,19 +163,128 @@
         </tr>
     </tbody>
 </table>
-[% END %]
+[% END ###################################################################### %]
 
-[% BLOCK Peers %]
-[% END %]
+[% BLOCK Peers ############################################################## %]
+<table class="peers_info">
+    <colgroup>
+        <col width="10%"/>
+        <col width="23%"/>
+        <col width="10%"/>
+        <col width="23%"/>
+        <col width="10%"/>
+        <col width="24%"/>
+    </colgroup>
+    <thead>
+        <tr><th colspan="6">[% gettext('Peers properties') %]</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>[% gettext('Peers connected') %]</th>
+            <td>[% data.info.peers_connected %]</td>
+            <th>[% gettext('Peers max') %]</th>
+            <td>[% data.info.peers_max %]</td>
+            <th>[% gettext('Peers exchange') %]</th>
+            <td>
+                [% IF data.info.peer_exchange %]
+                    [% gettext('on') %]
+                [% ELSE %]
+                    [% gettext('off') %]
+                [% END %]
+            </td>
+        </tr>
+        <tr>
+            <th>[% gettext('Peers accounted') %]</th>
+            <td>[% data.info.peers_accounted %]</td>
+            <th>[% gettext('Peers min') %]</th>
+            <td>[% data.info.peers_min %]</td>
+            <th></th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>[% gettext('Peers complete') %]</th>
+            <td>[% data.info.peers_complete %]</td>
+            <th></th>
+            <td></td>
+            <th></th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>[% gettext('Peers not connected') %]</th>
+            <td>[% data.info.peers_not_connected %]</td>
+            <th></th>
+            <td></td>
+            <th></th>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
 
-[% BLOCK Files %]
-[% END %]
+<table class="peers_list">
+    <thead>
+        <tr><th colspan="6">[% gettext('Peers list') %]</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+[% END ###################################################################### %]
 
-[% BLOCK Trackers %]
-[% END %]
+[% BLOCK Files ############################################################## %]
+<table class="files">
+    <colgroup>
+        <col width="1%" />
+        <col width="69%" />
+        <col width="5%" />
+        <col width="5%" />
+        <col width="10%" />
+        <col width="5%" />
+        <col width="5%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th/>
+            <th>[% gettext('Path') %]</th>
+            <th>[% gettext('Size') %]</th>
+            <th>[% gettext('Done') %]</th>
+            <th>[% gettext('%') %]</th>
+            <th>[% gettext('Chunks') %]</th>
+            <th>[% gettext('Priority') %]</th>
+        </tr>
+    </thead>
+    [% FOR file = data.info %]
+        [% SET class = [] %]
+        [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
+        [% IF data.file == file.hash; class.push('selected'); END %]
+        <tbody class="[% class.join(' ') %]">
+            <tr>
+                <td class="select">
+                    <input
+                        type="checkbox"
+                        name="hash[]"
+                        value="[%# %]"/>
+                </td>
+                <td class="path">[% file.path %]</td>
+                <td class="size">[% file.human_size %]</td>
+                <td class="spercent">[% file.percent %]</td>
+                <td class="percent">
+                    <div class="percent" style="width: [% file.percent %];" />
+                </td>
+                <td class="chunks">[% file.size_chunks %]</td>
+                <td class="priority">[%# gettext(file.priority_str) %]</td>
+            </tr>
+        </tbody>
+    [% END %]
+</table>
+[% END ###################################################################### %]
 
-[% BLOCK Chunks %]
-[% END %]
+[% BLOCK Trackers ########################################################### %]
+[% END ###################################################################### %]
 
-[% BLOCK Transfer %]
-[% END %]
+[% BLOCK Chunks ############################################################# %]
+[% END ###################################################################### %]
+
+[% BLOCK Transfer ########################################################### %]
+[% END ###################################################################### %]

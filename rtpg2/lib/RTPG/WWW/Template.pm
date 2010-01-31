@@ -13,6 +13,7 @@ package RTPG::WWW::Template;
 use base qw(Template);
 
 use CGI;
+use Encode qw(is_utf8 decode encode);
 use RTPG::WWW::Config;
 use RTPG::WWW::Locale;
 
@@ -103,6 +104,9 @@ sub process
         $self->SUPER::process($template, $opts, \$output);
         $output .= $self->error() if $self->error();
     }
+
+    # Be shure output is utf8
+    $output = decode( utf8 => $output ) unless is_utf8 $output;
 
     # Output ###################################################################
     print $header;

@@ -97,6 +97,9 @@ sub new
                                   $self->get('skin');
     $self->{url}{skin}{base} = 'skins/' . $self->get('skin');
 
+    # Set Info property page by default
+    $self->set('prop', 'info') unless $self->get('prop');
+
     return $self;
 }
 

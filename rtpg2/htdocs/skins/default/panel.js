@@ -51,6 +51,8 @@ function on_change_locale()
 
 function on_change_refresh()
 {
+    // Set new timeout
+    $.cookie('refresh', $(this).val());
     // Update window with new refrash rate
     var objDocList = window.parent.frames[2].document;
     objDocList.location = 'list.cgi?refresh=' + $(this).val();
