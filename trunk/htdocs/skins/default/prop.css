@@ -31,8 +31,13 @@ body {
     margin: 0px;
 }
 
+div.message {
+    width: 100%;
+    text-align: center;
+}
+
 /********************************************************************* Inlays */
-div.inlays{
+div.inlays {
     background-color: Menu;
     color: MenuText;
     clear: both;
@@ -56,7 +61,6 @@ div.item.selected {
 }
 
 /***************************************************************** Properties */
-
 div.properties {
     clear: both;
     float: left;
@@ -72,46 +76,21 @@ body.info {
     background-color: Window;
 }
 
-div.properties table.downloaded thead,
-div.properties table.downloaded thead tr,
-div.properties table.downloaded thead tr th,
-div.properties table.transfer thead,
-div.properties table.transfer thead tr,
-div.properties table.transfer thead tr th,
-div.properties table.tracker thead,
-div.properties table.tracker thead tr,
-div.properties table.tracker thead tr th,
-div.properties table.general thead,
-div.properties table.general thead tr,
-div.properties table.general thead tr th
-{
+div.properties table.downloaded thead,div.properties table.downloaded thead tr,div.properties table.downloaded thead tr th,div.properties table.transfer thead,div.properties table.transfer thead tr,div.properties table.transfer thead tr th,div.properties table.tracker thead,div.properties table.tracker thead tr,div.properties table.tracker thead tr th,div.properties table.general thead,div.properties table.general thead tr,div.properties table.general thead tr th
+    {
     text-align: left;
     color: CaptionText;
     background-color: ActiveCaption;
 }
 
-div.properties table.downloaded tbody,
-div.properties table.downloaded tbody tr,
-div.properties table.downloaded tbody tr td,
-div.properties table.transfer tbody,
-div.properties table.transfer tbody tr,
-div.properties table.transfer tbody tr td,
-div.properties table.tracker tbody,
-div.properties table.tracker tbody tr,
-div.properties table.tracker tbody tr td,
-div.properties table.general tbody,
-div.properties table.general tbody tr,
-div.properties table.general tbody tr td
-{
+div.properties table.downloaded tbody,div.properties table.downloaded tbody tr,div.properties table.downloaded tbody tr td,div.properties table.transfer tbody,div.properties table.transfer tbody tr,div.properties table.transfer tbody tr td,div.properties table.tracker tbody,div.properties table.tracker tbody tr,div.properties table.tracker tbody tr td,div.properties table.general tbody,div.properties table.general tbody tr,div.properties table.general tbody tr td
+    {
     text-align: left;
     padding-right: 3%;
 }
 
-div.properties table.downloaded tbody tr th,
-div.properties table.transfer tbody tr th,
-div.properties table.tracker tbody tr th,
-div.properties table.general tbody tr th
-{
+div.properties table.downloaded tbody tr th,div.properties table.transfer tbody tr th,div.properties table.tracker tbody tr th,div.properties table.general tbody tr th
+    {
     text-align: left;
     padding-left: 1%;
     font-weight: normal;
@@ -126,7 +105,7 @@ div.properties table.downloaded thead td.percent {
     height: 36pt;
 }
 
-div.properties table.downloaded thead td.percent div.percent{
+div.properties table.downloaded thead td.percent div.percent {
     background-color: Highlight;
     border: none;
     height: 100%;
@@ -135,18 +114,17 @@ div.properties table.downloaded thead td.percent div.percent{
     max-width: 100%;
 }
 
-div.properties table.downloaded thead td.spercent{
+div.properties table.downloaded thead td.spercent {
     font-size: 30pt;
     text-align: center;
     vertical-align: middle;
 }
 
-
 div.properties table.transfer {
 
 }
 
-div.properties table.tracker td.message{
+div.properties table.tracker td.message {
     font-style: italic;
 }
 
@@ -159,19 +137,15 @@ body.peers {
     background-color: Window;
 }
 
-div.properties table.peers_info thead,
-div.properties table.peers_info thead tr,
-div.properties table.peers_info thead tr th
-{
+div.properties table.peers_info thead,div.properties table.peers_info thead tr,div.properties table.peers_info thead tr th
+    {
     text-align: left;
     color: CaptionText;
     background-color: ActiveCaption;
 }
 
-div.properties table.peers_info tbody,
-div.properties table.peers_info tbody tr,
-div.properties table.peers_info tbody tr td
-{
+div.properties table.peers_info tbody,div.properties table.peers_info tbody tr,div.properties table.peers_info tbody tr td
+    {
     text-align: left;
     padding-right: 3%;
 }
@@ -183,24 +157,20 @@ div.properties table.peers_info tbody tr th {
 }
 
 /*************************************************************** Fields Files */
-div.properties table.files thead,
-div.properties table.files thead tr,
-div.properties table.files thead tr th
-{
+div.properties table.files thead,div.properties table.files thead tr,div.properties table.files thead tr th
+    {
     text-align: center;
     background-color: ActiveCaption;
     color: CaptionText;
     padding: 4px;
 }
 
-div.properties table.files tbody,
-div.properties table.files tbody tr,
-div.properties table.files tbody tr td
-{
+div.properties table.files tbody,div.properties table.files tbody tr,div.properties table.files tbody tr td
+    {
+
 }
 
 /* Files list */
-
 div.properties table.files tbody td.select {
     text-align: center;
 }
@@ -242,16 +212,14 @@ div.properties table.files tbody.even td.path {
 div.properties table.files tbody td.percent {
     border: 1px Highlight solid;
 }
-div.properties table.files tbody td.percent div.percent{
+
+div.properties table.files tbody td.percent div.percent {
     background-color: Highlight;
     min-height: 100%;
     height: 100%;
     min-width: 0%;
     max-width: 100%;
 }
-
 /************************************************************ Fields Trackers */
-
-/************************************************************** Fields Chunks */
-
-/************************************************************ Fields Transfer */
+    /************************************************************** Fields Chunks */
+    /************************************************************ Fields Transfer */

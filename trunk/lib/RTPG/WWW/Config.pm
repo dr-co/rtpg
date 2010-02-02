@@ -25,8 +25,8 @@ our @EXPORT = qw(cfg DieDumper Dumper);
 ################################################################################
 #use constant RTPG_SYSTEM_CONFIG_PATH  => '/etc/rtpg/rtpg.conf';
 #use constant RTPG_CONFIG_PATH         => '~/.rtpg/rtpg.conf';
-use constant RTPG_SYSTEM_CONFIG_PATH  => '/home/rubin/workspace/rtpg2/config/rtpg.conf';
-use constant RTPG_CONFIG_PATH         => '/home/rubin/workspace/rtpg2/config/rtpg.conf';
+use constant RTPG_SYSTEM_CONFIG_PATH  => '/home/rubin/workspace/rtpg2/trunk/config/rtpg.conf';
+use constant RTPG_CONFIG_PATH         => '/home/rubin/workspace/rtpg2/trunk/config/rtpg.conf';
 ###############################################################################
 
 =head2 cfg
@@ -86,6 +86,13 @@ sub new
 
     my $self = bless \%opts, $class;
 
+    # Set parameters by default, even it not declared in config file
+    $self->set('prop', 'info')      unless $self->get('prop');
+    $self->set('action', 'default') unless $self->get('action');
+    $self->set('locale', 'en')      unless $self->get('locale');
+    $self->set('skin', 'default')   unless $self->get('skin');
+    $self->set('refresh', 60)       unless $self->get('refresh');
+
     # Load params from file
     $self->load_from_files;
 
@@ -97,8 +104,11 @@ sub new
                                   $self->get('skin');
     $self->{url}{skin}{base} = 'skins/' . $self->get('skin');
 
-    # Set Info property page by default
-    $self->set('prop', 'info') unless $self->get('prop');
+
+
+    # Init parameters from current value to cookie
+    # It`s need for first time start to init all default cookie
+    $self->set($_, $self->get($_)) for qw(refresh skin prop locale action);
 
     return $self;
 }

@@ -33,7 +33,7 @@ $(document).ready(function(){
     // Start refresh timer
     setTimeout(
         function(){document.location = 'prop.cgi';},
-        $.cookie('refresh') * 1000);
+        ($.cookie('refresh') || 60) * 1000);
 });
 
 function on_prop()

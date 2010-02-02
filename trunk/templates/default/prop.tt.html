@@ -1,3 +1,15 @@
+[% UNLESS data.current && data.info %]
+    <body class="[% data.prop %]">
+        <div class="message">
+            [% UNLESS data.current %]
+                <br/>
+                [% gettext('Select torrent to show') %]
+            [% END %]
+        </div>
+    </body>
+    [% RETURN %]
+[% END %]
+
 <body class="[% data.prop %]">
     <div class="inlays">
         <div id="info" class="item info [% IF data.prop == 'info'%]selected[% END %]">
