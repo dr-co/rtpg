@@ -87,11 +87,11 @@ sub new
     my $self = bless \%opts, $class;
 
     # Set parameters by default, even it not declared in config file
-    $self->set('prop', 'info')      unless $self->get('prop');
-    $self->set('action', 'default') unless $self->get('action');
-    $self->set('locale', 'en')      unless $self->get('locale');
-    $self->set('skin', 'default')   unless $self->get('skin');
-    $self->set('refresh', 60)       unless $self->get('refresh');
+    $self->set('prop',    'info'    )   unless $self->get('prop');
+    $self->set('action',  'default' )   unless $self->get('action');
+    $self->set('locale',  'en'      )   unless $self->get('locale');
+    $self->set('skin',    'default' )   unless $self->get('skin');
+    $self->set('refresh', 60        )   unless $self->get('refresh');
 
     # Load params from file
     $self->load_from_files;

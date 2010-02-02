@@ -34,6 +34,7 @@ sub new
         PRE_CHOMP       => 1,
         POST_CHOMP      => 1,
         TRIM            => 1,
+        ENCODING        => 'utf8',
         WRAPPER         => 'main.tt.html',
 #        COMPILE_EXT     => '.ttc',
 #        COMPILE_DIR     => cfg()->{dir}{cache},
