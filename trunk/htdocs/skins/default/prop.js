@@ -30,10 +30,13 @@ $(document).ready(function(){
     // Show new prop page
     $('div.inlays div.item').bind('click', on_prop);
 
-    // Start refresh timer
-    setTimeout(
-        function(){document.location = 'prop.cgi';},
-        ($.cookie('refresh') || 60) * 1000);
+    // Start refresh timer if refresh time selected
+    if( $.cookie('refresh') != 0 )
+    {
+        setTimeout(
+            function(){document.location = 'prop.cgi';},
+            ($.cookie('refresh') || 60 ) * 1000);
+    }
 });
 
 function on_prop()

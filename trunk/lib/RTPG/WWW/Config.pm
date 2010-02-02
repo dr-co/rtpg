@@ -91,7 +91,7 @@ sub new
     $self->set('action',  'default' )   unless $self->get('action');
     $self->set('locale',  'en'      )   unless $self->get('locale');
     $self->set('skin',    'default' )   unless $self->get('skin');
-    $self->set('refresh', 60        )   unless $self->get('refresh');
+    $self->set('refresh', 60        )   unless defined $self->get('refresh');
 
     # Load params from file
     $self->load_from_files;
@@ -168,8 +168,8 @@ Get parameter by $name.
 sub get
 {
     my ($self, $name) = @_;
-    my $value = CGI::param($name)       || CGI::cookie($name)   ||
-                $self->{param}{$name}   || '';
+    my $value = CGI::param($name)       // CGI::cookie($name)   //
+                $self->{param}{$name}   // '';
 
     return $value;
 }

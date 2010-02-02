@@ -1,15 +1,3 @@
-[% UNLESS data.current && data.info %]
-    <body class="[% data.prop %]">
-        <div class="message">
-            [% UNLESS data.current %]
-                <br/>
-                [% gettext('Select torrent to show') %]
-            [% END %]
-        </div>
-    </body>
-    [% RETURN %]
-[% END %]
-
 <body class="[% data.prop %]">
     <div class="inlays">
         <div id="info" class="item info [% IF data.prop == 'info'%]selected[% END %]">
@@ -31,18 +19,28 @@
             [% gettext('Transfer') %]
         </div>
     </div>
-    <div class="properties [% data.prop %]">
-        [% SWITCH data.prop %]
-            [% CASE 'info';     INCLUDE Info        %]
-            [% CASE 'peers';    INCLUDE Peers       %]
-            [% CASE 'files';    INCLUDE Files       %]
-            [% CASE 'trackers'; INCLUDE Trackers    %]
-            [% CASE 'chunks';   INCLUDE Chunks      %]
-            [% CASE 'transfer'; INCLUDE Transfer    %]
-            [% CASE DEFAULT %]
-                [% gettext('Unknown property page') %]
-        [% END %]
-    </div>
+    [% UNLESS data.current && data.info %]
+        <div class="message">
+            [% UNLESS data.current %]
+                <br/>
+                <br/>
+                [% gettext('Select torrent to show') %]
+            [% END %]
+        </div>
+    [% ELSE %]
+        <div class="properties [% data.prop %]">
+            [% SWITCH data.prop %]
+                [% CASE 'info';     INCLUDE Info        %]
+                [% CASE 'peers';    INCLUDE Peers       %]
+                [% CASE 'files';    INCLUDE Files       %]
+                [% CASE 'trackers'; INCLUDE Trackers    %]
+                [% CASE 'chunks';   INCLUDE Chunks      %]
+                [% CASE 'transfer'; INCLUDE Transfer    %]
+                [% CASE DEFAULT %]
+                    [% gettext('Unknown property page') %]
+            [% END %]
+        </div>
+    [% END %]
 </body>
 [% BLOCK Info ############################################################### %]
 <table class="downloaded">

@@ -72,9 +72,9 @@ sub process
     $opts = {
         common  => { },
         config  => cfg(),
-        gettext => sub{ return RTPG::WWW::Locale::gettext(@_)   },
-        langs   => sub{ return RTPG::WWW::Locale::aviable()     },
-        skins   => sub{ return cfg->skins()                     },
+        gettext => sub { return RTPG::WWW::Locale::gettext(@_); },
+        langs   => sub { return RTPG::WWW::Locale::aviable();   },
+        skins   => sub { return cfg->skins();                   },
         %$opts
     };
 

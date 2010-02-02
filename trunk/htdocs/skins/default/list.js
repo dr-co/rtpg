@@ -31,10 +31,13 @@ $(document).ready(function(){
     $('#list table.list tbody > tr').find('> td:gt(0)')
         .bind('click', on_click_list);
 
-    // Start refresh timer
-    setTimeout(
-        function(){document.location = 'list.cgi';},
-        ($.cookie('refresh') || 60) * 1000);
+    // Start refresh timer if refresh time selected
+    if( $.cookie('refresh') != 0 )
+    {
+        setTimeout(
+            function(){document.location = 'list.cgi';},
+            ($.cookie('refresh') || 60 ) * 1000);
+    }
 });
 
 function on_click_list()
