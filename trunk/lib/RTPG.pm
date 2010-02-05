@@ -27,25 +27,25 @@ RTPG - is a module for accessing to rtorrent's SCGI functions.
 
 =cut
 
-our $VERSION=0.7;
+our $VERSION=0.8;
 
 =head1 SYNOPSIS
 
  use RTPG;
- 
+
  # standard variant
  my $h = new RTPG(url=>'http://localhost/RPC2');
- 
+
  # direct connection to rtorrent
  my $h = new RTPG(url=>'localhost:5000');
- my $h = new RTPG(url=>'/path/to/socket.rtorrent'); 
+ my $h = new RTPG(url=>'/path/to/socket.rtorrent');
 
  # arrayref and error (standard version)
  my ($tlist, $error)=$h->torrents_list;
 
  # arrayref (died version)
  my $tlist=$h->torrents_list;
- 
+
  for (@$tlist)
  {
      my $file_list=$h->file_list($_->{hash});
@@ -132,7 +132,7 @@ sub rpc_command
     {
         if ('RPC::XML::fault' eq ref $resp)
         {
-            my $err_str=sprintf 
+            my $err_str=sprintf
                 "Fault when execute command: %s\n" .
                 "Fault code: %s\n" .
                 "Fault text: %s\n",
@@ -145,7 +145,7 @@ sub rpc_command
         return $resp->value unless wantarray;
         return $resp->value, '';
     }
-    my $err_str=sprintf 
+    my $err_str=sprintf
         "Fault when execute command: %s\n" .
         "Fault text: %s\n",
         join(' ', $cmd, @args),
@@ -239,7 +239,7 @@ the torrent (tid);
 
  my $tlist = $h->torrents_list;
  my $tinfo_first = $tlist->[0];
- my $tinfo_first_second_time 
+ my $tinfo_first_second_time
     = $h->torrent_info($tlist->[0]{hash});
 
 =head4 NOTE
@@ -296,7 +296,7 @@ about each file that belong to the torrent (tid).
 
  # standard version
  my ($files, $error)=$h->file_list($tid);
- 
+
  # died version
  my $files=$h->file_list($tid);
 
@@ -315,7 +315,7 @@ sub file_list
         return undef, "$@" if wantarray;
         die $@;
     }
-    
+
     my ($chunk_size, $error)=$self->rpc_command('d.get_chunk_size', $id);
     unless (defined $chunk_size)
     {
@@ -360,7 +360,7 @@ sub file_list
 This method updates priorities of all files in one torrent
 
 =head3 EXAMPLE
- 
+
  # standard version
  my $error=$h->set_files_priorities($tid, $pri);
  my ($error)=$h->set_files_priorities($tid, $pri);
@@ -410,7 +410,7 @@ sub system_information
         return undef, $err if wantarray;
         die $err;
     }
-    
+
     my $res=
     {
         client_version      => $rv,
@@ -418,6 +418,81 @@ sub system_information
     };
 
     return $res, '' if wantarray;
+    return $res;
+}
+
+=head2 start
+
+Start torrent (tid) download
+
+=cut
+
+sub start
+{
+    my ($self, $id) = @_;
+
+    my $res;
+
+    eval
+    {
+        $res = $self->rpc_command("d.start", $id);
+    };
+    if ($@)
+    {
+        return undef, "$@" if wantarray;
+        die $@;
+    }
+
+    return $res;
+}
+
+=head2 stop
+
+Stop torrent (tid) download
+
+=cut
+
+sub stop
+{
+    my ($self, $id) = @_;
+
+    my $res;
+
+    eval
+    {
+        $res = $self->rpc_command("d.stop", $id);
+    };
+    if ($@)
+    {
+        return undef, "$@" if wantarray;
+        die $@;
+    }
+
+    return $res;
+}
+
+=head2 delete
+
+Delete torrent (tid)
+
+=cut
+
+sub delete
+{
+    my ($self, $id) = @_;
+
+    my $res;
+
+    eval
+    {
+        $res = $self->rpc_command("d.erase", $id);
+    };
+    if ($@)
+    {
+        return undef, "$@" if wantarray;
+        die $@;
+    }
+
     return $res;
 }
 

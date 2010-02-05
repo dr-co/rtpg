@@ -36,6 +36,9 @@ function on_click_action()
     $('#action div.item').removeClass('selected');
     $(this).parent('div.item').addClass('selected');
 
+    // Set new value
+    $.cookie('action', $(this).attr('class'), { expires: 730 });
+
     // Update List frame with new params
     var objDocList = window.parent.frames[2].document;
     objDocList.location = 'list.cgi?action=' + $(this).attr('class');

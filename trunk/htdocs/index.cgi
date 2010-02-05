@@ -26,13 +26,13 @@ my %params = (version => $VERSION);
 $params{show} = CGI::param('show') || 'index';
 $params{show} =~ s/\.cgi.*//g;
 
-for my $name ( qw(locale refresh skin action current prop) )
-{
-    # Get new parameter value
-    my $value = CGI::param($name);
-    # Set new state if value exists
-    cfg->set($name, $value) if $value;
-}
+#for my $name ( CGI::param )
+#{
+#    # Get new parameter value
+#    my $value = CGI::param($name);
+#    # Set new state if value exists
+#    cfg->set($name, $value) if $value;
+#}
 
 # Load module and get data #####################################################
 my $module = 'RTPG::WWW::Frame::' . ucfirst lc $params{show};

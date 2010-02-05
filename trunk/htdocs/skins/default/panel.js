@@ -28,13 +28,87 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 $(document).ready(function(){
     // Panel buttons
-    $('input.panel.refresh').bind('click', on_refresh);
+    $('input.panel.delete')			.bind('click', on_delete);
+    $('input.panel.start')			.bind('click', on_start);
+    $('input.panel.pause')			.bind('click', on_pause);
+    $('input.panel.stop')			.bind('click', on_stop);
+    $('input.panel.priority_up')	.bind('click', on_priority_up);
+    $('input.panel.priority_down')	.bind('click', on_priority_down);
+    $('input.panel.refresh')		.bind('click', on_refresh);
 
     // Additional params
-    $('#locale').bind('change', on_change_locale);
-    $('#refresh').bind('change', on_change_refresh);
-    $('#skin').bind('change', on_change_skin);
+    $('#locale')					.bind('change', on_change_locale);
+    $('#refresh')					.bind('change', on_change_refresh);
+    $('#skin')						.bind('change', on_change_skin);
 });
+
+function on_delete()
+{
+    // Update frames
+    var objDocList = window.parent.frames[2].document;
+    objDocList.location = 'list.cgi?delete=' + $.cookie('current');
+    var objDocProp = window.parent.frames[3].document;
+    objDocProp.location = 'prop.cgi';
+}
+
+function on_start()
+{
+    // Update frames
+    var objDocList = window.parent.frames[2].document;
+    objDocList.location = 'list.cgi?start=' + $.cookie('current');
+    var objDocProp = window.parent.frames[3].document;
+    objDocProp.location = 'prop.cgi';
+}
+
+function on_pause()
+{
+    // Update frames
+    var objDocList = window.parent.frames[2].document;
+    objDocList.location = 'list.cgi?pause=' + $.cookie('current');
+    var objDocProp = window.parent.frames[3].document;
+    objDocProp.location = 'prop.cgi';
+}
+
+function on_stop()
+{
+    // Update frames
+    var objDocList = window.parent.frames[2].document;
+
+    $.each($(objDocList).find('table.list tbody tr'), function(i, objTr){
+        alert($(objTr).find('td:first > :selected').val());
+        var objCheckbox = $(objTr).find('td:first > :selected');
+        if( !objCheckbox.length ){ return; }
+        alert( objCheckbox.val() );
+    });
+
+//    var arrSelected = $(objDocList).find('table.list tbody tr td:first :selected');
+//    $.each(arrSelected, function(i, objCheckbox){
+//        objCheckbox = 'stop=' + objCheckbox.val();
+//    });
+//    var strQuery = '?' + arrSelected.join('&');
+//    alert('query:' + strQuery + ' arr:' + arrSelected.length);
+//    objDocList.location = 'list.cgi?stop=' + $.cookie('current');
+    var objDocProp = window.parent.frames[3].document;
+    objDocProp.location = 'prop.cgi';
+}
+
+function on_priority_up()
+{
+    // Update frames
+    var objDocList = window.parent.frames[2].document;
+    objDocList.location = 'list.cgi?priority_up=' + $.cookie('current');
+    var objDocProp = window.parent.frames[3].document;
+    objDocProp.location = 'prop.cgi';
+}
+
+function on_priority_down()
+{
+    // Update frames
+    var objDocList = window.parent.frames[2].document;
+    objDocList.location = 'list.cgi?priority_down=' + $.cookie('current');
+    var objDocProp = window.parent.frames[3].document;
+    objDocProp.location = 'prop.cgi';
+}
 
 function on_refresh()
 {
@@ -45,6 +119,8 @@ function on_refresh()
 
 function on_change_locale()
 {
+    // Set new value
+    $.cookie('locale', $(this).val(), { expires: 730 });
     // Update window with new locale
     window.parent.document.location = 'index.cgi?locale=' + $(this).val();
 }
@@ -62,6 +138,8 @@ function on_change_refresh()
 
 function on_change_skin()
 {
+    // Set new value
+    $.cookie('skin', $(this).val(), { expires: 730 });
     // Update window with new skin
     window.parent.document.location = 'index.cgi?skin=' + $(this).val();
 }

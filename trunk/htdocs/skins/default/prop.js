@@ -41,6 +41,9 @@ $(document).ready(function(){
 
 function on_prop()
 {
+    // Set new value
+    $.cookie('prop', $(this).attr('id'), { expires: 730 });
+
     // Update window with new locale
     document.location = 'prop.cgi?prop=' + $(this).attr('id');
 }

@@ -65,7 +65,10 @@
                         [% IF torrent.is_active %][% gettext('Seeding') %]
                         [% ELSE %][% gettext('Finished') %]
                         [% END %]
-                    [% ELSE %][% gettext('Downloading') %]
+                    [% ELSE %]
+                        [% IF torrent.is_active %][% gettext('Downloading') %]
+                        [% ELSE %][% gettext('Paused') %]
+                        [% END %]
                     [% END %]
                 </td>
                 <td class="peers">[% torrent.peers_connected %]</td>

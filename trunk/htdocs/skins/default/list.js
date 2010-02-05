@@ -31,6 +31,10 @@ $(document).ready(function(){
     $('#list table.list tbody > tr').find('> td:gt(0)')
         .bind('click', on_click_list);
 
+    // On checkbox select add hash to list in cookies
+    $('#list table.list tbody > tr').find('> td:first :checkbox')
+        .bind('change', on_click_checkbox);
+
     // Start refresh timer if refresh time selected
     if( $.cookie('refresh') != 0 )
     {
@@ -46,8 +50,36 @@ function on_click_list()
     $('#list table.list tbody').removeClass('selected');
     $(this).parents('tbody:first').addClass('selected');
 
+    // Set new current in cookie
+    var strCurrent =
+        $(this).parents('tbody:first').find(':input[name="hash[]"]').val();
+    $.cookie('current', strCurrent, { expires: 730 });
+
     // Update prop frame
     var objDocList = window.parent.frames[3].document;
-    objDocList.location = 'prop.cgi?current=' +
-        $(this).parents('tbody:first').find(':input[name="hash[]"]').val();
+    objDocList.location = 'prop.cgi?current=' + strCurrent;
+
+}
+
+function on_click_checkbox()
+{
+    // Get cookie sting and slip it to array
+    var strCookie = new String( $.cookie('checked') || '' );
+    var arrChecked;
+    if( strCookie == '' ){ arrChecked = new Array(); }
+    else { arrChecked = strCookie.split(';'); }
+
+    if( $(this).attr('checked') )
+    {
+        // Add hash to array
+        arrChecked.push( $(this).val() );
+    }
+    else
+    {
+        // Remove hash from array
+        arrChecked.splice( $.inArray($(this).val(), arrChecked), 1);
+    }
+
+    // Set new cookie value
+    $.cookie('checked', arrChecked.join(';'), { expires: 730 } );
 }
