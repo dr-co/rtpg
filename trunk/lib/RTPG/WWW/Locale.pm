@@ -13,6 +13,8 @@ package RTPG::WWW::Locale;
 use base qw(Exporter);
 
 use Locale::PO;
+use Encode qw(is_utf8 decode);
+
 use RTPG::WWW::Config;
 
 our @EXPORT_OK = qw(po gettext);
@@ -106,12 +108,12 @@ sub gettext
 
     my $id = '"'.$string.'"';
 
-    # Return translated string if exists
-    return $self->{data}{$id}->dequote( $self->{data}{$id}->msgstr ) ||
-           $self->{data}{$id}->dequote( $self->{data}{$id}->msgid )  ||
-           $string
-                if exists $self->{data}{$id};
-    # Return input as is
+    # Return translated string if exists or as is
+    $string = $self->{data}{$id}->dequote( $self->{data}{$id}->msgstr ) ||
+        $self->{data}{$id}->dequote( $self->{data}{$id}->msgid )  ||
+        $string
+            if exists $self->{data}{$id};
+    $string = decode utf8 => $string unless is_utf8 $string;
     return $string;
 }
 
