@@ -36,6 +36,9 @@
             <tr>
                 <td class="select">
                     <input
+                        [% IF data.checked.${torrent.hash} %]
+                            checked="checked"
+                        [% END %]
                         type="checkbox"
                         name="hash[]"
                         value="[% torrent.hash %]"/>

@@ -233,6 +233,16 @@ sub skins
     return \%skins;
 }
 
+=head2 is_collapse
+
+Return true if html collapse enabled
+
+=cut
+sub is_collapse
+{
+    return ( shift->get('collapse') =~ m/^yes$/i) ?1 :0;
+}
+
 =head2 DieDumper
 
 Print all params and die

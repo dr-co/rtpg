@@ -1,3 +1,12 @@
+[%-
+    # Enable collapse for make html code less by size
+    IF config.is_collapse;
+        FILTER collapse; INCLUDE Main; END;
+    ELSE;
+        INCLUDE Main;
+    END;
+-%]
+[% BLOCK Main %]
 <?xml version="1.0" encoding="UTF-8"?>
 [% IF show == 'index' %]
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
@@ -32,3 +41,4 @@
 
     [% content || '<body/>' %]
 </html>
+[% END %]

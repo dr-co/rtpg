@@ -25,7 +25,8 @@ sub get
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(action current debug start stop delete);
+    $opts{$_} = cfg->get($_) for qw(action current debug start stop delete
+        checked );
 
     # Get RTPG object
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
@@ -37,6 +38,9 @@ sub get
 
     # Get list
     ($opts{list}, $opts{error}) = $rtpg->torrents_list( $opts{action} );
+
+    # Split checked string into hash
+    $opts{checked} = { map { $_ => 1 } split ';', $opts{checked} };
 
     # If debug option aviable die with first list item
     DieDumper \%opts if $opts{debug};
