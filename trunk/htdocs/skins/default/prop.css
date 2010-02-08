@@ -221,6 +221,10 @@ div.properties table.peers_list tbody td.up_speed {
     text-align: right;
 }
 
+div.properties table.peers_list tbody td.peer_rate {
+    text-align: right;
+}
+
 div.properties table.peers_list tbody td.peer_total {
     text-align: right;
 }
