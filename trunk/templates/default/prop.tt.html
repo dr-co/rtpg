@@ -60,6 +60,8 @@
     </thead>
 </table>
 
+<h4>[% gettext('Transfer') %]</h4>
+
 <table class="transfer">
     <colgroup>
         <col width="10%"/>
@@ -69,9 +71,6 @@
         <col width="10%"/>
         <col width="24%"/>
     </colgroup>
-    <thead>
-        <tr><th colspan="6">[% gettext('Transfer') %]</th></tr>
-    </thead>
     <tbody>
         <tr>
             <th>[% gettext('Downloaded') %]</th>
@@ -100,6 +99,8 @@
     </tbody>
 </table>
 
+<h4>[% gettext('Tracker') %]</h4>
+
 <table class="tracker">
     <colgroup>
         <col width="10%"/>
@@ -109,9 +110,6 @@
         <col width="10%"/>
         <col width="24%"/>
     </colgroup>
-    <thead>
-        <tr><th colspan="6">[% gettext('Tracker') %]</th></tr>
-    </thead>
     <tbody>
         <tr>
             <th>[% gettext('Message') %]</th>
@@ -124,6 +122,8 @@
     </tbody>
 </table>
 
+<h4>[% gettext('General') %]</h4>
+
 <table class="general">
     <colgroup>
         <col width="10%"/>
@@ -131,9 +131,6 @@
         <col width="10%"/>
         <col width="40%"/>
     </colgroup>
-    <thead>
-        <tr><th colspan="4">[% gettext('General') %]</th></tr>
-    </thead>
     <tbody>
         <tr>
             <th>[% gettext('Directory') %]</th>
@@ -176,6 +173,8 @@
 [% END ###################################################################### %]
 
 [% BLOCK Peers ############################################################## %]
+<h4>[% gettext('Peers properties') %]</h4>
+
 <table class="peers_info">
     <colgroup>
         <col width="10%"/>
@@ -185,9 +184,6 @@
         <col width="10%"/>
         <col width="24%"/>
     </colgroup>
-    <thead>
-        <tr><th colspan="6">[% gettext('Peers properties') %]</th></tr>
-    </thead>
     <tbody>
         <tr>
             <th>[% gettext('Peers connected') %]</th>
@@ -222,15 +218,71 @@
     </tbody>
 </table>
 
+<h4>[% gettext('Peers list') %]</h4>
+
 <table class="peers_list">
+    <colgroup>
+        <col width="1%" />
+        <col/>
+        <col width="10%" />
+        <col width="5%" />
+        <col width="5%" />
+        <col width="10%" />
+        <col width="5%" />
+        <col width="5%" />
+        <col width="5%" />
+        <col width="5%" />
+        <col width="5%" />
+        <col width="5%" />
+        <col width="20%" />
+    </colgroup>
     <thead>
-        <tr><th colspan="6">[% gettext('Peers list') %]</th></tr>
-    </thead>
-    <tbody>
         <tr>
-            <td></td>
+            <th colspan="2">[% gettext('IP : Port') %]</th>
+            <th>[% gettext('Client') %]</th>
+            <th>[% gettext('Flags') %]</th>
+            <th>[% gettext('Done') %]</th>
+            <th>[% gettext('%') %]</th>
+            <th>[% gettext('Down Speed') %]</th>
+            <th>[% gettext('Up Speed') %]</th>
+            <th>[% gettext('Peer Rate') %]</th>
+            <th>[% gettext('Down Total') %]</th>
+            <th>[% gettext('Up Total') %]</th>
+            <th>[% gettext('Peer Total') %]</th>
+            <th>[% gettext('Id') %]</th>
         </tr>
-    </tbody>
+    </thead>
+    [% FOR peer = data.list %]
+        [% SET class = [] %]
+        [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
+        [% IF data.peer == peer.id; class.push('selected'); END %]
+        <tbody class="[% class.join(' ') %]">
+            <tr>
+                <td class="country">[% peer.country | lower %]</td>
+                <td class="address">[% peer.address _ ' : ' _ peer.port %]</td>
+                <td class="client">[% peer.client_version %]</td>
+                <td class="flag">
+                    [% IF peer.is_incoming %][% ' ' _ gettext('Inc') %][% END %]
+                    [% IF is_encrypted %][% ' ' _ gettext('Enc') %][% END %]
+                    [% IF peer.is_obfuscated %][% ' ' _ gettext('Obf') %][% END %]
+                    [% IF peer.is_snubbed %][% ' ' _ gettext('Snub') %][% END %]
+                </td>
+                <td class="done">[% peer.completed_percent %]%</td>
+                <td class="percent">
+                    <div class="percent" style="width: [% peer.completed_percent %]%;">
+                        &nbsp;
+                    </div>
+                </td>
+                <td class="down_speed">[% peer.down_rate %]</td>
+                <td class="up_speed">[% peer.up_rate %]</td>
+                <td class="peer_rate">[% peer.peer_rate %]</td>
+                <td class="down_total">N/A[%# peer.down_total %]</td>
+                <td class="up_total">N/A[%# peer.up_total %]</td>
+                <td class="peer_total">N/A[%# peer.peer_total %]</td>
+                <td class="id">[% peer.id %]</td>
+            </tr>
+        </tbody>
+    [% END %]
 </table>
 [% END ###################################################################### %]
 
@@ -272,7 +324,9 @@
                 <td class="size">[% file.human_size %]</td>
                 <td class="spercent">[% file.percent %]</td>
                 <td class="percent">
-                    <div class="percent" style="width: [% file.percent %];" />
+                    <div class="percent" style="width: [% file.percent %];">
+                        &nbsp;
+                    </div>
                 </td>
                 <td class="chunks">[% file.size_chunks %]</td>
                 <td class="priority">[%# gettext(file.priority_str) %]</td>

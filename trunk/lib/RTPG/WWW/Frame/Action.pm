@@ -12,19 +12,37 @@ RTPG::WWW::Frame::Action
 package RTPG::WWW::Frame::Action;
 use CGI;
 use RTPG::WWW::Config;
+use RTPG::WWW::Locale qw(gettext);
+#use RPC::XML::base64;
 
-=head2 get
+=head2 new
 
 Get params
 
 =cut
 
-sub get
+sub new
 {
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(action);
+    $opts{$_} = cfg->get($_) for qw(action upload);
+
+    # Add uploaded file
+#    if( $opts{upload} )
+#    {
+#        my $fh = CGI::upload('upload');
+#        unless ($fh)
+#        {
+#            $opts{error} = gettext('Error upload torrent');
+#            last;
+#        }
+#        local $/;
+#
+#        my $torrent = RPC::XML::base64->new(<$fh>);
+#        ($opts{info}, $opts{error}) =
+#            $rtorrent->rpc_command(load_raw => $torrent);
+#    }
 
     my $self = bless \%opts, $class;
 

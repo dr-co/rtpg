@@ -15,7 +15,7 @@ use base qw(Template);
 use CGI;
 use Encode qw(is_utf8 decode encode);
 use RTPG::WWW::Config;
-use RTPG::WWW::Locale;
+use RTPG::WWW::Locale qw(gettext);
 
 sub new
 {
@@ -72,7 +72,7 @@ sub process
     $opts = {
         common  => { },
         config  => cfg(),
-        gettext => sub { return RTPG::WWW::Locale::gettext(@_); },
+        gettext => sub { return gettext(@_); },
         langs   => sub { return RTPG::WWW::Locale::aviable();   },
         skins   => sub { return cfg->skins();                   },
         %$opts
@@ -91,7 +91,7 @@ sub process
         if( $self->error() =~ m/^file error - .* not found$/ )
         {
             $opts->{error} = {
-                message => RTPG::WWW::Locale::gettext('File not found'),
+                message => gettext('File not found'),
                 status => 404
             };
         }

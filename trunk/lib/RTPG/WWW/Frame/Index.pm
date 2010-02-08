@@ -14,25 +14,21 @@ use CGI;
 use RTPG;
 use RTPG::WWW::Config;
 
-=head2 get
+=head2 new
 
 Get params
 
 =cut
 
-sub get
+sub new
 {
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(locale debug);
+    $opts{$_} = cfg->get($_) for qw(locale);
 
-    if( $opts{debug} )
-    {
-        $opts{methods} =
-            [ RTPG->new(url => cfg->get('rpc_uri'))->_get_list_methods ];
-        DieDumper \%opts;
-    }
+    $opts{methods} =[ RTPG->new(url => cfg->get('rpc_uri'))->_get_list_methods ]
+        if cfg->get('debug');
 
     my $self = bless \%opts, $class;
 

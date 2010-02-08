@@ -1,6 +1,8 @@
 #!/usr/bin/perl
 
 use utf8;
+use strict;
+use warnings;
 package RTPG;
 use Carp;
 use RTPG::Direct;
@@ -75,6 +77,7 @@ The constructor. It receives the next options:
 is an address of rtorrent's SCGI (direct) or rtorrent's RPC (standard).
 
 =back
+
 =cut
 
 sub new
@@ -120,6 +123,7 @@ You can use this method for send commands to rtorrent.
  my $result=$h->rpc_command('system.listMethods');
 
 =cut
+
 sub rpc_command
 {
     my $self=shift;
@@ -153,6 +157,7 @@ sub rpc_command
     die $err_str unless wantarray;
     return undef, $err_str;
 }
+
 
 =head2 torrents_list([VIEW])
 
@@ -230,6 +235,7 @@ sub torrents_list
     return $list, '';
 }
 
+
 =head2 torrent_info(tid)
 
 The method returns the link to hash which contains the information about
@@ -253,7 +259,9 @@ an other information about the torrent.
 
  # died version
  my $tinfo=$h->torrent_info($tid);
+
 =cut
+
 sub torrent_info
 {
     my ($self, $id)=@_;
@@ -285,7 +293,9 @@ sub torrent_info
     }
     return _normalize_one_torrent_info($info), '' if wantarray;
     return _normalize_one_torrent_info($info);
+
 }
+
 
 =head2 file_list(tid)
 
@@ -355,6 +365,87 @@ sub file_list
     return $list;
 }
 
+
+=head2 tracker_list
+
+The method returns information about trackers.
+
+=cut
+
+sub tracker_list
+{
+    my ($self, $tid) = @_;
+    my @cmd = eval {
+        grep /^t\.(?:get_|is_)/,
+            $self->_get_list_methods
+    };
+
+    if ($@) {
+        return undef, $@ if wantarray;
+        die;
+    }
+
+    my ($r, $e) =
+        $self->rpc_command('t.multicall', $tid, undef, map { "$_="  } @cmd);
+
+    if ($e) {
+        return undef, $e if wantarray;
+        die $e;
+    }
+
+    @cmd = map { s/^t\.(?:get_)?//; $_ } @cmd;
+
+    for my $t (@$r) {
+        $t = { map { ($cmd[$_] => $t->[$_]) } 0 .. $#cmd };
+    }
+
+    return ($r, $e) if wantarray;
+    return $r;
+}
+
+
+=head2 peer_list(tid)
+
+The method returns information about peers we are connected (by torrent id).
+
+=cut
+
+sub peer_list
+{
+    my ($self, $tid) = @_;
+    my @cmd = eval { grep /^p\.(?:get_|is_)/, $self->_get_list_methods };
+    if ($@) {
+        return undef, $@ if wantarray;
+        die;
+    }
+
+    my ($list, $error) = eval {
+        $self->rpc_command('p.multicall', $tid, undef, map { "$_=" } @cmd)
+    };
+
+
+    if ($@) {
+        return undef, $@ if wantarray;
+        die;
+    }
+
+    unless($error) {
+        for my $item (0 .. $#{$list}) {
+            my %h;
+            for (0 .. $#cmd) {
+                (my $name = $cmd[$_]) =~ s/^p\.(?:get_)?//;
+                $h{$name} = $list->[$item][$_];
+            }
+            $list->[$item] = { %h };
+        }
+    }
+
+    return ($list, $error) if wantarray;
+    return $list unless $error;
+    die $error;
+}
+
+
 =head2 set_files_priorities(tid, pri)
 
 This method updates priorities of all files in one torrent
@@ -369,6 +460,7 @@ This method updates priorities of all files in one torrent
  $h->set_files_priorities($tid, $pri);
 
 =cut
+
 sub set_files_priorities
 {
     my ($self, $id, $pri)=@_;
@@ -378,6 +470,7 @@ sub set_files_priorities
     die $error if $error;
     return undef;
 }
+
 
 =head2 system_information
 
@@ -397,6 +490,7 @@ the version of librtorrent.
 =back
 
 =cut
+
 sub system_information
 {
     my $self=shift;
@@ -420,6 +514,7 @@ sub system_information
     return $res, '' if wantarray;
     return $res;
 }
+
 
 =head2 start
 
@@ -446,6 +541,7 @@ sub start
     return $res;
 }
 
+
 =head2 stop
 
 Stop torrent (tid) download
@@ -470,6 +566,7 @@ sub stop
 
     return $res;
 }
+
 
 =head2 delete
 
@@ -496,6 +593,7 @@ sub delete
     return $res;
 }
 
+
 =head1 PRIVATE METHODS
 
 =head2 _get_list_methods
@@ -517,6 +615,7 @@ sub _get_list_methods
 counts percent by pair values
 
 =cut
+
 sub _get_percent_string($$)
 {
     my ($part, $full)=@_;
@@ -538,11 +637,13 @@ sub _get_percent_string($$)
     return "$percent%";
 }
 
+
 =head2 _human_size(NUM)
 
 converts big numbers to small 1024 = 1K, 1024**2 == 1M, etc
 
 =cut
+
 sub _human_size($)
 {
     my ($size, $sign)=(shift, 1);
@@ -574,6 +675,7 @@ sub _human_size($)
         $limit *= 1024;
     }
 }
+
 
 =head2 _normalize_one_torrent_info(HASHREF)
 

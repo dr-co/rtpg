@@ -43,12 +43,15 @@ if( $@ )
     $params{error}  = { message => $@, status => 503 };
 }
 
-$params{data} = $module->get;
+$params{data} = $module->new;
 if( $params{data}{error} )
 {
     $params{show}   = 'error';
     $params{error}  = { message => $params{data}{error}, status => 503 };
 }
+
+# If debug option aviable die with params ######################################
+DieDumper \%params if cfg->get('debug');
 
 # Files for this page ##########################################################
 cfg->{url}{skin}{css} = cfg->{url}{skin}{base} . '/' . $params{show} . '.css'

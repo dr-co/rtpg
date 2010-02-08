@@ -15,54 +15,69 @@
         title="[% gettext('Refresh window') %]"/>
 </div>
 <div id="settings">
-    <div class="param refresh">
-        <select id="refresh">
-            [% SET str_sec = gettext('sec.') %]
-            [% SET str_min = gettext('min.') %]
-            [% SET time = [
-                    {'0'     => gettext('Never')},
-                    {'5'     => '5  ' _ str_sec},
-                    {'10'    => '10 ' _ str_sec},
-                    {'15'    => '15 ' _ str_sec},
-                    {'30'    => '30 ' _ str_sec},
-                    {'60'    => '1  ' _ str_min},
-                    {'120'   => '2  ' _ str_min},
-                    {'180'   => '3  ' _ str_min},
-                    {'300'   => '5  ' _ str_min},
-                    {'600'   => '10 ' _ str_min},
-                    {'1800'  => '30 ' _ str_min},
-                ]
-            %]
-            [% FOR tm = time %]
-                <option
-                    value="[% tm.keys.0 %]"
-                    [% IF data.refresh == tm.keys.0 %]selected="selected"[% END %]>
-                        [% tm.values.0 %]
-                </option>
-            [% END %]
-        </select>
-    </div>
-    <div class="param skin">
-        <select id="skin">
-            [% FOR sk IN skins %]
-                <option
-                    value="[% sk.key | html %]"
-                    [% IF data.skin == sk.key %]selected="selected"[% END %]>
-                        [% sk.value | html %]
-                </option>
-            [% END %]
-        </select>
-    </div>
-    <div class="param locale">
-        <select id="locale">
-            [% FOR lg = langs %]
-                <option
-                    value="[% lg | html %]"
-                    [% IF data.locale == lg %]selected="selected"[% END %]>
-                        [% lg | upper | html %]
-                </option>
-            [% END %]
-        </select>
-    </div>
+    [%
+        SET speed = [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40,  50,  60,
+            70, 80, 90, 100, 200, 300, 400, 500, 600, 700,  800,
+            900, 1024, 2048, 3072, 4096, 5120, 6144, 7168, 8192,
+            9216, 10240,  20480,  30720,  40960,  51200,  61440,
+            71680, 81920, 92160, 102400
+        ];
+    %]
+    [% gettext('Down Speed') %]:
+    <select id="download_rate" title="[% gettext('Select max download speed') | html %]">
+        [% FOR val = speed %]
+            <option vlaue="[% val * 1024 %]">[% val * 1024 %]</option>
+        [% END %]
+    </select>
+    [% gettext('Up Speed') %]:
+    <select id="upload_rate" title="[% gettext('Select max upload speed') | html %]">
+        [% FOR val = speed %]
+            <option vlaue="[% val * 1024 %]">[% val * 1024 %]</option>
+        [% END %]
+    </select>
+    <select id="refresh" title="[% gettext('Select refresh interval') | html %]">
+        [% SET str_sec = gettext('sec.') %]
+        [% SET str_min = gettext('min.') %]
+        [% SET time = [
+                {'0'     => gettext('Never')},
+                {'5'     => '5  ' _ str_sec},
+                {'10'    => '10 ' _ str_sec},
+                {'15'    => '15 ' _ str_sec},
+                {'30'    => '30 ' _ str_sec},
+                {'60'    => '1  ' _ str_min},
+                {'120'   => '2  ' _ str_min},
+                {'180'   => '3  ' _ str_min},
+                {'300'   => '5  ' _ str_min},
+                {'600'   => '10 ' _ str_min},
+                {'1800'  => '30 ' _ str_min},
+            ]
+        %]
+        [% FOR tm = time %]
+            <option
+                value="[% tm.keys.0 %]"
+                [% IF data.refresh == tm.keys.0 %]selected="selected"[% END %]>
+                    [% tm.values.0 %]
+            </option>
+        [% END %]
+    </select>
+    <select id="skin" title="[% gettext('Select skin') | html %]">
+        [% FOR sk IN skins %]
+            <option
+                value="[% sk.key | html %]"
+                [% IF data.skin == sk.key %]selected="selected"[% END %]>
+                    [% sk.value | html %]
+            </option>
+        [% END %]
+    </select>
+    <select id="locale" title="[% gettext('Select language') | html %]">
+        [% FOR lg = langs %]
+            <option
+                value="[% lg | html %]"
+                [% IF data.locale == lg %]selected="selected"[% END %]>
+                    [% lg | upper | html %]
+            </option>
+        [% END %]
+    </select>
 </div>
 </body>

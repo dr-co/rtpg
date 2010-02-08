@@ -14,19 +14,18 @@ use CGI;
 use RTPG;
 use RTPG::WWW::Config;
 
-=head2 get
+=head2 new
 
 Get params
 
 =cut
 
-sub get
+sub new
 {
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(action current debug start stop delete
-        checked );
+    $opts{$_} = cfg->get($_) for qw(action current debug start stop checked );
 
     # Get RTPG object
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
@@ -41,9 +40,6 @@ sub get
 
     # Split checked string into hash
     $opts{checked} = { map { $_ => 1 } split ';', $opts{checked} };
-
-    # If debug option aviable die with first list item
-    DieDumper \%opts if $opts{debug};
 
     my $self = bless \%opts, $class;
 

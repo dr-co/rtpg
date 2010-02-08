@@ -12,21 +12,18 @@ RTPG::WWW::Frame::Panel
 package RTPG::WWW::Frame::Panel;
 use RTPG::WWW::Config;
 
-=head2 get
+=head2 new
 
 Get params
 
 =cut
 
-sub get
+sub new
 {
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(locale refresh skin debug);
-
-    # If debug option aviable die with first list item
-    DieDumper \%opts if $opts{debug};
+    $opts{$_} = cfg->get($_) for qw(locale refresh skin);
 
     my $self = bless \%opts, $class;
 

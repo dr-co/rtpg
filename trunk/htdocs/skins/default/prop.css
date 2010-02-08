@@ -36,6 +36,34 @@ div.message {
     text-align: center;
 }
 
+h4 {
+    white-space: nowrap;
+    margin: 2px;
+}
+
+/*********************************************************** List alternation */
+div.properties table tbody.odd td.path,
+div.properties table tbody.odd td.address {
+}
+
+div.properties table tbody.even td.path,
+div.properties table tbody.even td.address {
+    background-color: #fafafa;
+}
+
+/********************************************************** Percent indicator */
+div.properties table tbody td.percent {
+    border: 1px Highlight solid;
+}
+
+div.properties table tbody td.percent div.percent {
+    background-color: Highlight;
+    min-height: 100%;
+    height: 100%;
+    min-width: 0%;
+    max-width: 100%;
+}
+
 /********************************************************************* Inlays */
 div.inlays {
     background-color: Menu;
@@ -137,37 +165,95 @@ body.peers {
     background-color: Window;
 }
 
-div.properties table.peers_info thead,div.properties table.peers_info thead tr,div.properties table.peers_info thead tr th
-    {
-    text-align: left;
-    color: CaptionText;
-    background-color: ActiveCaption;
-}
-
-div.properties table.peers_info tbody,div.properties table.peers_info tbody tr,div.properties table.peers_info tbody tr td
-    {
-    text-align: left;
-    padding-right: 3%;
-}
-
 div.properties table.peers_info tbody tr th {
     text-align: left;
     padding-left: 1%;
     font-weight: normal;
 }
 
-/*************************************************************** Fields Files */
-div.properties table.files thead,div.properties table.files thead tr,div.properties table.files thead tr th
-    {
+div.properties table.peers_list {
+    background-color: white;
+}
+
+div.properties table.peers_list thead,
+div.properties table.peers_list thead tr,
+div.properties table.peers_list thead tr th {
     text-align: center;
     background-color: ActiveCaption;
     color: CaptionText;
     padding: 4px;
 }
 
-div.properties table.files tbody,div.properties table.files tbody tr,div.properties table.files tbody tr td
-    {
+div.properties table.peers_list tbody,
+div.properties table.peers_list tbody tr,
+div.properties table.peers_list tbody tr td {
+}
 
+div.properties table.peers_list tbody td.country {
+    text-align: center;
+}
+
+div.properties table.peers_list tbody td.address {
+    text-align: left;
+}
+
+div.properties table.peers_list tbody td.client {
+    text-align: left;
+}
+
+div.properties table.peers_list tbody td.flag {
+    text-align: center;
+}
+
+div.properties table.peers_list tbody td.done {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.percent {
+    text-align: center;
+}
+
+div.properties table.peers_list tbody td.down_speed {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.up_speed {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.peer_total {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.down_total {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.up_total {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.peer_total {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.id {
+    text-align: center;
+}
+
+/*************************************************************** Fields Files */
+div.properties table.files thead,
+div.properties table.files thead tr,
+div.properties table.files thead tr th {
+    text-align: center;
+    background-color: ActiveCaption;
+    color: CaptionText;
+    padding: 4px;
+}
+
+div.properties table.files tbody,
+div.properties table.files tbody tr,
+div.properties table.files tbody tr td {
 }
 
 /* Files list */
@@ -199,27 +285,6 @@ div.properties table.files tbody td.priority {
     text-align: center;
 }
 
-/* List alternation */
-div.properties table.files tbody.odd td.path {
-
-}
-
-div.properties table.files tbody.even td.path {
-    background-color: #fafafa;
-}
-
-/* Percent indicator */
-div.properties table.files tbody td.percent {
-    border: 1px Highlight solid;
-}
-
-div.properties table.files tbody td.percent div.percent {
-    background-color: Highlight;
-    min-height: 100%;
-    height: 100%;
-    min-width: 0%;
-    max-width: 100%;
-}
 /************************************************************ Fields Trackers */
     /************************************************************** Fields Chunks */
     /************************************************************ Fields Transfer */

@@ -10,57 +10,69 @@ RTPG::WWW::Frame::Prop
 =cut
 
 package RTPG::WWW::Frame::Prop;
+
+use Geo::IPfree;
+
 use RTPG;
 use RTPG::WWW::Config;
 use RTPG::WWW::Locale;
 
-=head2 get
+=head2 new
 
 Get params
 
 =cut
 
-sub get
+sub new
 {
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(current prop debug);
+    $opts{$_} = cfg->get($_) for qw(current prop);
 
-    if( $opts{prop} eq 'info')
     {
-        ($opts{info}, $opts{error}) = RTPG->new(url => cfg->get('rpc_uri'))->
-            torrent_info( $opts{current} )
-                if $opts{current};
-    }
-    elsif($opts{prop} eq 'peers')
-    {
-        ($opts{info}, $opts{error}) = RTPG->new(url => cfg->get('rpc_uri'))->
-            torrent_info( $opts{current} )
-                if $opts{current};
-    }
-    elsif($opts{prop} eq 'files')
-    {
-        ($opts{info}, $opts{error}) = RTPG->new(url => cfg->get('rpc_uri'))->
-            file_list( $opts{current} )
-                if $opts{current};
-    }
-    elsif($opts{prop} eq 'trackers')
-    {
-    }
-    elsif($opts{prop} eq 'chunks')
-    {
-    }
-    elsif($opts{prop} eq 'transfer')
-    {
-    }
-    else
-    {
-        $opts{error} = RTPG::WWW::Locale::gettext('Unknown property page');
-    }
+        # Exit if no current selected
+        last unless $opts{current};
+        # Get RTPG object
+        my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
 
-    # If debug option aviable die with first list item
-    DieDumper \%opts if $opts{debug};
+        # Get info by page name
+        if( $opts{prop} eq 'info')
+        {
+            ($opts{info}, $opts{error}) = $rtpg->torrent_info( $opts{current} );
+        }
+        elsif($opts{prop} eq 'peers')
+        {
+            my ($error1, $error2);
+            ($opts{info}, $error1) = $rtpg->torrent_info( $opts{current} );
+            ($opts{list}, $error2) = $rtpg->peer_list( $opts{current} );
+
+            $opts{error} = $error1 || $error2 || '';
+
+            my $geo = Geo::IPfree->new;
+            $geo->Faster;
+            ($_->{country}) = $geo->LookUp( $_->{address} )
+                for @{ $opts{list} };
+        }
+        elsif($opts{prop} eq 'files')
+        {
+            ($opts{info}, $opts{error}) = $rtpg->file_list( $opts{current} );
+        }
+        elsif($opts{prop} eq 'trackers')
+        {
+            ($opts{info}, $opts{error}) = $rtpg->tracker_list( $opts{current} );
+        }
+        elsif($opts{prop} eq 'chunks')
+        {
+        }
+        elsif($opts{prop} eq 'transfer')
+        {
+        }
+        else
+        {
+            $opts{error} = RTPG::WWW::Locale::gettext('Unknown property page');
+        }
+    }
 
     my $self = bless \%opts, $class;
 
