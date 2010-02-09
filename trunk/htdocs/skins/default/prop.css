@@ -43,10 +43,12 @@ h4 {
 
 /*********************************************************** List alternation */
 div.properties table tbody.odd td.path,
+div.properties table tbody.odd td.url,
 div.properties table tbody.odd td.address {
 }
 
 div.properties table tbody.even td.path,
+div.properties table tbody.even td.url,
 div.properties table tbody.even td.address {
     background-color: #fafafa;
 }
@@ -290,5 +292,34 @@ div.properties table.files tbody td.priority {
 }
 
 /************************************************************ Fields Trackers */
+div.properties table.trackers thead,
+div.properties table.trackers thead tr,
+div.properties table.trackers thead tr th {
+    text-align: center;
+    background-color: ActiveCaption;
+    color: CaptionText;
+    padding: 4px;
+}
+
+div.properties table.trackers tbody,
+div.properties table.trackers tbody tr,
+div.properties table.trackers tbody tr td {
+}
+
+div.properties table.trackers tbody td.url {
+    text-align: left;
+}
+
+div.properties table.trackers tbody td.enabled {
+    text-align: right;
+}
+
+div.properties table.trackers tbody td.interval {
+    text-align: right;
+}
+
+div.properties table.trackers tbody td.last_update {
+    text-align: right;
+}
     /************************************************************** Fields Chunks */
     /************************************************************ Fields Transfer */

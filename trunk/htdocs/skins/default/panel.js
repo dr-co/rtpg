@@ -26,6 +26,8 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
     This file contain java scripts for Action frame
 */
 
+var idRefreshTimer;
+
 $(document).ready(function(){
     // Panel buttons
     $('input.panel.delete')			.bind('click', on_delete);
@@ -37,9 +39,14 @@ $(document).ready(function(){
     $('input.panel.refresh')		.bind('click', on_refresh);
 
     // Additional params
+    $('#download_rate')				.bind('change', on_change_download_rate);
+    $('#upload_rate')				.bind('change', on_change_upload_rate);
     $('#locale')					.bind('change', on_change_locale);
     $('#refresh')					.bind('change', on_change_refresh);
     $('#skin')						.bind('change', on_change_skin);
+
+    // Start refresh timer
+    $('#refresh').change();
 });
 
 function on_delete()
@@ -117,6 +124,24 @@ function on_refresh()
 }
 
 
+function on_change_download_rate()
+{
+    // Set new value
+    $.cookie('download_rate', $(this).val(), { expires: 730 });
+    // Update window with new locale
+    window.parent.document.location = 'status.cgi?download_rate=' + $(this).val();
+}
+
+function on_change_upload_rate()
+{
+    // Set new value
+    $.cookie('upload_rate', $(this).val(), { expires: 730 });
+    // Update window with new locale
+    window.parent.document.location = 'status.cgi?upload_rate=' + $(this).val();
+}
+
+
+
 function on_change_locale()
 {
     // Set new value
@@ -129,11 +154,22 @@ function on_change_refresh()
 {
     // Set new timeout
     $.cookie('refresh', $(this).val(), { expires: 730 });
-    // Update window with new refrash rate
-    var objDocList = window.parent.frames[2].document;
-    objDocList.location = 'list.cgi?refresh=' + $(this).val();
-    var objDocProp = window.parent.frames[3].document;
-    objDocProp.location = 'prop.cgi';
+
+    // Clear interval if it already started
+    if( idRefreshTimer ) { clearInterval(idRefreshTimer); }
+
+    // Start refresh timer if refresh time selected
+    if( $(this).val() != 0 )
+    {
+        idRefreshTimer = setInterval(
+            function(){
+                var objDocList = window.parent.frames[2].document;
+                objDocList.location = 'list.cgi';
+                var objDocProp = window.parent.frames[3].document;
+                objDocProp.location = 'prop.cgi';
+            },
+            ($(this).val() || 60 ) * 1000 );
+    }
 }
 
 function on_change_skin()

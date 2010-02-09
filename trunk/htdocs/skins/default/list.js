@@ -34,14 +34,6 @@ $(document).ready(function(){
     // On checkbox select add hash to list in cookies
     $('#list table.list tbody > tr').find('> td:first :checkbox')
         .bind('change', on_click_checkbox);
-
-    // Start refresh timer if refresh time selected
-    if( $.cookie('refresh') != 0 )
-    {
-        setTimeout(
-            function(){document.location = 'list.cgi';},
-            ($.cookie('refresh') || 60 ) * 1000);
-    }
 });
 
 function on_click_list()

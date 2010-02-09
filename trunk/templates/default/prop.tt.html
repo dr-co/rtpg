@@ -255,7 +255,6 @@
     [% FOR peer = data.list %]
         [% SET class = [] %]
         [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
-        [% IF data.peer == peer.id; class.push('selected'); END %]
         <tbody class="[% class.join(' ') %]">
             <tr>
                 <td class="country">[% peer.country | lower %]</td>
@@ -337,6 +336,42 @@
 [% END ###################################################################### %]
 
 [% BLOCK Trackers ########################################################### %]
+<table class="trackers">
+    <colgroup>
+        <col/>
+        <col width="5%" />
+        <col width="10%" />
+        <col width="10%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>[% gettext('Url') %]</th>
+            <th>[% gettext('Enabled') %]</th>
+            <th>[% gettext('Interval') %]</th>
+            <th>[% gettext('Last Update') %]</th>
+        </tr>
+    </thead>
+    [% FOR tracker = data.info %]
+        [% SET class = [] %]
+        [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
+        <tbody class="[% class.join(' ') %]">
+            <tr>
+                <td class="url">[% tracker.url %]</td>
+                <td class="enabled">
+                    [% IF tracker.is_enabled %][% gettext('Yes') %]
+                    [% ELSE %][% gettext('No') %]
+                    [% END %]
+                </td>
+                <td class="interval">[% tracker.normal_interval %]</td>
+                <td class="last_update">
+                    [% UNLESS tracker.scrape_time_last %][% gettext('Never') %]
+                    [% ELSE %][% tracker.scrape_time_last %]
+                    [% END %]
+                </td>
+            </tr>
+        </tbody>
+    [% END %]
+</table>
 [% END ###################################################################### %]
 
 [% BLOCK Chunks ############################################################# %]
