@@ -26,30 +26,22 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
     This file contain java scripts for List frame
 */
 
+// Global frameset links
+var frmsMiddle;
+var frmsContent;
+
 $(document).ready(function(){
+    // Set global links
+    frmsMiddle 	= $('#frms_middle');
+    frmsContent	= $('#frms_content');
+
     // Restore frames positions
-//    $('#frms_middle').attr('cols', $.cookie('frms_middle'));
-//    $('#frms_content').attr('rows', $.cookie('frms_content'));
+    frmsMiddle.attr('cols',  $.cookie('horizontal') || frmsMiddle.attr('cols'));
+    frmsContent.attr('rows', $.cookie('vertical')   || frmsContent.attr('rows'));
 
     // Save frame position on resize
-    $('#frms_main').bind('resize', function(){ alert( $(this).id() )} );
-    $('#frms_middle').bind('resize', function(){ alert( $(this).id() )} );
-    $('#frms_content').bind('resize', function(){ alert( $(this).id() )} );
-
-//alert( window.frames(3).bind('resize', function(){ alert( $(this).id() )} ); );
-//    $(window.parent.frames[2]).bind(
-//        'resize',
-//        function(){
-//            $(document).ready(function(){
-//                alert( $(window.parent.frames[2]).parent().attr('row') );
-//            });
-//        });
+    $(window[2]).bind('resize', function(){
+        $.cookie('horizontal', frmsMiddle.attr('cols'));
+        $.cookie('vertical', frmsContent.attr('rows'));
+    });
 });
-
-//function on_resize()
-//{
-//    alert( $(this).id() );
-//    $.each($('frameset'), function( i, objFrameset ){
-//        $.cookie(objFrameset.id(), objFrameset.attr('rows'));
-//    });
-//}
