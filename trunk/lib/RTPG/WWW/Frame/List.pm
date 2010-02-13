@@ -41,6 +41,7 @@ sub new
         # Do command
         $rtpg->$command( $_ ) for @{ $opts{$command} };
         # If command then drop all cheched cookie
+        $opts{checked} = '';
         cfg->set('checked', '');
     }
 

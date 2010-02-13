@@ -49,6 +49,11 @@ $(document).ready(function(){
     $('#refresh').change();
 });
 
+/*
+ * Get selection list. First time try to get all checked rows and return sting
+ * of hash concatination. If no, try to get current torrent hash.
+ * Return empty string if no selection.
+*/
 function get_selections()
 {
     var arrSelected = new Array();
@@ -76,6 +81,9 @@ function get_selections()
 
 function on_delete()
 {
+    // Restart refresh timer
+    $('#refresh').change();
+
     // Get selected
     var strSelected = new String( get_selections() );
     if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
@@ -89,6 +97,9 @@ function on_delete()
 
 function on_start()
 {
+    // Restart refresh timer
+    $('#refresh').change();
+
     // Get selected
     var strSelected = new String( get_selections() );
     if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
@@ -102,6 +113,9 @@ function on_start()
 
 function on_pause()
 {
+    // Restart refresh timer
+    $('#refresh').change();
+
     // Get selected
     var strSelected = new String( get_selections() );
     if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
@@ -115,6 +129,9 @@ function on_pause()
 
 function on_stop()
 {
+    // Restart refresh timer
+    $('#refresh').change();
+
     // Get selected
     var strSelected = new String( get_selections() );
     if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
