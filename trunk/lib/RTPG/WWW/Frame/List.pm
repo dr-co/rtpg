@@ -47,7 +47,9 @@ sub new
     # Get list
     ($opts{list}, $opts{error}) = $rtpg->torrents_list( $opts{action} );
 
-
+    # Split checked string into hash
+    $opts{checked} = { map { $_ => 1 } split ';', $opts{checked} }
+        if $opts{checked};
 
     my $self = bless \%opts, $class;
 
