@@ -25,21 +25,29 @@ sub new
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(action current debug start stop checked );
-
+    $opts{$_} = cfg->get($_) for qw(action current debug start stop pause
+                                    delete checked );
     # Get RTPG object
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
 
-    # Do commands
-    $rtpg->start($opts{start})      if $opts{start};
-    $rtpg->stop($opts{stop})        if $opts{stop};
-    $rtpg->delete($opts{delete})    if $opts{delete};
+    for my $command ( qw(start stop pause delete) )
+    {
+        # Skip if not checked
+        next unless $opts{$command};
+        # Split commands string into hash
+        $opts{$command} = [ split ',', $opts{$command} ];
+        # Skip if not checked
+        next unless @{ $opts{$command} };
+        # Do command
+        $rtpg->$command( $_ ) for @{ $opts{$command} };
+        # If command then drop all cheched cookie
+        cfg->set('checked', '');
+    }
 
     # Get list
     ($opts{list}, $opts{error}) = $rtpg->torrents_list( $opts{action} );
 
-    # Split checked string into hash
-    $opts{checked} = { map { $_ => 1 } split ';', $opts{checked} };
+
 
     my $self = bless \%opts, $class;
 

@@ -49,52 +49,79 @@ $(document).ready(function(){
     $('#refresh').change();
 });
 
+function get_selections()
+{
+    var arrSelected = new Array();
+    var objDocList = window.parent.frames[2].document;
+
+    // Get checked torrents hash
+    $.each($(objDocList).find('table.list tbody'), function(i, objTboby){
+        var objCheckbox = $(objTboby).find('> tr:first > td:first > input:checked');
+        if( !objCheckbox.length ){ return; }
+        arrSelected.push( objCheckbox.val() );
+    });
+    // Return checked
+    if(arrSelected.length){ return arrSelected.join(','); }
+
+    // Get current torrent hash
+    var objCurrent = $(objDocList).find('table.list tbody.selected');
+    var objCheckbox = $(objCurrent).find('> tr:first > td:first > input[type=checkbox]');
+    if( objCheckbox.length ){ arrSelected.push( objCheckbox.val() ); }
+    // Return current
+    if(arrSelected.length) return arrSelected[0];
+
+    // Nothing
+    return new String('');
+}
+
 function on_delete()
 {
+    // Get selected
+    var strSelected = new String( get_selections() );
+    if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
+
     // Update frames
     var objDocList = window.parent.frames[2].document;
-    objDocList.location = 'list.cgi?delete=' + $.cookie('current');
+    objDocList.location = 'list.cgi?delete=' + strSelected;
     var objDocProp = window.parent.frames[3].document;
     objDocProp.location = 'prop.cgi';
 }
 
 function on_start()
 {
+    // Get selected
+    var strSelected = new String( get_selections() );
+    if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
+
     // Update frames
     var objDocList = window.parent.frames[2].document;
-    objDocList.location = 'list.cgi?start=' + $.cookie('current');
+    objDocList.location = 'list.cgi?start=' + strSelected;
     var objDocProp = window.parent.frames[3].document;
     objDocProp.location = 'prop.cgi';
 }
 
 function on_pause()
 {
+    // Get selected
+    var strSelected = new String( get_selections() );
+    if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
+
     // Update frames
     var objDocList = window.parent.frames[2].document;
-    objDocList.location = 'list.cgi?pause=' + $.cookie('current');
+    objDocList.location = 'list.cgi?pause=' + strSelected;
     var objDocProp = window.parent.frames[3].document;
     objDocProp.location = 'prop.cgi';
 }
 
 function on_stop()
 {
+    // Get selected
+    var strSelected = new String( get_selections() );
+    if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
+
     // Update frames
     var objDocList = window.parent.frames[2].document;
-
-    $.each($(objDocList).find('table.list tbody tr'), function(i, objTr){
-        alert($(objTr).find('td:first > :selected').val());
-        var objCheckbox = $(objTr).find('td:first > :selected');
-        if( !objCheckbox.length ){ return; }
-        alert( objCheckbox.val() );
-    });
-
-//    var arrSelected = $(objDocList).find('table.list tbody tr td:first :selected');
-//    $.each(arrSelected, function(i, objCheckbox){
-//        objCheckbox = 'stop=' + objCheckbox.val();
-//    });
-//    var strQuery = '?' + arrSelected.join('&');
-//    alert('query:' + strQuery + ' arr:' + arrSelected.length);
-//    objDocList.location = 'list.cgi?stop=' + $.cookie('current');
+    objDocList.location = 'list.cgi?stop=' + strSelected;
     var objDocProp = window.parent.frames[3].document;
     objDocProp.location = 'prop.cgi';
 }

@@ -1,8 +1,19 @@
 #!/usr/bin/perl
 
-=head1 index.cgi
+=head1 NAME
 
-This is controller script
+index.cgi - controller script
+
+=head1 DEBUG
+
+For debug use addresses with debug parameter. For example:
+
+    http://my_page/index.cgi?debug=1
+    http://my_page/prop.cgi?debug=1
+    http://my_page/list.cgi?debug=1
+    etc.
+
+then you can see all variables for templates.
 
 =cut
 
@@ -25,14 +36,6 @@ my %params = (version => $VERSION);
 # Get params ###################################################################
 $params{show} = CGI::param('show') || 'index';
 $params{show} =~ s/\.cgi.*//g;
-
-#for my $name ( CGI::param )
-#{
-#    # Get new parameter value
-#    my $value = CGI::param($name);
-#    # Set new state if value exists
-#    cfg->set($name, $value) if $value;
-#}
 
 # Load module and get data #####################################################
 my $module = 'RTPG::WWW::Frame::' . ucfirst lc $params{show};

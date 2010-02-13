@@ -41,7 +41,7 @@ $(document).ready(function(){
 
     // Save frame position on resize
     $(window[2]).bind('resize', function(){
-        $.cookie('horizontal', frmsMiddle.attr('cols'));
-        $.cookie('vertical', frmsContent.attr('rows'));
+        $.cookie('horizontal', frmsMiddle.attr('cols'),  { expires: 730 });
+        $.cookie('vertical',   frmsContent.attr('rows'), { expires: 730 });
     });
 });

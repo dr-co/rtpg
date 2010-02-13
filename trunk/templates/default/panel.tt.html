@@ -41,12 +41,9 @@
         [% SET str_min = gettext('min.') %]
         [% SET time = [
                 {'0'     => gettext('Never')},
-                {'5'     => '5  ' _ str_sec},
                 {'10'    => '10 ' _ str_sec},
-                {'15'    => '15 ' _ str_sec},
                 {'30'    => '30 ' _ str_sec},
                 {'60'    => '1  ' _ str_min},
-                {'120'   => '2  ' _ str_min},
                 {'180'   => '3  ' _ str_min},
                 {'300'   => '5  ' _ str_min},
                 {'600'   => '10 ' _ str_min},
