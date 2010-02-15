@@ -150,8 +150,12 @@
         <tr>
             <th>[% gettext('Total size') %]</th>
             <td>
-                [% data.info.human_size %]
-                ([% data.info.human_done _ ' ' _ gettext('done') %])
+                [%
+                    data.info.human_size _ ' (' _
+                    data.info.human_done _ ' ' _ gettext('done') _ '), ' _
+                    #data.info.free_diskspace _
+                    'N/A' _ ' ' _ gettext('free diskspace')
+                %]
             </td>
             <th>[% gettext('Hash') %]</th>
             <td>[% data.info.hash %]</td>
@@ -225,7 +229,7 @@
         <col width="1%" />
         <col/>
         <col width="10%" />
-        <col width="5%" />
+        <col width="10%" />
         <col width="5%" />
         <col width="10%" />
         <col width="5%" />
@@ -234,14 +238,13 @@
         <col width="5%" />
         <col width="5%" />
         <col width="5%" />
-        <col width="20%" />
     </colgroup>
     <thead>
         <tr>
             <th colspan="2">[% gettext('IP : Port') %]</th>
             <th>[% gettext('Client') %]</th>
             <th>[% gettext('Flags') %]</th>
-            <th>[% gettext('Done') %]</th>
+            <th>[% gettext('Available') %]</th>
             <th>[% gettext('%') %]</th>
             <th>[% gettext('Down Speed') %]</th>
             <th>[% gettext('Up Speed') %]</th>
@@ -249,7 +252,6 @@
             <th>[% gettext('Down Total') %]</th>
             <th>[% gettext('Up Total') %]</th>
             <th>[% gettext('Peer Total') %]</th>
-            <th>[% gettext('Id') %]</th>
         </tr>
     </thead>
     [% FOR peer = data.list %]
@@ -257,8 +259,17 @@
         [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
         <tbody class="[% class.join(' ') %]">
             <tr>
-                <td class="country">[% peer.country | lower %]</td>
-                <td class="address">[% peer.address _ ' : ' _ peer.port %]</td>
+                <td class="country">
+                    <img
+                        alt="[% peer.country_code | lower %]"
+                        title="[% gettext(peer.country_name) %]"
+                        src="img/flag/[% peer.country_code _ '.png' | lower %]" />
+                </td>
+                <td
+                    class="address"
+                    title="[% gettext('Id') _ ': ' _ peer.id %]">
+                        [% peer.address _ ' : ' _ peer.port %]
+                </td>
                 <td class="client">[% peer.client_version %]</td>
                 <td class="flag">
                     [% IF peer.is_incoming %][% ' ' _ gettext('Inc') %][% END %]
@@ -278,7 +289,6 @@
                 <td class="down_total">N/A[%# peer.down_total %]</td>
                 <td class="up_total">N/A[%# peer.up_total %]</td>
                 <td class="peer_total">N/A[%# peer.peer_total %]</td>
-                <td class="id">[% peer.id %]</td>
             </tr>
         </tbody>
     [% END %]

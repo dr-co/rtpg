@@ -593,6 +593,30 @@ sub delete
     return $res;
 }
 
+=head2 pause
+
+Pause torrent (tid)
+
+=cut
+
+sub pause
+{
+    my ($self, $id) = @_;
+
+    my $res;
+
+    eval
+    {
+        $res = $self->rpc_command("d.pause", $id);
+    };
+    if ($@)
+    {
+        return undef, "$@" if wantarray;
+        die $@;
+    }
+
+    return $res;
+}
 
 =head1 PRIVATE METHODS
 

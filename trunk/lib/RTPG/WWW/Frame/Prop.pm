@@ -51,8 +51,9 @@ sub new
 
             my $geo = Geo::IPfree->new;
             $geo->Faster;
-            ($_->{country}) = $geo->LookUp( $_->{address} )
-                for @{ $opts{list} };
+            ($_->{country_code}, $_->{country_name},) =
+                $geo->LookUp( $_->{address} )
+                    for @{ $opts{list} };
         }
         elsif($opts{prop} eq 'files')
         {
