@@ -86,10 +86,12 @@ sub new
 
     my $self = bless \%opts, $class;
 
+    my ($browser_locale) = $ENV{HTTP_ACCEPT_LANGUAGE} =~ m/^(\w+)/;
+
     # Set parameters by default, even it not declared in config file
 #    $self->set('prop',    'info'    )   unless $self->get('prop');
     $self->set('action',  'default' )   unless $self->get('action');
-#    $self->set('locale',  'en'      )   unless $self->get('locale');
+    $self->set('locale',  $self->get('locale') || $browser_locale || 'en' );
 #    $self->set('skin',    'default' )   unless $self->get('skin');
 #    $self->set('refresh', 60        )   unless defined $self->get('refresh');
 #    $self->set('collapse','yes'     )   unless $self->get('collapse');
@@ -106,11 +108,9 @@ sub new
                                   $self->get('skin');
     $self->{url}{skin}{base} = 'skins/' . $self->get('skin');
 
-
-
     # Init parameters from current value to cookie
     # It`s need for first time start to init all default cookie
-    $self->set($_, $self->get($_)) for qw(refresh skin prop locale action);
+    $self->set($_, $self->get($_)) for qw(refresh skin prop);
 
     return $self;
 }

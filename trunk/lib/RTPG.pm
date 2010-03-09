@@ -159,7 +159,6 @@ sub rpc_command
     return undef, $err_str;
 }
 
-
 =head2 torrents_list([VIEW])
 
 This method returns list of torrents. It is a link to array of hashes.
@@ -265,7 +264,6 @@ sub torrents_list
     return $list, '';
 }
 
-
 =head2 torrent_info(tid)
 
 The method returns the link to hash which contains the information about
@@ -326,7 +324,6 @@ sub torrent_info
 
 }
 
-
 =head2 file_list(tid)
 
 The method returns the link to array which contains information
@@ -385,7 +382,10 @@ sub file_list
         $_ =  \%info;
         my $size_bytes=1.0*$chunk_size*$_->{size_chunks};
         $_->{size_bytes}=$size_bytes if $size_bytes > $SIZE_BY_CHUNKS_LIMIT;
-#        $_->{human_size}=_human_size($_->{size_bytes});
+        $_->{priority_str} =
+            ($_->{priority} == 0) ?'off'    :
+            ($_->{priority} == 1) ?'normal' :
+            ($_->{priority} == 2) ?'high'   :'unknown';
         $_->{percent}=_get_percent_string(
             $_->{completed_chunks},
             $_->{size_chunks}
@@ -394,7 +394,6 @@ sub file_list
     return $list, '' if wantarray;
     return $list;
 }
-
 
 =head2 tracker_list
 
@@ -432,7 +431,6 @@ sub tracker_list
     return ($r, $e) if wantarray;
     return $r;
 }
-
 
 =head2 peer_list(tid)
 
@@ -475,7 +473,6 @@ sub peer_list
     die $error;
 }
 
-
 =head2 set_files_priorities(tid, pri)
 
 This method updates priorities of all files in one torrent
@@ -500,7 +497,6 @@ sub set_files_priorities
     die $error if $error;
     return undef;
 }
-
 
 =head2 system_information
 
@@ -594,7 +590,6 @@ sub start
     return $res;
 }
 
-
 =head2 stop
 
 Stop torrent (tid) download
@@ -619,7 +614,6 @@ sub stop
 
     return $res;
 }
-
 
 =head2 delete
 

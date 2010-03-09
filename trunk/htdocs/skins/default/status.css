@@ -49,7 +49,6 @@ a:visited
 
 a:hover
 {
-    color: GrayText;
     text-decoration: underline;
 }
 
