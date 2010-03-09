@@ -26,6 +26,10 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
     This file contain java scripts for Action frame
 */
 
+const NUM_LIST_FRAME = 2;
+const NUM_PROP_FRAME = 3;
+const NUM_STATUS_FRAME = 4;
+
 var idRefreshTimer;
 
 $(document).ready(function(){
@@ -39,8 +43,6 @@ $(document).ready(function(){
     $('input.panel.refresh')		.bind('click', on_refresh);
 
     // Additional params
-    $('#download_rate')				.bind('change', on_change_download_rate);
-    $('#upload_rate')				.bind('change', on_change_upload_rate);
     $('#locale')					.bind('change', on_change_locale);
     $('#refresh')					.bind('change', on_change_refresh);
     $('#skin')						.bind('change', on_change_skin);
@@ -57,7 +59,7 @@ $(document).ready(function(){
 function get_selections()
 {
     var arrSelected = new Array();
-    var objDocList = window.parent.frames[2].document;
+    var objDocList = window.parent.frames[ NUM_LIST_FRAME ].document;
 
     // Get checked torrents hash
     $.each($(objDocList).find('table.list tbody'), function(i, objTboby){
@@ -89,10 +91,9 @@ function on_delete()
     if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
 
     // Update frames
-    var objDocList = window.parent.frames[2].document;
-    objDocList.location = 'list.cgi?delete=' + strSelected;
-    var objDocProp = window.parent.frames[3].document;
-    objDocProp.location = 'prop.cgi';
+    window.parent.frames[ NUM_LIST_FRAME ].document.location =
+        'list.cgi?delete=' + strSelected;
+    window.parent.frames[ NUM_PROP_FRAME ].document.location = 'prop.cgi';
 }
 
 function on_start()
@@ -105,10 +106,9 @@ function on_start()
     if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
 
     // Update frames
-    var objDocList = window.parent.frames[2].document;
-    objDocList.location = 'list.cgi?start=' + strSelected;
-    var objDocProp = window.parent.frames[3].document;
-    objDocProp.location = 'prop.cgi';
+    window.parent.frames[ NUM_LIST_FRAME ].document.location =
+        'list.cgi?start=' + strSelected;
+    window.parent.frames[ NUM_PROP_FRAME ].document.location = 'prop.cgi';
 }
 
 function on_pause()
@@ -121,10 +121,9 @@ function on_pause()
     if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
 
     // Update frames
-    var objDocList = window.parent.frames[2].document;
-    objDocList.location = 'list.cgi?pause=' + strSelected;
-    var objDocProp = window.parent.frames[3].document;
-    objDocProp.location = 'prop.cgi';
+    window.parent.frames[ NUM_LIST_FRAME ].document.location =
+        'list.cgi?pause=' + strSelected;
+    window.parent.frames[ NUM_PROP_FRAME ].document.location = 'prop.cgi';
 }
 
 function on_stop()
@@ -137,28 +136,25 @@ function on_stop()
     if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
 
     // Update frames
-    var objDocList = window.parent.frames[2].document;
-    objDocList.location = 'list.cgi?stop=' + strSelected;
-    var objDocProp = window.parent.frames[3].document;
-    objDocProp.location = 'prop.cgi';
+    window.parent.frames[ NUM_LIST_FRAME ].document.location =
+        'list.cgi?stop=' + strSelected;
+    window.parent.frames[ NUM_PROP_FRAME ].document.location = 'prop.cgi';
 }
 
 function on_priority_up()
 {
     // Update frames
-    var objDocList = window.parent.frames[2].document;
-    objDocList.location = 'list.cgi?priority_up=' + $.cookie('current');
-    var objDocProp = window.parent.frames[3].document;
-    objDocProp.location = 'prop.cgi';
+    window.parent.frames[ NUM_LIST_FRAME ].document.location =
+        'list.cgi?priority_up=' + $.cookie('current');
+    window.parent.frames[ NUM_PROP_FRAME ].document.location = 'prop.cgi';
 }
 
 function on_priority_down()
 {
     // Update frames
-    var objDocList = window.parent.frames[2].document;
-    objDocList.location = 'list.cgi?priority_down=' + $.cookie('current');
-    var objDocProp = window.parent.frames[3].document;
-    objDocProp.location = 'prop.cgi';
+    window.parent.frames[ NUM_LIST_FRAME ].document.location =
+        'list.cgi?priority_down=' + $.cookie('current');
+    window.parent.frames[ NUM_PROP_FRAME ].document.location = 'prop.cgi';
 }
 
 function on_refresh()
@@ -166,25 +162,6 @@ function on_refresh()
     // Update all windows
     window.parent.document.location = 'index.cgi';
 }
-
-
-function on_change_download_rate()
-{
-    // Set new value
-    $.cookie('download_rate', $(this).val(), { expires: 730 });
-    // Update window with new locale
-    window.parent.document.location = 'status.cgi?download_rate=' + $(this).val();
-}
-
-function on_change_upload_rate()
-{
-    // Set new value
-    $.cookie('upload_rate', $(this).val(), { expires: 730 });
-    // Update window with new locale
-    window.parent.document.location = 'status.cgi?upload_rate=' + $(this).val();
-}
-
-
 
 function on_change_locale()
 {
@@ -207,10 +184,12 @@ function on_change_refresh()
     {
         idRefreshTimer = setInterval(
             function(){
-                var objDocList = window.parent.frames[2].document;
-                objDocList.location = 'list.cgi';
-                var objDocProp = window.parent.frames[3].document;
-                objDocProp.location = 'prop.cgi';
+                window.parent.frames[ NUM_LIST_FRAME ].document
+                    .location = 'list.cgi';
+                window.parent.frames[ NUM_PROP_FRAME ].document
+                    .location = 'prop.cgi';
+                window.parent.frames[ NUM_STATUS_FRAME ].document
+                    .location = 'status.cgi';
             },
             ($(this).val() || 60 ) * 1000 );
     }

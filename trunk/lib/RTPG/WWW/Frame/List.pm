@@ -26,7 +26,7 @@ sub new
 
     # Get current state
     $opts{$_} = cfg->get($_) for qw(action current debug start stop pause
-                                    delete checked );
+                                    delete checked all);
     # Get RTPG object
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
 
@@ -43,6 +43,12 @@ sub new
         # If command then drop all cheched cookie
         $opts{checked} = '';
         cfg->set('checked', '');
+        # If "delete" command drop current value
+        if( $command eq 'delete' )
+        {
+            $opts{current} = '';
+            cfg->set('current', '');
+        }
     }
 
     # Get list

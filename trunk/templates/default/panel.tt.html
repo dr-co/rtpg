@@ -15,27 +15,6 @@
         title="[% gettext('Refresh window') %]"/>
 </div>
 <div id="settings">
-    [%
-        SET speed = [
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40,  50,  60,
-            70, 80, 90, 100, 200, 300, 400, 500, 600, 700,  800,
-            900, 1024, 2048, 3072, 4096, 5120, 6144, 7168, 8192,
-            9216, 10240,  20480,  30720,  40960,  51200,  61440,
-            71680, 81920, 92160, 102400
-        ];
-    %]
-    [% gettext('Down Speed') %]:
-    <select id="download_rate" title="[% gettext('Select max download speed') | html %]">
-        [% FOR val = speed %]
-            <option vlaue="[% val * 1024 %]">[% val * 1024 %]</option>
-        [% END %]
-    </select>
-    [% gettext('Up Speed') %]:
-    <select id="upload_rate" title="[% gettext('Select max upload speed') | html %]">
-        [% FOR val = speed %]
-            <option vlaue="[% val * 1024 %]">[% val * 1024 %]</option>
-        [% END %]
-    </select>
     <select id="refresh" title="[% gettext('Select refresh interval') | html %]">
         [% SET str_sec = gettext('sec.') %]
         [% SET str_min = gettext('min.') %]

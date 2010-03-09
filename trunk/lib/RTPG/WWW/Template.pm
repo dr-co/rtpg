@@ -14,6 +14,8 @@ use base qw(Template);
 
 use CGI;
 use Encode qw(is_utf8 decode encode);
+
+use RTPG;
 use RTPG::WWW::Config;
 use RTPG::WWW::Locale qw(gettext);
 
@@ -21,25 +23,57 @@ sub new
 {
     my $class = shift;
 
+    # Set human values functions to use in templates
+    $Template::Stash::SCALAR_OPS->{as_human_size}   =
+    $Template::Stash::LIST_OPS->{as_human_size}     = sub {
+        my ($digit, $letter, $byte) = RTPG::as_human_size(shift);
+        return $digit . gettext($letter) . gettext($byte) if $digit;
+        return 0;
+    };
+    $Template::Stash::SCALAR_OPS->{as_human_speed}  =
+    $Template::Stash::LIST_OPS->{as_human_speed}    = sub {
+        my ($digit, $letter, $byte, $div, $time) = RTPG::as_human_speed(shift);
+        return $digit . gettext($letter) . gettext($byte) .
+            gettext($div). gettext($time)
+                if $digit;
+        return 0;
+    };
+    $Template::Stash::SCALAR_OPS->{as_human_datetime} =
+    $Template::Stash::LIST_OPS->{as_human_datetime} = sub {
+        return RTPG::as_human_datetime(shift);
+    };
+
+    # Other functions
+    $Template::Stash::SCALAR_OPS->{ucfirst} = sub { return ucfirst shift };
+
+    # Debug function
     $Template::Stash::ROOT_OPS->{dump} =
     $Template::Stash::SCALAR_OPS->{dump} =
     $Template::Stash::HASH_OPS->{dump} =
     $Template::Stash::LIST_OPS->{dump} = sub {'###'.Dumper(@_).'###'};
-    my $obj = $class->SUPER::new(
+
+    my %opts = (
         RELATIVE        => 1,
         ABSOLUTE        => 1,
         RECURSION       => 1,
         INCLUDE_PATH    => cfg->{dir}{skin}{base} . ':' .
                            cfg->{dir}{templates},
-        PRE_CHOMP       => 1,
-        POST_CHOMP      => 1,
-        TRIM            => 1,
+#        PRE_CHOMP       => 1,
+#        POST_CHOMP      => 1,
+#        TRIM            => 1,
         ENCODING        => 'utf8',
         WRAPPER         => 'main.tt.html',
-#        COMPILE_EXT     => '.ttc',
-#        COMPILE_DIR     => cfg()->{dir}{cache},
-        @_);
+        @_
+    );
 
+    # Enable template toolkit cache
+    if( defined cfg->get('cache') and -d cfg->get('cache') )
+    {
+        $opts{COMPILE_EXT} = '.ttc';
+        $opts{COMPILE_DIR} = cfg->get('cache');
+    }
+
+    my $obj = $class->SUPER::new( %opts );
     return $obj;
 }
 
@@ -70,11 +104,11 @@ sub process
 
     # Add common params
     $opts = {
-        common  => { },
-        config  => cfg(),
-        gettext => sub { return gettext(@_); },
-        langs   => sub { return RTPG::WWW::Locale::aviable();   },
-        skins   => sub { return cfg->skins();                   },
+        common   => { },
+        config   => cfg(),
+        gettext  => sub { return gettext(@_);                    },
+        langs    => sub { return RTPG::WWW::Locale::aviable();   },
+        skins    => sub { return cfg->skins();                   },
         %$opts
     };
 

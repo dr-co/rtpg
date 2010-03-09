@@ -1,23 +1,16 @@
 <body class="[% data.prop %]">
     <div class="inlays">
-        <div id="info" class="item info [% IF data.prop == 'info'%]selected[% END %]">
-            [% gettext('Info') %]
-        </div>
-        <div id="peers" class="item peers [% IF data.prop == 'peers'%]selected[% END %]">
-            [% gettext('Peers') %]
-        </div>
-        <div id="files" class="item files [% IF data.prop == 'files'%]selected[% END %]">
-            [% gettext('Files') %]
-        </div>
-        <div id="trackers" class="item trackers [% IF data.prop == 'trackers'%]selected[% END %]">
-            [% gettext('Trackers') %]
-        </div>
-        <div id="chunks" class="item chunks [% IF data.prop == 'chunks'%]selected[% END %]">
-            [% gettext('Chunks') %]
-        </div>
-        <div id="transfer" class="item transfer [% IF data.prop == 'transfer'%]selected[% END %]">
-            [% gettext('Transfer') %]
-        </div>
+        [% # Menu
+            SET menu = ['info', 'peers', 'files', 'trackers',
+                        'chunks', 'transfer']
+        %]
+        [% FOR item = menu %]
+            <div id="[% item %]"
+                 class="item [% item %] [% IF data.prop == item %]selected[% END %]"
+            >
+                [% gettext(item.ucfirst) %]
+            </div>
+        [% END %]
     </div>
     [% UNLESS data.current && data.info %]
         <div class="message">
@@ -29,16 +22,15 @@
         </div>
     [% ELSE %]
         <div class="properties [% data.prop %]">
-            [% SWITCH data.prop %]
-                [% CASE 'info';     INCLUDE Info        %]
-                [% CASE 'peers';    INCLUDE Peers       %]
-                [% CASE 'files';    INCLUDE Files       %]
-                [% CASE 'trackers'; INCLUDE Trackers    %]
-                [% CASE 'chunks';   INCLUDE Chunks      %]
-                [% CASE 'transfer'; INCLUDE Transfer    %]
-                [% CASE DEFAULT %]
-                    [% gettext('Unknown property page') %]
-            [% END %]
+            [% SWITCH data.prop;
+                CASE 'info';     INCLUDE Info;
+                CASE 'peers';    INCLUDE Peers;
+                CASE 'files';    INCLUDE Files;
+                CASE 'trackers'; INCLUDE Trackers;
+                CASE 'chunks';   INCLUDE Chunks;
+                CASE 'transfer'; INCLUDE Transfer;
+                CASE DEFAULT;    gettext('Unknown property page');
+            END %]
         </div>
     [% END %]
 </body>
@@ -73,28 +65,24 @@
     </colgroup>
     <tbody>
         <tr>
-            <th>[% gettext('Downloaded') %]</th>
-            <td>[% data.info.human_done %]</td>
-            <th>[% gettext('Down Speed') %]</th>
-            <td>[% data.info.human_down_rate %]</td>
-            <th>[% gettext('Peers connected') %]</th>
+            <th>[% gettext('Downloaded')                %]</th>
+            <td>[% data.info.bytes_done.as_human_size   %]</td>
+            <th>[% gettext('Down Speed')                %]</th>
+            <td>[% data.info.down_rate.as_human_speed   %]</td>
+            <th>[% gettext('Peers connected')           %]</th>
             <td>
-                [%
-                    data.info.peers_connected
-                    _ ' '
-                    _ gettext('from')
-                    _ ' '
-                    _ data.info.peers_max
-                %]
+                [% data.info.peers_connected        %]
+                [% gettext('from')                  %]
+                [% data.info.peers_max              %]
             </td>
         </tr>
         <tr>
-            <th>[% gettext('Uploaded') %]</th>
-            <td>[% data.info.human_up_total %]</td>
-            <th>[% gettext('Up Speed') %]</th>
-            <td>[% data.info.human_up_rate %]</td>
-            <th>[% gettext('Peers not connected') %]</th>
-            <td>[% data.info.peers_not_connected %]</td>
+            <th>[% gettext('Uploaded')              %]</th>
+            <td>[% data.info.up_total.as_human_size %]</td>
+            <th>[% gettext('Up Speed')              %]</th>
+            <td>[% data.info.up_rate.as_human_speed %]</td>
+            <th>[% gettext('Peers not connected')   %]</th>
+            <td>[% data.info.peers_not_connected    %]</td>
         </tr>
     </tbody>
 </table>
@@ -103,21 +91,13 @@
 
 <table class="tracker">
     <colgroup>
-        <col width="23%"/>
         <col width="10%"/>
-        <col width="23%"/>
-        <col width="10%"/>
-        <col width="24%"/>
-        <col width="10%"/>
+        <col width="90%"/>
     </colgroup>
     <tbody>
         <tr>
             <th>[% gettext('Message') %]</th>
             <td class="message">[% data.info.message %]</td>
-            <th>[%# gettext('') %]</th>
-            <td>[%# data.info %]</td>
-            <th>[%# gettext('') %]</th>
-            <td>[%# data.info %]</td>
         </tr>
     </tbody>
 </table>
@@ -133,44 +113,39 @@
     </colgroup>
     <tbody>
         <tr>
-            <th>[% gettext('Directory') %]</th>
-            <td>[% data.info.directory %]</td>
-            <th>[% gettext('Chunks') %]</th>
+            <th>[% gettext('Directory')             %]</th>
+            <td>[% data.info.directory              %]</td>
+            <th>[% gettext('Chunks')                %]</th>
             <td>
-                [%
-                    data.info.size_chunks
-                    _ ' '
-                    _ gettext('x')
-                    _ ' '
-                    _ data.info.chunk_size
-                %]
-                ([% data.info.completed_chunks _ ' ' _ gettext('done') %])
+                [% data.info.size_chunks            %]
+                [% gettext('x')                     %]
+                [% data.info.chunk_size.as_human_size %]
+                ([% data.info.completed_chunks %] [% gettext('done') %])
             </td>
         </tr>
         <tr>
             <th>[% gettext('Total size') %]</th>
             <td>
-                [%
-                    data.info.human_size _ ' (' _
-                    data.info.human_done _ ' ' _ gettext('done') _ '), ' _
-                    #data.info.free_diskspace _
-                    'N/A' _ ' ' _ gettext('free diskspace')
-                %]
+                [% data.info.size_bytes.as_human_size       %]
+                ([% data.info.bytes_done.as_human_size      %]
+                 [% gettext('done') %] )
+                [% data.info.free_diskspace.as_human_size   %]
+                [% gettext('free diskspace')                %]
             </td>
             <th>[% gettext('Hash') %]</th>
             <td>[% data.info.hash %]</td>
         </tr>
         <tr>
-            <th>[% gettext('Created On') %]</th>
-            <td>[% data.info.creation_date %]</td>
-            <th>[% gettext('Local ID') %]</th>
-            <td>[% data.info.local_id %]</td>
+            <th>[% gettext('Created On')            %]</th>
+            <td>[% data.info.creation_date.as_human_datetime %]</td>
+            <th>[% gettext('Local ID')              %]</th>
+            <td>[% data.info.local_id               %]</td>
         </tr>
         <tr>
-            <th>[% gettext('Comment') %]</th>
-            <td>[% data.info.name %]</td>
-            <th>[%# %]</th>
-            <td>[%# %]</td>
+            <th>[% gettext('Comment')               %]</th>
+            <td>[% data.info.name                   %]</td>
+            <th>[%#                                 %]</th>
+            <td>[%#                                 %]</td>
         </tr>
     </tbody>
 </table>
@@ -190,20 +165,20 @@
     </colgroup>
     <tbody>
         <tr>
-            <th>[% gettext('Peers connected') %]</th>
-            <td>[% data.info.peers_connected %]</td>
-            <th>[% gettext('Peers accounted') %]</th>
-            <td>[% data.info.peers_accounted %]</td>
-            <th>[% gettext('Peers max') %]</th>
-            <td>[% data.info.peers_max %]</td>
+            <th>[% gettext('Peers connected')       %]</th>
+            <td>[% data.info.peers_connected        %]</td>
+            <th>[% gettext('Peers accounted')       %]</th>
+            <td>[% data.info.peers_accounted        %]</td>
+            <th>[% gettext('Peers max')             %]</th>
+            <td>[% data.info.peers_max              %]</td>
         </tr>
         <tr>
-            <th>[% gettext('Peers not connected') %]</th>
-            <td>[% data.info.peers_not_connected %]</td>
-            <th>[% gettext('Peers complete') %]</th>
-            <td>[% data.info.peers_complete %]</td>
-            <th>[% gettext('Peers min') %]</th>
-            <td>[% data.info.peers_min %]</td>
+            <th>[% gettext('Peers not connected')   %]</th>
+            <td>[% data.info.peers_not_connected    %]</td>
+            <th>[% gettext('Peers complete')        %]</th>
+            <td>[% data.info.peers_complete         %]</td>
+            <th>[% gettext('Peers min')             %]</th>
+            <td>[% data.info.peers_min              %]</td>
         </tr>
         <tr>
             <th></th>
@@ -212,10 +187,8 @@
             <td></td>
             <th>[% gettext('Peers exchange') %]</th>
             <td>
-                [% IF data.info.peer_exchange %]
-                    [% gettext('on') %]
-                [% ELSE %]
-                    [% gettext('off') %]
+                [% IF data.info.peer_exchange; gettext('on')  %]
+                [% ELSE;                       gettext('off') %]
                 [% END %]
             </td>
         </tr>
@@ -228,7 +201,7 @@
     <colgroup>
         <col width="1%" />
         <col/>
-        <col width="10%" />
+        <col width="15%" />
         <col width="10%" />
         <col width="5%" />
         <col width="10%" />
@@ -242,16 +215,16 @@
     <thead>
         <tr>
             <th colspan="2">[% gettext('IP : Port') %]</th>
-            <th>[% gettext('Client') %]</th>
-            <th>[% gettext('Flags') %]</th>
-            <th>[% gettext('Available') %]</th>
-            <th>[% gettext('%') %]</th>
-            <th>[% gettext('Down Speed') %]</th>
-            <th>[% gettext('Up Speed') %]</th>
-            <th>[% gettext('Peer Rate') %]</th>
-            <th>[% gettext('Down Total') %]</th>
-            <th>[% gettext('Up Total') %]</th>
-            <th>[% gettext('Peer Total') %]</th>
+            <th>[% gettext('Client')                %]</th>
+            <th>[% gettext('Flags')                 %]</th>
+            <th>[% gettext('Available')             %]</th>
+            <th>[% gettext('%')                     %]</th>
+            <th>[% gettext('Down Speed')            %]</th>
+            <th>[% gettext('Up Speed')              %]</th>
+            <th>[% gettext('Peer Rate')             %]</th>
+            <th>[% gettext('Down Total')            %]</th>
+            <th>[% gettext('Up Total')              %]</th>
+            <th>[% gettext('Peer Total')            %]</th>
         </tr>
     </thead>
     [% FOR peer = data.list %]
@@ -259,12 +232,17 @@
         [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
         <tbody class="[% class.join(' ') %]">
             <tr>
-                <td class="country">
-                    <img
-                        alt="[% peer.country_code | lower %]"
-                        title="[% gettext(peer.country_name) %]"
-                        src="img/flag/[% peer.country_code _ '.png' | lower %]" />
-                </td>
+                [% IF peer.country_code || peer.country_name %]
+                    <td class="country">
+                        <img
+                            alt="[% peer.country_code | lower %]"
+                            title="[% gettext(peer.country_name) %]"
+                            src="img/flag/[% peer.country_code _ '.png' | lower %]"
+                        />
+                    </td>
+                [% ELSE %]
+                    <td class="country" />
+                [% END %]
                 <td
                     class="address"
                     title="[% gettext('Id') _ ': ' _ peer.id %]">
@@ -272,23 +250,27 @@
                 </td>
                 <td class="client">[% peer.client_version %]</td>
                 <td class="flag">
-                    [% IF peer.is_incoming %][% ' ' _ gettext('Inc') %][% END %]
-                    [% IF is_encrypted %][% ' ' _ gettext('Enc') %][% END %]
-                    [% IF peer.is_obfuscated %][% ' ' _ gettext('Obf') %][% END %]
-                    [% IF peer.is_snubbed %][% ' ' _ gettext('Snub') %][% END %]
+                    [%
+                        IF peer.is_incoming;   ' ' _ gettext('Inc');  END;
+                        IF is_encrypted;       ' ' _ gettext('Enc');  END;
+                        IF peer.is_obfuscated; ' ' _ gettext('Obf');  END;
+                        IF peer.is_snubbed;    ' ' _ gettext('Snub'); END;
+                    %]
                 </td>
                 <td class="done">[% peer.completed_percent %]%</td>
                 <td class="percent">
-                    <div class="percent" style="width: [% peer.completed_percent %]%;">
+                    <div class="percent"
+                         style="width: [% peer.completed_percent %]%;"
+                    >
                         &nbsp;
                     </div>
                 </td>
-                <td class="down_speed">[% peer.down_rate %]</td>
-                <td class="up_speed">[% peer.up_rate %]</td>
-                <td class="peer_rate">[% peer.peer_rate %]</td>
-                <td class="down_total">N/A[%# peer.down_total %]</td>
-                <td class="up_total">N/A[%# peer.up_total %]</td>
-                <td class="peer_total">N/A[%# peer.peer_total %]</td>
+                <td class="down_speed">[% peer.down_rate.as_human_speed %]</td>
+                <td class="up_speed">[%   peer.up_rate.as_human_speed   %]</td>
+                <td class="peer_rate">[%  peer.peer_rate.as_human_speed %]</td>
+                <td class="down_total">[% peer.down_total.as_human_size %]</td>
+                <td class="up_total">[%   peer.up_total.as_human_size   %]</td>
+                <td class="peer_total">[% peer.peer_total.as_human_size %]</td>
             </tr>
         </tbody>
     [% END %]
@@ -309,15 +291,15 @@
     <thead>
         <tr>
             <th/>
-            <th>[% gettext('Path') %]</th>
-            <th>[% gettext('Size') %]</th>
-            <th>[% gettext('Done') %]</th>
-            <th>[% gettext('%') %]</th>
-            <th>[% gettext('Chunks') %]</th>
-            <th>[% gettext('Priority') %]</th>
+            <th>[% gettext('Path')          %]</th>
+            <th>[% gettext('Size')          %]</th>
+            <th>[% gettext('Done')          %]</th>
+            <th>[% gettext('%')             %]</th>
+            <th>[% gettext('Chunks')        %]</th>
+            <th>[% gettext('Priority')      %]</th>
         </tr>
     </thead>
-    [% FOR file = data.info %]
+    [% FOR file = data.list %]
         [% SET class = [] %]
         [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
         [% IF data.file == file.hash; class.push('selected'); END %]
@@ -329,8 +311,14 @@
                         name="hash[]"
                         value="[%# %]"/>
                 </td>
-                <td class="path">[% file.path %]</td>
-                <td class="size">[% file.human_size %]</td>
+                <td class="path">
+                    <a href="file://[% data.info.directory _ '/' _ file.path %]"
+                       target="blank"
+                    >
+                        [% file.path %]
+                    </a>
+                </td>
+                <td class="size">[% file.size_bytes.as_human_size %]</td>
                 <td class="spercent">[% file.percent %]</td>
                 <td class="percent">
                     <div class="percent" style="width: [% file.percent %];">
@@ -351,14 +339,14 @@
         <col/>
         <col width="5%" />
         <col width="10%" />
-        <col width="10%" />
+        <col width="20%" />
     </colgroup>
     <thead>
         <tr>
-            <th>[% gettext('Url') %]</th>
-            <th>[% gettext('Enabled') %]</th>
-            <th>[% gettext('Interval') %]</th>
-            <th>[% gettext('Last Update') %]</th>
+            <th>[% gettext('Url')           %]</th>
+            <th>[% gettext('Enabled')       %]</th>
+            <th>[% gettext('Interval')      %]</th>
+            <th>[% gettext('Last Update')   %]</th>
         </tr>
     </thead>
     [% FOR tracker = data.info %]
@@ -375,7 +363,7 @@
                 <td class="interval">[% tracker.normal_interval %]</td>
                 <td class="last_update">
                     [% UNLESS tracker.scrape_time_last %][% gettext('Never') %]
-                    [% ELSE %][% tracker.scrape_time_last %]
+                    [% ELSE %][% tracker.scrape_time_last.as_human_datetime %]
                     [% END %]
                 </td>
             </tr>

@@ -26,22 +26,24 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
     This file contain java scripts for Action frame
 */
 
-const NUM_LIST_FRAME = 2;
-
 $(document).ready(function(){
-    $('#action div.item :button').bind('click', on_click_action);
+    // Additional params
+    $('#download_rate')				.bind('change', on_change_download_rate);
+    $('#upload_rate')				.bind('change', on_change_upload_rate);
 });
 
-function on_click_action()
+function on_change_download_rate()
 {
-    // Highlight new option
-    $('#action div.item').removeClass('selected');
-    $(this).parent('div.item').addClass('selected');
-
     // Set new value
-    $.cookie('action', $(this).attr('class'), { expires: 730 });
+    //$.cookie('download_rate', $(this).val(), { expires: 730 });
+    // Update window with new locale
+    window.document.location = 'status.cgi?download_rate=' + $(this).val();
+}
 
-    // Update List frame with new params
-    var objDocList = window.parent.frames[ NUM_LIST_FRAME ].document;
-    objDocList.location = 'list.cgi?action=' + $(this).attr('class');
+function on_change_upload_rate()
+{
+    // Set new value
+    //$.cookie('upload_rate', $(this).val(), { expires: 730 });
+    // Update window with new locale
+    window.document.location = 'status.cgi?upload_rate=' + $(this).val();
 }

@@ -85,3 +85,12 @@ msgstr ""
 
 msgid "high"
 msgstr ""
+
+msgid "B"
+msgstr ""
+
+msgid "b"
+msgstr ""
+
+msgid "s"
+msgstr ""

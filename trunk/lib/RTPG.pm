@@ -5,17 +5,18 @@ use strict;
 use warnings;
 package RTPG;
 use Carp;
+use POSIX qw(strftime);
 use RTPG::Direct;
 use RPC::XML::Client;
 use RPC::XML;
 
-# use Data::Dumper;
+ use Data::Dumper;
 
-# $Data::Dumper::Indent = 1;
-# $Data::Dumper::Terse = 1;
-# $Data::Dumper::Useqq = 1;
-# $Data::Dumper::Deepcopy = 1;
-# $Data::Dumper::Maxdepth = 0;
+ $Data::Dumper::Indent = 1;
+ $Data::Dumper::Terse = 1;
+ $Data::Dumper::Useqq = 1;
+ $Data::Dumper::Deepcopy = 1;
+ $Data::Dumper::Maxdepth = 0;
 
 my $SIZE_BY_CHUNKS_LIMIT=1024**3;
 
@@ -29,7 +30,7 @@ RTPG - is a module for accessing to rtorrent's SCGI functions.
 
 =cut
 
-our $VERSION=0.8;
+our $VERSION=0.9;
 
 =head1 SYNOPSIS
 
@@ -203,7 +204,7 @@ sub torrents_list
 
     my @iary=eval {
         grep !/$exclude_d_mask/,
-        grep /^d\.(get_|is_)/, $self->_get_list_methods;
+        grep /^d\.(get_|is_|views\.has$)/, $self->_get_list_methods;
     };
 
     if ($@)
@@ -229,6 +230,35 @@ sub torrents_list
             $name =~ s/^..(?:get_)?//;
             $info{$name}=$_->[$i];
         }
+
+        # Set download status
+        if( $info{hashing} )
+        {
+            $info{status} = 'hashing';
+        }
+        elsif( $info{complete} )
+        {
+            if($info{is_active})
+            {
+                $info{status} = 'seeding';
+            }
+            else
+            {
+                $info{status} = 'finished';
+            }
+        }
+        else
+        {
+            if($info{is_active})
+            {
+                $info{status} = 'downloading';
+            }
+            else
+            {
+                $info{status} = 'paused';
+            }
+        }
+
         $_ = _normalize_one_torrent_info(\%info);
     }
     return $list unless wantarray;
@@ -355,7 +385,7 @@ sub file_list
         $_ =  \%info;
         my $size_bytes=1.0*$chunk_size*$_->{size_chunks};
         $_->{size_bytes}=$size_bytes if $size_bytes > $SIZE_BY_CHUNKS_LIMIT;
-        $_->{human_size}=_human_size($_->{size_bytes});
+#        $_->{human_size}=_human_size($_->{size_bytes});
         $_->{percent}=_get_percent_string(
             $_->{completed_chunks},
             $_->{size_chunks}
@@ -515,6 +545,29 @@ sub system_information
     return $res;
 }
 
+=head2 view_list
+
+The method returns information about views in rtorrent.
+
+=cut
+
+sub view_list
+{
+    my ($self)=@_;
+
+    my $info;
+
+    eval
+    {
+        $info = $self->rpc_command('view_list');
+    };
+    if ($@)
+    {
+        return undef, "$@" if wantarray;
+        die $@;
+    }
+    return $info;
+}
 
 =head2 start
 
@@ -618,6 +671,70 @@ sub pause
     return $res;
 }
 
+=head2 set_download_rate
+
+Set maximum download rate for all torrents
+
+=cut
+
+sub set_download_rate
+{
+    my ($self, $rate) = @_;
+
+    my ($res, $error)=$self->rpc_command('set_download_rate', $rate);
+    unless (defined $res)
+    {
+        return undef, $error if wantarray;
+        die $error;
+    }
+
+    return $res;
+}
+
+=head2 set_upload_rate
+
+Set maximum upload rate for all torrents
+
+=cut
+
+sub set_upload_rate
+{
+    my ($self, $rate) = @_;
+
+    my ($res, $error)=$self->rpc_command('set_upload_rate', $rate);
+    unless (defined $res)
+    {
+        return undef, $error if wantarray;
+        die $error;
+    }
+
+    return $res;
+}
+
+=head2 rates
+
+Return varios current speed rates and etc.
+
+=cut
+sub rates
+{
+    my ($self, $param)=@_;
+
+    my (%info, $error);
+
+    ($info{download_rate}, $error) = $self->rpc_command('get_download_rate')
+        unless $error;
+    ($info{upload_rate},   $error) = $self->rpc_command('get_upload_rate')
+        unless $error;
+
+    if ($error)
+    {
+        return undef, $error if wantarray;
+        die $error;
+    }
+    return \%info;
+}
+
 =head1 PRIVATE METHODS
 
 =head2 _get_list_methods
@@ -661,46 +778,6 @@ sub _get_percent_string($$)
     return "$percent%";
 }
 
-
-=head2 _human_size(NUM)
-
-converts big numbers to small 1024 = 1K, 1024**2 == 1M, etc
-
-=cut
-
-sub _human_size($)
-{
-    my ($size, $sign)=(shift, 1);
-    if ($size<0) { return '>2G'; }
-    return 0 unless $size;
-    my @suffixes=('', 'K', 'M', 'G', 'T', 'P', 'E');
-    my ($limit, $div)=(1024, 1);
-    for (@suffixes)
-    {
-        if ($size<$limit || $_ eq $suffixes[-1])
-        {
-            $size = $sign*$size/$div;
-            if ($size<10)
-            {
-                $size=sprintf "%1.2f", $size;
-            }
-            elsif ($size<50)
-            {
-                $size=sprintf "%1.1f", $size;
-            }
-            else
-            {
-                $size=int($size);
-            }
-            s/(?<=\.\d)0$//, s/\.00?$// for $size;
-            return "$size$_";
-        }
-        $div = $limit;
-        $limit *= 1024;
-    }
-}
-
-
 =head2 _normalize_one_torrent_info(HASHREF)
 
 =over
@@ -742,19 +819,98 @@ sub _normalize_one_torrent_info($)
         $_->{ratio}=sprintf '%1.2f', $_->{ratio}/1000;
         $_->{ratio}=~s/((\.00)|0)$//;
 
-        $_->{human_size} = _human_size($_->{size_bytes});
-        $_->{human_done} = _human_size($_->{bytes_done});
-        $_->{human_up_total} = _human_size($_->{up_total});
-        $_->{human_up_rate} = _human_size($_->{up_rate});
-        $_->{human_down_rate} = _human_size($_->{down_rate});
-
-        for ($_->{human_up_rate}, $_->{human_down_rate})
-        {
-            next if $_ eq 0;
-            $_ .= 'B/s';
-        }
+#        $_->{human_size}        = as_human_size(  $_->{size_bytes} );
+#        $_->{human_done}        = as_human_size(  $_->{bytes_done} );
+#        $_->{human_up_total}    = as_human_size(  $_->{up_total}   );
+#        $_->{human_up_rate}     = as_human_speed( $_->{up_rate}    );
+#        $_->{human_down_rate}   = as_human_speed( $_->{down_rate}  );
     }
     return $info;
+}
+
+=head2 as_human_size(NUM)
+
+converts big numbers to small 1024 = 1K, 1024**2 == 1M, etc
+
+=cut
+
+sub as_human_size($)
+{
+    my ($size, $sign) = (shift, 1);
+
+    my %result = (
+        original    => $size,
+        digit       => 0,
+        letter      => '',
+        human       => 'N/A',
+    );
+
+    {{
+        last unless $size;
+        last unless $size >= 0;
+
+        my @suffixes = ('', 'K', 'M', 'G', 'T', 'P', 'E');
+        my ($limit, $div) = (1024, 1);
+        for (@suffixes)
+        {
+            if ($size < $limit || $_ eq $suffixes[-1])
+            {
+                $size = $sign * $size / $div;
+                if ($size < 10)
+                {
+                    $size = sprintf "%1.2f", $size;
+                }
+                elsif ($size < 50)
+                {
+                    $size = sprintf "%1.1f", $size;
+                }
+                else
+                {
+                    $size = int($size);
+                }
+                s/(?<=\.\d)0$//, s/\.00?$// for $size;
+                $result{digit}  = $size;
+                $result{letter} = $_;
+                $result{byte}   = 'B';
+                last;
+            }
+            $div = $limit;
+            $limit *= 1024;
+        }
+    }}
+
+    $result{human} = $result{digit} . $result{letter} . $result{byte};
+
+    return ($result{digit}, $result{letter}, $result{byte}, $result{human})
+        if wantarray;
+    return $result{human};
+}
+
+=head2 as_human_speed
+
+As as_human_size, but convert into speed
+
+=cut
+sub as_human_speed
+{
+    my @result = as_human_size(shift);
+    my $human = pop @result;
+    my $byte = pop @result;
+    $human .= '/s';
+    push @result, 'b',  '/', 's', $human;
+    return @result if wantarray;
+    return $human;
+}
+
+=head2 as_human_datetime
+
+Return datetime string from timestemp
+
+=cut
+
+sub as_human_datetime
+{
+    return strftime '%c', localtime shift;
 }
 
 1;

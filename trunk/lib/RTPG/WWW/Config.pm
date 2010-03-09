@@ -69,7 +69,7 @@ sub new
 
     # Другие директории
     $opts{dir}{templates}   = $opts{dir}{base}      . '/templates';
-    $opts{dir}{cache}       = $opts{dir}{base}      . '/cache';
+#    $opts{dir}{cache}       = $opts{dir}{base}      . '/cache';
     $opts{dir}{po}          = $opts{dir}{base}      . '/po';
 
     # Абсолютные пути к ресурсам
@@ -87,11 +87,13 @@ sub new
     my $self = bless \%opts, $class;
 
     # Set parameters by default, even it not declared in config file
-    $self->set('prop',    'info'    )   unless $self->get('prop');
+#    $self->set('prop',    'info'    )   unless $self->get('prop');
     $self->set('action',  'default' )   unless $self->get('action');
-    $self->set('locale',  'en'      )   unless $self->get('locale');
-    $self->set('skin',    'default' )   unless $self->get('skin');
-    $self->set('refresh', 60        )   unless defined $self->get('refresh');
+#    $self->set('locale',  'en'      )   unless $self->get('locale');
+#    $self->set('skin',    'default' )   unless $self->get('skin');
+#    $self->set('refresh', 60        )   unless defined $self->get('refresh');
+#    $self->set('collapse','yes'     )   unless $self->get('collapse');
+#    $self->set('geo_ip',  'yes'     )   unless $self->get('geo_ip');
 
     # Load params from file
     $self->load_from_files;
@@ -197,6 +199,7 @@ sub set
 Get cookies to response
 
 =cut
+
 sub cookies { return shift->{cookies}; }
 
 =head2 skins
@@ -204,6 +207,7 @@ sub cookies { return shift->{cookies}; }
 Get list of aviable skins
 
 =cut
+
 sub skins
 {
     my ($self) = @_;
@@ -238,9 +242,20 @@ sub skins
 Return true if html collapse enabled
 
 =cut
+
 sub is_collapse
 {
-    return ( shift->get('collapse') =~ m/^yes$/i) ?1 :0;
+    return ( shift->get('collapse') =~ m/^(yes|on|enable)$/i) ?1 :0;
+}
+
+=head2 is_geo_ip
+
+Return true if geo_ip enabled
+
+=cut
+sub is_geo_ip
+{
+    return ( shift->get('geo_ip') =~ m/^(yes|on|enable)$/i) ?1 :0;
 }
 
 =head2 DieDumper

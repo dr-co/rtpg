@@ -32,8 +32,13 @@ body {
 }
 
 div.message {
+    clear: both;
     width: 100%;
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
     text-align: center;
+    vertical-align: middle;
 }
 
 h4 {
@@ -248,6 +253,17 @@ div.properties table.peers_list tbody td.id {
 }
 
 /*************************************************************** Fields Files */
+div.properties table.files a,
+div.properties table.files a:visited {
+    color: WindowText;
+    text-decoration: none;
+}
+
+div.properties table.files a:hover {
+    color: WindowText;
+    text-decoration: underline;
+}
+
 div.properties table.files thead,
 div.properties table.files thead tr,
 div.properties table.files thead tr th {

@@ -26,6 +26,8 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
     This file contain java scripts for List frame
 */
 
+const NUM_PROP_FRAME = 3;
+
 $(document).ready(function(){
     // On torrent select
     $('#list table.list tbody > tr').find('> td:gt(0)')
@@ -34,6 +36,9 @@ $(document).ready(function(){
     // On checkbox select add hash to list in cookies
     $('#list table.list tbody > tr').find('> td:first :checkbox')
         .bind('change', on_click_checkbox);
+
+    // On mass select checkbox click
+    $('#all').bind('change', on_all_change);
 });
 
 function on_click_list()
@@ -48,7 +53,7 @@ function on_click_list()
     $.cookie('current', strCurrent, { expires: 730 });
 
     // Update prop frame
-    var objDocList = window.parent.frames[3].document;
+    var objDocList = window.parent.frames[ NUM_PROP_FRAME ].document;
     objDocList.location = 'prop.cgi?current=' + strCurrent;
 
 }
@@ -74,4 +79,20 @@ function on_click_checkbox()
 
     // Set new cookie value
     $.cookie('checked', arrChecked.join(';'), { expires: 730 } );
+}
+
+function on_all_change()
+{
+    // Get all state
+    var strChecked = $(this).attr('checked');
+    // Seve in cookie
+    $.cookie('all', strChecked, { expires: 730 });
+    // Set all checkbox
+    $.each($('#list table.list tbody > tr').find('> td:first :checkbox'),
+        function(index, objCheckbox){
+//            if((strChecked == 'true'  && $(objCheckbox).attr('checked') == 'false') ||
+//               (strChecked == 'false' && $(objCheckbox).attr('checked') == 'true')){
+//                $(objCheckbox).attr('checked', true);
+//            }
+    });
 }

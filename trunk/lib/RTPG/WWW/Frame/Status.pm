@@ -30,11 +30,19 @@ sub new
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
 
     # Do commands
-    $rtpg->set_download_rate($opts{download_rate})  if $opts{download_rate};
-    $rtpg->set_upload_rate($opts{upload_rate})      if $opts{upload_rate};
+    $rtpg->set_download_rate($opts{download_rate})
+        if $opts{download_rate} =~ m/^\d+$/;
+    $rtpg->set_upload_rate($opts{upload_rate})
+        if $opts{upload_rate} =~ m/^\d+$/;
 
+    my $error;
     # Get information about system
-    ($opts{info}, $opts{error}) = $rtpg->system_information;
+    ($opts{info}, $error) = $rtpg->system_information;
+    $opts{error} ||= $error;
+
+    # Get information about rates
+    ($opts{rates}, $error) = $rtpg->rates;
+    $opts{error} ||= $error;
 
     my $self = bless \%opts, $class;
 

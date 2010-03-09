@@ -28,6 +28,30 @@ sub new
     # Get current state
     $opts{$_} = cfg->get($_) for qw(action upload);
 
+    # Get RTPG object
+    my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
+    # Get list
+    ($opts{list}, $opts{error}) = $rtpg->view_list();
+
+    # Remove dublicate
+    my @list = grep { $_ !~ m/^(main|name)$/ } @{ $opts{list} };
+    # Clear object list
+    $opts{list} = [];
+
+    for my $action ( @list )
+    {
+        # Set name to show
+        my $name = ucfirst $action;
+        # Fix name for default action
+        $name = 'All' if $name eq 'Default';
+        # Get count (don`t beat me =) )
+        my ($list, $error) = $rtpg->torrents_list( $action );
+        my $count = ($error) ? '?' : scalar @$list;
+        # Set names and titles for actions
+        push @{ $opts{list} },
+            { action => $action, name => $name, count => $count};
+    }
+
     # Add uploaded file
 #    if( $opts{upload} )
 #    {

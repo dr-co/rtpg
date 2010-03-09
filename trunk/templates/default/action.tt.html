@@ -1,47 +1,19 @@
 <body>
 <div id="action">
-    <div class="item default [% IF data.action == 'default'%]selected[% END %]">
-        <div class="img">&nbsp;</div>
-        <input
-            type="button"
-            class="default"
-            value="[% gettext('All') %]"/>
-        <div class="count">[% '?' %]</div>
-    </div>
-    <div class="item incomplete [% IF data.action == 'incomplete'%]selected[% END %]">
-        <div class="img">&nbsp;</div>
-        <input
-            type="button"
-            class="incomplete"
-            value="[% gettext('Incomplete') %]"/>
-        <div class="count">[% '?' %]</div>
-    </div>
-    <div class="item complete [% IF data.action == 'complete'%]selected[% END %]">
-        <div class="img">&nbsp;</div>
-        <input
-            type="button"
-            class="complete"
-            value="[% gettext('Complete') %]"/>
-        <div class="count">[% '?' %]</div>
-    </div>
-    <div class="item started [% IF data.action == 'started'%]selected[% END %]">
-        <div class="img">&nbsp;</div>
-        <input
-            type="button"
-            class="started"
-            value="[% gettext('Started') %]"/>
-        <div class="count">[% '?' %]</div>
-    </div>
-    <div class="item stopped [% IF data.action == 'stopped'%]selected[% END %]">
-        <div class="img">&nbsp;</div>
-        <input
-            type="button"
-            class="stopped"
-            value="[% gettext('Stopped') %]"/>
-        <div class="count">[% '?' %]</div>
-    </div>
-</div>
-<div id="logo">
+    [% FOR row = data.list %]
+        [% SET class = ['item'] %]
+        [% class.push(row.action) %]
+        [% IF data.action == row.action; class.push('selected'); END %]
+        <div class="[% class.join(' ') %]">
+            <div class="img">&nbsp;</div>
+            <input
+                type="button"
+                class="[% row.action %]"
+                value="[% gettext(row.name) %]"/>
+            <div class="count">[% row.count %]</div>
+        </div>
+    [% END %]
+ <div id="logo">
     <img alt="RTPG [% version %]" src="[% config.url.skin.base _ '/logo.png' %]">
 </div>
 </body>

@@ -11,8 +11,6 @@ RTPG::WWW::Frame::Prop
 
 package RTPG::WWW::Frame::Prop;
 
-use Geo::IPfree;
-
 use RTPG;
 use RTPG::WWW::Config;
 use RTPG::WWW::Locale;
@@ -49,15 +47,19 @@ sub new
 
             $opts{error} = $error1 || $error2 || '';
 
-            my $geo = Geo::IPfree->new;
-            $geo->Faster;
-            ($_->{country_code}, $_->{country_name},) =
-                $geo->LookUp( $_->{address} )
-                    for @{ $opts{list} };
+            if( cfg->is_geo_ip and eval "require Geo::IPfree" and !$@)
+            {
+                my $geo = Geo::IPfree->new;
+                $geo->Faster;
+                ($_->{country_code}, $_->{country_name},) =
+                    $geo->LookUp( $_->{address} )
+                        for @{ $opts{list} };
+            }
         }
         elsif($opts{prop} eq 'files')
         {
-            ($opts{info}, $opts{error}) = $rtpg->file_list( $opts{current} );
+            ($opts{info}, $opts{error}) = $rtpg->torrent_info( $opts{current} );
+            ($opts{list}, $opts{error}) = $rtpg->file_list( $opts{current} );
         }
         elsif($opts{prop} eq 'trackers')
         {
