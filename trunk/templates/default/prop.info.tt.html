@@ -1,0 +1,114 @@
+<table class="downloaded">
+    <colgroup>
+        <col width="10%"/>
+        <col width="80%"/>
+        <col width="10%"/>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>[% gettext('Downloaded') %]</th>
+            <td class="percent">
+                <div class="percent" style="width: [% data.info.percent %];" />
+            </td>
+            <td class="spercent">[% data.info.percent %]</td>
+        </tr>
+    </thead>
+</table>
+
+<h4>[% gettext('Transfer') %]</h4>
+
+<table class="transfer">
+    <colgroup>
+        <col width="23%"/>
+        <col width="10%"/>
+        <col width="23%"/>
+        <col width="10%"/>
+        <col width="24%"/>
+        <col width="10%"/>
+    </colgroup>
+    <tbody>
+        <tr>
+            <th>[% gettext('Downloaded')                %]</th>
+            <td>[% data.info.bytes_done.as_human_size   %]</td>
+            <th>[% gettext('Down Speed')                %]</th>
+            <td>[% data.info.down_rate.as_human_speed   %]</td>
+            <th>[% gettext('Peers connected')           %]</th>
+            <td>
+                [% data.info.peers_connected        %]
+                [% gettext('from')                  %]
+                [% data.info.peers_max              %]
+            </td>
+        </tr>
+        <tr>
+            <th>[% gettext('Uploaded')              %]</th>
+            <td>[% data.info.up_total.as_human_size %]</td>
+            <th>[% gettext('Up Speed')              %]</th>
+            <td>[% data.info.up_rate.as_human_speed %]</td>
+            <th>[% gettext('Peers not connected')   %]</th>
+            <td>[% data.info.peers_not_connected    %]</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>[% gettext('Tracker') %]</h4>
+
+<table class="tracker">
+    <colgroup>
+        <col width="10%"/>
+        <col width="90%"/>
+    </colgroup>
+    <tbody>
+        <tr>
+            <th>[% gettext('Message') %]</th>
+            <td class="message">[% data.info.message %]</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>[% gettext('General') %]</h4>
+
+<table class="general">
+    <colgroup>
+        <col width="10%"/>
+        <col width="40%"/>
+        <col width="10%"/>
+        <col width="40%"/>
+    </colgroup>
+    <tbody>
+        <tr>
+            <th>[% gettext('Directory')             %]</th>
+            <td>[% data.info.directory              %]</td>
+            <th>[% gettext('Chunks')                %]</th>
+            <td>
+                [% data.info.size_chunks            %]
+                [% gettext('x')                     %]
+                [% data.info.chunk_size.as_human_size %]
+                ([% data.info.completed_chunks %] [% gettext('done') %])
+            </td>
+        </tr>
+        <tr>
+            <th>[% gettext('Total size') %]</th>
+            <td>
+                [% data.info.size_bytes.as_human_size       %]
+                ([% data.info.bytes_done.as_human_size      %]
+                 [% gettext('done') %] )
+                [% data.info.free_diskspace.as_human_size   %]
+                [% gettext('free diskspace')                %]
+            </td>
+            <th>[% gettext('Hash') %]</th>
+            <td>[% data.info.hash %]</td>
+        </tr>
+        <tr>
+            <th>[% gettext('Created On')            %]</th>
+            <td>[% data.info.creation_date.as_human_datetime %]</td>
+            <th>[% gettext('Local ID')              %]</th>
+            <td>[% data.info.local_id               %]</td>
+        </tr>
+        <tr>
+            <th>[% gettext('Comment')               %]</th>
+            <td>[% data.info.name                   %]</td>
+            <th>[%#                                 %]</th>
+            <td>[%#                                 %]</td>
+        </tr>
+    </tbody>
+</table>

@@ -64,7 +64,7 @@ div.item div.img {
     margin-left: 5px;
     width: 16px;
     height: 16px;
-    background-image: url("action.png");
+    background-image: url("status/other.png");
 }
 
 div.item input {
@@ -85,23 +85,37 @@ div.item div.count {
 
 /*********************************************************** Items by actions */
 div.item.default div.img {
-    background-position: -176px 0;
+    background-image: url("status/default.png");
 }
 
+div.item.active div.img {
+    background-image: url("status/active.png");
+}
+
+
 div.item.started div.img {
-    background-position: -160px 0;
+    background-image: url("status/started.png");
 }
 
 div.item.stopped div.img {
-    background-position: -192px 0;
+    background-image: url("status/stopped.png");
 }
 
 div.item.incomplete div.img {
-    background-position: 0 0;
+    background-image: url("status/incomplete.png");
 }
 
 div.item.complete div.img {
-    background-position: -16px 0;
+    background-image: url("status/complete.png");
+}
+
+div.item.seeding div.img {
+    background-image: url("status/seeding.png");
+}
+
+
+div.item.hashing div.img {
+    background-image: url("status/hashing.png");
 }
 
 /*********************************************************************** Logo */

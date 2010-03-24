@@ -110,3 +110,6 @@ msgstr "б"
 
 msgid "s"
 msgstr "с"
+
+msgid "No current torrent selected"
+msgstr "Текущий торрент не выбран"

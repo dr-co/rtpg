@@ -1,13 +1,8 @@
 /*
- * Translates
+ * Translates for strings
  *
  */
 
-var translates = {
-    "New locale settings": "[% gettext('New locale settings') %]",
-};
-
-function gettext( str )
-{
-    return translates.str
-}
+[% FOR string IN data.info %]
+const [% string.key %] = "[% string.value | html %]";
+[% END %]

@@ -46,6 +46,17 @@ h4 {
     margin: 2px;
 }
 
+div.properties a,
+div.properties a:visited {
+    color: WindowText;
+    text-decoration: none;
+}
+
+div.properties a:hover {
+    color: WindowText;
+    text-decoration: underline;
+}
+
 /*********************************************************** List alternation */
 div.properties table tbody.odd td.path,
 div.properties table tbody.odd td.url,
@@ -253,17 +264,6 @@ div.properties table.peers_list tbody td.id {
 }
 
 /*************************************************************** Fields Files */
-div.properties table.files a,
-div.properties table.files a:visited {
-    color: WindowText;
-    text-decoration: none;
-}
-
-div.properties table.files a:hover {
-    color: WindowText;
-    text-decoration: underline;
-}
-
 div.properties table.files thead,
 div.properties table.files thead tr,
 div.properties table.files thead tr th {

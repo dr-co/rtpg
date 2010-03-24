@@ -35,6 +35,7 @@ body {
 
 table.list {
     width: 100%;
+    white-space: nowrap;
 }
 
 /*********************************************************************** Head */
@@ -123,38 +124,41 @@ table.list tbody td.img div.img{
     width: 16px;
     height: 16px;
     border: 0px;
-    background-image: url("action.png");
+    background-image: url("status/other.png");
     text-align: center;
     vertical-align: middle;
     top: 0px;
 }
 
-table.list tbody td.img div.img.downloading{
-    background-position: 0 0;
+table.list tbody td.img div.img.hashing{
+    background-image: url("status/hashing.png");
 }
 
 table.list tbody td.img div.img.seeding{
-    background-position: -16px 0;
-}
-
-table.list tbody td.img div.img.hashing{
-    background-position: -112px 0;
-}
-
-table.list tbody td.img div.img.active{
-    background-position: -160px 0;
-}
-
-table.list tbody td.img div.img.inactive{
-    background-position: -192px 0;
+    background-image: url("status/seeding.png");
 }
 
 table.list tbody td.img div.img.seeding_inactive{
-    background-position: -144px 0;
+    background-image: url("status/seeding_inactive.png");
+}
+
+table.list tbody td.img div.img.downloading{
+    background-image: url("status/downloading.png");
 }
 
 table.list tbody td.img div.img.downloading_inactive{
-    background-position: -128px 0;
+    background-image: url("status/downloading_inactive.png");
+}
+
+/************************************************************* Message images */
+table.list tbody td.message div.img.message{
+    width: 16px;
+    height: 16px;
+    border: 0px;
+    background-image: url("status/message.png");
+    text-align: center;
+    vertical-align: middle;
+    top: 0px;
 }
 
 /*************************************************************** Selected row */

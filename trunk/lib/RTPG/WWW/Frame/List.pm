@@ -10,7 +10,7 @@ RTPG::WWW::Frame::List
 =cut
 
 package RTPG::WWW::Frame::List;
-use CGI;
+
 use RTPG;
 use RTPG::WWW::Config;
 
@@ -25,38 +25,44 @@ sub new
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(action current debug start stop pause
-                                    delete checked all);
+    $opts{$_} = cfg->get($_) for qw(action current debug do);
+    $opts{hash} = {};
+    $opts{hash} = { map { $_ => 'checked' } cfg->get('hash[]') }
+        if cfg->get('hash[]');
+
+    # If priority command then get priority level
+    if($opts{do} =~ m/^(off|low|normal|high)$/i)
+    {
+        $opts{param}    = ($opts{do} eq 'off')    ?0    :
+                          ($opts{do} eq 'low')    ?1    :
+                          ($opts{do} eq 'normal') ?2    :3;
+        $opts{do}       = 'priority';
+    }
+
     # Get RTPG object
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
 
-    for my $command ( qw(start stop pause delete) )
-    {
+    {{
+        # Skip if command not set
+        last unless $opts{do};
         # Skip if not checked
-        next unless $opts{$command};
-        # Split commands string into hash
-        $opts{$command} = [ split ',', $opts{$command} ];
-        # Skip if not checked
-        next unless @{ $opts{$command} };
+        last if !('HASH' eq ref $opts{hash} and %{$opts{hash}}) and
+                ! $opts{current};
+        # Get command name
+        my $command = $opts{do};
+        # Get torrents hash from checked torrents or current torrent
+        my @torrents = keys %{ $opts{hash} };
+        push @torrents, $opts{current} unless @torrents;
         # Do command
-        $rtpg->$command( $_ ) for @{ $opts{$command} };
+        $rtpg->$command( $_, $opts{param} ) for @torrents;
         # If command then drop all cheched cookie
-        $opts{checked} = '';
-        cfg->set('checked', '');
+        cfg->set('checked', $opts{hash} = '');
         # If "delete" command drop current value
-        if( $command eq 'delete' )
-        {
-            $opts{current} = '';
-            cfg->set('current', '');
-        }
-    }
+        cfg->set('current', $opts{current} = '') if $command eq 'delete';
+    }}
 
     # Get list
     ($opts{list}, $opts{error}) = $rtpg->torrents_list( $opts{action} );
-
-    # Split checked string into hash
-    $opts{checked} = { map { $_ => 1 } split ';', $opts{checked} }
-        if $opts{checked};
 
     my $self = bless \%opts, $class;
 

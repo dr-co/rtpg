@@ -1,9 +1,14 @@
 <body>
+<form action="/list.cgi" method="post" id="form">
+<input type="hidden" id="do" name="do" value="" />
+
 <div id="list">
     <table class="list" summary="[% gettext('Main torrents list') %]">
     <colgroup>
         <col width="1%"/>
-        <col span="2" />
+        <col width="1%"/>
+        <col/>
+        <col width="1%"/>
         <col width="5%"/>
         <col width="10%"/>
         <col width="10%"/>
@@ -21,27 +26,31 @@
                     title="[% gettext('Select/Unselect all') %]"
                  />
             </th>
-            <th abbr="[% gettext('Nm') %]" colspan="2">[% gettext('Name') %]</th>
-            <th abbr="[% gettext('Pr') %]">[% gettext('Priority') %]</th>
-            <th abbr="[% gettext('Sz') %]">[% gettext('Size') %]</th>
-            <th abbr="[% gettext('Dn') %]">[% gettext('Done') %]</th>
-            <th abbr="[% gettext('St') %]">[% gettext('Status') %]</th>
-            <th abbr="[% gettext('Pe') %]">[% gettext('Peers') %]</th>
+            <th abbr="[% gettext('Nm') %]" colspan="3">
+                [% gettext('Name') %]
+            </th>
+            <th abbr="[% gettext('Pr') %]">[% gettext('Priority')   %]</th>
+            <th abbr="[% gettext('Sz') %]">[% gettext('Size')       %]</th>
+            <th abbr="[% gettext('Dn') %]">[% gettext('Done')       %]</th>
+            <th abbr="[% gettext('St') %]">[% gettext('Status')     %]</th>
+            <th abbr="[% gettext('Pe') %]">[% gettext('Peers')      %]</th>
             <th abbr="[% gettext('DS') %]">[% gettext('Down Speed') %]</th>
-            <th abbr="[% gettext('US') %]">[% gettext('Up Speed') %]</th>
-            <th abbr="[% gettext('Rt') %]">[% gettext('Rate') %]</th>
+            <th abbr="[% gettext('US') %]">[% gettext('Up Speed')   %]</th>
+            <th abbr="[% gettext('Rt') %]">[% gettext('Rate')       %]</th>
         </tr>
     </thead>
     [% FOR torrent = data.list.list %]
-        [% SET class = [] %]
-        [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
-        [% IF data.current == torrent.hash; class.push('selected'); END %]
-        [% UNLESS torrent.is_active; class.push('inactive'); END %]
+        [%
+            SET class = [];
+            IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END;
+            IF data.current == torrent.hash; class.push('selected'); END;
+            UNLESS torrent.is_active; class.push('inactive'); END;
+        %]
         <tbody class="[% class.join(' ') %]">
             <tr>
                 <td class="select">
                     <input
-                        [% IF data.checked.${torrent.hash} %]
+                        [% IF data.hash.${torrent.hash} %]
                             checked="checked"
                         [% END %]
                         type="checkbox"
@@ -60,7 +69,18 @@
                         [% END %]
                     [% END %]
                 </td>
-                <td class="name">[% torrent.name %]</td>
+                <td class="name"
+                    [% UNLESS torrent.message %]colspan="2"[% END %]
+                >
+                    [% torrent.name %]
+                </td>
+                [% IF torrent.message %]
+                    <td class="message">
+                        <div class="img message"
+                            title="[% torrent.message %]"
+                        />
+                    </td>
+                [% END %]
                 <td class="num">[% gettext(torrent.priority_str) %]</td>
                 <td class="size">[% torrent.size_bytes.as_human_size %]</td>
                 <td class="done">
@@ -68,16 +88,18 @@
                     <div class="percent" style="width: [% torrent.percent %];" />
                 </td>
                 <td class="status">
-                    [% IF torrent.hashing %][% gettext('Hashing') %]
-                    [% ELSIF torrent.complete %]
-                        [% IF torrent.is_active %][% gettext('Seeding') %]
-                        [% ELSE %][% gettext('Finished') %]
-                        [% END %]
-                    [% ELSE %]
-                        [% IF torrent.is_active %][% gettext('Downloading') %]
-                        [% ELSE %][% gettext('Paused') %]
-                        [% END %]
-                    [% END %]
+                    [%
+                        IF torrent.hashing;         gettext('Hashing');
+                        ELSIF torrent.complete;
+                            IF torrent.is_active;   gettext('Seeding');
+                            ELSE;                   gettext('Finished');
+                            END;
+                        ELSE;
+                            IF torrent.is_active;   gettext('Downloading');
+                            ELSE;                   gettext('Paused');
+                            END;
+                        END;
+                    %]
                 </td>
                 <td class="peers">[% torrent.peers_connected %]</td>
                 <td class="down_speed">[% torrent.down_rate.as_human_speed %]</td>
@@ -94,4 +116,6 @@
     [% END %]
     </table>
 </div>
+
+</form>
 </body>

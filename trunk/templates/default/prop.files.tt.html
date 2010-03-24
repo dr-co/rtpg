@@ -1,0 +1,90 @@
+<table class="files">
+    <colgroup>
+        <col width="1%" />
+        <col width="69%"/>
+        <col width="1%" />
+        <col width="5%" />
+        <col width="5%" />
+        <col width="10%" />
+        <col width="5%" />
+        <col width="5%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th/>
+            <th colspan="2">
+                [% gettext('Path')          %]
+            </th>
+            <th>[% gettext('Size')          %]</th>
+            <th>[% gettext('Done')          %]</th>
+            <th>[% gettext('%')             %]</th>
+            <th>[% gettext('Chunks')        %]</th>
+            <th>[% gettext('Priority')      %]</th>
+        </tr>
+    </thead>
+    [% FOR file = data.tree %]
+        [%
+            SET class = [];
+            IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END;
+            IF data.file == file.hash; class.push('selected'); END;
+        %]
+        [% IF file.type == 'dir' %]
+            <tbody class="[% class.join(' ') %]">
+                <tr>
+                    <td>
+                        +
+                    </td>
+                    <td colspan="7">
+                        [% SET level = file.level - 1 %]
+                        [% FOR i IN [0 .. level] %]&nbsp;&nbsp;[% END %]
+                        [% file.name %]
+                    </td>
+                </tr>
+            </tbody>
+            [% NEXT %]
+        [% END %]
+
+        <tbody class="[% class.join(' ') %]">
+            <tr>
+                <td class="select">
+                    <input
+                        type="checkbox"
+                        name="hash[]"
+                        value="[%# %]"/>
+                </td>
+                <td class="path">
+                    [% FOR i IN [0 .. file.level] %]&nbsp;&nbsp;[% END %]
+
+                    [% IF file.data.percent == '100%' %]
+                        <a href="[% file.data.path %]"
+                           target="blank"
+                        >
+                            [% file.name %]
+                        </a>
+                    [% ELSE %]
+                        [% file.name %]
+                    [% END %]
+                </td>
+                <td class="mime">
+                    [% IF file.data.mime %]
+                        <img
+                            alt="[% file.data.mime.type | lower %]"
+                            title="[% file.data.mime.type %]"
+                            src="[% config.url.skin.mime _ '/' _
+                                    file.data.mime.mediaType _ '.png' | lower %]"
+                        />
+                    [% END %]
+                </td>
+                <td class="size">[% file.data.size_bytes.as_human_size %]</td>
+                <td class="spercent">[% file.data.percent %]</td>
+                <td class="percent">
+                    <div class="percent" style="width: [% file.data.percent %];">
+                        &nbsp;
+                    </div>
+                </td>
+                <td class="chunks">[% file.data.size_chunks %]</td>
+                <td class="priority">[% gettext(file.data.priority_str) %]</td>
+            </tr>
+        </tbody>
+    [% END %]
+</table>

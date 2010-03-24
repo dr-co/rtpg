@@ -1,14 +1,34 @@
 <body>
 <div id="panel">
-    <input type="button" class="panel delete"/>
+    <input type="button" class="panel add"
+        title="[% gettext('Add new torrent') %]" />
+    <input type="button" class="panel delete"
+        title="[% gettext('Delete selected torrents') %]"/>
+
     <span class="panel separator">&nbsp;</span>
-    <input type="button" class="panel start"/>
-    <input type="button" class="panel pause"/>
-    <input type="button" class="panel stop"/>
+
+    <input type="button" class="panel start"
+        title="[% gettext('Start selected torrents') %]"/>
+    <input type="button" class="panel pause"
+        title="[% gettext('Pause selected torrents') %]"/>
+    <input type="button" class="panel stop"
+        title="[% gettext('Stop selected torrents') %]"/>
+    <input type="button" class="panel check"
+        title="[% gettext('Check selected torrents for errors') %]"/>
+
     <span class="panel separator">&nbsp;</span>
-    <input type="button" class="panel priority_up"/>
-    <input type="button" class="panel priority_down"/>
+
+    <input type="button" class="panel priority off"
+        title="[% gettext('Off selected torrents by priority') %]"/>
+    <input type="button" class="panel priority low"
+        title="[% gettext('Set low priority for selected torrents') %]"/>
+    <input type="button" class="panel priority normal"
+        title="[% gettext('Set normal priority for selected torrents') %]"/>
+    <input type="button" class="panel priority high"
+        title="[% gettext('Set high priority for selected torrents') %]"/>
+
     <span class="panel separator">&nbsp;</span>
+
     <input
         type="button"
         class="panel refresh"

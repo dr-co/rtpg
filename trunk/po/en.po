@@ -94,3 +94,6 @@ msgstr ""
 
 msgid "s"
 msgstr ""
+
+msgid "No current torrent selected"
+msgstr ""

@@ -34,6 +34,10 @@
         <script type="text/javascript" src="js/jquery/jquery.cookie.js">
         </script>
 
+        [% IF show == 'panel' %]
+            <script type="text/javascript" src="string.js"></script>
+        [% END %]
+
         [% FOR js = config.url.skin.js.list %]
             <script type="text/javascript" src="[% js %]"></script>
         [% END %]

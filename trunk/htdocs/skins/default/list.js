@@ -60,25 +60,32 @@ function on_click_list()
 
 function on_click_checkbox()
 {
-    // Get cookie sting and slip it to array
-    var strCookie = new String( $.cookie('checked') || '' );
-    var arrChecked;
-    if( strCookie == '' ){ arrChecked = new Array(); }
-    else { arrChecked = strCookie.split(';'); }
-
-    if( $(this).attr('checked') )
-    {
-        // Add hash to array
-        arrChecked.push( $(this).val() );
-    }
-    else
-    {
-        // Remove hash from array
-        arrChecked.splice( $.inArray($(this).val(), arrChecked), 1);
-    }
-
+//    var arrChecked = new Array();
+//    arrChecked = $.map(
+//        $('#list table.list tbody > tr').find('> td:first :checkbox'),
+//        function(objCheckbox){ return (objCheckbox.attr('checked')) ?1 :0; });
+//    // Get cookie sting and slip it to array
+//    var strCookie = new String( $.cookie('checked') || '' );
+//    var arrChecked;
+//    if( strCookie == '' ){ arrChecked = new Array(); }
+//    else { arrChecked = strCookie.split(';'); }
+//
+//    if( $(this).attr('checked') )
+//    {
+//        // Add hash to array
+//        arrChecked.push( $(this).val() );
+//    }
+//    else
+//    {
+//        // Remove hash from array
+//        arrChecked.splice( $.inArray($(this).val(), arrChecked), 1);
+//    }
+//
     // Set new cookie value
-    $.cookie('checked', arrChecked.join(';'), { expires: 730 } );
+//    $.cookie(
+//        'checked',
+//        $.cookie('action') + ':' + arrChecked.join(''),
+//        { expires: 730 } );
 }
 
 function on_all_change()

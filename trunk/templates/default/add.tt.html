@@ -1,0 +1,17 @@
+<body>
+
+<form action="add.cgi" method="post">
+    <label>[% gettext('Link') %]:</label>
+    <input type="text" name="link"/>
+    <input type="submit" value="[% gettext('Add') %]">
+</form>
+
+<form action="add.cgi" method="post">
+    <label>[% gettext('File') %]:</label>
+    <input type="file" name="file" />
+    <input type="submit" value="[% gettext('Add') %]">
+</form>
+
+<input type="button" value="[% gettext('Close') %]" onClick="window.close()" />
+
+</body>

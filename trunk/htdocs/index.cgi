@@ -21,11 +21,14 @@ use warnings;
 use strict;
 use utf8;
 use open ':utf8';
-use lib qw(../lib);
+
+use CGI::Carp qw(fatalsToBrowser);
+use File::Basename;
+use File::Spec;
 
 our $VERSION = "0.2.0";
 
-use CGI::Carp qw(fatalsToBrowser);
+use lib qw(../lib);
 use RTPG::WWW::Config;
 use RTPG::WWW::Template;
 use RTPG::WWW::Locale;
@@ -34,8 +37,8 @@ use RTPG;
 my %params = (version => $VERSION);
 
 # Get params ###################################################################
-$params{show} = CGI::param('show') || 'index';
-$params{show} =~ s/\.cgi.*//g;
+($params{show}) = $ENV{REQUEST_URI} =~ m{^/?(.*)\.cgi};
+$params{show} ||= CGI::param('show') || 'index';
 
 # Load module and get data #####################################################
 my $module = 'RTPG::WWW::Frame::' . ucfirst lc $params{show};
@@ -57,11 +60,40 @@ if( $params{data}{error} )
 DieDumper \%params if cfg->get('debug');
 
 # Files for this page ##########################################################
-cfg->{url}{skin}{css} = cfg->{url}{skin}{base} . '/' . $params{show} . '.css'
-    if -f cfg->{dir}{skin}{current} . '/' . $params{show} . '.css';
-cfg->{url}{skin}{js}  = cfg->{url}{skin}{base} . '/' . $params{show} . '.js'
-    if -f cfg->{dir}{skin}{current} . '/' . $params{show} . '.js';
+if( -f cfg->{dir}{skin}{current} . '/' . $params{show} . '.css' )
+{
+    cfg->{url}{skin}{css} =
+        cfg->{url}{skin}{base} . '/' . $params{show} . '.css';
+}
+elsif( -f cfg->{dir}{skin}{default} . '/' . $params{show} . '.css' )
+{
+    cfg->{url}{skin}{css} =
+        cfg->{url}{skin}{default} . '/' . $params{show} . '.css';
+}
+
+if( -f cfg->{dir}{skin}{current} . '/' . $params{show} . '.js' )
+{
+    cfg->{url}{skin}{js}  =
+        cfg->{url}{skin}{base} . '/' . $params{show} . '.js';
+}
+elsif( -f cfg->{dir}{skin}{default} . '/' . $params{show} . '.js' )
+{
+    cfg->{url}{skin}{js}  =
+        cfg->{url}{skin}{default} . '/' . $params{show} . '.js';
+}
 
 # Output #######################################################################
-my $template = RTPG::WWW::Template->new;
-$template->process( $params{show} . '.tt.html', \%params );
+my ($template, $file);
+# Output for js strings
+if($params{show} eq 'string')
+{
+    $template   = RTPG::WWW::Template->new(WRAPPER => undef);
+    $file       = $params{show} . '.tt.js';
+}
+# Output for html
+else
+{
+    $template   = RTPG::WWW::Template->new;
+    $file       = $params{show} . '.tt.html';
+}
+$template->process( $file, \%params );

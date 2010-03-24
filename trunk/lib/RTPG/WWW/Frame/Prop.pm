@@ -27,6 +27,7 @@ sub new
 
     # Get current state
     $opts{$_} = cfg->get($_) for qw(current prop);
+    $opts{prop} ||= 'info';
 
     {
         # Exit if no current selected
@@ -60,6 +61,38 @@ sub new
         {
             ($opts{info}, $opts{error}) = $rtpg->torrent_info( $opts{current} );
             ($opts{list}, $opts{error}) = $rtpg->file_list( $opts{current} );
+
+            my @tree;
+
+            my @stack;
+            for my $file ( @{ $opts{list} } )
+            {
+                my @path_components = @{ $file->{path_components} };
+                my $filename = pop @path_components;
+
+                unless( @stack ~~ @path_components )
+                {
+                    for(my $level = 0; $level < @path_components; $level++)
+                    {
+                        push @stack, $path_components[ $level ];
+                        push @tree, {
+                            level   => $level,
+                            name    => $path_components[ $level ],
+                            type    => 'dir',
+                        };
+                    }
+                }
+
+                push @tree, {
+                    level   => scalar(@path_components),
+                    name    => $filename,
+                    type    => 'file',
+                    data    => $file,
+                };
+
+            }
+
+            $opts{tree} = \@tree;
         }
         elsif($opts{prop} eq 'trackers')
         {

@@ -41,6 +41,10 @@ span.panel.separator {
     background-color: ThreeDShadow;
 }
 
+input, select{
+    cursor: pointer;
+}
+
 /******************************************************************** Buttons */
 #panel {
     clear: both;
@@ -50,38 +54,53 @@ span.panel.separator {
 input.panel {
     width: 24px;
     height: 24px;
-    background-image: url("panel.png");
-    background-repeat: no-repeat;
     border: none;
     background-color: Menu;
+    background-repeat: no-repeat;
+}
+
+input.panel.add {
+    background-image: url("panel/add.png");
 }
 
 input.panel.delete {
-    background-position: -72px 0;
+    background-image: url("panel/delete.png");
 }
 
 input.panel.start {
-    background-position: -96px 0;
+    background-image: url("panel/start.png");
 }
 
 input.panel.pause {
-    background-position: -120px 0;
+    background-image: url("panel/pause.png");
 }
 
 input.panel.stop {
-    background-position: -144px 0;
+    background-image: url("panel/stop.png");
 }
 
-input.panel.priority_up {
-    background-position: -168px 0;
+input.panel.check {
+    background-image: url("panel/check.png");
 }
 
-input.panel.priority_down {
-    background-position: -192px 0;
+input.panel.priority.off {
+    background-image: url("panel/off.png");
+}
+
+input.panel.priority.low {
+    background-image: url("panel/low.png");
+}
+
+input.panel.priority.normal {
+    background-image: url("panel/normal.png");
+}
+
+input.panel.priority.high {
+    background-image: url("panel/high.png");
 }
 
 input.panel.refresh {
-    background-position: -240px 0;
+    background-image: url("panel/refresh.png");
 }
 
 /******************************************************************* Settings */

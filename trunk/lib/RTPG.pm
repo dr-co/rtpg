@@ -9,14 +9,15 @@ use POSIX qw(strftime);
 use RTPG::Direct;
 use RPC::XML::Client;
 use RPC::XML;
+use MIME::Types;
 
- use Data::Dumper;
+    use Data::Dumper;
 
- $Data::Dumper::Indent = 1;
- $Data::Dumper::Terse = 1;
- $Data::Dumper::Useqq = 1;
- $Data::Dumper::Deepcopy = 1;
- $Data::Dumper::Maxdepth = 0;
+    $Data::Dumper::Indent = 1;
+    $Data::Dumper::Terse = 1;
+    $Data::Dumper::Useqq = 1;
+    $Data::Dumper::Deepcopy = 1;
+    $Data::Dumper::Maxdepth = 0;
 
 my $SIZE_BY_CHUNKS_LIMIT=1024**3;
 
@@ -370,6 +371,12 @@ sub file_list
         return undef, $error;
     }
 
+    my $mimetypes = MIME::Types->new;
+    my $unknown   = MIME::Type->new(
+        encoding    => 'base64',
+        simplified  => 'unknown/unknown',
+        type        => 'x-unknown/x-unknown');
+
     for (@$list)
     {
         my %info;
@@ -390,6 +397,7 @@ sub file_list
             $_->{completed_chunks},
             $_->{size_chunks}
         );
+        $_->{mime} = $mimetypes->mimeTypeOf( $_->{path} ) || $unknown;
     }
     return $list, '' if wantarray;
     return $list;
@@ -579,7 +587,7 @@ sub start
 
     eval
     {
-        $res = $self->rpc_command("d.start", $id);
+        $res = $self->rpc_command('d.start', $id);
     };
     if ($@)
     {
@@ -604,7 +612,7 @@ sub stop
 
     eval
     {
-        $res = $self->rpc_command("d.stop", $id);
+        $res = $self->rpc_command('d.stop', $id);
     };
     if ($@)
     {
@@ -629,7 +637,7 @@ sub delete
 
     eval
     {
-        $res = $self->rpc_command("d.erase", $id);
+        $res = $self->rpc_command('d.erase', $id);
     };
     if ($@)
     {
@@ -654,7 +662,57 @@ sub pause
 
     eval
     {
-        $res = $self->rpc_command("d.pause", $id);
+        $res = $self->rpc_command('d.pause', $id);
+    };
+    if ($@)
+    {
+        return undef, "$@" if wantarray;
+        die $@;
+    }
+
+    return $res;
+}
+
+=head2 check
+
+Check torrent hash (tid)
+
+=cut
+
+sub check
+{
+    my ($self, $id) = @_;
+
+    my $res;
+
+    eval
+    {
+        $res = $self->rpc_command('d.check_hash', $id);
+    };
+    if ($@)
+    {
+        return undef, "$@" if wantarray;
+        die $@;
+    }
+
+    return $res;
+}
+
+=head2 priority
+
+Set torrent priority (tid, priority)
+
+=cut
+
+sub priority
+{
+    my ($self, $id, $priority) = @_;
+
+    my $res;
+
+    eval
+    {
+        $res = $self->rpc_command('d.set_priority', $id, $priority);
     };
     if ($@)
     {
@@ -890,8 +948,9 @@ sub as_human_speed
     my @result = as_human_size(shift);
     my $human = pop @result;
     my $byte = pop @result;
-    $human .= '/s';
-    push @result, 'b',  '/', 's', $human;
+    push @result, 'b',  '/', 's';
+    $human = join '', @result;
+    push @result, $human;
     return @result if wantarray;
     return $human;
 }

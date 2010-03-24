@@ -25,21 +25,25 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 /*
     This file contain java scripts for Action frame
 */
-
-const NUM_LIST_FRAME = 2;
-const NUM_PROP_FRAME = 3;
-const NUM_STATUS_FRAME = 4;
+const NUM_ACTION_FRAME	= 1;
+const NUM_LIST_FRAME 	= 2;
+const NUM_PROP_FRAME 	= 3;
+const NUM_STATUS_FRAME 	= 4;
 
 var idRefreshTimer;
 
 $(document).ready(function(){
     // Panel buttons
-    $('input.panel.delete')			.bind('click', on_delete);
-    $('input.panel.start')			.bind('click', on_start);
-    $('input.panel.pause')			.bind('click', on_pause);
-    $('input.panel.stop')			.bind('click', on_stop);
-    $('input.panel.priority_up')	.bind('click', on_priority_up);
-    $('input.panel.priority_down')	.bind('click', on_priority_down);
+    $('input.panel.add')			.bind('click', on_add);
+    $('input.panel.delete')			.bind('click', function(){ call('delete')});
+    $('input.panel.start')			.bind('click', function(){ call('start') });
+    $('input.panel.pause')			.bind('click', function(){ call('pause') });
+    $('input.panel.stop')			.bind('click', function(){ call('stop')	 });
+    $('input.panel.check')			.bind('click', function(){ call('check') });
+    $('input.panel.priority.off')   .bind('click', function(){ call('off')   });
+    $('input.panel.priority.low')   .bind('click', function(){ call('low')   });
+    $('input.panel.priority.normal').bind('click', function(){ call('normal')});
+    $('input.panel.priority.high')  .bind('click', function(){ call('high')  });
     $('input.panel.refresh')		.bind('click', on_refresh);
 
     // Additional params
@@ -51,115 +55,58 @@ $(document).ready(function(){
     $('#refresh').change();
 });
 
-/*
- * Get selection list. First time try to get all checked rows and return sting
- * of hash concatination. If no, try to get current torrent hash.
- * Return empty string if no selection.
-*/
-function get_selections()
+function call( strCommand )
 {
-    var arrSelected = new Array();
-    var objDocList = window.parent.frames[ NUM_LIST_FRAME ].document;
+    // Check for command
+    if(! strCommand.length ){ throw "Command not set"; }
 
-    // Get checked torrents hash
-    $.each($(objDocList).find('table.list tbody'), function(i, objTboby){
-        var objCheckbox = $(objTboby).find('> tr:first > td:first > input:checked');
-        if( !objCheckbox.length ){ return; }
-        arrSelected.push( objCheckbox.val() );
-    });
-    // Return checked
-    if(arrSelected.length){ return arrSelected.join(','); }
-
-    // Get current torrent hash
-    var objCurrent = $(objDocList).find('table.list tbody.selected');
-    var objCheckbox = $(objCurrent).find('> tr:first > td:first > input[type=checkbox]');
-    if( objCheckbox.length ){ arrSelected.push( objCheckbox.val() ); }
-    // Return current
-    if(arrSelected.length) return arrSelected[0];
-
-    // Nothing
-    return new String('');
-}
-
-function on_delete()
-{
     // Restart refresh timer
     $('#refresh').change();
 
-    // Get selected
-    var strSelected = new String( get_selections() );
-    if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
+    var objDocList = $(window.parent.frames[ NUM_LIST_FRAME ].document);
 
-    // Update frames
-    window.parent.frames[ NUM_LIST_FRAME ].document.location =
-        'list.cgi?delete=' + strSelected;
-    window.parent.frames[ NUM_PROP_FRAME ].document.location = 'prop.cgi';
+    // If some checkboxs selected then submit form
+    if( objDocList.find('input[name="hash[]"]:checked').length ){
+        objDocList.find('#do').val(strCommand);
+        objDocList.find('#form').submit();
+
+        window.parent.frames[ NUM_ACTION_FRAME ].document.location.reload(true);
+        window.parent.frames[ NUM_PROP_FRAME   ].document.location.reload(true);
+    }
+    else{
+        // Get current torrent hash
+        var objCurrent = objDocList.find('table.list tbody.selected');
+        var objCheckbox = objCurrent.find('> tr:first > td:first > input[type=checkbox]');
+        // If have current selected torrent then send them
+        if( objCheckbox.length ){
+            window.parent.frames[ NUM_ACTION_FRAME ].document.location.reload(true);
+            window.parent.frames[ NUM_PROP_FRAME   ].document.location.reload(true);
+            window.parent.frames[ NUM_LIST_FRAME   ].document.location =
+                'list.cgi?do=' + strCommand + '&current=' + objCheckbox.val();
+        }
+        // If no selected torrents then alert about this
+        else
+        {
+            alert(STR_NO_SELECTED);
+        }
+    }
 }
 
-function on_start()
+function on_add()
 {
-    // Restart refresh timer
-    $('#refresh').change();
-
-    // Get selected
-    var strSelected = new String( get_selections() );
-    if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
-
-    // Update frames
-    window.parent.frames[ NUM_LIST_FRAME ].document.location =
-        'list.cgi?start=' + strSelected;
-    window.parent.frames[ NUM_PROP_FRAME ].document.location = 'prop.cgi';
-}
-
-function on_pause()
-{
-    // Restart refresh timer
-    $('#refresh').change();
-
-    // Get selected
-    var strSelected = new String( get_selections() );
-    if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
-
-    // Update frames
-    window.parent.frames[ NUM_LIST_FRAME ].document.location =
-        'list.cgi?pause=' + strSelected;
-    window.parent.frames[ NUM_PROP_FRAME ].document.location = 'prop.cgi';
-}
-
-function on_stop()
-{
-    // Restart refresh timer
-    $('#refresh').change();
-
-    // Get selected
-    var strSelected = new String( get_selections() );
-    if( ! strSelected.length ){ alert( NO_SELECTED ); return; }
-
-    // Update frames
-    window.parent.frames[ NUM_LIST_FRAME ].document.location =
-        'list.cgi?stop=' + strSelected;
-    window.parent.frames[ NUM_PROP_FRAME ].document.location = 'prop.cgi';
-}
-
-function on_priority_up()
-{
-    // Update frames
-    window.parent.frames[ NUM_LIST_FRAME ].document.location =
-        'list.cgi?priority_up=' + $.cookie('current');
-    window.parent.frames[ NUM_PROP_FRAME ].document.location = 'prop.cgi';
-}
-
-function on_priority_down()
-{
-    // Update frames
-    window.parent.frames[ NUM_LIST_FRAME ].document.location =
-        'list.cgi?priority_down=' + $.cookie('current');
-    window.parent.frames[ NUM_PROP_FRAME ].document.location = 'prop.cgi';
+    const WIDTH  = 640;
+    const HEIGHT = 240;
+    var iTop   = parseInt((screen.availHeight/2) - (HEIGHT/2));
+    var iLeft  = parseInt((screen.availWidth/2) - (WIDTH/2));
+    window.open('add.cgi', 'add',
+        'toolbar=0,location=0,directories=0,status=0,menubar=0,copyhistory=0' +
+        ',width='+ WIDTH +',height='+ HEIGHT +
+        ',left='+ iLeft +',top='+ iTop +',screenX='+ iLeft +',screenY='+ iTop);
 }
 
 function on_refresh()
 {
-    // Update all windows
+    // Update all frames
     window.parent.document.location = 'index.cgi';
 }
 
@@ -184,12 +131,12 @@ function on_change_refresh()
     {
         idRefreshTimer = setInterval(
             function(){
-                window.parent.frames[ NUM_LIST_FRAME ].document
-                    .location = 'list.cgi';
-                window.parent.frames[ NUM_PROP_FRAME ].document
-                    .location = 'prop.cgi';
+                window.parent.frames[ NUM_LIST_FRAME   ].document
+                    .location.reload(true);
+                window.parent.frames[ NUM_PROP_FRAME   ].document
+                    .location.reload(true);
                 window.parent.frames[ NUM_STATUS_FRAME ].document
-                    .location = 'status.cgi';
+                    .location.reload(true);
             },
             ($(this).val() || 60 ) * 1000 );
     }

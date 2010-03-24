@@ -106,11 +106,17 @@ sub new
                                   $self->get('skin');
     $self->{dir}{skin}{base}    = $self->{dir}{templates} . '/' .
                                   $self->get('skin');
-    $self->{url}{skin}{base} = 'skins/' . $self->get('skin');
+    $self->{dir}{skin}{default} = $self->{dir}{templates} . '/default';
+
+    $self->{url}{skin}{base}    = 'skins/' . $self->get('skin');
+    $self->{url}{skin}{default} = 'skins/default';
+    $self->{url}{skin}{panel}   = $self->{url}{skin}{base} . '/panel';
+    $self->{url}{skin}{status}  = $self->{url}{skin}{base} . '/status';
+    $self->{url}{skin}{mime}    = $self->{url}{skin}{base} . '/mimetypes';
 
     # Init parameters from current value to cookie
     # It`s need for first time start to init all default cookie
-    $self->set($_, $self->get($_)) for qw(refresh skin prop);
+    $self->set($_, $self->get($_)) for qw(refresh skin);
 
     return $self;
 }
@@ -170,10 +176,12 @@ Get parameter by $name.
 sub get
 {
     my ($self, $name) = @_;
-    my $value = CGI::param($name)       // CGI::cookie($name)   //
-                $self->{param}{$name}   // '';
+    return (CGI::param($name))     if defined CGI::param($name)     and wantarray;
+    return (CGI::cookie($name))    if defined CGI::cookie($name)    and wantarray;
+    return ($self->{param}{$name}) if defined $self->{param}{$name} and wantarray;
 
-    return $value;
+    return CGI::param($name)     // CGI::cookie($name) //
+           $self->{param}{$name} // '';
 }
 
 =head2 set $name, $value
@@ -228,7 +236,7 @@ sub skins
         if( -f $file and -r _ and -s _ )
         {
             $title = `cat $file`;
-            s/^\s+//, s/\s+$//, s/[^\w\s.,]//g for $title;
+            s/^\s+//, s/\s+$//, s/[^\w\s.,)(]//g for $title;
         }
         # Set skin description
         $skins{$name} = $title || ucfirst( lc $name );
