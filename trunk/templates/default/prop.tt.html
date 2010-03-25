@@ -1,8 +1,8 @@
 <body class="[% data.prop %]">
     <div class="inlays">
         [% # Menu
-            SET menu = ['info', 'peers', 'files', 'trackers',
-                        'chunks', 'transfer']
+            SET menu = ['info', 'peers', 'files', 'trackers']
+            #, 'chunks', 'transfer']
         %]
         [% FOR item = menu %]
             <div id="[% item %]"
