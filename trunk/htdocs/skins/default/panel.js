@@ -95,13 +95,23 @@ function call( strCommand )
 function on_add()
 {
     const WIDTH  = 640;
-    const HEIGHT = 240;
+    const HEIGHT = 320;
     var iTop   = parseInt((screen.availHeight/2) - (HEIGHT/2));
     var iLeft  = parseInt((screen.availWidth/2) - (WIDTH/2));
-    window.open('add.cgi', 'add',
-        'toolbar=0,location=0,directories=0,status=0,menubar=0,copyhistory=0' +
+    var retVal = window.showModalDialog('add.cgi', 'add',
+        ',toolbar=0,location=0,directories=0,status=0,menubar=0,copyhistory=0' +
         ',width='+ WIDTH +',height='+ HEIGHT +
         ',left='+ iLeft +',top='+ iTop +',screenX='+ iLeft +',screenY='+ iTop);
+
+    // If return TRUE then reftesh all frames
+    if(retVal){
+        window.parent.frames[ NUM_ACTION_FRAME ].document
+            .location.reload(true);
+        window.parent.frames[ NUM_LIST_FRAME   ].document
+            .location.reload(true);
+        window.parent.frames[ NUM_PROP_FRAME   ].document
+            .location.reload(true);
+    }
 }
 
 function on_refresh()

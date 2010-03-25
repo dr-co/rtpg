@@ -1,17 +1,81 @@
 <body>
 
 <form action="add.cgi" method="post">
-    <label>[% gettext('Link') %]:</label>
-    <input type="text" name="link"/>
-    <input type="submit" value="[% gettext('Add') %]">
+    <table class="source">
+        <tr>
+            <td class="label">
+                <label for="link">[% gettext('Link') %]:</label>
+            </td>
+            <td class="input">
+                <textarea rows="4" name="link" id="link"
+                    title="[% gettext('One link per line') %]"
+                    ></textarea>
+            </td>
+            <td class="submit">
+                <button>
+                    <img src="[% config.url.skin.panel %]/add.png" />
+                    [% gettext('Add') %]
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td/>
+            <td colspan="2" class="note">
+                [% gettext('Note: rTorrent don`t notify you about broken links.'
+                           _ ' Just attempt to load this links.') %]
+            </td>
+        </tr>
+    </table>
 </form>
 
-<form action="add.cgi" method="post">
-    <label>[% gettext('File') %]:</label>
-    <input type="file" name="file" />
-    <input type="submit" value="[% gettext('Add') %]">
+<form action="add.cgi" method="post" enctype="multipart/form-data">
+    <table class="source">
+        <tr>
+            <td class="label">
+                <label for="file">[% gettext('File') %]:</label>
+            </td>
+            <td class="input">
+                <input type="file" name="file" id="file" />
+            </td>
+            <td class="submit">
+                <button>
+                    <img src="[% config.url.skin.panel %]/add.png" />
+                    [% gettext('Add') %]
+                </button>
+            </td>
+        </tr>
+    </table>
 </form>
 
-<input type="button" value="[% gettext('Close') %]" onClick="window.close()" />
+<div class="keys" >
+    <button class="close">
+        <img src="[% config.url.skin.panel %]/close.png" />
+        [% gettext('Close') %]
+    </button>
+</div>
+
+[% IF data.source %]
+    <div class="message" >
+        [% IF data.result %]
+            [% SWITCH data.source %]
+            [% CASE 'file'; gettext('Add from file') _ ': ';%]
+                <span class="source">
+                    [% data.result %]
+                </span>
+            [% CASE 'link'; gettext('Add by link') _ ': '%]
+                <span class="source">
+                    [% FOR row = data.result.list %]
+                        [% IF loop.first and loop.size > 1 %]<br/>[% END %]
+                        [% gettext(row) | html %]
+                        [% UNLESS loop.last %]<br/>[% END %]
+                    [% END %]
+                </span>
+            [% CASE DEFAULT; gettext('Unknown') %]
+            [% END %]
+        [% ELSE %]
+            <span class="source">[% gettext(data.message) | html %]</span>
+        [% END %]
+    </div>
+[% END %]
 
 </body>

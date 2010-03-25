@@ -10,7 +10,6 @@ RTPG::WWW::Frame::Index
 =cut
 
 package RTPG::WWW::Frame::Index;
-use CGI;
 use RTPG;
 use RTPG::WWW::Config;
 

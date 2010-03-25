@@ -12,6 +12,12 @@ package RTPG::WWW::Config;
 use base qw(Exporter);
 
 use CGI;
+$CGI::DISABLE_UPLOADS = 0;
+$CGI::POST_MAX = 67108864; #64Mb
+$CGI::PRIVATE_TEMPFILES = 1;
+$CGI::CLOSE_UPLOAD_FILES = 0;
+$CGI::HEADERS_ONCE = 0;
+
 use File::Basename;
 use File::Spec;
 
@@ -34,9 +40,11 @@ use constant RTPG_CONFIG_PATH         => '/home/rubin/workspace/rtpg2/trunk/conf
 Get cached config object
 
 =cut
-my $config;
+
 sub cfg
 {
+    our $config;
+
     # Cache config
     return $config if $config;
     $config = RTPG::WWW::Config->new;
@@ -182,6 +190,30 @@ sub get
 
     return CGI::param($name)     // CGI::cookie($name) //
            $self->{param}{$name} // '';
+}
+
+=head2 upload $name
+
+Get uploaded file handle
+
+=cut
+
+sub upload
+{
+    my ($self, $name) = @_;
+    return CGI::upload($name);
+}
+
+=head2 upload $name
+
+Get uploaded file info
+
+=cut
+
+sub upload_info
+{
+    my ($self, $name) = @_;
+    return CGI::uploadInfo(CGI::upload($name));
 }
 
 =head2 set $name, $value

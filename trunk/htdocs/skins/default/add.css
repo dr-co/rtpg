@@ -1,0 +1,84 @@
+/*
+
+AUTHORS
+
+ Copyright (C) 2010 Dmitry E. Oboukhov <unera@debian.org>
+ Copyright (C) 2010 Nikolaev Roman <rshadow@rambler.ru>
+
+LICENSE
+
+This program is free software: you can redistribute  it  and/or  modify  it
+under the terms of the GNU General Public License as published by the  Free
+Software Foundation, either version 3 of the License, or (at  your  option)
+any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even  the  implied  warranty  of  MERCHANTABILITY  or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public  License  for
+more details.
+
+You should have received a copy of the GNU  General  Public  License  along
+with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+*/
+/* This file contain styles for Action frame */
+/********************************************************************* Global */
+body {
+    background-color: Background;
+    color: WindowText;
+    font-size: 10pt;
+    font-family: sans;
+    margin: 2px;
+}
+
+/******************************************************************** Buttons */
+button{
+    white-space: nowrap;
+}
+button img{
+    text-align: center;
+    vertical-align: middle;
+    direction: ltr;
+}
+
+/********************************************************************* Common */
+div.keys{
+    text-align: right;
+    margin-top: 20pt;
+}
+
+/********************************************************************** Forms */
+table.source{
+    width: 100%;
+}
+
+table.source td.label{
+    width: 5%;
+}
+
+table.source td.submit{
+    width: 5%;
+}
+
+table.source td.input input,
+table.source td.input textarea{
+    width: 100%;
+    margin: -3px;
+}
+
+table.source td.note{
+    font-size: smaller;
+}
+
+/******************************************************************** Message */
+div.message{
+    margin-top: 20pt;
+    padding: 10pt;
+    background-color: InfoBackground;
+    color: InfoText;
+    text-align: center;
+}
+
+div.message span.source{
+    font-weight: bold;
+}

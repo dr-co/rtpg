@@ -787,6 +787,44 @@ sub rates
     return \%info;
 }
 
+=head2 add
+
+Add new torrent for download from url list or filehandle
+
+=cut
+
+sub add
+{
+    my ($self, $param) = @_;
+
+    $param = [ $param ] unless 'ARRAY' eq ref $param;
+
+    my ($res, $error);
+
+    for (@$param)
+    {
+        if('IO::Handle' eq ref $_ )
+        {
+            local $/;
+            my $torrent = RPC::XML::base64->new(<$_>);
+            ($res, $error) = $self->rpc_command(load_raw => $torrent);
+        }
+        else
+        {
+            my $url = RPC::XML::base64->new($_);
+            ($res, $error) = $self->rpc_command(load_verbose => $url);
+        }
+    }
+
+    if ($error)
+    {
+        return undef, $error if wantarray;
+        die $error;
+    }
+
+    return $res;
+}
+
 =head1 PRIVATE METHODS
 
 =head2 _get_list_methods
