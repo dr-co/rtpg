@@ -60,26 +60,52 @@ if( $params{data}{error} )
 DieDumper \%params if cfg->get('debug');
 
 # Files for this page ##########################################################
-if( -f cfg->{dir}{skin}{current} . '/' . $params{show} . '.css' )
+for (qw(current default))
 {
-    cfg->{url}{skin}{css} =
-        cfg->{url}{skin}{base} . '/' . $params{show} . '.css';
-}
-elsif( -f cfg->{dir}{skin}{default} . '/' . $params{show} . '.css' )
-{
-    cfg->{url}{skin}{css} =
-        cfg->{url}{skin}{default} . '/' . $params{show} . '.css';
+    if( -f cfg->{dir}{skin}{$_} .'/'. $params{show} .'.css' )
+    {
+        push @{ cfg->{url}{skin}{css} },
+            cfg->{url}{skin}{$_} .'/'. $params{show} .'.css';
+        last;
+    }
 }
 
-if( -f cfg->{dir}{skin}{current} . '/' . $params{show} . '.js' )
+for (qw(current default))
 {
-    cfg->{url}{skin}{js}  =
-        cfg->{url}{skin}{base} . '/' . $params{show} . '.js';
+    if( -f cfg->{dir}{skin}{$_} .'/'. $params{show} .'.js' )
+    {
+        push @{ cfg->{url}{skin}{js} },
+            cfg->{url}{skin}{$_} .'/'. $params{show} .'.js';
+        last;
+    }
 }
-elsif( -f cfg->{dir}{skin}{default} . '/' . $params{show} . '.js' )
+
+# For some frame type add some resources
+if(    $params{show} eq 'panel' )
 {
-    cfg->{url}{skin}{js}  =
-        cfg->{url}{skin}{default} . '/' . $params{show} . '.js';
+    push @{ cfg->{url}{skin}{js} }, 'string.js';
+}
+elsif( $params{show} eq 'prop' )
+{
+    for (qw(current default))
+    {
+        if( -f cfg->{dir}{skin}{$_} .'/prop.'. $params{data}{prop} .'.css' )
+        {
+            push @{ cfg->{url}{skin}{css} },
+                cfg->{url}{skin}{$_} .'/prop.'. $params{data}{prop} .'.css';
+            last;
+        }
+    }
+
+    for (qw(current default))
+    {
+        if( -f cfg->{dir}{skin}{$_} .'/prop.'. $params{data}{prop} .'.js' )
+        {
+            push @{ cfg->{url}{skin}{js} },
+                cfg->{url}{skin}{$_} .'/prop.'. $params{data}{prop} .'.js';
+            last;
+        }
+    }
 }
 
 # Output #######################################################################

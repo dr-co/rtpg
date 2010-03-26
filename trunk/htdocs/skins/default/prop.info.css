@@ -1,0 +1,84 @@
+/*
+
+AUTHORS
+
+ Copyright (C) 2010 Dmitry E. Oboukhov <unera@debian.org>
+ Copyright (C) 2010 Nikolaev Roman <rshadow@rambler.ru>
+
+LICENSE
+
+This program is free software: you can redistribute  it  and/or  modify  it
+under the terms of the GNU General Public License as published by the  Free
+Software Foundation, either version 3 of the License, or (at  your  option)
+any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even  the  implied  warranty  of  MERCHANTABILITY  or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public  License  for
+more details.
+
+You should have received a copy of the GNU  General  Public  License  along
+with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+*/ /* This file contain styles for Prop frame */
+
+/**************************************************************** Fields Info */
+body.info {
+    background-color: Window;
+}
+
+div.properties table.downloaded thead,div.properties table.downloaded thead tr,div.properties table.downloaded thead tr th,div.properties table.transfer thead,div.properties table.transfer thead tr,div.properties table.transfer thead tr th,div.properties table.tracker thead,div.properties table.tracker thead tr,div.properties table.tracker thead tr th,div.properties table.general thead,div.properties table.general thead tr,div.properties table.general thead tr th
+    {
+    text-align: left;
+    color: CaptionText;
+    background-color: ActiveCaption;
+}
+
+div.properties table.downloaded tbody,div.properties table.downloaded tbody tr,div.properties table.downloaded tbody tr td,div.properties table.transfer tbody,div.properties table.transfer tbody tr,div.properties table.transfer tbody tr td,div.properties table.tracker tbody,div.properties table.tracker tbody tr,div.properties table.tracker tbody tr td,div.properties table.general tbody,div.properties table.general tbody tr,div.properties table.general tbody tr td
+    {
+    text-align: left;
+    padding-right: 3%;
+}
+
+div.properties table.downloaded tbody tr th,div.properties table.transfer tbody tr th,div.properties table.tracker tbody tr th,div.properties table.general tbody tr th
+    {
+    text-align: left;
+    padding-left: 1%;
+    font-weight: normal;
+}
+
+div.properties table.downloaded thead td {
+    text-align: center;
+}
+
+div.properties table.downloaded thead td.percent {
+    border: 1px ThreeDShadow solid;
+    height: 36pt;
+}
+
+div.properties table.downloaded thead td.percent div.percent {
+    background-color: Highlight;
+    border: none;
+    height: 100%;
+    min-height: 100%;
+    min-width: 0%;
+    max-width: 100%;
+}
+
+div.properties table.downloaded thead td.spercent {
+    font-size: 30pt;
+    text-align: center;
+    vertical-align: middle;
+}
+
+div.properties table.transfer {
+
+}
+
+div.properties table.tracker td.message {
+    font-style: italic;
+}
+
+div.properties table.general {
+
+}

@@ -67,7 +67,7 @@ sub new
             # Current puth for circle
             my @g_path;
             # Index for files operations
-            my $index = 0;
+            my ($index, $dir_index) = (0, 0);
 
             for my $file ( @{ $opts{list} } )
             {
@@ -89,6 +89,7 @@ sub new
                             level   => $level,
                             name    => $path[$level],
                             type    => 'dir',
+                            index   => $dir_index++,
                         };
                     }
                 }

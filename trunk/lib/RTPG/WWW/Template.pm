@@ -56,7 +56,7 @@ sub new
         RELATIVE        => 1,
         ABSOLUTE        => 1,
         RECURSION       => 1,
-        INCLUDE_PATH    => cfg->{dir}{skin}{base} . ':' .
+        INCLUDE_PATH    => cfg->{dir}{skin}{current} . ':' .
                            cfg->{dir}{templates}  . ':' .
                            cfg->{dir}{skin}{default},
 #        PRE_CHOMP       => 1,

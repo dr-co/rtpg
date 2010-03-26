@@ -1,0 +1,88 @@
+/*
+
+AUTHORS
+
+ Copyright (C) 2010 Dmitry E. Oboukhov <unera@debian.org>
+ Copyright (C) 2010 Nikolaev Roman <rshadow@rambler.ru>
+
+LICENSE
+
+This program is free software: you can redistribute  it  and/or  modify  it
+under the terms of the GNU General Public License as published by the  Free
+Software Foundation, either version 3 of the License, or (at  your  option)
+any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even  the  implied  warranty  of  MERCHANTABILITY  or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public  License  for
+more details.
+
+You should have received a copy of the GNU  General  Public  License  along
+with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+*/ /* This file contain styles for Prop frame */
+
+/*************************************************************** Fields Files */
+table.files thead,
+table.files thead tr,
+table.files thead tr th {
+    text-align: center;
+    background-color: ActiveCaption;
+    color: CaptionText;
+    padding: 4px;
+}
+
+table.files tbody,
+table.files tbody tr,
+table.files tbody tr td {
+}
+
+/* Files list */
+table.files tbody td.select {
+    text-align: center;
+}
+
+table.files tbody td.path {
+    text-align: left;
+    white-space: nowrap;
+}
+
+table.files tbody td.size {
+    text-align: right;
+}
+
+table.files tbody td.spercent {
+    text-align: right;
+}
+
+table.files tbody td.percent {
+    text-align: center;
+}
+
+table.files tbody td.chunks {
+    text-align: right;
+}
+
+table.files tbody td.priority {
+    text-align: center;
+}
+
+/*********************************************************************** MIME */
+table.files tbody.file td.path div.mime {
+    white-space: nowrap;
+    clear: none;
+    float: left;
+    margin-left: 2px;
+    margin-right: 2px;
+    text-align: right;
+}
+
+table.files tbody.folder td.path div.mime {
+    cursor: pointer;
+    white-space: nowrap;
+    clear: none;
+    float: left;
+    margin-left: 2px;
+    margin-right: 2px;
+    text-align: right;
+}

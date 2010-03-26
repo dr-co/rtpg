@@ -116,11 +116,11 @@ sub new
                                   $self->get('skin');
     $self->{dir}{skin}{default} = $self->{dir}{templates} . '/default';
 
-    $self->{url}{skin}{base}    = 'skins/' . $self->get('skin');
+    $self->{url}{skin}{current}    = 'skins/' . $self->get('skin');
     $self->{url}{skin}{default} = 'skins/default';
-    $self->{url}{skin}{panel}   = $self->{url}{skin}{base} . '/panel';
-    $self->{url}{skin}{status}  = $self->{url}{skin}{base} . '/status';
-    $self->{url}{skin}{mime}    = $self->{url}{skin}{base} . '/mimetypes';
+    $self->{url}{skin}{panel}   = $self->{url}{skin}{current} . '/panel';
+    $self->{url}{skin}{status}  = $self->{url}{skin}{current} . '/status';
+    $self->{url}{skin}{mime}    = $self->{url}{skin}{current} . '/mimetypes';
 
     # Init parameters from current value to cookie
     # It`s need for first time start to init all default cookie

@@ -1,0 +1,108 @@
+/*
+
+AUTHORS
+
+ Copyright (C) 2010 Dmitry E. Oboukhov <unera@debian.org>
+ Copyright (C) 2010 Nikolaev Roman <rshadow@rambler.ru>
+
+LICENSE
+
+This program is free software: you can redistribute  it  and/or  modify  it
+under the terms of the GNU General Public License as published by the  Free
+Software Foundation, either version 3 of the License, or (at  your  option)
+any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even  the  implied  warranty  of  MERCHANTABILITY  or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public  License  for
+more details.
+
+You should have received a copy of the GNU  General  Public  License  along
+with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+*/ /* This file contain styles for Prop frame */
+
+/*************************************************************** Fields Peers */
+body.peers {
+    background-color: Window;
+}
+
+div.properties table.peers_info tbody tr th {
+    text-align: left;
+    padding-left: 1%;
+    font-weight: normal;
+}
+
+div.properties table.peers_list {
+    background-color: white;
+}
+
+div.properties table.peers_list thead,
+div.properties table.peers_list thead tr,
+div.properties table.peers_list thead tr th {
+    text-align: center;
+    background-color: ActiveCaption;
+    color: CaptionText;
+    padding: 4px;
+}
+
+div.properties table.peers_list tbody,
+div.properties table.peers_list tbody tr,
+div.properties table.peers_list tbody tr td {
+}
+
+div.properties table.peers_list tbody td.country {
+    text-align: center;
+}
+
+div.properties table.peers_list tbody td.address {
+    text-align: left;
+}
+
+div.properties table.peers_list tbody td.client {
+    text-align: left;
+}
+
+div.properties table.peers_list tbody td.flag {
+    text-align: center;
+}
+
+div.properties table.peers_list tbody td.done {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.percent {
+    text-align: center;
+}
+
+div.properties table.peers_list tbody td.down_speed {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.up_speed {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.peer_rate {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.peer_total {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.down_total {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.up_total {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.peer_total {
+    text-align: right;
+}
+
+div.properties table.peers_list tbody td.id {
+    text-align: center;
+}
