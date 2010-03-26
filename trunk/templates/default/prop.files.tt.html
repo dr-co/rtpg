@@ -32,11 +32,14 @@
             <tbody class="[% class.join(' ') %]">
                 <tr>
                     <td>
-                        +
+                        <input
+                        type="checkbox"
+                        name="hash[]"
+                        value="[%# %]"/>
                     </td>
                     <td colspan="7">
-                        [% SET level = file.level - 1 %]
-                        [% FOR i IN [0 .. level] %]&nbsp;&nbsp;[% END %]
+                        [% SET lv = file.level - 1 %]
+                        [% FOR i IN [0 .. lv] %]&nbsp;&nbsp;[% END %]
                         [% file.name %]
                     </td>
                 </tr>
@@ -47,13 +50,11 @@
         <tbody class="[% class.join(' ') %]">
             <tr>
                 <td class="select">
-                    <input
-                        type="checkbox"
-                        name="hash[]"
-                        value="[%# %]"/>
+                    <input type="checkbox" name="hash[]" value="[%# %]"/>
                 </td>
                 <td class="path">
-                    [% FOR i IN [0 .. file.level] %]&nbsp;&nbsp;[% END %]
+                    [% SET lv = file.level - 1 %]
+                    [% FOR i IN [0 .. lv] %]&nbsp;&nbsp;[% END %]
 
                     [% IF file.data.percent == '100%' %]
                         <a href="[% file.data.path %]"

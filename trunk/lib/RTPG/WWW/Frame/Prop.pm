@@ -62,34 +62,49 @@ sub new
             ($opts{info}, $opts{error}) = $rtpg->torrent_info( $opts{current} );
             ($opts{list}, $opts{error}) = $rtpg->file_list( $opts{current} );
 
+            # Tree view simle for HTML usage
             my @tree;
+            # Current puth for circle
+            my @g_path;
+            # Index for files operations
+            my $index = 0;
 
-            my @stack;
             for my $file ( @{ $opts{list} } )
             {
-                my @path_components = @{ $file->{path_components} };
-                my $filename = pop @path_components;
+                # Get current file components
+                my @path        = @{ $file->{path_components} };
+                my $filename    = pop @path;
 
-                unless( @stack ~~ @path_components )
+                # Make catalog and left padding
+                for(my $level = 0; $level < @path; $level++)
                 {
-                    for(my $level = 0; $level < @path_components; $level++)
+                    # For new path, drop deep catalog and add new path
+                    if( !exists $g_path[$level] or
+                        $path[$level] ne $g_path[$level] )
                     {
-                        push @stack, $path_components[ $level ];
+                        @g_path = splice @g_path,0, $level+1;
+
+                        # Add directory in tree
                         push @tree, {
                             level   => $level,
-                            name    => $path_components[ $level ],
+                            name    => $path[$level],
                             type    => 'dir',
                         };
                     }
                 }
 
+                # Move to path
+                @g_path = @path;
+
+                # Add file in tree
                 push @tree, {
-                    level   => scalar(@path_components),
+                    level   => scalar(@path),
                     name    => $filename,
                     type    => 'file',
                     data    => $file,
+                    index   => $index++,
                 };
-
+#DieDumper \@tree, \@g_path, \@path, $filename if $filename =~ m{\.pdf};
             }
 
             $opts{tree} = \@tree;
