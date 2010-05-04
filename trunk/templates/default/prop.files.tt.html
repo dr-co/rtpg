@@ -11,7 +11,7 @@
     <thead>
         <tr>
             <th/>
-            <th colspan="2">
+            <th>
                 [% gettext('Path')          %]
             </th>
             <th>[% gettext('Size')          %]</th>
@@ -67,16 +67,7 @@
                                 />
                             [% END %]
                         </div>
-
-                        [% IF file.data.percent == '100%' %]
-                            <a href="[% file.data.path %]"
-                               target="blank"
-                            >
-                                [% file.name %]
-                            </a>
-                        [% ELSE %]
-                            [% file.name %]
-                        [% END %]
+                        [% file.name %]
                     </td>
                     <td class="size">[% file.data.size_bytes.as_human_size %]</td>
                     <td class="spercent">[% file.data.percent %]</td>

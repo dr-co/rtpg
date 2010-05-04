@@ -11,6 +11,17 @@
                 [% gettext(item.ucfirst) %]
             </div>
         [% END %]
+        <div class="priority">
+            <input type="button" class="inlays priority off"
+                title="[% gettext('Off selected files by priority') %]"/>
+            <input type="button" class="inlays priority low"
+                title="[% gettext('Set low priority for selected files') %]"/>
+            <input type="button" class="inlays priority normal"
+                title="[% gettext('Set normal priority for selected files') %]"/>
+            <input type="button" class="inlays priority high"
+                title="[% gettext('Set high priority for selected files') %]"/>
+
+        </div>
     </div>
     [% UNLESS data.current && data.info %]
         <div class="message">

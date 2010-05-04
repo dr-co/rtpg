@@ -30,10 +30,22 @@ sub new
     $opts{prop} ||= 'info';
 
     {
-        # Exit if no current selected
-        last unless $opts{current};
         # Get RTPG object
         my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
+        my $error;
+
+        # Check exists current
+        ($opts{list}, $error) = $rtpg->torrents_list;
+        $opts{error} ||= $error;
+        unless( grep {$_->{hash} eq $opts{current}} @{ $opts{list} } )
+        {
+            # Drop current if not in list
+            cfg->set('current', '');
+            $opts{current} = '';
+        }
+
+        # Exit if no current selected
+        last unless $opts{current};
 
         # Get info by page name
         if( $opts{prop} eq 'info')

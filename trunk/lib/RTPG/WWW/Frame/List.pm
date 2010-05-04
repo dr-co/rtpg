@@ -43,6 +43,17 @@ sub new
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
 
     {{
+        my $error;
+        # Check exists current
+        ($opts{list}, $error) = $rtpg->torrents_list;
+        $opts{error} ||= $error;
+        unless( grep {$_->{hash} eq $opts{current}} @{ $opts{list} } )
+        {
+            # Drop current if not in list
+            cfg->set('current', '');
+            $opts{current} = '';
+        }
+
         # Skip if command not set
         last unless $opts{do};
         # Skip if not checked

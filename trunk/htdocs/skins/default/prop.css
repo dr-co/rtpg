@@ -109,6 +109,30 @@ div.item.selected {
     background-color: Highlight;
 }
 
+input.inlays {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background-color: Menu;
+    background-repeat: no-repeat;
+}
+
+input.inlays.priority.off {
+    background-image: url("panel/off.png");
+}
+
+input.inlays.priority.low {
+    background-image: url("panel/low.png");
+}
+
+input.inlays.priority.normal {
+    background-image: url("panel/normal.png");
+}
+
+input.inlays.priority.high {
+    background-image: url("panel/high.png");
+}
+
 /***************************************************************** Properties */
 div.properties {
     clear: both;
@@ -118,4 +142,9 @@ div.properties {
 
 div.properties table {
     width: 100%;
+}
+
+/******************************************************************* Priority */
+div.priority {
+    float: right;
 }
