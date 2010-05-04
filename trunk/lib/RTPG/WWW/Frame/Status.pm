@@ -44,6 +44,16 @@ sub new
     ($opts{rates}, $error) = $rtpg->rates;
     $opts{error} ||= $error;
 
+    # Sum current rates
+    ($opts{list}, $error) = $rtpg->torrents_list;
+    $opts{error} ||= $error;
+    $opts{rates}{current_upload_rate} = 0;
+    $opts{rates}{current_download_rate} = 0;
+    map {
+        $opts{rates}{current_upload_rate}   += $_->{up_rate};
+        $opts{rates}{current_download_rate} += $_->{down_rate};
+    } @{ $opts{list} };
+
     my $self = bless \%opts, $class;
 
     return $self;

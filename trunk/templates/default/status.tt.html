@@ -22,7 +22,7 @@
         ];
         FOR speed; speed.${loop.index} = speed.${loop.index} * 1024; END;
     %]
-    [% gettext('Down Speed') _ ': ' _ data.rates.download_rate _ ' ' _ gettext('Max') _ ':' %]
+    [% gettext('Down Speed') _ ': ' _ data.rates.current_download_rate.as_human_size _ ' ' _ gettext('Max') _ ':' %]
     <select id="download_rate" title="[% gettext('Select max download speed') | html %]">
         <option value="0">[% gettext('Unlimited') %]</option>
         [% FOR val = speed %]
@@ -51,7 +51,7 @@
         [% END %]
     </select>
     &nbsp;&nbsp;
-    [% gettext('Up Speed') _ ': ' _ current _ ' ' _ gettext('Max') _ ':' %]
+    [% gettext('Up Speed') _ ': ' _ data.rates.current_upload_rate.as_human_size _ ' ' _ gettext('Max') _ ':' %]
     <select id="upload_rate" title="[% gettext('Select max upload speed') | html %]">
         <option value="0">[% gettext('Unlimited') %]</option>
         [% FOR val = speed %]
