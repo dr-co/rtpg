@@ -27,21 +27,94 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 $(document).ready(function(){
+    // Select all subdirectories if click on folder checkbox
     $('table.files tbody.folder td.select :checkbox')
         .bind('click', on_folder_click);
+
+    // Directories folding
+    $('table.files tbody.folder td.path div.mime')
+        .bind('click', on_mime_click);
+
+    // Priority set
+    $('input.inlays.priority.off')   .bind('click', function(){call('off')   });
+    $('input.inlays.priority.normal').bind('click', function(){call('normal')});
+    $('input.inlays.priority.high')  .bind('click', function(){call('high')  });
+
+    // Selected save
+    $('input[name="index[]"]')      .bind('change',function(){ bitmap() });
 });
 
 function on_folder_click()
 {
-//    var objCheckbox = $(this);
-//    var objTBody = objCheckbox.parents('tbody.folder');
-//    var arrTBody = $(objTBody).next('tbody.folder');
-//
-//    alert(arrTBody.length);
-//
-//    $.each(arrTBody, function(i, obj){
-//
-//        $(obj).find('td.select :checkbox')
-//            .attr('checked', objCheckbox.attr('checked'));
-//    });
+    // Get current row
+    var objCheckbox = $(this);
+    var objTBody = objCheckbox.parents('tbody.folder');
+
+    // Get corrent direcory level
+    var reLevel = new RegExp("level(\\d+)");
+    var iLevel  = objTBody.attr('class').match(reLevel)[1];
+
+    // Select all subdirectories
+    $.each($(objTBody).nextAll('tbody'), function(i, objRow){
+        // Get row level
+        var iRowLevel = $(objRow).attr('class').match(reLevel)[1];
+        // If level <= current level then it`s not subdir and stop check
+        if(iRowLevel <= iLevel ){ return false; }
+        // Check subdir/subfile
+        $(objRow).find('td.select :checkbox')
+            .attr('checked', objCheckbox.attr('checked'));
+    });
+}
+
+function on_mime_click()
+{
+    // Get current row
+    var objDiv = $(this);
+    var objTBody = objDiv.parents('tbody.folder');
+    // Toggle folding
+    objTBody.toggleClass('open');
+
+    // Get corrent direcory level
+    var reLevel = new RegExp("level(\\d+)");
+    var iLevel  = objTBody.attr('class').match(reLevel)[1];
+
+    // How/Hide all subdirectories
+    $.each($(objTBody).nextAll('tbody'), function(i, objRow){
+        // Get row level
+        var iRowLevel = $(objRow).attr('class').match(reLevel)[1];
+        // If level <= current level then it`s not subdir and stop check
+        if(iRowLevel <= iLevel ){ return false; }
+        // Check subdir/subfile
+        (objTBody.hasClass('open'))
+            ?$(objRow).removeClass('folded')
+            :$(objRow).addClass('folded');
+    });
+}
+
+function bitmap()
+{
+    // Get bitmap array
+    var arrResult = $('input[name="index[]"]');
+    arrResult = $.map( $('input[name="index[]"]'), function(obj, i){
+        if( $(obj).attr('checked') ){ return 1; }
+        return 0;
+    });
+
+    // Save compressed bitmap in cookie
+    $.cookie('filelist',
+        $.bitmap_serialize(arrResult.join('')),
+        { expires: 730 });
+}
+
+function call( strCommand )
+{
+    // Check for command
+    if(! strCommand.length ){ throw "Command not set"; }
+    // Check for selected files
+    if(! $('table.files').find('input[name="index[]"]:checked').length ){
+        throw "Files not selected";
+    }
+    // Set priority and submit form
+    $('#do').val(strCommand);
+    $('#form').submit();
 }

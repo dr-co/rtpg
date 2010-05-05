@@ -506,6 +506,28 @@ sub set_files_priorities
     return undef;
 }
 
+=head2 set_file_priority
+
+Set file priority
+
+=cut
+
+sub set_file_priority
+{
+    my ($self, $id, $file_index, $priority) = @_;
+
+    my ($res, $error)=
+        $self->rpc_command('f.set_priority', $id, $file_index, $priority);
+    unless (defined $res)
+    {
+        return undef, "$error" if wantarray;
+        die $error;
+    }
+
+    return $res;
+
+}
+
 =head2 system_information
 
 The method returns the link to hash about system information. The hash
@@ -1002,6 +1024,41 @@ Return datetime string from timestemp
 sub as_human_datetime
 {
     return strftime '%c', localtime shift;
+}
+
+=head2 torrent_priority_num
+
+Convert torrent priority name to int
+
+=cut
+sub torrent_priority_num
+{
+    my ($name) = @_;
+
+    # Default normal
+    my $num =   ($name eq 'off')    ?0    :
+                ($name eq 'low')    ?1    :
+                ($name eq 'normal') ?2    :
+                ($name eq 'high')   ?3    :2;
+
+    return $num;
+}
+
+=head2 file_priority_num
+
+Convert file priority name to int
+
+=cut
+sub file_priority_num
+{
+    my ($name) = @_;
+
+    # Default normal
+    my $num =   ($name eq 'off')    ?0    :
+                ($name eq 'normal') ?1    :
+                ($name eq 'high')   ?2    :1;
+
+    return $num;
 }
 
 1;

@@ -53,6 +53,7 @@ function on_click_list()
     $.cookie('current', strCurrent, { expires: 730 });
 
     // Update prop frame
+    $.cookie('filelist', '');
     var objDocList = window.parent.frames[ NUM_PROP_FRAME ].document;
     objDocList.location = 'prop.cgi?current=' + strCurrent;
 

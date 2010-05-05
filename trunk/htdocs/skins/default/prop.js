@@ -28,14 +28,7 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 $(document).ready(function(){
     // Show new prop page
-    $('div.inlays div.item')        .bind('click', on_prop);
-
-    $('input.panel.priority.off')   .bind('click', function(){ call('off')   });
-    $('input.panel.priority.low')   .bind('click', function(){ call('low')   });
-    $('input.panel.priority.normal').bind('click', function(){ call('normal')});
-    $('input.panel.priority.high')  .bind('click', function(){ call('high')  });
-
-    $('input[name="index[]"]')      .bind('change',function(){ bitmap() });
+    $('div.inlays div.item').bind('click', on_prop);
 });
 
 function on_prop()
@@ -45,31 +38,4 @@ function on_prop()
 
     // Update window with new locale
     document.location = 'prop.cgi?prop=' + $(this).attr('id');
-}
-
-function bitmap()
-{
-    // Get bitmap array
-    var arrResult = $('input[name="index[]"]');
-    arrResult = $.map( $('input[name="index[]"]'), function(obj, i){
-        if( $(obj).attr('checked') ){ return 1; }
-        return 0;
-    });
-
-    // Save compressed bitmap in cookie
-    $.cookie('filelist',
-        $.bitmap_serialize(arrResult.join('')),
-        { expires: 730 });
-}
-
-function call( strCommand )
-{
-    // Check for command
-    if(! strCommand.length ){ throw "Command not set"; }
-
-    if(! $('table.files input[name="index[]"]:checked').length ){
-        throw "Files not selected";
-    }
-
-    document.location = 'prop.cgi?do=' + strCommand;
 }

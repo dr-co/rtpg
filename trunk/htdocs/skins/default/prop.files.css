@@ -37,6 +37,10 @@ table.files tbody tr,
 table.files tbody tr td {
 }
 
+table.files tbody.folded{
+    display: none;
+}
+
 /* Files list */
 table.files tbody td.select {
     text-align: center;
@@ -85,4 +89,16 @@ table.files tbody.folder td.path div.mime {
     margin-left: 2px;
     margin-right: 2px;
     text-align: right;
+}
+
+table.files tbody.folder td.path div.mime {
+    background-image: url('mimetypes/folder.png');
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+table.files tbody.folder.open td.path div.mime {
+    background-image: url('mimetypes/folder-open.png');
+    background-repeat: no-repeat;
+    background-position: right;
 }

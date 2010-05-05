@@ -1,3 +1,6 @@
+<form action="/prop.cgi" method="post" id="form">
+<input type="hidden" id="do" name="do" value="" />
+
 <table class="files">
     <colgroup>
         <col width="1%" />
@@ -30,19 +33,17 @@
         %]
         [% IF file.type == 'dir' %]
             [% class.push('folder') %]
-            [% IF file.open; class.push('open'); END %]
+            [% IF file.open; class.push('open'); END; %]
             <tbody class="[% class.join(' ') %]">
                 <tr>
                     <td class="select">
                         <input type="checkbox" class="folder"/>
                     </td>
-                    <td colspan="6" class="path">
-                        <div class="mime" style="width: [% (file.level + 1) * 16 %]px">
-                             <img
-                                    alt="dir"
-                                    title="folder"
-                                    src="[% config.url.skin.mime _ '/folder.png' | lower %]"
-                                />
+                    <td colspan="7" class="path">
+                        <div class="mime"
+                             style="width: [% (file.level + 1) * 16 %]px"
+                             title="folder">
+                             &nbsp;
                         </div>
                         [% file.name %]
                     </td>
@@ -84,3 +85,5 @@
         [% END %]
     [% END %]
 </table>
+
+</form>

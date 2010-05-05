@@ -26,8 +26,10 @@ sub new
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(current prop);
+    $opts{$_} = cfg->get($_) for qw(current prop do);
     $opts{prop} ||= 'info';
+    # Get selected files indexes
+    $opts{index} = [cfg->get('index[]')];
 
     {
         # Get RTPG object
@@ -71,6 +73,19 @@ sub new
         }
         elsif($opts{prop} eq 'files')
         {
+            # If priority command then get priority level
+            if($opts{do} =~ m/^(off|low|normal|high)$/i)
+            {
+                $opts{param} = RTPG::file_priority_num( $opts{do} );
+                $opts{do}       = 'priority';
+            }
+            # Set priorities
+            if( $opts{do} eq 'priority' and @{ $opts{index} } )
+            {
+                $rtpg->set_file_priority($opts{current}, $_, $opts{param})
+                    for @{ $opts{index} };
+            }
+
             ($opts{info}, $opts{error}) = $rtpg->torrent_info( $opts{current} );
             ($opts{list}, $opts{error}) = $rtpg->file_list( $opts{current} );
 
@@ -101,7 +116,8 @@ sub new
                             level   => $level,
                             name    => $path[$level],
                             type    => 'dir',
-                            index   => $dir_index++,
+                            'index' => $dir_index++,
+                            'open'  => 1,
                         };
                     }
                 }

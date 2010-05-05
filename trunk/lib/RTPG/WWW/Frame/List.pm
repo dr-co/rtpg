@@ -33,9 +33,7 @@ sub new
     # If priority command then get priority level
     if($opts{do} =~ m/^(off|low|normal|high)$/i)
     {
-        $opts{param}    = ($opts{do} eq 'off')    ?0    :
-                          ($opts{do} eq 'low')    ?1    :
-                          ($opts{do} eq 'normal') ?2    :3;
+        $opts{param} = RTPG::torrent_priority_num( $opts{do} );
         $opts{do}       = 'priority';
     }
 
