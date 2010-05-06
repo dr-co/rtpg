@@ -42,9 +42,6 @@ $(document).ready(function(){
     $('input.inlays.priority.off')   .bind('click', function(){call('off')   });
     $('input.inlays.priority.normal').bind('click', function(){call('normal')});
     $('input.inlays.priority.high')  .bind('click', function(){call('high')  });
-
-    // Selected save
-    $('input[name="index[]"]')      .bind('change',function(){ bitmap() });
 });
 
 function on_folder_click()
@@ -94,21 +91,6 @@ function on_mime_click()
     });
 }
 
-function bitmap()
-{
-    // Get bitmap array
-    var arrResult = $('input[name="index[]"]');
-    arrResult = $.map( $('input[name="index[]"]'), function(obj, i){
-        if( $(obj).attr('checked') ){ return 1; }
-        return 0;
-    });
-
-    // Save compressed bitmap in cookie
-    $.cookie('filelist',
-        $.bitmap_serialize(arrResult.join('')),
-        { expires: 730 });
-}
-
 function call( strCommand )
 {
     // Check for command
@@ -126,8 +108,6 @@ function on_all_change()
 {
     // Get all state
     var boolChecked = $(this).attr('checked');
-    // Save in coockie
-    $.cookie('all_files', boolChecked, { expires: 730 });
     // Set all checkbox
     $.each(
         $('table.files tbody > tr').find('> td:first :checkbox'),

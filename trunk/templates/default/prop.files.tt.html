@@ -43,7 +43,12 @@
             <tbody class="[% class.join(' ') %]">
                 <tr>
                     <td class="select">
-                        <input type="checkbox" class="folder"/>
+                        <input
+                            [% IF data.folder.${file.index} %]
+                                checked="checked"
+                            [% END %]
+                            type="checkbox" class="folder" name="folder[]"
+                            value="[% file.index %]"/>
                     </td>
                     <td colspan="7" class="path">
                         <div class="mime"
@@ -61,7 +66,12 @@
             <tbody class="[% class.join(' ') %]">
                 <tr>
                     <td class="select">
-                        <input type="checkbox" name="index[]" value="[% file.index %]"/>
+                        <input
+                            [% IF data.index.${file.index} %]
+                                checked="checked"
+                            [% END %]
+                            type="checkbox" name="index[]"
+                            value="[% file.index %]"/>
                     </td>
                     <td class="path">
                         <div class="mime" style="width: [% (file.level + 1) * 16 %]px">

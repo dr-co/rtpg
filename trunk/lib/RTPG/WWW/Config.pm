@@ -184,9 +184,12 @@ Get parameter by $name.
 sub get
 {
     my ($self, $name) = @_;
-    return (CGI::param($name))     if defined CGI::param($name)     and wantarray;
-    return (CGI::cookie($name))    if defined CGI::cookie($name)    and wantarray;
-    return ($self->{param}{$name}) if defined $self->{param}{$name} and wantarray;
+    return (CGI::param($name))
+        if defined CGI::param($name)     and wantarray;
+    return (CGI::cookie($name))
+        if defined CGI::cookie($name)    and wantarray;
+    return ($self->{param}{$name})
+        if defined $self->{param}{$name} and wantarray;
 
     return CGI::param($name)     // CGI::cookie($name) //
            $self->{param}{$name} // '';

@@ -25,6 +25,7 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 /*
     This file contain java scripts for Action frame
 */
+const NUM_INDEX_FRAME	= 0;
 const NUM_ACTION_FRAME	= 1;
 const NUM_LIST_FRAME 	= 2;
 const NUM_PROP_FRAME 	= 3;
@@ -55,6 +56,36 @@ $(document).ready(function(){
     $('#refresh').change();
 });
 
+/* Refresh frame by it`s number and send some command */
+function refresh_frame( iFrame, strCommand )
+{
+    switch( iFrame )
+    {
+    case NUM_INDEX_FRAME:
+        window.parent.document.location.reload(true);
+        break;
+    case NUM_ACTION_FRAME:
+        window.parent.frames[ NUM_ACTION_FRAME ].document.location.reload(true);
+        break;
+    case NUM_LIST_FRAME:
+        var objDoc = $(window.parent.frames[ NUM_LIST_FRAME ].document);
+        objDoc.find('#do').val(strCommand);
+        objDoc.find('#form').submit();
+        break;
+    case NUM_PROP_FRAME:
+        var objDoc = $(window.parent.frames[ NUM_PROP_FRAME ].document);
+        objDoc.find('#do').val(strCommand);
+        objDoc.find('#form').submit();
+        break;
+    case NUM_STATUS_FRAME:
+        window.parent.frames[ NUM_STATUS_FRAME ].document.location.reload(true);
+        break;
+    default:
+        throw 'Undefined frame';
+        break;
+    }
+}
+
 function call( strCommand )
 {
     // Check for command
@@ -67,11 +98,9 @@ function call( strCommand )
 
     // If some checkboxs selected then submit form
     if( objDocList.find('input[name="hash[]"]:checked').length ){
-        objDocList.find('#do').val(strCommand);
-        objDocList.find('#form').submit();
-
-        window.parent.frames[ NUM_ACTION_FRAME ].document.location.reload(true);
-        window.parent.frames[ NUM_PROP_FRAME   ].document.location.reload(true);
+        refresh_frame(NUM_LIST_FRAME, 	strCommand);
+        refresh_frame(NUM_ACTION_FRAME, 'refresh');
+        refresh_frame(NUM_PROP_FRAME, 	'refresh');
     }
     else{
         // Get current torrent hash
@@ -79,8 +108,8 @@ function call( strCommand )
         var objCheckbox = objCurrent.find('> tr:first > td:first > input[type=checkbox]');
         // If have current selected torrent then send them
         if( objCheckbox.length ){
-            window.parent.frames[ NUM_ACTION_FRAME ].document.location.reload(true);
-            window.parent.frames[ NUM_PROP_FRAME   ].document.location.reload(true);
+            refresh_frame(NUM_ACTION_FRAME, 'refresh');
+            refresh_frame(NUM_PROP_FRAME, 	'refresh');
             window.parent.frames[ NUM_LIST_FRAME   ].document.location =
                 'list.cgi?do=' + strCommand + '&current=' + objCheckbox.val();
         }
@@ -105,19 +134,16 @@ function on_add()
 
     // If return TRUE then reftesh all frames
     if(retVal){
-        window.parent.frames[ NUM_ACTION_FRAME ].document
-            .location.reload(true);
-        window.parent.frames[ NUM_LIST_FRAME   ].document
-            .location.reload(true);
-        window.parent.frames[ NUM_PROP_FRAME   ].document
-            .location.reload(true);
+        refresh_frame(NUM_LIST_FRAME, 	'refresh');
+        refresh_frame(NUM_ACTION_FRAME, 'refresh');
+        refresh_frame(NUM_PROP_FRAME, 	'refresh');
     }
 }
 
 function on_refresh()
 {
     // Update all frames
-    window.parent.document.location = 'index.cgi';
+    refresh_frame(NUM_INDEX_FRAME, 'refresh');
 }
 
 function on_change_locale()
@@ -141,12 +167,9 @@ function on_change_refresh()
     {
         idRefreshTimer = setInterval(
             function(){
-                window.parent.frames[ NUM_LIST_FRAME   ].document
-                    .location.reload(true);
-                window.parent.frames[ NUM_PROP_FRAME   ].document
-                    .location.reload(true);
-                window.parent.frames[ NUM_STATUS_FRAME ].document
-                    .location.reload(true);
+                refresh_frame(NUM_LIST_FRAME, 	'refresh');
+                refresh_frame(NUM_PROP_FRAME, 	'refresh');
+                refresh_frame(NUM_STATUS_FRAME, 'refresh');
             },
             ($(this).val() || 60 ) * 1000 );
     }

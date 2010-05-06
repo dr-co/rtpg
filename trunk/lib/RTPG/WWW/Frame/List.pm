@@ -62,12 +62,15 @@ sub new
         # Get torrents hash from checked torrents or current torrent
         my @torrents = keys %{ $opts{hash} };
         push @torrents, $opts{current} unless @torrents;
-        # Do command
-        $rtpg->$command( $_, $opts{param} ) for @torrents;
-        # If command then drop all cheched cookie
-        cfg->set('checked', $opts{hash} = '');
-        # If "delete" command drop current value
-        cfg->set('current', $opts{current} = '') if $command eq 'delete';
+        # Do command if it`s not just refresh
+        if( $command ne 'refresh' )
+        {
+            $rtpg->$command( $_, $opts{param} ) for @torrents;
+
+            # If "delete" command drop current value
+            cfg->set('current', $opts{current} = '') if $command eq 'delete';
+        }
+
     }}
 
     # Get list

@@ -29,7 +29,13 @@ sub new
     $opts{$_} = cfg->get($_) for qw(current prop do);
     $opts{prop} ||= 'info';
     # Get selected files indexes
-    $opts{index} = [cfg->get('index[]')];
+    my @index = cfg->get('index[]');
+    $opts{index} = {};
+    $opts{index} = { map {$_ => 'checked'} @index } if @index;
+    # Get selected folder indexes
+    my @folder = cfg->get('folder[]');
+    $opts{folder} = {};
+    $opts{folder} = { map { $_ => 'checked' } @folder } if @folder;
 
     {
         # Get RTPG object
@@ -80,10 +86,10 @@ sub new
                 $opts{do}       = 'priority';
             }
             # Set priorities
-            if( $opts{do} eq 'priority' and @{ $opts{index} } )
+            if( $opts{do} eq 'priority' and %{ $opts{index} } )
             {
                 $rtpg->set_file_priority($opts{current}, $_, $opts{param})
-                    for @{ $opts{index} };
+                    for values %{ $opts{index} };
             }
 
             ($opts{info}, $opts{error}) = $rtpg->torrent_info( $opts{current} );

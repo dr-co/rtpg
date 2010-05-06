@@ -33,10 +33,6 @@ $(document).ready(function(){
     $('#list table.list tbody > tr').find('> td:gt(0)')
         .bind('click', on_click_list);
 
-    // On checkbox select add hash to list in cookies
-    $('#list table.list tbody > tr').find('> td:first :checkbox')
-        .bind('change', on_click_checkbox);
-
     // On mass select checkbox click
     $('#all').bind('change', on_all_change);
 });
@@ -57,36 +53,6 @@ function on_click_list()
     var objDocList = window.parent.frames[ NUM_PROP_FRAME ].document;
     objDocList.location = 'prop.cgi?current=' + strCurrent;
 
-}
-
-function on_click_checkbox()
-{
-//    var arrChecked = new Array();
-//    arrChecked = $.map(
-//        $('#list table.list tbody > tr').find('> td:first :checkbox'),
-//        function(objCheckbox){ return (objCheckbox.attr('checked')) ?1 :0; });
-//    // Get cookie sting and slip it to array
-//    var strCookie = new String( $.cookie('checked') || '' );
-//    var arrChecked;
-//    if( strCookie == '' ){ arrChecked = new Array(); }
-//    else { arrChecked = strCookie.split(';'); }
-//
-//    if( $(this).attr('checked') )
-//    {
-//        // Add hash to array
-//        arrChecked.push( $(this).val() );
-//    }
-//    else
-//    {
-//        // Remove hash from array
-//        arrChecked.splice( $.inArray($(this).val(), arrChecked), 1);
-//    }
-//
-    // Set new cookie value
-//    $.cookie(
-//        'checked',
-//        $.cookie('action') + ':' + arrChecked.join(''),
-//        { expires: 730 } );
 }
 
 function on_all_change()
