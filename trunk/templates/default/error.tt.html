@@ -5,5 +5,11 @@
     </h1>
     <br/><br/>
     <div class="message">[% gettext(error.message) | html %]</div>
+    [% IF error.message.match('Can not connect to') %]
+        <br/><br/>
+        <div class="message">
+            [% gettext('rTorrent not started or access restricted.') | html %]
+        </div>
+    [% END %]
 </div>
 </body>

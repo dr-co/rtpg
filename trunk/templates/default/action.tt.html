@@ -1,19 +1,30 @@
 <body>
-<div id="action">
+
+<table id="action">
+    <colgroup>
+        <col width="16px"/>
+        <col/>
+        <col width="1%"/>
+    </colgroup>
     [% FOR row = data.list %]
         [% SET class = ['item'] %]
         [% class.push(row.action) %]
         [% IF data.action == row.action; class.push('selected'); END %]
-        <div class="[% class.join(' ') %]">
-            <div class="img">&nbsp;</div>
-            <input
-                type="button"
-                class="[% row.action %]"
-                value="[% gettext(row.name) %]"/>
-            <div class="count">[% row.count %]</div>
-        </div>
+        <tbody class="[% class.join(' ') %]">
+        <tr>
+            <td class="img"></td>
+            <td class="select">
+                <input type="button" class="[% row.action %]"
+                    value="[% gettext(row.name) %]"/>
+            </td>
+            <td class="count">[% row.count %]</td>
+        </tr>
+        </tbody>
     [% END %]
- <div id="logo">
+</table>
+
+<div id="logo">
     <img alt="RTPG [% version %]" src="[% config.url.skin.current _ '/logo.png' %]">
 </div>
+
 </body>

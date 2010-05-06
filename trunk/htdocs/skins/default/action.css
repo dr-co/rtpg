@@ -46,75 +46,83 @@ a:hover {
     text-decoration: underline;
 }
 
+#action {
+    width: 100%;
+    border-collapse: collapse;
+}
+
 /*************************************************************** Items global */
-div.item {
+tbody.item td {
     padding-top: 4px;
     padding-bottom: 4px;
-    background-repeat: no-repeat;
 }
 
-div.item.selected {
+tbody.item.selected,
+tbody.item.selected tr,
+tbody.item.selected td {
     background-color: Highlight;
     color: HighlightText;
+    border-color: Highlight;
 }
 
-div.item div.img {
-    clear: both;
-    float: left;
-    margin-left: 5px;
+tbody.item td.img {
     width: 16px;
     height: 16px;
     background-image: url("status/other.png");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-div.item input {
+tbody.item input {
     border: none;
     background-color: white;
+    width: 100%;
+    text-align: left;
 }
 
-div.item.selected input {
+tbody.item.selected input {
     background-color: Highlight;
     color: HighlightText;
 }
 
-div.item div.count {
-    float: right;
+tbody.item td.count {
     padding-right: 5px;
     color: GrayText;
+    text-align: right;
 }
 
 /*********************************************************** Items by actions */
-div.item.default div.img {
+tbody.item.default td.img {
     background-image: url("status/default.png");
 }
 
-div.item.active div.img {
+tbody.item.active td.img {
     background-image: url("status/active.png");
 }
 
 
-div.item.started div.img {
+tbody.item.started td.img {
     background-image: url("status/started.png");
 }
 
-div.item.stopped div.img {
+tbody.item.stopped td.img {
     background-image: url("status/stopped.png");
 }
 
-div.item.incomplete div.img {
+tbody.item.incomplete td.img {
     background-image: url("status/incomplete.png");
 }
 
-div.item.complete div.img {
+tbody.item.complete td.img {
     background-image: url("status/complete.png");
 }
 
-div.item.seeding div.img {
+tbody.item.seeding td.img {
     background-image: url("status/seeding.png");
 }
 
 
-div.item.hashing div.img {
+tbody.item.hashing td.img {
     background-image: url("status/hashing.png");
 }
 

@@ -29,14 +29,14 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 const NUM_LIST_FRAME = 2;
 
 $(document).ready(function(){
-    $('#action div.item :button').bind('click', on_click_action);
+    $('#action tbody.item td.select :button').bind('click', on_click_action);
 });
 
 function on_click_action()
 {
     // Highlight new option
-    $('#action div.item').removeClass('selected');
-    $(this).parent('div.item').addClass('selected');
+    $('#action tbody.item').removeClass('selected');
+    $(this).parent().parent().parent('tbody.item').addClass('selected');
 
     // Set new value
     $.cookie('action', $(this).attr('class'), { expires: 730 });
