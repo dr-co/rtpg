@@ -44,6 +44,8 @@ table.list thead th {
     color: CaptionText;
     padding: 4px;
     background-color: ActiveCaption;
+    border-left: 2px white solid;
+    border-right: 2px white solid;
 }
 
 /************************************************************** Torrents list */

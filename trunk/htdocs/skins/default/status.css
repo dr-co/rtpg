@@ -36,8 +36,9 @@ body {
 }
 
 div {
-    float: left;
     margin-left: 3%;
+    height: 100%;
+    display: table-cell;
 }
 
 a,
@@ -50,6 +51,11 @@ a:visited
 a:hover
 {
     text-decoration: underline;
+}
+
+/********************************************************************* Status */
+#status {
+    float: left;
 }
 
 /****************************************************************** Copyright */
