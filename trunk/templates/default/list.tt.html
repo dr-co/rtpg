@@ -75,11 +75,7 @@
                     [% torrent.name %]
                 </td>
                 [% IF torrent.message %]
-                    <td class="message">
-                        <div class="img message"
-                            title="[% torrent.message %]"
-                        />
-                    </td>
+                    <td class="message" title="[% torrent.message %]"></td>
                 [% END %]
                 <td class="num">[% gettext(torrent.priority_str) %]</td>
                 <td class="size">[% torrent.size_bytes.as_human_size %]</td>
