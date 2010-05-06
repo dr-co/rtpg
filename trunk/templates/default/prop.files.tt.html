@@ -13,7 +13,13 @@
     </colgroup>
     <thead>
         <tr>
-            <th/>
+            <th>
+                <input type="checkbox" class="all"
+                       id="all_files" name="all_files"
+                    [% IF data.all_files == 'true' %]checked="checked"[% END %]
+                    title="[% gettext('Select/Unselect all') %]"
+                 />
+            </th>
             <th>
                 [% gettext('Path')          %]
             </th>

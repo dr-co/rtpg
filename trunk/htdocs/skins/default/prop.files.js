@@ -35,6 +35,9 @@ $(document).ready(function(){
     $('table.files tbody.folder td.path div.mime')
         .bind('click', on_mime_click);
 
+    // On mass select checkbox click
+    $('#all_files').bind('change', on_all_change);
+
     // Priority set
     $('input.inlays.priority.off')   .bind('click', function(){call('off')   });
     $('input.inlays.priority.normal').bind('click', function(){call('normal')});
@@ -117,4 +120,18 @@ function call( strCommand )
     // Set priority and submit form
     $('#do').val(strCommand);
     $('#form').submit();
+}
+
+function on_all_change()
+{
+    // Get all state
+    var boolChecked = $(this).attr('checked');
+    // Save in coockie
+    $.cookie('all_files', boolChecked, { expires: 730 });
+    // Set all checkbox
+    $.each(
+        $('table.files tbody > tr').find('> td:first :checkbox'),
+        function(index, objCheckbox){
+            $(objCheckbox).attr('checked', boolChecked);
+    });
 }
