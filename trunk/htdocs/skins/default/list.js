@@ -92,15 +92,13 @@ function on_click_checkbox()
 function on_all_change()
 {
     // Get all state
-    var strChecked = $(this).attr('checked');
-    // Seve in cookie
-    $.cookie('all', strChecked, { expires: 730 });
+    var boolChecked = $(this).attr('checked');
+    // Save in coockie
+    $.cookie('all', boolChecked, { expires: 730 });
     // Set all checkbox
-    $.each($('#list table.list tbody > tr').find('> td:first :checkbox'),
+    $.each(
+        $('#list table.list tbody > tr').find('> td:first :checkbox'),
         function(index, objCheckbox){
-//            if((strChecked == 'true'  && $(objCheckbox).attr('checked') == 'false') ||
-//               (strChecked == 'false' && $(objCheckbox).attr('checked') == 'true')){
-//                $(objCheckbox).attr('checked', true);
-//            }
+            $(objCheckbox).attr('checked', boolChecked);
     });
 }

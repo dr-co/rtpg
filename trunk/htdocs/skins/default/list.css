@@ -125,11 +125,13 @@ table.list tbody td.rate.negative {
 }
 
 /*********************************************************** List alternation */
-table.list tbody.odd td.name {
+table.list tbody.odd td.name,
+table.list tbody.odd td.message {
 
 }
 
-table.list tbody.even td.name {
+table.list tbody.even td.name,
+table.list tbody.even td.message {
     background-color: #fafafa;
 }
 
