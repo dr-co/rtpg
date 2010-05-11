@@ -37,7 +37,7 @@ table.files tbody tr,
 table.files tbody tr td {
 }
 
-table.files tbody.folded{
+table.files tbody tr.folded{
     display: none;
 }
 
@@ -72,7 +72,7 @@ table.files tbody td.priority {
 }
 
 /*********************************************************************** MIME */
-table.files tbody.file td.path div.mime {
+table.files tbody tr.file td.path div.mime {
     white-space: nowrap;
     clear: none;
     float: left;
@@ -81,7 +81,7 @@ table.files tbody.file td.path div.mime {
     text-align: right;
 }
 
-table.files tbody.folder td.path div.mime {
+table.files tbody tr.folder td.path div.mime {
     cursor: pointer;
     white-space: nowrap;
     clear: none;
@@ -91,13 +91,13 @@ table.files tbody.folder td.path div.mime {
     text-align: right;
 }
 
-table.files tbody.folder td.path div.mime {
+table.files tbody tr.folder td.path div.mime {
     background-image: url('mimetypes/folder.png');
     background-repeat: no-repeat;
     background-position: right;
 }
 
-table.files tbody.folder.open td.path div.mime {
+table.files tbody tr.folder.open td.path div.mime {
     background-image: url('mimetypes/folder-open.png');
     background-repeat: no-repeat;
     background-position: right;

@@ -73,51 +73,51 @@
             <th>[% gettext('Peer Total')            %]</th>
         </tr>
     </thead>
+    <tbody>
     [% FOR peer = data.list %]
         [% SET class = [] %]
         [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
-        <tbody class="[% class.join(' ') %]">
-            <tr>
-                [% IF peer.country_code || peer.country_name %]
-                    <td class="country">
-                        <img
-                            alt="[% peer.country_code | lower %]"
-                            title="[% gettext(peer.country_name) %]"
-                            src="img/flag/[% peer.country_code _ '.png' | lower %]"
-                        />
-                    </td>
-                [% ELSE %]
-                    <td class="country" />
-                [% END %]
-                <td
-                    class="address"
-                    title="[% gettext('Id') _ ': ' _ peer.id %]">
-                        [% peer.address _ ' : ' _ peer.port %]
+        <tr class="[% class.join(' ') %]">
+            [% IF peer.country_code || peer.country_name %]
+                <td class="country">
+                    <img
+                        alt="[% peer.country_code | lower %]"
+                        title="[% gettext(peer.country_name) %]"
+                        src="img/flag/[% peer.country_code _ '.png' | lower %]"
+                    />
                 </td>
-                <td class="client">[% peer.client_version %]</td>
-                <td class="flag">
-                    [%
-                        IF peer.is_incoming;   ' ' _ gettext('Inc');  END;
-                        IF is_encrypted;       ' ' _ gettext('Enc');  END;
-                        IF peer.is_obfuscated; ' ' _ gettext('Obf');  END;
-                        IF peer.is_snubbed;    ' ' _ gettext('Snub'); END;
-                    %]
-                </td>
-                <td class="done">[% peer.completed_percent %]%</td>
-                <td class="percent">
-                    <div class="percent"
-                         style="width: [% peer.completed_percent %]%;"
-                    >
-                        &nbsp;
-                    </div>
-                </td>
-                <td class="down_speed">[% peer.down_rate.as_human_speed %]</td>
-                <td class="up_speed">[%   peer.up_rate.as_human_speed   %]</td>
-                <td class="peer_rate">[%  peer.peer_rate.as_human_speed %]</td>
-                <td class="down_total">[% peer.down_total.as_human_size %]</td>
-                <td class="up_total">[%   peer.up_total.as_human_size   %]</td>
-                <td class="peer_total">[% peer.peer_total.as_human_size %]</td>
-            </tr>
-        </tbody>
+            [% ELSE %]
+                <td class="country" />
+            [% END %]
+            <td
+                class="address"
+                title="[% gettext('Id') _ ': ' _ peer.id %]">
+                    [% peer.address _ ' : ' _ peer.port %]
+            </td>
+            <td class="client">[% peer.client_version %]</td>
+            <td class="flag">
+                [%
+                    IF peer.is_incoming;   ' ' _ gettext('Inc');  END;
+                    IF is_encrypted;       ' ' _ gettext('Enc');  END;
+                    IF peer.is_obfuscated; ' ' _ gettext('Obf');  END;
+                    IF peer.is_snubbed;    ' ' _ gettext('Snub'); END;
+                %]
+            </td>
+            <td class="done">[% peer.completed_percent %]%</td>
+            <td class="percent">
+                <div class="percent"
+                     style="width: [% peer.completed_percent %]%;"
+                >
+                    &nbsp;
+                </div>
+            </td>
+            <td class="down_speed">[% peer.down_rate.as_human_speed %]</td>
+            <td class="up_speed">[%   peer.up_rate.as_human_speed   %]</td>
+            <td class="peer_rate">[%  peer.peer_rate.as_human_speed %]</td>
+            <td class="down_total">[% peer.down_total.as_human_size %]</td>
+            <td class="up_total">[%   peer.up_total.as_human_size   %]</td>
+            <td class="peer_total">[% peer.peer_total.as_human_size %]</td>
+        </tr>
     [% END %]
+    </tbody>
 </table>

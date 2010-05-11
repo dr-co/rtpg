@@ -61,15 +61,15 @@ div.properties a:hover {
 }
 
 /*********************************************************** List alternation */
-div.properties table tbody.odd td.path,
-div.properties table tbody.odd td.url,
-div.properties table tbody.odd td.address {
+div.properties table tbody tr.odd td.path,
+div.properties table tbody tr.odd td.url,
+div.properties table tbody tr.odd td.address {
 }
 
-div.properties table tbody.even td.path,
-div.properties table tbody.even td.url,
-div.properties table tbody.even td.address {
-    background-color: #fafafa;
+div.properties table tbody tr.even td.path,
+div.properties table tbody tr.even td.url,
+div.properties table tbody tr.even td.address {
+    background-color: #f0f0f0;
 }
 
 /********************************************************** Percent indicator */

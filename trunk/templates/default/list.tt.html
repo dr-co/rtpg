@@ -39,6 +39,8 @@
             <th abbr="[% gettext('Rt') %]">[% gettext('Rate')       %]</th>
         </tr>
     </thead>
+
+    <tbody>
     [% FOR torrent = data.list.list %]
         [%
             SET class = [];
@@ -46,8 +48,7 @@
             IF data.current == torrent.hash; class.push('selected'); END;
             UNLESS torrent.is_active; class.push('inactive'); END;
         %]
-        <tbody class="[% class.join(' ') %]">
-            <tr>
+            <tr class="[% class.join(' ') %]">
                 <td class="select">
                     <input
                         [% IF data.hash.${torrent.hash} %]
@@ -108,8 +109,8 @@
                     [% torrent.ratio %]
                 </td>
             </tr>
-        </tbody>
     [% END %]
+    </tbody>
     </table>
 </div>
 

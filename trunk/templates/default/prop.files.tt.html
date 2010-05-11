@@ -30,6 +30,8 @@
             <th>[% gettext('Priority')      %]</th>
         </tr>
     </thead>
+
+    <tbody>
     [% FOR file = data.tree %]
         [%
             SET class = [];
@@ -40,66 +42,62 @@
         [% IF file.type == 'dir' %]
             [% class.push('folder') %]
             [% IF file.open; class.push('open'); END; %]
-            <tbody class="[% class.join(' ') %]">
-                <tr>
-                    <td class="select">
-                        <input
-                            [% IF data.folder.${file.index} %]
-                                checked="checked"
-                            [% END %]
-                            type="checkbox" class="folder" name="folder[]"
-                            value="[% file.index %]"/>
-                    </td>
-                    <td colspan="7" class="path">
-                        <div class="mime"
-                             style="width: [% (file.level + 1) * 16 %]px"
-                             title="folder">
-                             &nbsp;
-                        </div>
-                        [% file.name %]
-                    </td>
-                </tr>
-            </tbody>
+            <tr class="[% class.join(' ') %]">
+                <td class="select">
+                    <input
+                        [% IF data.folder.${file.index} %]
+                            checked="checked"
+                        [% END %]
+                        type="checkbox" class="folder" name="folder[]"
+                        value="[% file.index %]"/>
+                </td>
+                <td colspan="7" class="path">
+                    <div class="mime"
+                         style="width: [% (file.level + 1) * 16 %]px"
+                         title="folder">
+                         &nbsp;
+                    </div>
+                    [% file.name %]
+                </td>
+            </tr>
 
         [% ELSE %]
             [% class.push('file'); %]
-            <tbody class="[% class.join(' ') %]">
-                <tr>
-                    <td class="select">
-                        <input
-                            [% IF data.index.${file.index} %]
-                                checked="checked"
-                            [% END %]
-                            type="checkbox" name="index[]"
-                            value="[% file.index %]"/>
-                    </td>
-                    <td class="path">
-                        <div class="mime" style="width: [% (file.level + 1) * 16 %]px">
-                            [% IF file.data.mime %]
-                                <img
-                                    alt="[% file.data.mime.type | lower %]"
-                                    title="[% file.data.mime.type %]"
-                                    src="[% config.url.skin.mime _ '/' _
-                                            file.data.mime.mediaType _ '.png' | lower %]"
-                                />
-                            [% END %]
-                        </div>
-                        [% file.name %]
-                    </td>
-                    <td class="size">[% file.data.size_bytes.as_human_size %]</td>
-                    <td class="spercent">[% file.data.percent %]</td>
-                    <td class="percent">
-                        <div class="percent" style="width: [% file.data.percent %];">
-                            &nbsp;
-                        </div>
-                    </td>
-                    <td class="chunks">[% file.data.size_chunks %]</td>
-                    <td class="priority">[% gettext(file.data.priority_str) %]</td>
-                </tr>
-            </tbody>
-
+            <tr class="[% class.join(' ') %]">
+                <td class="select">
+                    <input
+                        [% IF data.index.${file.index} %]
+                            checked="checked"
+                        [% END %]
+                        type="checkbox" name="index[]"
+                        value="[% file.index %]"/>
+                </td>
+                <td class="path">
+                    <div class="mime" style="width: [% (file.level + 1) * 16 %]px">
+                        [% IF file.data.mime %]
+                            <img
+                                alt="[% file.data.mime.type | lower %]"
+                                title="[% file.data.mime.type %]"
+                                src="[% config.url.skin.mime _ '/' _
+                                        file.data.mime.mediaType _ '.png' | lower %]"
+                            />
+                        [% END %]
+                    </div>
+                    [% file.name %]
+                </td>
+                <td class="size">[% file.data.size_bytes.as_human_size %]</td>
+                <td class="spercent">[% file.data.percent %]</td>
+                <td class="percent">
+                    <div class="percent" style="width: [% file.data.percent %];">
+                        &nbsp;
+                    </div>
+                </td>
+                <td class="chunks">[% file.data.size_chunks %]</td>
+                <td class="priority">[% gettext(file.data.priority_str) %]</td>
+            </tr>
         [% END %]
     [% END %]
+    </tbody>
 </table>
 
 </form>

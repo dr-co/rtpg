@@ -28,11 +28,11 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 $(document).ready(function(){
     // Select all subdirectories if click on folder checkbox
-    $('table.files tbody.folder td.select :checkbox')
+    $('table.files tbody tr.folder td.select :checkbox')
         .bind('click', on_folder_click);
 
     // Directories folding
-    $('table.files tbody.folder td.path div.mime')
+    $('table.files tbody tr.folder td.path div.mime')
         .bind('click', on_mime_click);
 
     // On mass select checkbox click
@@ -48,14 +48,14 @@ function on_folder_click()
 {
     // Get current row
     var objCheckbox = $(this);
-    var objTBody = objCheckbox.parents('tbody.folder');
+    var objTr = objCheckbox.parents('tbody tr.folder');
 
     // Get corrent direcory level
     var reLevel = new RegExp("level(\\d+)");
-    var iLevel  = objTBody.attr('class').match(reLevel)[1];
+    var iLevel  = objTr.attr('class').match(reLevel)[1];
 
     // Select all subdirectories
-    $.each($(objTBody).nextAll('tbody'), function(i, objRow){
+    $.each($(objTr).nextAll('tr'), function(i, objRow){
         // Get row level
         var iRowLevel = $(objRow).attr('class').match(reLevel)[1];
         // If level <= current level then it`s not subdir and stop check
@@ -70,22 +70,22 @@ function on_mime_click()
 {
     // Get current row
     var objDiv = $(this);
-    var objTBody = objDiv.parents('tbody.folder');
+    var objTr = objDiv.parents('tbody tr.folder');
     // Toggle folding
-    objTBody.toggleClass('open');
+    objTr.toggleClass('open');
 
     // Get corrent direcory level
     var reLevel = new RegExp("level(\\d+)");
-    var iLevel  = objTBody.attr('class').match(reLevel)[1];
+    var iLevel  = objTr.attr('class').match(reLevel)[1];
 
     // How/Hide all subdirectories
-    $.each($(objTBody).nextAll('tbody'), function(i, objRow){
+    $.each($(objTr).nextAll('tr'), function(i, objRow){
         // Get row level
         var iRowLevel = $(objRow).attr('class').match(reLevel)[1];
         // If level <= current level then it`s not subdir and stop check
         if(iRowLevel <= iLevel ){ return false; }
         // Check subdir/subfile
-        (objTBody.hasClass('open'))
+        (objTr.hasClass('open'))
             ?$(objRow).removeClass('folded')
             :$(objRow).addClass('folded');
     });

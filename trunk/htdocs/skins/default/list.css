@@ -48,6 +48,20 @@ table.list thead th {
     border-right: 2px white solid;
 }
 
+table.list thead th.asc {
+    background-position: right;
+    background-repeat: no-repeat;
+    background-image: url("status/sort-ascending.png");
+    padding-right: 18px;
+}
+
+table.list thead th.desc {
+    background-position: right;
+    background-repeat: no-repeat;
+    background-image: url("status/sort-descending.png");
+    padding-right: 18px;
+}
+
 /************************************************************** Torrents list */
 table.list tbody{
     cursor: pointer;
@@ -125,14 +139,14 @@ table.list tbody td.rate.negative {
 }
 
 /*********************************************************** List alternation */
-table.list tbody.odd td.name,
-table.list tbody.odd td.message {
+table.list tbody tr.odd td.name,
+table.list tbody tr.odd td.message {
 
 }
 
-table.list tbody.even td.name,
-table.list tbody.even td.message {
-    background-color: #fafafa;
+table.list tbody tr.even td.name,
+table.list tbody tr.even td.message {
+    background-color: #f0f0f0;
 }
 
 /************************************************************** Status images */
@@ -167,19 +181,18 @@ table.list tbody td.img div.img.downloading_inactive{
 }
 
 /*************************************************************** Selected row */
-table.list tbody.selected,
-table.list tbody.selected tr,
-table.list tbody.selected td{
+table.list tbody tr.selected,
+table.list tbody tr.selected td{
     background-color: Highlight !important;
     color: HighlightText !important;
 }
 
-table.list tbody.selected td.img{
+table.list tbody tr.selected td.img{
     background-color: white !important;
 }
 
 /*************************************************************** Inactive row */
-table.list tbody.inactive{
+table.list tbody tr.inactive{
 }
 
 /********************************************************** Percent indicator */

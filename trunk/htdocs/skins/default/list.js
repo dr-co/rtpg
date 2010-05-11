@@ -35,17 +35,40 @@ $(document).ready(function(){
 
     // On mass select checkbox click
     $('#all').bind('change', on_all_change);
+
+    // Add client side sorting
+    $('#list table.list').tableSort({
+        headRow: 0,
+        columns: {
+            1: { type: 'string', sorted: 'asc' },
+            2: { type: 'string' },
+//            3: { type: 'string' },
+            4: { type: 'number'   },
+            5: { type: 'string' },
+            6: { type: 'string' },
+//            7: { type: 'string' },
+//            8: { type: 'string' },
+            9: { type: 'number' },
+        },
+        stripe: true,
+        classes: {
+            sorting:  'sorting',
+            sortable: 'sortable',
+            asc:      'asc',
+            desc:     'desc',
+            stripe:   'even'
+     }});
 });
 
 function on_click_list()
 {
     // Set current selected
-    $('#list table.list tbody').removeClass('selected');
-    $(this).parents('tbody:first').addClass('selected');
+    $('#list table.list tbody tr').removeClass('selected');
+    $(this).parents('tr:first').addClass('selected');
 
     // Set new current in cookie
     var strCurrent =
-        $(this).parents('tbody:first').find(':input[name="hash[]"]').val();
+        $(this).parents('tr:first').find(':input[name="hash[]"]').val();
     $.cookie('current', strCurrent, { expires: 730 });
 
     // Update prop frame

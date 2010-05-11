@@ -34,7 +34,18 @@ div.properties table.downloaded thead,div.properties table.downloaded thead tr,d
     background-color: ActiveCaption;
 }
 
-div.properties table.downloaded tbody,div.properties table.downloaded tbody tr,div.properties table.downloaded tbody tr td,div.properties table.transfer tbody,div.properties table.transfer tbody tr,div.properties table.transfer tbody tr td,div.properties table.tracker tbody,div.properties table.tracker tbody tr,div.properties table.tracker tbody tr td,div.properties table.general tbody,div.properties table.general tbody tr,div.properties table.general tbody tr td
+div.properties table.downloaded tbody,
+div.properties table.downloaded tbody tr,
+div.properties table.downloaded tbody tr td,
+div.properties table.transfer tbody,
+div.properties table.transfer tbody tr,
+div.properties table.transfer tbody tr td,
+div.properties table.tracker tbody,
+div.properties table.tracker tbody tr,
+div.properties table.tracker tbody tr td,
+div.properties table.general tbody,
+div.properties table.general tbody tr,
+div.properties table.general tbody tr td
     {
     text-align: left;
     padding-right: 3%;
