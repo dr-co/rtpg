@@ -89,7 +89,7 @@ sub new
             if( $opts{do} eq 'priority' and %{ $opts{index} } )
             {
                 $rtpg->set_file_priority($opts{current}, $_, $opts{param})
-                    for values %{ $opts{index} };
+                    for keys %{ $opts{index} };
             }
 
             ($opts{info}, $opts{error}) = $rtpg->torrent_info( $opts{current} );

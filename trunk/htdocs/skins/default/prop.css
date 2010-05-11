@@ -93,6 +93,8 @@ div.inlays {
     float: left;
     border-bottom: 1px ThreeDShadow solid;
     width: 100%;
+    position: fixed;
+    z-index: 1;
 }
 
 div.item {
@@ -138,6 +140,10 @@ div.properties {
     clear: both;
     float: left;
     width: 100%;
+
+    top: 27px;
+    position: relative;
+    z-index: 0;
 }
 
 div.properties table {
