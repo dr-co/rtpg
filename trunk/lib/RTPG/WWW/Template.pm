@@ -149,4 +149,9 @@ sub process
     print $output;
 }
 
+sub redirect
+{
+
+}
+
 1;

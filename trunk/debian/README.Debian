@@ -1,0 +1,34 @@
+уou can start several rtpg-guis simulatansly by using
+different config files with using SetEnv directive in
+virtual server config.
+
+see example in examples/rtpg.apache.conf
+
+
+PS:
+
+Virtual server for apache has been created
+For enable the virtual server use commands:
+
+    a2enmod scgi        [*]
+    a2ensite rtpg.apache.conf
+    invoke-rc.d apache2 restart
+
+Check url "http://rtpg/" in your browser.
+
+Edit /etc/apache2/sites-available/rtpg.apache.conf for
+change any settings.
+
+**********************************************************************
+*                                                                    *
+* [*] NOTE: Beginning from version 0.1.0 rtpg can use direct connec- *
+* tion to rtorrent SCGI-port/socket. You can leave out this step and *
+* point to rtorrent's SCGI-port in your /etc/rtpg/rtpg.conf. So      *
+* comment VirtualHost with name 'rtpg-scgi.localhost' in your        *
+* /etc/apache2/sites-available/rtpg.apache.conf.                     *
+*                                                                    *
+**********************************************************************
+
+See /usr/share/doc/rtpg-www/examples/rtorrent.rc for configure
+your rtorrent. RTPG uses file /etc/rtpg/rtpg.conf as config
+by default.

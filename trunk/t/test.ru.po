@@ -1,0 +1,50 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: t/test_for_po.txt: translate part: #1
+#, fuzzy
+msgid ""
+"text "
+msgstr ""
+""
+
+#: t/test_for_po.txt: translate part: #3
+#, fuzzy
+msgid ""
+"text"
+msgstr ""
+""
+
+#: t/test_for_po.txt: translate part: #4
+#, fuzzy
+msgid ""
+"my name is test"
+msgstr ""
+""
+
+#: t/test_for_po.txt: translate part: #5
+#, fuzzy
+msgid ""
+"Debian is a free operating system (OS) for your computer. An operating "
+"system is the set of basic programs and utilities that make your computer "
+"run. Debian uses the Linux kernel (the core of an operating system), but "
+"most of the basic OS tools come from the GNU project; hence the name "
+"GNU/Linux."
+msgstr ""
+""
+

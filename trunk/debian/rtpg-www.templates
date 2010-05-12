@@ -1,0 +1,19 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
+Template: rtpg-www/change_host
+Type: boolean
+Default: true
+_Description: Add an entry for the virtual server in /etc/hosts?
+ This package may define a virtual server in the web server
+ configuration.
+ .
+ For this to be fully functional, an entry is needed in the
+ /etc/hosts file for the virtual server. This operation can be made
+ automatic by enabling this option.

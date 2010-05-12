@@ -1,0 +1,28 @@
+Localization
+~~~~~~~~~~~~
+
+For the rtpg localization you need:
+
+1. copy po/TEMPLATE.pot file to 'LANG.po' file (for ex: fr.po, de.po.
+etc).
+
+2. translate all english strings in it (fill msgstr fields);
+
+3. put in the file header translators info.
+
+4. send me your localization (po-file) files to intergrate it in 
+the basic version.
+
+
+Debian package localization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. copy debian/po/templates.pot file to 'debian.lang.po' file 
+(for ex: debian.fr.po, debian.de.po, etc)
+
+2. translate all english strings in it (fill msgstr fields);
+
+3. put in the file header translators info.
+
+4. send me your localization (po-file) files to intergrate it in 
+the basic version.

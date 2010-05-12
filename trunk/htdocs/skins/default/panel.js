@@ -104,8 +104,8 @@ function call( strCommand )
     }
     else{
         // Get current torrent hash
-        var objCurrent = objDocList.find('table.list tbody.selected');
-        var objCheckbox = objCurrent.find('> tr:first > td:first > input[type=checkbox]');
+        var objCurrent = objDocList.find('table.list tbody tr.selected');
+        var objCheckbox = objCurrent.find('> td:first > input[type=checkbox]');
         // If have current selected torrent then send them
         if( objCheckbox.length ){
             refresh_frame(NUM_ACTION_FRAME, 'refresh');

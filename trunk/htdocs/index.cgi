@@ -59,6 +59,9 @@ if( $params{data}{error} )
 # If debug option aviable die with params ######################################
 DieDumper \%params if cfg->get('debug');
 
+# IF some actions then redirect ################################################
+
+
 # Files for this page ##########################################################
 for (qw(current default))
 {
@@ -106,6 +109,10 @@ elsif( $params{show} eq 'prop' )
             last;
         }
     }
+}
+elsif( $params{show} eq 'list' )
+{
+    push @{ cfg->{url}{skin}{js} }, 'js/jquery/jquery.tablesort.js';
 }
 
 # Output #######################################################################

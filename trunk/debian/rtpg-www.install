@@ -1,0 +1,3 @@
+debian/tmp/*            /usr/share/rtpg-www/
+debian/rtpg.conf        /etc/rtpg/
+debian/rtpg.apache.conf /etc/apache2/sites-available/

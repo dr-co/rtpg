@@ -1,0 +1,17 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+makebuilddir/rtpg-www::
+	rm -fr debian/tmp
+	mkdir -p debian/tmp
+	cp -ar RTPG RTPG.pm skins js index.cgi templates debian/tmp
+	find debian/tmp -name .svn -type d -exec rm -fr '{}' +
+	find debian/tmp -type d -exec chmod 0755 '{}' +
+	find debian/tmp -type f -exec chmod 0644 '{}' +
+	find debian/tmp -type f -name '*.xcf' -exec rm -f '{}' +
+	rm -f debian/tmp/js/main.js debian/tmp/templates/index.tt.html
+	chmod 0755 debian/tmp/index.cgi
+
+clean::
+	debconf-updatepo
+	rm -f *.cdbs-config_list
