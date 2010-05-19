@@ -25,6 +25,7 @@ use File::Basename;
 use File::Spec;
 
 our $VERSION = "0.2.0";
+our $PROJECT_NAME = "rtpg";
 
 use lib qw(../lib);
 use RTPG::WWW::Config;
