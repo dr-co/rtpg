@@ -74,7 +74,7 @@ function on_click_list()
     // Update prop frame
     $.cookie('filelist', '');
     var objDocList = window.parent.frames[ NUM_PROP_FRAME ].document;
-    objDocList.location = 'prop.cgi?current=' + strCurrent;
+    objDocList.location = 'index.cgi?show=prop&current=' + strCurrent;
 
 }
 

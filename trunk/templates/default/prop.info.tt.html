@@ -94,6 +94,14 @@
                  [% gettext('done') %] )
                 [% data.info.free_diskspace.as_human_size   %]
                 [% gettext('free diskspace')                %]
+                [% IF data.info.low_space %]
+                    ,
+                    [% gettext('need more') %]
+                    [% data.info.low_space.as_human_size %]
+                    <div class="lds" title="[% gettext('Low disk space') %]">
+                        &nbsp;
+                    </div>
+                [% END %]
             </td>
             <th>[% gettext('Hash') %]</th>
             <td>[% data.info.hash %]</td>

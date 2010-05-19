@@ -43,5 +43,5 @@ function on_click_action()
 
     // Update List frame with new params
     var objDocList = window.parent.frames[ NUM_LIST_FRAME ].document;
-    objDocList.location = 'list.cgi?action=' + $(this).attr('class');
+    objDocList.location = 'index.cgi?show=list&action=' + $(this).attr('class');
 }

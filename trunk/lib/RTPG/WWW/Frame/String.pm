@@ -25,19 +25,6 @@ sub new
 {
     my ($class, %opts) = @_;
 
-    # Strings
-    $opts{info} = {
-        # Add
-        STR_WINDOW_ADD_NAME => gettext('Add new torrent'),
-        # Action
-        # Index
-        # List
-        # Panel
-        STR_NO_SELECTED     => gettext('No current torrent selected'),
-        # Prop
-        # Status
-    };
-
     my $self = bless \%opts, $class;
 
     return $self;

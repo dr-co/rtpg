@@ -59,6 +59,12 @@ sub new
         if( $opts{prop} eq 'info')
         {
             ($opts{info}, $opts{error}) = $rtpg->torrent_info( $opts{current} );
+
+            # Count space for future downloads. And set warning flag in no space
+            my $need = 0;
+            $need += ($_->{size_bytes} - $_->{left_bytes}) for @{ $opts{list} };
+            $opts{info}{low_space} = $need - $opts{info}{free_diskspace}
+                if $need > $opts{info}{free_diskspace};
         }
         elsif($opts{prop} eq 'peers')
         {

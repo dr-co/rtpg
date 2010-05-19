@@ -195,6 +195,19 @@ table.list tbody tr.selected td.img{
 table.list tbody tr.inactive{
 }
 
+/****************************************************************** Hover row */
+
+table.list tbody tr:hover td.num,
+table.list tbody tr:hover td.size,
+table.list tbody tr:hover td.done,
+table.list tbody tr:hover td.status,
+table.list tbody tr:hover td.peers,
+table.list tbody tr:hover td.down_speed,
+table.list tbody tr:hover td.up_speed,
+table.list tbody tr:hover td.rate {
+    background-color: #f0f0f0;
+}
+
 /********************************************************** Percent indicator */
 table.list tbody td.done div.percent{
     background-color: InfoBackground;

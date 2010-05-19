@@ -37,7 +37,8 @@ function on_change_download_rate()
     // Set new value
     //$.cookie('download_rate', $(this).val(), { expires: 730 });
     // Update window with new locale
-    window.document.location = 'status.cgi?download_rate=' + $(this).val();
+    window.document.location =
+        'index.cgi?show=status&download_rate=' + $(this).val();
 }
 
 function on_change_upload_rate()
@@ -45,5 +46,6 @@ function on_change_upload_rate()
     // Set new value
     //$.cookie('upload_rate', $(this).val(), { expires: 730 });
     // Update window with new locale
-    window.document.location = 'status.cgi?upload_rate=' + $(this).val();
+    window.document.location =
+        'index.cgi?show=status&upload_rate=' + $(this).val();
 }

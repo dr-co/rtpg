@@ -51,7 +51,10 @@ div.properties table.general tbody tr td
     padding-right: 3%;
 }
 
-div.properties table.downloaded tbody tr th,div.properties table.transfer tbody tr th,div.properties table.tracker tbody tr th,div.properties table.general tbody tr th
+div.properties table.downloaded tbody tr th,
+div.properties table.transfer tbody tr th,
+div.properties table.tracker tbody tr th,
+div.properties table.general tbody tr th
     {
     text-align: left;
     padding-left: 1%;
@@ -92,4 +95,17 @@ div.properties table.tracker td.message {
 
 div.properties table.general {
 
+}
+
+div.properties table.general div.lds {
+    clear: none;
+    float: left;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("status/message.png");
+    max-width: 24px;
+    width: 24px;
+    min-width: 24px;
+    margin: 0px;
+    padding-left: 0px;
 }

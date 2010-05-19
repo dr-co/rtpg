@@ -8,9 +8,7 @@ index.cgi - controller script
 
 For debug use addresses with debug parameter. For example:
 
-    http://my_page/index.cgi?debug=1
-    http://my_page/prop.cgi?debug=1
-    http://my_page/list.cgi?debug=1
+    http://my_page/index.cgi?show=list&debug=1
     etc.
 
 then you can see all variables for templates.
@@ -37,8 +35,7 @@ use RTPG;
 my %params = (version => $VERSION);
 
 # Get params ###################################################################
-($params{show}) = $ENV{REQUEST_URI} =~ m{^/?(.*)\.cgi};
-$params{show} ||= CGI::param('show') || 'index';
+$params{show} = CGI::param('show') || 'index';
 
 # Load module and get data #####################################################
 my $module = 'RTPG::WWW::Frame::' . ucfirst lc $params{show};
@@ -86,7 +83,7 @@ for (qw(current default))
 # For some frame type add some resources
 if(    $params{show} eq 'panel' )
 {
-    push @{ cfg->{url}{skin}{js} }, 'string.js';
+    push @{ cfg->{url}{skin}{js} }, 'index.cgi?show=string';
 }
 elsif( $params{show} eq 'prop' )
 {

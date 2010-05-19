@@ -1,8 +1,0 @@
-# Use utf8
-IndexOptions Charset=UTF-8
-
-# Forward all scripts request to index.cgi
-RewriteEngine On
-RewriteCond %{REQUEST_URI} 		!^/index.cgi
-RewriteRule ^/?(.*)\.cgi.*$ 	/index.cgi?show=$1 [L,QSA]
-RewriteRule ^/?(string)\.js$ 	/index.cgi?show=$1 [L]

@@ -3,6 +3,12 @@
  *
  */
 
-[% FOR string IN data.info %]
-const [% string.key %] = "[% string.value | html %]";
-[% END %]
+// Add
+const STR_WINDOW_ADD_NAME = "[% gettext('Add new torrent') %]";
+// Action
+// Index
+// List
+// Panel
+const STR_NO_SELECTED     = "[% gettext('No current torrent selected') %]";
+// Prop
+// Status

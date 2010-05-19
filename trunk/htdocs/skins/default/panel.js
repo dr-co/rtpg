@@ -111,7 +111,9 @@ function call( strCommand )
             refresh_frame(NUM_ACTION_FRAME, 'refresh');
             refresh_frame(NUM_PROP_FRAME, 	'refresh');
             window.parent.frames[ NUM_LIST_FRAME   ].document.location =
-                'list.cgi?do=' + strCommand + '&current=' + objCheckbox.val();
+                'index.cgi?show=list' +
+                '&do=' + strCommand +
+                '&current=' + objCheckbox.val();
         }
         // If no selected torrents then alert about this
         else
@@ -127,7 +129,7 @@ function on_add()
     const HEIGHT = 320;
     var iTop   = parseInt((screen.availHeight/2) - (HEIGHT/2));
     var iLeft  = parseInt((screen.availWidth/2) - (WIDTH/2));
-    var retVal = window.showModalDialog('add.cgi', 'add',
+    var retVal = window.showModalDialog('index.cgi?show=add', 'add',
         ',toolbar=0,location=0,directories=0,status=0,menubar=0,copyhistory=0' +
         ',width='+ WIDTH +',height='+ HEIGHT +
         ',left='+ iLeft +',top='+ iTop +',screenX='+ iLeft +',screenY='+ iTop);

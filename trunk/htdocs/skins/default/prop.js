@@ -37,5 +37,5 @@ function on_prop()
     $.cookie('prop', $(this).attr('id'), { expires: 730 });
 
     // Update window with new locale
-    document.location = 'prop.cgi?prop=' + $(this).attr('id');
+    document.location = 'index.cgi?show=prop&prop=' + $(this).attr('id');
 }
