@@ -62,7 +62,7 @@
             <option
                 value="[% sk.key | html %]"
                 [% IF data.skin == sk.key %]selected="selected"[% END %]>
-                    [% sk.value | html %]
+                    [% gettext(sk.value) | html %]
             </option>
         [% END %]
     </select>

@@ -29,6 +29,8 @@ OPTIONS:
     -n          - do not print po-header
     -f          - print '#, fuzzy' before each msgid
 
+    -q          - don`t show warnings
+
 PS: script works in utf-8 charset
 
 endusage
@@ -37,7 +39,7 @@ endusage
 
 sub get_po_header()
 {
-	return <<endpoheader;
+    return <<endpoheader;
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -67,7 +69,7 @@ sub message_text($$)
 
     for ($message)
     {
-    	s/\\/\\\\/g;
+        s/\\/\\\\/g;
         s/"/\\"/g;
         s/\n/\\n/gs;
         s/\r/\\r/gs;
@@ -78,27 +80,28 @@ sub message_text($$)
 
     for (@items)
     {
-    	if (length($line)+length($_)>$width and length($line))
-    	{
-    		$result .= '"' . $line . '"' . "\n";
-    		$line = $_;
-    		next;
-    	}
+        if (length($line)+length($_)>$width and length($line))
+        {
+            $result .= '"' . $line . '"' . "\n";
+            $line = $_;
+            next;
+        }
 
-    	$line .= $_;
+        $line .= $_;
     }
 
     $result .= '"' . $line . '"' . "\n" if length $line;
     return $result;
 }
 
-getopts('hfno:c:sebw:', \my %opts) or usage;
+getopts('hfnqo:c:sebw:', \my %opts) or usage;
 usage if $opts{h};
-my ($open_tag, $close_tag, $width)=
+my ($open_tag, $close_tag, $width, $quite)=
 (
     $opts{o}||'<gt>',
     $opts{c}||'</gt>',
-    $opts{w}||75
+    $opts{w}||75,
+    $opts{q}||0,
 );
 
 my ($input, $output);
@@ -106,9 +109,9 @@ my ($input, $output);
 my $input_name;
 if (defined $ARGV[0])
 {
-	$input_name=$ARGV[0];
-	open $input, '<', $input_name
-	    or die "Can not open (read) file $input_name: $!\n";
+    $input_name=$ARGV[0];
+    open $input, '<', $input_name
+        or die "Can not open (read) file $input_name: $!\n";
 }
 else {	$input=\*STDIN; $input_name='STDIN'; }
 
@@ -116,17 +119,22 @@ else {	$input=\*STDIN; $input_name='STDIN'; }
 my $input_data;
 { local $/; $input_data=<$input>; }
 
-my @items=$input_data=~/$open_tag(.*?)$close_tag/gs;
-die "Can not found any parts for translation in $input_name\n" unless @items;
+my @items=$input_data=~/\Q$open_tag\E(.*?)\Q$close_tag\E/gs;
+unless( @items )
+{
+    die "Can not found any parts for translation in $input_name\n"
+        unless $quite;
+    exit 0;
+}
 
 if ($ARGV[1])
 {
-	open $output, '>', $ARGV[1]
-	    or die "Can not open (write) file $ARGV[1]: $!\n";
+    open $output, '>', $ARGV[1]
+        or die "Can not open (write) file $ARGV[1]: $!\n";
 }
 else
 {
-	$output=\*STDOUT;
+    $output=\*STDOUT;
 }
 
 my $no=0;
@@ -136,7 +144,7 @@ print $output get_po_header unless $opts{n};
 my %printed;
 for (@items)
 {
-	$no++;
+    $no++;
     s/\s+/ /gs if $opts{s};
     s/^\s+//mg if $opts{b};
     s/\s+$//mg if $opts{e};

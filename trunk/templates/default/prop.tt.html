@@ -1,14 +1,22 @@
 <body class="[% data.prop %]">
     <div class="inlays">
         [% # Menu
-            SET menu = ['info', 'peers', 'files', 'trackers']
-            #, 'chunks', 'transfer']
+            SET menu = [
+                { name => 'info',       description => gettext('Info')      },
+                { name => 'peers',      description => gettext('Peers')     },
+                { name => 'files',      description => gettext('Files')     },
+                { name => 'trackers',   description => gettext('Trackers')  },
+                #{ name => 'chunks',     description => gettext('Chunks')    },
+                #{ name => 'transfer',   description => gettext('Transfer')  },
+            ];
         %]
         [% FOR item = menu %]
-            <div id="[% item %]"
-                 class="item [% item %] [% IF data.prop == item %]selected[% END %]"
-            >
-                [% gettext(item.ucfirst) %]
+            [%
+                SET class = ['item', item.name];
+                IF data.prop == item; class.push('selected'); END;
+            %]
+            <div id="[% item.name %]" class="[% class.join(' ') %]" >
+                [% item.description %]
             </div>
         [% END %]
         [% IF data.prop == 'files' %]

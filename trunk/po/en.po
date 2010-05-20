@@ -1,26 +1,535 @@
-#: templates/index.tt.html: translate part: #1
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Roman V. Nikolaev <rshadow@rambler.ru>, 2010.
+#
 msgid ""
-"Config file was not defined or found. Please define RTPG_CONFIG the variable "
-"in options of your virtual server."
+msgstr ""
+"Project-Id-Version: rtpg\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2010-05-20 12:00+04\n"
+"Last-Translator: Roman V. Nikolaev <rshadow@rambler.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: lib/RTPG/WWW/Frame/Action.pm: translate part: #1
+msgid "Error upload torrent"
 msgstr ""
 
-#: templates/index.tt.html: translate part: #2
-msgid "File not found"
+#: templates/default/add.tt.html: translate part: #1
+msgid "Link"
 msgstr ""
 
+#: templates/default/add.tt.html: translate part: #2
+msgid "One link per line"
+msgstr ""
+
+#: templates/default/add.tt.html: translate part: #3
+msgid "Add"
+msgstr ""
+
+#: templates/default/add.tt.html: translate part: #4
+msgid ""
+"Note: rTorrent don`t notify you about broken links.\n"
+"                            Just attempt to load this links."
+msgstr ""
+
+#: templates/default/add.tt.html: translate part: #5
+msgid "File"
+msgstr ""
+
+#: templates/default/add.tt.html: translate part: #7
+msgid "Close"
+msgstr ""
+
+#: templates/default/add.tt.html: translate part: #8
+msgid "Add from file"
+msgstr ""
+
+#: templates/default/add.tt.html: translate part: #9
+msgid "Add by link"
+msgstr ""
+
+#: templates/default/add.tt.html: translate part: #10
+msgid "Unknown"
+msgstr ""
+
+#: templates/default/error.tt.html: translate part: #1
 msgid "Error"
 msgstr ""
 
-msgid "Never"
+#: templates/default/error.tt.html: translate part: #2
+msgid "rTorrent not started or access restricted."
 msgstr ""
 
+#: templates/default/list.tt.html: translate part: #1
+msgid "Main torrents list"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #2
+#: templates/default/prop.files.tt.html: #1
+msgid "Select/Unselect all"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #3
+msgid "Nm"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #4
+msgid "Name"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #5
+msgid "Pr"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #6
+#: templates/default/prop.files.tt.html: #7
+msgid "Priority"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #7
+msgid "Sz"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #8
+#: templates/default/prop.files.tt.html: #3
+msgid "Size"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #9
+msgid "Dn"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #10
+#: templates/default/prop.files.tt.html: #4
+msgid "Done"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #11
+msgid "St"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #12
+msgid "Status"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #13
+msgid "Pe"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #14
+#: templates/default/prop.tt.html: #2
+msgid "Peers"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #15
+msgid "DS"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #16
+#: templates/default/prop.info.tt.html: #4
+#: templates/default/prop.peers.tt.html: #17 templates/default/status.tt.html:
+#: #5
+msgid "Down Speed"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #17
+msgid "US"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #18
+#: templates/default/prop.info.tt.html: #8
+#: templates/default/prop.peers.tt.html: templates/default/status.tt.html: #9
+msgid "Up Speed"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #19
+msgid "Rt"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #20
+msgid "Rate"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #21
+msgid "Hashing"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #22
+msgid "Seeding"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #23
+msgid "Finished"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #24
+msgid "Downloading"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #25
+msgid "Paused"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #1
+#: templates/default/string.tt.js:
+msgid "Add new torrent"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #2
+msgid "Delete selected torrents"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #3
+msgid "Start selected torrents"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #4
+msgid "Pause selected torrents"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #5
+msgid "Stop selected torrents"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #6
+msgid "Check selected torrents for errors"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #7
+msgid "Skip selected torrents"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #8
+msgid "Set low priority for selected torrents"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #9
+msgid "Set normal priority for selected torrents"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #10
+msgid "Set high priority for selected torrents"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #11
+msgid "Refresh"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #12
+msgid "Select refresh interval"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #13
 msgid "sec."
 msgstr ""
 
+#: templates/default/panel.tt.html: translate part: #14
 msgid "min."
 msgstr ""
 
+#: templates/default/panel.tt.html: translate part: #15
+#: templates/default/prop.trackers.tt.html: #7
+msgid "Never"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #16
+msgid "Select skin"
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #17
+msgid "Select language"
+msgstr ""
+
+#: templates/default/prop.files.tt.html: translate part: #2
+msgid "Path"
+msgstr ""
+
+#: templates/default/prop.files.tt.html: translate part: #5
+#: templates/default/prop.peers.tt.html: #16
+msgid "%"
+msgstr ""
+
+#: templates/default/prop.files.tt.html: translate part: #6
+#: templates/default/prop.info.tt.html: #14 templates/default/prop.tt.html: #5
+msgid "Chunks"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #1
+msgid "Downloaded"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #2
+#: templates/default/prop.tt.html: #6
+msgid "Transfer"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #5
+#: templates/default/prop.peers.tt.html: #2
+msgid "Peers connected"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #6
+msgid "from"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #7
+msgid "Uploaded"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #9
+#: templates/default/prop.peers.tt.html: #5
+msgid "Peers not connected"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #10
+msgid "Tracker"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #11
+msgid "Message"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #12
+msgid "General"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #13
+msgid "Directory"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #15
+msgid "x"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #16
+msgid "done"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #17
+msgid "Total size"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #19
+msgid "free diskspace"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #20
+msgid "need more"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #21
+msgid "Low disk space"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #22
+msgid "Hash"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #23
+msgid "Created On"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #24
+msgid "Local ID"
+msgstr ""
+
+#: templates/default/prop.info.tt.html: translate part: #25
+msgid "Comment"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #1
+msgid "Peers properties"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #3
+msgid "Peers accounted"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #4
+msgid "Peers max"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #6
+msgid "Peers complete"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #7
+msgid "Peers min"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #8
+msgid "Peers exchange"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #9
+msgid "on"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #10
+msgid "off"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #11
+msgid "Peers list"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #12
+msgid "IP : Port"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #13
+msgid "Client"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #14
+msgid "Flags"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #15
+msgid "Available"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #19
+msgid "Peer Rate"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #20
+msgid "Down Total"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #21
+msgid "Up Total"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #22
+msgid "Peer Total"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #23
+msgid "Id"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #24
+msgid "Inc"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #25
+msgid "Enc"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #26
+msgid "Obf"
+msgstr ""
+
+#: templates/default/prop.peers.tt.html: translate part: #27
+msgid "Snub"
+msgstr ""
+
+#: lib/RTPG/WWW/Frame/Prop.pm: translate part: #1
+#: templates/default/prop.tt.html: #11
+msgid "Unknown property page"
+msgstr ""
+
+#: templates/default/prop.trackers.tt.html: translate part: #1
+msgid "Url"
+msgstr ""
+
+#: templates/default/prop.trackers.tt.html: translate part: #2
+msgid "Enabled"
+msgstr ""
+
+#: templates/default/prop.trackers.tt.html: translate part: #3
+msgid "Interval"
+msgstr ""
+
+#: templates/default/prop.trackers.tt.html: translate part: #4
+msgid "Last Update"
+msgstr ""
+
+#: templates/default/prop.trackers.tt.html: translate part: #5
+msgid "Yes"
+msgstr ""
+
+#: templates/default/prop.trackers.tt.html: translate part: #6
+msgid "No"
+msgstr ""
+
+#: templates/default/prop.tt.html: translate part: #1
+msgid "Info"
+msgstr ""
+
+#: templates/default/prop.tt.html: translate part: #3
+msgid "Files"
+msgstr ""
+
+#: templates/default/prop.tt.html: translate part: #4
+msgid "Trackers"
+msgstr ""
+
+#: templates/default/prop.tt.html: translate part: #7
+msgid "Skip selected files"
+msgstr ""
+
+#: templates/default/prop.tt.html: translate part: #8
+msgid "Set normal priority for selected files"
+msgstr ""
+
+#: templates/default/prop.tt.html: translate part: #9
+msgid "Set high priority for selected files"
+msgstr ""
+
+#: templates/default/prop.tt.html: translate part: #10
+msgid "Select torrent to show"
+msgstr ""
+
+#: templates/default/status.tt.html: translate part: #1
+msgid "Used"
+msgstr ""
+
+#: templates/default/status.tt.html: translate part: #2
+msgid "library"
+msgstr ""
+
+#: templates/default/status.tt.html: translate part: #3
+msgid "Dmitry E. Oboukhov"
+msgstr ""
+
+#: templates/default/status.tt.html: translate part: #4
+msgid "Roman V. Nikolaev"
+msgstr ""
+
+#: templates/default/status.tt.html: translate part: #6
+msgid "Max"
+msgstr ""
+
+#: templates/default/status.tt.html: translate part: #7
+msgid "Select max download speed"
+msgstr ""
+
+#: templates/default/status.tt.html: translate part: #8
+msgid "Unlimited"
+msgstr ""
+
+#: templates/default/status.tt.html: translate part: #11
+msgid "Select max upload speed"
+msgstr ""
+
+#: templates/default/string.tt.js: translate part: #2
+msgid "No current torrent selected"
+msgstr ""
+
+#: lib/RTPG/WWW/Template.pm: translate part: #1
+msgid "File not found"
+msgstr ""
+
 msgid "All"
+msgstr ""
+
+msgid "Active"
 msgstr ""
 
 msgid "Started"
@@ -29,52 +538,13 @@ msgstr ""
 msgid "Stopped"
 msgstr ""
 
-msgid "Incomplete"
-msgstr ""
-
 msgid "Complete"
 msgstr ""
 
-msgid "Name"
+msgid "Incomplete"
 msgstr ""
 
-msgid "Priority"
-msgstr ""
-
-msgid "Size"
-msgstr ""
-
-msgid "Done"
-msgstr ""
-
-msgid "Status"
-msgstr ""
-
-msgid "Seeds"
-msgstr ""
-
-msgid "Peers"
-msgstr ""
-
-msgid "Down Speed"
-msgstr ""
-
-msgid "Up Speed"
-msgstr ""
-
-msgid "Rate"
-msgstr ""
-
-msgid "Downloading"
-msgstr ""
-
-msgid "Seeding"
-msgstr ""
-
-msgid "Hashing"
-msgstr ""
-
-msgid "off"
+msgid "Default"
 msgstr ""
 
 msgid "low"
@@ -86,14 +556,5 @@ msgstr ""
 msgid "high"
 msgstr ""
 
-msgid "B"
-msgstr ""
-
-msgid "b"
-msgstr ""
-
-msgid "s"
-msgstr ""
-
-msgid "No current torrent selected"
+msgid "unknown"
 msgstr ""
