@@ -560,3 +560,30 @@ msgstr "высокий"
 
 msgid "unknown"
 msgstr "неизвестно"
+
+msgid "K"
+msgstr "К"
+
+msgid "M"
+msgstr "М"
+
+msgid "G"
+msgstr "Г"
+
+msgid "T"
+msgstr "Т"
+
+msgid "P"
+msgstr "П"
+
+msgid "E"
+msgstr "Е"
+
+msgid "b"
+msgstr "б"
+
+msgid "/"
+msgstr "/"
+
+msgid "s"
+msgstr "с"

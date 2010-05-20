@@ -784,3 +784,30 @@ msgstr ""
 
 msgid "unknown"
 msgstr ""
+
+msgid "K"
+msgstr ""
+
+msgid "M"
+msgstr ""
+
+msgid "G"
+msgstr ""
+
+msgid "T"
+msgstr ""
+
+msgid "P"
+msgstr ""
+
+msgid "E"
+msgstr ""
+
+msgid "b"
+msgstr ""
+
+msgid "/"
+msgstr ""
+
+msgid "s"
+msgstr ""
