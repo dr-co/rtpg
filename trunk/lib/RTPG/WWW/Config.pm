@@ -63,30 +63,30 @@ sub new
 
     $opts{title} = "RTPG";
 
-    # Проверка на локальность пользователя
+    # Check is user local
     $opts{user}{ip} = $ENV{REMOTE_ADDR};
     $opts{user}{local} =
         ( $opts{user}{ip} =~ m/^(10\.|172\.16\.|192\.168\.|127\.0\.)/ ) ?1 :0;
 
-    # Переменные окружения
+    # Enviroment
     $opts{env} = \%ENV;
 
     $opts{dir}{base} = File::Spec->rel2abs( dirname(__FILE__) . '/../../..' );
-    # Удалим лишние вход/выход из поддиректорий
+    # Make clean basedir
     while( $opts{dir}{base} =~ s{(?:/[^\./]+/\.\.)}{}g ) {;}
 
-    # Другие директории
+    # Other dirs
     $opts{dir}{templates}   = $opts{dir}{base}      . '/templates';
 #    $opts{dir}{cache}       = $opts{dir}{base}      . '/cache';
     $opts{dir}{po}          = $opts{dir}{base}      . '/po';
 
-    # Абсолютные пути к ресурсам
+    # Absolute resources dirs
     $opts{dir}{htdocs}      = $opts{dir}{base}      . '/htdocs';
     $opts{dir}{css}         = $opts{dir}{htdocs}    . '/css';
     $opts{dir}{img}         = $opts{dir}{htdocs}    . '/img';
     $opts{dir}{js}          = $opts{dir}{htdocs}    . '/js';
 
-    # относительные пути к ресурсам
+    # Relative resource urls
     $opts{url}{base}        = $ENV{SERVER_NAME};
 #    $opts{url}{css} =      $opts{url}{base} . '/css';
 #    $opts{url}{img} =      $opts{url}{base} . '/img';
@@ -316,8 +316,6 @@ sub DieDumper
     $Data::Dumper::Deepcopy = 1;
     $Data::Dumper::Maxdepth = 0;
     my $dump = Data::Dumper->Dump([@_]);
-    # юникодные символы преобразуем в них самих
-    # вметсто \x{уродство}
     $dump=~s/(\\x\{[\da-fA-F]+\})/eval "qq{$1}"/eg;
     die $dump;
 }

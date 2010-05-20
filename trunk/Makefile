@@ -20,7 +20,7 @@ i18n:
 			$$file  build/`basename $$file`.pot; \
 	done
 	# concat all files in one template
-	msgcat build/*.pot po/STATIC.pot > po/TEMPLATE.pot
+	msgcat build/*.pot tools/STATIC.pot > po/TEMPLATE.pot
 	# update current transtation files
 	for lang in $(LANGS); do \
 		msgmerge --suffix=.previous --update po/$$lang.po po/TEMPLATE.pot; \

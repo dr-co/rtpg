@@ -5,7 +5,7 @@ use open ':utf8';
 
 =head1 Template
 
-Модуль шаблонов
+Module of templates processing
 
 =cut
 
