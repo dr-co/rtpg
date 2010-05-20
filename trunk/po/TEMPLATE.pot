@@ -803,6 +803,9 @@ msgstr ""
 msgid "E"
 msgstr ""
 
+msgid "B"
+msgstr ""
+
 msgid "b"
 msgstr ""
 

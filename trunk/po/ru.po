@@ -579,6 +579,9 @@ msgstr "П"
 msgid "E"
 msgstr "Е"
 
+msgid "B"
+msgstr "Б"
+
 msgid "b"
 msgstr "б"
 
