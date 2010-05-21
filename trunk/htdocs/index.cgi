@@ -36,7 +36,7 @@ use RTPG;
 my %params = (version => $VERSION);
 
 # Get params ###################################################################
-$params{show} = CGI::param('show') || 'index';
+$params{show} = cfg->get('show') || 'index';
 
 # Load module and get data #####################################################
 my $module = 'RTPG::WWW::Frame::' . ucfirst lc $params{show};

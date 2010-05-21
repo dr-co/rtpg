@@ -11,6 +11,9 @@ RTPG::WWW::Config configuration module.
 package RTPG::WWW::Config;
 use base qw(Exporter);
 
+use locale;
+use POSIX qw(locale_h);
+
 use CGI;
 $CGI::DISABLE_UPLOADS = 0;
 $CGI::POST_MAX = 67108864; #64Mb
@@ -125,6 +128,11 @@ sub new
     # Init parameters from current value to cookie
     # It`s need for first time start to init all default cookie
     $self->set($_, $self->get($_)) for qw(refresh skin);
+
+    # Set locale
+#    my $locale =
+#        sprintf '%s_%s.UTF-8', $self->get('locale'), uc $self->get('locale');
+#    setlocale ( LC_ALL, $locale );
 
     return $self;
 }
