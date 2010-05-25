@@ -29,8 +29,11 @@
         <tr>
             <td/>
             <td colspan="2" class="note">
-                [% gettext('Note: rTorrent don`t notify you about broken links.
-                            Just attempt to load this links.') %]
+                [%
+                  gettext('Note: rTorrent don`t notify you about broken links.')
+                  _ ' ' _
+                  gettext('Just attempt to load this links.')
+                %]
             </td>
         </tr>
         </tbody>

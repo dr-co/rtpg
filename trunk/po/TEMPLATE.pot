@@ -85,7 +85,7 @@
 # #-#-#-#-#  STATIC.pot (rtpg)  #-#-#-#-#
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2010 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the rtpg package.
 # Roman V. Nikolaev <rshadow@rambler.ru>, 2010.
 #, fuzzy
 msgid ""
@@ -257,28 +257,30 @@ msgid "Add"
 msgstr ""
 
 #: templates/default/add.tt.html: translate part: #4
-msgid ""
-"Note: rTorrent don`t notify you about broken links.\n"
-"                            Just attempt to load this links."
+msgid "Note: rTorrent don`t notify you about broken links."
 msgstr ""
 
 #: templates/default/add.tt.html: translate part: #5
+msgid "Just attempt to load this links."
+msgstr ""
+
+#: templates/default/add.tt.html: translate part: #6
 msgid "File"
 msgstr ""
 
-#: templates/default/add.tt.html: translate part: #7
+#: templates/default/add.tt.html: translate part: #8
 msgid "Close"
 msgstr ""
 
-#: templates/default/add.tt.html: translate part: #8
+#: templates/default/add.tt.html: translate part: #9
 msgid "Add from file"
 msgstr ""
 
-#: templates/default/add.tt.html: translate part: #9
+#: templates/default/add.tt.html: translate part: #10
 msgid "Add by link"
 msgstr ""
 
-#: templates/default/add.tt.html: translate part: #10
+#: templates/default/add.tt.html: translate part: #11
 msgid "Unknown"
 msgstr ""
 
