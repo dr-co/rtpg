@@ -64,7 +64,7 @@ msgstr "Ошибка"
 
 #: templates/default/error.tt.html: translate part: #2
 msgid "rTorrent not started or access restricted."
-msgstr "rTorrent не запущен или доступ к нему запрещен"
+msgstr "rTorrent не запущен или доступ к нему запрещен."
 
 #: templates/default/list.tt.html: translate part: #1
 msgid "Main torrents list"
