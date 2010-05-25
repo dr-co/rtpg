@@ -31,35 +31,3 @@ clean:
 	rm -fr po/*.previous
 	
 all: po
-
-#    
-#    templates/langs/%.html: po/%.po $(TEMPLATE_PO)
-#    	perl tools/poabstract/gen_translate.pl -s templates/index.tt.html $<	>$@
-#    
-#    js/langs/%.main.js: po/%.po $(TEMPLATE_PO)
-#    	perl poabstract/gen_translate.pl -s js/main.js $< > $@
-#    
-#    
-#    build/html.po: templates/index.tt.html Makefile
-#    	perl poabstract/extract_po.pl -s $< $@
-#    
-#    build/js.po: js/main.js Makefile
-#    	perl poabstract/extract_po.pl -s $< $@
-#    
-#    
-#    $(TEMPLATE_PO): build/html.po build/js.po
-#    	msgcat $^ > $@
-#    	for lang in $(LANGS); do \
-#    		msgmerge --suffix=.previous --update po/$$lang.po $@; \
-#    	done
-#
-#	grep --recursive --perl-regexp --only-matching --no-filename --no-messages \
-#		--regexp="gettext\(('.*?')\)" ./*
-		
-#	sed 's/^gettext(//' | \
-#	sed 's/)$//'
-
-#	xgettext \
-#		--files-from=htdocs/index.cgi \
-#		--output=po/111.p \
-#		--language=Perl --extract-all

@@ -124,13 +124,14 @@ sub new
                         @g_path = splice @g_path,0, $level+1;
 
                         # Add directory in tree
-                        push @tree, {
+                        my %node = (
                             level   => $level,
                             name    => $path[$level],
                             type    => 'dir',
                             'index' => $dir_index++,
                             'open'  => 1,
-                        };
+                        );
+                        push @tree, \%node;
                     }
                 }
 
@@ -138,13 +139,19 @@ sub new
                 @g_path = @path;
 
                 # Add file in tree
-                push @tree, {
+                my %node = (
                     level   => scalar(@path),
                     name    => $filename,
                     type    => 'file',
                     data    => $file,
                     index   => $index++,
-                };
+                );
+                $node{complete} = 1 if $file->{percent} eq '100%';
+                $node{dlink} = cfg->get('direct_link') . $file->{path}
+                    if cfg->get('direct_link') and $node{complete} and
+                       $opts{info}{complete};
+
+                push @tree, \%node;
 #DieDumper \@tree, \@g_path, \@path, $filename if $filename =~ m{\.pdf};
             }
 

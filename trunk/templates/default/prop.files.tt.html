@@ -84,7 +84,9 @@
                             />
                         [% END %]
                     </div>
+                    [% IF file.dlink %]<a href="[% file.dlink %]">[% END %]
                     [% file.name %]
+                    [% IF file.dlink %]</a>[% END %]
                 </td>
                 <td class="size">[% file.data.size_bytes.as_human_size %]</td>
                 <td class="spercent">[% file.data.percent %]</td>
