@@ -179,6 +179,18 @@ sub load_from_files
     # Exit if no one config exists
     die 'Config file not exists' unless $loaded eq 'yes';
 
+    # Replace by old parameters from RTPG 0.1.x version
+    if( exists $self->{param}{refresh_timeout} )
+    {
+        $self->{param}{refresh} = $self->{param}{refresh_timeout};
+        delete $self->{param}{refresh_timeout};
+    }
+    if( exists $self->{param}{current_skin} )
+    {
+        $self->{param}{skin} = $self->{param}{current_skin};
+        delete $self->{param}{current_skin};
+    }
+
     return 1;
 }
 
