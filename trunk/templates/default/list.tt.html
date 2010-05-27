@@ -71,16 +71,22 @@
                         [% END %]
                     [% END %]
                 </td>
-                <td class="name"
-                    [% UNLESS torrent.message %]colspan="2"[% END %]
-                >
-                    [% torrent.name %]
-                </td>
-                [% IF torrent.message %]
-                    <td class="message" title="[% torrent.message %]"></td>
-                [% END %]
+                <td class="name">[% torrent.name %]</td>
+                <td
+                    [%
+                        SET class = ['message'];
+                        IF torrent.message; class.push('warning'); END;
+                    %]
+                    class="[% class.join(' ') %]"
+                    [% IF torrent.message %]
+                        title="[% torrent.message %]"
+                    [% END %]
+                />
                 <td class="num">[% gettext(torrent.priority_str) %]</td>
-                <td class="size">[% torrent.size_bytes.as_human_size %]</td>
+                <td class="size">
+                    [% torrent.size_bytes.as_human_size %]
+                    <span class="data">[% torrent.size_bytes %]</span>
+                </td>
                 <td class="done">
                     [% torrent.percent %]
                     <div class="percent" style="width: [% torrent.percent %];" />
@@ -100,8 +106,14 @@
                     %]
                 </td>
                 <td class="peers">[% torrent.peers_connected %]</td>
-                <td class="down_speed">[% torrent.down_rate.as_human_speed %]</td>
-                <td class="up_speed">[% torrent.up_rate.as_human_speed %]</td>
+                <td class="down_speed">
+                    [% torrent.down_rate.as_human_speed %]
+                    <span class="data">[% torrent.down_rate %]</span>
+                </td>
+                <td class="up_speed">
+                    [% torrent.up_rate.as_human_speed %]
+                    <span class="data">[% torrent.up_rate %]</span>
+                </td>
                 [% SET class = ['rate'] %]
                 [% IF torrent.ratio >= 1.0; class.push('positive');
                    ELSE; class.push('negative');

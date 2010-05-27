@@ -48,18 +48,22 @@ table.list thead th {
     border-right: 2px white solid;
 }
 
-table.list thead th.headerSortDown {
+table.list thead th.asc {
     background-position: right;
     background-repeat: no-repeat;
     background-image: url("status/sort-ascending.png");
     padding-right: 18px;
 }
 
-table.list thead th.headerSortUp {
+table.list thead th.desc {
     background-position: right;
     background-repeat: no-repeat;
     background-image: url("status/sort-descending.png");
     padding-right: 18px;
+}
+
+table.list thead th.sortable {
+    cursor: pointer;
 }
 
 /************************************************************** Torrents list */
@@ -88,14 +92,18 @@ table.list tbody td.name {
 }
 
 table.list tbody td.message {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url("status/message.png");
     max-width: 24px;
     width: 24px;
     min-width: 24px;
     padding: 0px;
     margin: 0px;
+}
+
+table.list tbody td.message.warning
+{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("status/message.png");
 }
 
 table.list tbody td.num {
@@ -136,6 +144,12 @@ table.list tbody td.rate.positive {
 
 table.list tbody td.rate.negative {
     color: #700;
+}
+
+/* hidden original data */
+table.list tbody td span.data
+{
+    display: none;
 }
 
 /*********************************************************** List alternation */

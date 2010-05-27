@@ -28,6 +28,49 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 const NUM_PROP_FRAME = 3;
 
+var fExtractor = function( objTd )
+{
+    var vReturn  = '';
+    var strClass = $(objTd).attr('class');
+
+    // Because we use colspan, shift column data
+    switch( strClass )
+    {
+    case 'img':
+        vReturn = $(objTd).siblings('td.name').text();
+        break;
+    case 'name':
+        vReturn = $(objTd).siblings('td.num').text();
+        break;
+    case 'message':
+        vReturn = $(objTd).siblings('td.size').find('span.data').text();
+        break;
+    case 'num':
+        vReturn = $(objTd).siblings('td.done').text();
+        break;
+    case 'size':
+        vReturn = $(objTd).siblings('td.status').text();
+        break;
+    case 'done':
+        vReturn = $(objTd).siblings('td.peers').text();
+        break;
+    case 'status':
+        vReturn = $(objTd).siblings('td.down_speed').find('span.data').text();
+        break;
+    case 'peers':
+        vReturn = $(objTd).siblings('td.up_speed').find('span.data').text();
+        break;
+    case 'down_speed':
+        vReturn = $(objTd).siblings('td.rate').text();
+        break;
+    default:
+        vReturn = '';
+        break;
+    }
+
+    return vReturn;
+}
+
 $(document).ready(function(){
     // On torrent select
     $('#list table.list tbody > tr').find('> td:gt(0)')
@@ -37,28 +80,26 @@ $(document).ready(function(){
     $('#all').bind('change', on_all_change);
 
     // Add client side sorting
-    $('#list table.list').tablesorter();
-//    $('#list table.list').tableSort({
-//        headRow: 0,
-//        columns: {
-//            1: { type: 'string', sorted: 'asc' },
-//            2: { type: 'string' },
-////            3: { type: 'string' },
-//            4: { type: 'number'   },
-//            5: { type: 'string' },
-//            6: { type: 'string' },
-////            7: { type: 'string' },
-////            8: { type: 'string' },
-//            9: { type: 'number' },
-//        },
-//        stripe: true,
-//        classes: {
-//            sorting:  'sorting',
-//            sortable: 'sortable',
-//            asc:      'asc',
-//            desc:     'desc',
-//            stripe:   'even'
-//     }});
+    $('#list table.list').tablesorter({
+//        debug: true,
+        headers: {
+            0: { sorter: false 		},
+//            1: { sorter: 'text' 		},
+//            2: { sorter: 'text' 		},
+            3: { sorter: 'digit' 	},
+//            4: { sortet: 'procent'	},
+//            5: { sorter: 'text' 		},
+//            6: { sorter: 'digit' 	},
+            7: { sorter: 'digit' 	},
+            8: { sorter: 'digit' 	},
+//            9: { sorter: 'digit' 	},
+        },
+        cssAsc:  		'asc',
+        cssDesc: 		'desc',
+        cssHeader: 		'sortable',
+        widgets: 		['zebra'],
+        textExtraction: fExtractor
+    });
 });
 
 function on_click_list()
