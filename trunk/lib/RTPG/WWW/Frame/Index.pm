@@ -24,7 +24,7 @@ sub new
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(locale);
+    $opts{$_} = cfg->get($_) for qw(locale horizontal vertical);
 
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
 

@@ -1,8 +1,8 @@
 <frameset id="frms_main" rows="32px,*,32px" border="1px">
     <frame src="index.cgi?show=panel" id="frm_panel" noresize="noresize" />
-    <frameset id="frms_middle" rows="*" cols="10%,*" border="4px">
+    <frameset id="frms_middle" rows="*" cols="[% horizontal %]" border="4px">
         <frame src="index.cgi?show=action" id="frm_action" />
-        <frameset id="frms_content" rows="60%,*">
+        <frameset id="frms_content" rows="[% vertical %]">
             <frame src="index.cgi?show=list" id="frm_list" />
             <frame src="index.cgi?show=prop" id="frm_prop" />
         </frameset>
