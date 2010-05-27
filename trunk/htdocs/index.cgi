@@ -110,7 +110,7 @@ elsif( $params{show} eq 'prop' )
 }
 elsif( $params{show} eq 'list' )
 {
-    push @{ cfg->{url}{skin}{js} }, 'js/jquery/jquery.tablesort.js';
+    push @{ cfg->{url}{skin}{js} }, 'js/jquery/jquery.tablesorter.js';
 }
 
 # Output #######################################################################

@@ -37,27 +37,28 @@ $(document).ready(function(){
     $('#all').bind('change', on_all_change);
 
     // Add client side sorting
-    $('#list table.list').tableSort({
-        headRow: 0,
-        columns: {
-            1: { type: 'string', sorted: 'asc' },
-            2: { type: 'string' },
-//            3: { type: 'string' },
-            4: { type: 'number'   },
-            5: { type: 'string' },
-            6: { type: 'string' },
-//            7: { type: 'string' },
-//            8: { type: 'string' },
-            9: { type: 'number' },
-        },
-        stripe: true,
-        classes: {
-            sorting:  'sorting',
-            sortable: 'sortable',
-            asc:      'asc',
-            desc:     'desc',
-            stripe:   'even'
-     }});
+    $('#list table.list').tablesorter();
+//    $('#list table.list').tableSort({
+//        headRow: 0,
+//        columns: {
+//            1: { type: 'string', sorted: 'asc' },
+//            2: { type: 'string' },
+////            3: { type: 'string' },
+//            4: { type: 'number'   },
+//            5: { type: 'string' },
+//            6: { type: 'string' },
+////            7: { type: 'string' },
+////            8: { type: 'string' },
+//            9: { type: 'number' },
+//        },
+//        stripe: true,
+//        classes: {
+//            sorting:  'sorting',
+//            sortable: 'sortable',
+//            asc:      'asc',
+//            desc:     'desc',
+//            stripe:   'even'
+//     }});
 });
 
 function on_click_list()

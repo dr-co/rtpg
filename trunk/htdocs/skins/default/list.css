@@ -48,14 +48,14 @@ table.list thead th {
     border-right: 2px white solid;
 }
 
-table.list thead th.asc {
+table.list thead th.headerSortDown {
     background-position: right;
     background-repeat: no-repeat;
     background-image: url("status/sort-ascending.png");
     padding-right: 18px;
 }
 
-table.list thead th.desc {
+table.list thead th.headerSortUp {
     background-position: right;
     background-repeat: no-repeat;
     background-image: url("status/sort-descending.png");
