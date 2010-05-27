@@ -1023,7 +1023,8 @@ Return datetime string from timestemp
 
 sub as_human_datetime
 {
-    return strftime '%c', localtime shift;
+#    return decode utf8 => strftime '%c', localtime shift;
+    return strftime '%F %R', localtime shift;
 }
 
 =head2 torrent_priority_num
