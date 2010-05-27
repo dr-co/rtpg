@@ -92,6 +92,8 @@
                 [% data.info.size_bytes.as_human_size       %]
                 ([% data.info.bytes_done.as_human_size      %]
                  [% gettext('done') %] )
+
+                <!-- Need new version of libxmlrpc for show correctly:
                 [% data.info.free_diskspace.as_human_size   %]
                 [% gettext('free diskspace')                %]
                 [% IF data.info.low_space %]
@@ -102,6 +104,7 @@
                         &nbsp;
                     </div>
                 [% END %]
+                 -->
             </td>
             <th>[% gettext('Hash') %]</th>
             <td>[% data.info.hash %]</td>
