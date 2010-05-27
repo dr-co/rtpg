@@ -77,7 +77,6 @@ sub new
 
     # Other dirs
     $opts{dir}{templates}   = $opts{dir}{base}      . '/templates';
-#    $opts{dir}{cache}       = $opts{dir}{base}      . '/cache';
     $opts{dir}{po}          = $opts{dir}{base}      . '/po';
 
     # Absolute resources dirs
@@ -88,9 +87,6 @@ sub new
 
     # Relative resource urls
     $opts{url}{base}        = $ENV{SERVER_NAME};
-#    $opts{url}{css} =      $opts{url}{base} . '/css';
-#    $opts{url}{img} =      $opts{url}{base} . '/img';
-#    $opts{url}{js} =       $opts{url}{base} . '/js';
 
     my $self = bless \%opts, $class;
 
