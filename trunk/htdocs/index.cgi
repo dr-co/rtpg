@@ -18,7 +18,7 @@ then you can see all variables for templates.
 use warnings;
 use strict;
 use utf8;
-use open ':utf8';
+use open qw(:std :utf8);
 
 use CGI::Carp qw(fatalsToBrowser);
 use File::Basename;

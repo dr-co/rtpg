@@ -955,6 +955,7 @@ sub as_human_size($)
         digit       => 0,
         letter      => '',
         human       => 'N/A',
+        byte        => '',
     );
 
     {{
