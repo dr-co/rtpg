@@ -45,14 +45,15 @@ sub new
     # Set default
     $opts{language} ||= cfg->get('locale');
 
-    # Get aviable translations
-    my @langs = aviable();
+    # Get available translations
+    my @langs = available();
     warn 'No translation files' unless @langs;
 
     # Check for pod file and drop to default if not exists
-    warn sprintf('Language %s not found', uc $opts{language}),
-    $opts{language} = 'en'
-        unless $opts{language} ~~ @langs;
+    unless ($opts{language} ~~ @langs) {
+        warn sprintf('Language %s not found', uc $opts{language});
+        $opts{language} = 'en';
+    }
 
     my $self = bless \%opts, $class;
 
@@ -117,14 +118,14 @@ sub gettext
     return $string;
 }
 
-=head2 aviable
+=head2 available
 
-Get aviable translations
+Get available translations
 
 =cut
-sub aviable
+sub available
 {
-    # Get aviable translations
-    return [ map { m|/(\w*?).po$| } glob sprintf '%s/*.po', cfg()->{dir}{po} ];
+    # Get available translations
+    return map { m|/(\w*?).po$| } glob sprintf '%s/*.po', cfg()->{dir}{po};
 }
 1;
