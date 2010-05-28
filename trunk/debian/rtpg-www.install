@@ -1,3 +1,4 @@
+tools/index.cgi		/usr/share/rtpg-www/
 htdocs                  /usr/share/rtpg-www/
 lib                     /usr/share/rtpg-www/
 po                      /usr/share/rtpg-www/

@@ -1,3 +1,9 @@
+rtpg (0.2.0-2) experimental; urgency=low
+
+  * index.cgi to ensure compatibility with old rtpg(0.1) config.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Fri, 28 May 2010 16:34:43 +0400
+
 rtpg (0.2.0-1) experimental; urgency=low
 
   * New upstream version:
