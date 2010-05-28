@@ -1,2 +1,2 @@
-debian/rtorrent.rc
-debian/rtpg.apache.conf
+config/rtorrent.rc
+config/rtpg.apache.conf
