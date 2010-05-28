@@ -1,4 +1,4 @@
-rtpg (0.2.0-2) experimental; urgency=low
+rtpg (0.2.1-1) experimental; urgency=low
 
   * index.cgi to ensure compatibility with old rtpg(0.1) config.
 
