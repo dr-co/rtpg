@@ -27,19 +27,20 @@ sub new
     $Template::Stash::SCALAR_OPS->{as_human_size}   =
     $Template::Stash::LIST_OPS->{as_human_size}     = sub {
         my ($digit, $letter, $byte) = RTPG::as_human_size(shift);
-        return $digit . gettext($letter) . gettext($byte)
-            if $digit and $letter and $byte;
-        return $digit if $digit;
-        return 0;
+        return 0 unless $digit;
+
+        my $result = $digit;
+        ($_) ?$result .= gettext($_) :next for $letter, $byte;
+        return $result;
     };
     $Template::Stash::SCALAR_OPS->{as_human_speed}  =
     $Template::Stash::LIST_OPS->{as_human_speed}    = sub {
         my ($digit, $letter, $byte, $div, $time) = RTPG::as_human_speed(shift);
-        return $digit . gettext($letter) . gettext($byte) .
-            gettext($div). gettext($time)
-                if $digit and $letter and $byte and $div and $time;
-        return $digit if $digit;
-        return 0;
+        return 0 unless $digit;
+
+        my $result = $digit;
+        ($_) ?$result .= gettext($_) :next for $letter, $byte, $div, $time;
+        return $result;
     };
     $Template::Stash::SCALAR_OPS->{as_human_datetime} =
     $Template::Stash::LIST_OPS->{as_human_datetime} = sub {
