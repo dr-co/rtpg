@@ -23,21 +23,8 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
-    This file contain java scripts for Action frame
+    This file contain java scripts for frame 'Add'
 */
-const NUM_ACTION_FRAME	= 1;
-const NUM_LIST_FRAME 	= 2;
-const NUM_PROP_FRAME 	= 3;
-
-const WIDTH  = 640;
-const HEIGHT = 320;
-var iTop   = parseInt((screen.availHeight/2) - (HEIGHT/2));
-var iLeft  = parseInt((screen.availWidth/2) - (WIDTH/2));
-
-window.screenX = iLeft;
-window.screenY = iTop;
-window.innerWidth  = WIDTH;
-window.innerHeight = HEIGHT;
 
 $(document).ready(function(){
     $('button.close')            .bind('click', on_close);

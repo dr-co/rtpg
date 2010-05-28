@@ -129,10 +129,20 @@ function on_add()
     const HEIGHT = 320;
     var iTop   = parseInt((screen.availHeight/2) - (HEIGHT/2));
     var iLeft  = parseInt((screen.availWidth/2) - (WIDTH/2));
-    var retVal = window.showModalDialog('index.cgi?show=add', 'add',
-        ',toolbar=0,location=0,directories=0,status=0,menubar=0,copyhistory=0' +
-        ',width='+ WIDTH +',height='+ HEIGHT +
-        ',left='+ iLeft +',top='+ iTop +',screenX='+ iLeft +',screenY='+ iTop);
+    
+    var win_pars = "resizable:yes;status:no;center:yes";
+    win_pars += ';dialogHeight:' + HEIGHT;
+    win_pars += ';dialogWidth:' + WIDTH;
+    win_pars += ';unadorned:yes';
+    win_pars += ';screenX:' + iLeft;
+    win_pars += ';left:' + iLeft;
+    win_pars += ';dialogLeft:' + iLeft;
+    
+    win_pars += ';screenY:' + iTop;
+    win_pars += ';top:' + iTop;
+    win_pars += ';dialogTop:' + iTop;
+
+    var retVal = window.showModalDialog('index.cgi?show=add', 'add', win_pars);
 
     // If return TRUE then reftesh all frames
     if(retVal){
