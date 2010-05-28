@@ -23,7 +23,7 @@ use File::Spec;
 
 our @EXPORT = qw(cfg DieDumper Dumper);
 
-###############################################################################
+################################################################################
 # This section contains some paths for use in this program
 # Edit this for some OS
 # I think no any place to change. If it`s wrong, please inform me.
@@ -31,9 +31,7 @@ our @EXPORT = qw(cfg DieDumper Dumper);
 ################################################################################
 use constant RTPG_SYSTEM_CONFIG_PATH  => '/etc/rtpg/rtpg.conf';
 use constant RTPG_CONFIG_PATH         => '~/.rtpg/rtpg.conf';
-# use constant RTPG_SYSTEM_CONFIG_PATH  => '/home/rubin/workspace/rtpg2/trunk/config/rtpg.conf';
-# use constant RTPG_CONFIG_PATH         => '/home/rubin/workspace/rtpg2/trunk/config/rtpg.conf';
-###############################################################################
+################################################################################
 
 =head2 cfg
 
@@ -60,19 +58,10 @@ sub new
         RTPG_SYSTEM_CONFIG_PATH,
         RTPG_CONFIG_PATH,
     ];
-
-    # redefining config path from server options.
+    # Redefining config path from server options.
     $opts{dir}{config} = [ $ENV{RTPG_CONFIG} ] if $ENV{RTPG_CONFIG};
 
     $opts{title} = "RTPG";
-
-    # Check is user local
-    $opts{user}{ip} = $ENV{REMOTE_ADDR};
-    $opts{user}{local} =
-        ( $opts{user}{ip} =~ m/^(10\.|172\.16\.|192\.168\.|127\.0\.)/ ) ?1 :0;
-
-    # Enviroment
-    $opts{env} = \%ENV;
 
     $opts{dir}{base} = File::Spec->rel2abs( dirname(__FILE__) . '/../../..' );
     # Make clean basedir
@@ -91,14 +80,14 @@ sub new
     # Relative resource urls
     $opts{url}{base}        = $ENV{SCRIPT_NAME};
     $opts{url}{base}        =~ s{/[^/]*$}{/};
-    $opts{url}{base}        = "$ENV{SERVER_NAME}/$opts{url}{base}";
+    $opts{url}{base}        = $ENV{SERVER_NAME} .'/'. $opts{url}{base};
 
     my $self = bless \%opts, $class;
 
     my ($browser_locale) = $ENV{HTTP_ACCEPT_LANGUAGE} =~ m/^(\w+)/;
 
     # Set parameters by default, even it not declared in config file
-    $self->set('action',     'default' )   unless $self->get('action');
+    $self->set('action',     'default' ) unless $self->get('action');
     $self->set('locale',     $self->get('locale') || $browser_locale || 'en' );
     $self->set('horizontal', '150,*' )   unless $self->get('horizontal');
     $self->set('vertical',   '*,300' )   unless $self->get('vertical');
