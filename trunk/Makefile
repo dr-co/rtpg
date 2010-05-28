@@ -1,5 +1,13 @@
 SVN = http://svn.rtpg2.rshadow.ru
 
+
+DEBVERSION 	= $(shell \
+	dpkg-parsechangelog|grep ^Version:|awk '{print $$2}' \
+		|sed 's/-[[:digit:]]\+$$//' )
+
+DEBFULLVERSION 	= $(shell \
+	dpkg-parsechangelog|grep ^Version:|awk '{print $$2}')
+
 VERSION		= $(shell \
 	grep VERSION index.cgi |grep ^our \
 	|sed 's/^[^[:digit:]]\+//' |sed 's/".*//')
@@ -31,3 +39,26 @@ clean:
 	rm -fr po/*.previous
 	
 all: po
+
+
+SRC		=	$(shell find .|grep -v '\./build\|\.svn')
+DEB		=	build/rtpg-www_$(DEBFULLVERSION)_all.deb
+ORIG		=	build/rtpg_$(DEBVERSION).orig.tar.gz
+
+deb-package: build/stamp $(DEB)
+
+build/stamp:
+	mkdir -p build
+	touch $@
+
+$(DEB): $(ORIG)
+	cd build/rtpg-$(DEBVERSION)/ && debuild
+
+$(ORIG): $(SRC)
+	rm -fr build/rtpg-$(DEBVERSION)
+	mkdir build/rtpg-$(DEBVERSION)
+	rsync --exclude=.svn --exclude=build -a \
+		* build/rtpg-$(DEBVERSION)/
+	cd build && tar -czf rtpg_$(DEBVERSION).orig.tar.gz rtpg-$(DEBVERSION)/
+	
+	

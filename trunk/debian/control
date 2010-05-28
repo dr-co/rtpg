@@ -3,7 +3,7 @@ Maintainer: Dmitry E. Oboukhov <unera@debian.org>
 Section: web
 Priority: optional
 Build-Depends: cdbs, debhelper (>= 5), po-debconf
-Standards-Version: 3.8.3
+Standards-Version: 3.8.4
 Homepage: http://rtpg.uvw.ru
 Vcs-browser: http://svn.uvw.ru/rtpg
 
