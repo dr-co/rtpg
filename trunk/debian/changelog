@@ -1,3 +1,11 @@
+rtpg (0.2.0-1) unstable; urgency=low
+
+  * New upstream version:
+    - new frame interface;
+    - slow ajax was removed;
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Fri, 28 May 2010 13:24:44 +0400
+
 rtpg (0.1.7-1) unstable; urgency=low
 
   * Fixed a few apache warnings.

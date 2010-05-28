@@ -1,3 +1,7 @@
-debian/tmp/*            /usr/share/rtpg-www/
-debian/rtpg.conf        /etc/rtpg/
-debian/rtpg.apache.conf /etc/apache2/sites-available/
+htdocs                  /usr/share/rtpg-www/
+lib                     /usr/share/rtpg-www/
+po                      /usr/share/rtpg-www/
+templates               /usr/share/rtpg-www/
+config/rtpg.conf        /etc/rtpg/
+config/rtpg.apache.conf /etc/apache2/sites-available/
+
