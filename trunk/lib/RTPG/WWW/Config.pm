@@ -96,13 +96,21 @@ sub new
 
     # Get skin files path
     $self->{dir}{skin}{files}   = $opts{dir}{htdocs} . '/skins';
-    $self->{dir}{skin}{current} = $self->{dir}{skin}{files} . '/' .
-                                  $self->get('skin');
-    $self->{dir}{skin}{base}    = $self->{dir}{templates} . '/' .
-                                  $self->get('skin');
-    $self->{dir}{skin}{default} = $self->{dir}{templates} . '/default';
 
-    $self->{url}{skin}{current}    = 'skins/' . $self->get('skin');
+    # Get current skin and check for skin available
+    my $skin = $self->get('skin');
+    unless( $self->get('skin') ~~ keys %{$self->skins} )
+    {
+        $skin = 'default';
+        $self->set('skin', $skin);
+    }
+
+    # Get over skin files path
+    $self->{dir}{skin}{current} = $self->{dir}{skin}{files} . '/' . $skin;
+    $self->{dir}{skin}{base}    = $self->{dir}{templates}   . '/' . $skin;
+    $self->{dir}{skin}{default} = $self->{dir}{templates}   . '/default';
+    # Get over skin files url
+    $self->{url}{skin}{current}    = 'skins/' . $skin;
     $self->{url}{skin}{default} = 'skins/default';
     $self->{url}{skin}{panel}   = $self->{url}{skin}{current} . '/panel';
     $self->{url}{skin}{status}  = $self->{url}{skin}{current} . '/status';
@@ -182,15 +190,20 @@ Get parameter by $name.
 sub get
 {
     my ($self, $name) = @_;
-    return (CGI::param($name))
-        if defined CGI::param($name)     and wantarray;
-    return (CGI::cookie($name))
-        if defined CGI::cookie($name)    and wantarray;
-    return ($self->{param}{$name})
-        if defined $self->{param}{$name} and wantarray;
 
-    return CGI::param($name)     // CGI::cookie($name) //
-           $self->{param}{$name} // '';
+    my ($http, $cookie, $param) =
+        (CGI::param($name), CGI::cookie($name), $self->{param}{$name});
+    my $return = '';
+
+    for( $http, $cookie, $param )
+    {
+        next unless defined $_;
+        $return = $_;
+        last;
+    }
+
+    return ($return) if wantarray;
+    return $return;
 }
 
 =head2 upload $name
@@ -245,13 +258,16 @@ sub cookies { return shift->{cookies}; }
 
 =head2 skins
 
-Get list of aviable skins
+Get list of available skins
 
 =cut
 
 sub skins
 {
     my ($self) = @_;
+
+    # Cache
+    return $self->{skins} if $self->{skins};
 
     # Get paths to skins
     my @paths = glob sprintf( '%s/*', $self->{dir}{skin}{files});
@@ -275,7 +291,8 @@ sub skins
         $skins{$name} = $title || ucfirst( lc $name );
     }
 
-    return \%skins;
+    $self->{skins} = \%skins;
+    return $self->{skins};
 }
 
 =head2 is_collapse
