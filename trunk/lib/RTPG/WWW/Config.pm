@@ -79,7 +79,7 @@ sub new
     # Relative resource urls
     $opts{url}{base}        = $ENV{SCRIPT_NAME};
     $opts{url}{base}        =~ s{/[^/]*$}{/};
-    $opts{url}{base}        = $ENV{SERVER_NAME} .'/'. $opts{url}{base};
+    $opts{url}{base}        = $ENV{SERVER_NAME} . $opts{url}{base};
 
     my $self = bless \%opts, $class;
 
