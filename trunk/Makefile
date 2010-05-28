@@ -57,8 +57,10 @@ $(DEB): $(ORIG)
 $(ORIG): $(SRC)
 	rm -fr build/rtpg-$(DEBVERSION)
 	mkdir build/rtpg-$(DEBVERSION)
-	rsync --exclude=.svn --exclude=build --exclude=debian -a \
+	rsync --exclude=.svn --exclude=build -a \
 		* build/rtpg-$(DEBVERSION)/
-	cd build && tar -czf rtpg_$(DEBVERSION).orig.tar.gz rtpg-$(DEBVERSION)/
+	cd build && \
+		tar --exclude=debian -czf \
+			rtpg_$(DEBVERSION).orig.tar.gz rtpg-$(DEBVERSION)/
 	
 	

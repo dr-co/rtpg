@@ -1,8 +1,9 @@
 rtpg (0.2.1-1) experimental; urgency=low
 
   * index.cgi to ensure compatibility with old rtpg(0.1) config.
+  * switched to 3.0 debian/source format.
 
- -- Dmitry E. Oboukhov <unera@debian.org>  Fri, 28 May 2010 16:34:43 +0400
+ -- Dmitry E. Oboukhov <unera@debian.org>  Fri, 28 May 2010 16:47:08 +0400
 
 rtpg (0.2.0-1) experimental; urgency=low
 
