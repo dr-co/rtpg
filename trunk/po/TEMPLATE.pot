@@ -427,10 +427,6 @@ msgstr ""
 msgid "Check selected torrents for errors"
 msgstr ""
 
-#: templates/default/panel.tt.html: translate part: #7
-msgid "Skip selected torrents"
-msgstr ""
-
 #: templates/default/panel.tt.html: translate part: #8
 msgid "Set low priority for selected torrents"
 msgstr ""

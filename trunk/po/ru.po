@@ -201,10 +201,6 @@ msgstr "Остановить выделенные торренты"
 msgid "Check selected torrents for errors"
 msgstr "Проверить выделенные торренты на ошибки"
 
-#: templates/default/panel.tt.html: translate part: #7
-msgid "Skip selected torrents"
-msgstr "Пропустить выделенные торренты"
-
 #: templates/default/panel.tt.html: translate part: #8
 msgid "Set low priority for selected torrents"
 msgstr "Установить минимальный приоритет для выделенных торрентов"
@@ -590,3 +586,6 @@ msgstr "/"
 
 msgid "s"
 msgstr "с"
+
+#~ msgid "Skip selected torrents"
+#~ msgstr "Остановить выделенные торренты"
