@@ -29,10 +29,10 @@ our @EXPORT = qw(cfg DieDumper Dumper);
 # I think no any place to change. If it`s wrong, please inform me.
 # (Except config file)
 ################################################################################
-#use constant RTPG_SYSTEM_CONFIG_PATH  => '/etc/rtpg/rtpg.conf';
-#use constant RTPG_CONFIG_PATH         => '~/.rtpg/rtpg.conf';
-use constant RTPG_SYSTEM_CONFIG_PATH  => '/home/rubin/workspace/rtpg2/trunk/config/rtpg.conf';
-use constant RTPG_CONFIG_PATH         => '/home/rubin/workspace/rtpg2/trunk/config/rtpg.conf';
+use constant RTPG_SYSTEM_CONFIG_PATH  => '/etc/rtpg/rtpg.conf';
+use constant RTPG_CONFIG_PATH         => '~/.rtpg/rtpg.conf';
+# use constant RTPG_SYSTEM_CONFIG_PATH  => '/home/rubin/workspace/rtpg2/trunk/config/rtpg.conf';
+# use constant RTPG_CONFIG_PATH         => '/home/rubin/workspace/rtpg2/trunk/config/rtpg.conf';
 ###############################################################################
 
 =head2 cfg
@@ -61,6 +61,9 @@ sub new
         RTPG_CONFIG_PATH,
     ];
 
+    # redefining config path from server options.
+    $opts{dir}{config} = [ $ENV{RTPG_CONFIG} ] if $ENV{RTPG_CONFIG};
+
     $opts{title} = "RTPG";
 
     # Check is user local
@@ -86,7 +89,9 @@ sub new
     $opts{dir}{js}          = $opts{dir}{htdocs}    . '/js';
 
     # Relative resource urls
-    $opts{url}{base}        = $ENV{SERVER_NAME};
+    $opts{url}{base}        = $ENV{SCRIPT_NAME};
+    $opts{url}{base}        =~ s{/[^/]*$}{/};
+    $opts{url}{base}        = "$ENV{SERVER_NAME}/$opts{url}{base}";
 
     my $self = bless \%opts, $class;
 
