@@ -48,10 +48,6 @@ table.source{
     margin-top: 10px;
 }
 
-table.keys{
-    margin-top: 100px;
-}
-
 table.keys button,
 table.source button{
     width: 100%;

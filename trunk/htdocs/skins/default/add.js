@@ -32,6 +32,7 @@ $(document).ready(function(){
 
 function on_close()
 {
-    window.returnValue = true;
+    if($('div.message').length) { window.returnValue = true; }
+    else						{ window.returnValue = false;}
     window.close();
 }
