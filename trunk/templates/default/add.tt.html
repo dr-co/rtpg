@@ -68,12 +68,24 @@
     </table>
 </form>
 
-<div class="keys" >
-    <button class="close">
-        <img src="[% config.url.skin.panel %]/close.png" />
-        [% gettext('Close') %]
-    </button>
-</div>
+<table class="keys">
+    <colgroup>
+        <col/>
+        <col width="20%"/>
+    </colgroup>
+
+    <tbody>
+    <tr>
+        <td/>
+        <td class="submit">
+            <button class="close">
+                <img src="[% config.url.skin.panel %]/close.png" />
+                [% gettext('Close') %]
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 [% IF data.source %]
     <div class="message" >

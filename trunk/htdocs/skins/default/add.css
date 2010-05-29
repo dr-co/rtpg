@@ -42,24 +42,22 @@ button img{
 }
 
 /********************************************************************* Common */
-div.keys{
-    text-align: right;
-    margin-top: 20pt;
+table.keys,
+table.source{
+    width: 100%;
+    margin-top: 10px;
 }
 
-/********************************************************************** Forms */
-table.source{
+table.keys{
+    margin-top: 100px;
+}
+
+table.keys button,
+table.source button{
     width: 100%;
 }
 
-table.source td.label{
-    width: 5%;
-}
-
-table.source td.submit{
-    width: 5%;
-}
-
+/********************************************************************** Forms */
 table.source td.input input,
 table.source td.input textarea{
     width: 100%;
