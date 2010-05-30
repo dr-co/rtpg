@@ -28,49 +28,6 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 const NUM_PROP_FRAME = 3;
 
-var fExtractor = function( objTd )
-{
-    var vReturn  = '';
-    var strClass = $(objTd).attr('class');
-
-    // Because we use colspan, shift column data
-    switch( strClass )
-    {
-    case 'img':
-        vReturn = $(objTd).siblings('td.name').text();
-        break;
-    case 'name':
-        vReturn = $(objTd).siblings('td.num').text();
-        break;
-    case 'message':
-        vReturn = $(objTd).siblings('td.size').find('span.data').text();
-        break;
-    case 'num':
-        vReturn = $(objTd).siblings('td.done').text();
-        break;
-    case 'size':
-        vReturn = $(objTd).siblings('td.status').text();
-        break;
-    case 'done':
-        vReturn = $(objTd).siblings('td.peers').text();
-        break;
-    case 'status':
-        vReturn = $(objTd).siblings('td.down_speed').find('span.data').text();
-        break;
-    case 'peers':
-        vReturn = $(objTd).siblings('td.up_speed').find('span.data').text();
-        break;
-    case 'down_speed':
-        vReturn = $(objTd).siblings('td.rate').text();
-        break;
-    default:
-        vReturn = '';
-        break;
-    }
-
-    return vReturn;
-}
-
 $(document).ready(function(){
     // On torrent select
     $('#list table.list tbody > tr').find('> td:gt(0)')
@@ -84,11 +41,11 @@ $(document).ready(function(){
 //        debug: true,
         headers: {
             0: { sorter: false 		},
-//            1: { sorter: 'text' 		},
-//            2: { sorter: 'text' 		},
+            1: { sorter: 'text' 	},
+            2: { sorter: 'text' 	},
             3: { sorter: 'digit' 	},
             4: { sortet: 'procent'	},
-//            5: { sorter: 'text' 		},
+            5: { sorter: 'text' 	},
             6: { sorter: 'digit' 	},
             7: { sorter: 'digit' 	},
             8: { sorter: 'digit' 	},
@@ -97,8 +54,56 @@ $(document).ready(function(){
         cssAsc:  		'asc',
         cssDesc: 		'desc',
         cssHeader: 		'sortable',
+//        sortList:		[[1,0]],
         widgets: 		['zebra'],
-        textExtraction: fExtractor
+        textExtraction: function( objTd )
+        {
+            var vReturn  = '';
+            var strClass = $(objTd).attr('class');
+
+            // Because we use colspan, we must shift column data
+            if(      $(objTd).hasClass('img')  )
+            {
+                vReturn = $(objTd).siblings('td.name').text();
+            }
+            else if( $(objTd).hasClass('name') )
+            {
+                vReturn = $(objTd).siblings('td.num').text();
+            }
+            else if( $(objTd).hasClass('message') )
+            {
+                vReturn = $(objTd).siblings('td.size')
+                    .find('span.data').text();
+            }
+            else if( $(objTd).hasClass('num') )
+            {
+                vReturn = $(objTd).siblings('td.done').text();
+            }
+            else if( $(objTd).hasClass('size') )
+            {
+                vReturn = $(objTd).siblings('td.status').text();
+            }
+            else if( $(objTd).hasClass('done') )
+            {
+                vReturn = $(objTd).siblings('td.peers').text();
+            }
+            else if( $(objTd).hasClass('status') )
+            {
+                vReturn = $(objTd).siblings('td.down_speed')
+                    .find('span.data').text();
+            }
+            else if( $(objTd).hasClass('peers') )
+            {
+                vReturn = $(objTd).siblings('td.up_speed')
+                    .find('span.data').text();
+            }
+            else if( $(objTd).hasClass('down_speed') )
+            {
+                vReturn = $(objTd).siblings('td.rate').text();
+            }
+
+            return vReturn;
+        }
     });
 });
 

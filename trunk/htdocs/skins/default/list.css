@@ -71,13 +71,11 @@ table.list tbody{
     cursor: pointer;
 }
 
-table.list tbody tr td:first-child{
-    cursor: auto !important;
-}
-
+/* Special columns */
 table.list tbody td.select {
     text-align: left;
     width: 1%;
+    cursor: auto !important;
 }
 
 table.list tbody td.img {
@@ -85,10 +83,6 @@ table.list tbody td.img {
     width: 16px;
     padding: 0px;
     margin: 0px;
-}
-
-table.list tbody td.name {
-    text-align: left;
 }
 
 table.list tbody td.message {
@@ -106,38 +100,16 @@ table.list tbody td.message.warning
     background-image: url("status/message.png");
 }
 
-table.list tbody td.num {
+/* Align classes */
+table.list tbody td.digit {
+    text-align: right;
+}
+
+table.list tbody td.info {
     text-align: center;
 }
 
-table.list tbody td.size {
-    text-align: right;
-}
-
-table.list tbody td.done {
-    text-align: center;
-}
-
-table.list tbody td.status {
-    text-align: left;
-}
-
-table.list tbody td.peers {
-    text-align: right;
-}
-
-table.list tbody td.down_speed {
-    text-align: right;
-}
-
-table.list tbody td.up_speed {
-    text-align: right;
-}
-
-table.list tbody td.rate {
-    text-align: right;
-}
-
+/* Rates highlight */
 table.list tbody td.rate.positive {
     color: green;
 }
@@ -146,7 +118,7 @@ table.list tbody td.rate.negative {
     color: #700;
 }
 
-/* hidden original data */
+/* Hide original data */
 table.list tbody td span.data
 {
     display: none;

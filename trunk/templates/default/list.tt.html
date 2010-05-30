@@ -82,16 +82,16 @@
                         title="[% torrent.message %]"
                     [% END %]
                 />
-                <td class="num">[% gettext(torrent.priority_str) %]</td>
-                <td class="size">
+                <td class="num info">[% gettext(torrent.priority_str) %]</td>
+                <td class="size digit">
                     [% torrent.size_bytes.as_human_size %]
                     <span class="data">[% torrent.size_bytes %]</span>
                 </td>
-                <td class="done">
+                <td class="done info">
                     [% torrent.percent %]
                     <div class="percent" style="width: [% torrent.percent %];" />
                 </td>
-                <td class="status">
+                <td class="status info">
                     [%
                         IF torrent.hashing;         gettext('Hashing');
                         ELSIF torrent.complete;
@@ -105,16 +105,16 @@
                         END;
                     %]
                 </td>
-                <td class="peers">[% torrent.peers_connected %]</td>
-                <td class="down_speed">
+                <td class="peers digit">[% torrent.peers_connected %]</td>
+                <td class="down_speed digit">
                     [% torrent.down_rate.as_human_speed %]
                     <span class="data">[% torrent.down_rate %]</span>
                 </td>
-                <td class="up_speed">
+                <td class="up_speed digit">
                     [% torrent.up_rate.as_human_speed %]
                     <span class="data">[% torrent.up_rate %]</span>
                 </td>
-                [% SET class = ['rate'] %]
+                [% SET class = ['rate', 'digit'] %]
                 [% IF torrent.ratio >= 1.0; class.push('positive');
                    ELSE; class.push('negative');
                    END %]
