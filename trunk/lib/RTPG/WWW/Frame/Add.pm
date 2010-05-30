@@ -40,7 +40,7 @@ sub new
     elsif( $opts{file} )
     {{
         # Get info about file
-        $opts{fh}       = cfg->upload('file')->handle;
+        $opts{fh}       = cfg->upload('file');
         $opts{fileinfo} = cfg->upload_info('file');
 
         # Check for file type present
@@ -49,8 +49,8 @@ sub new
             unless exists $opts{fileinfo}{'Content-Type'};
         # Check for .torrent file
         $opts{message} = 'This is not torrent file',
-        last
-            unless $opts{fileinfo}{'Content-Type'} eq 'application/x-bittorrent';
+        last unless
+            $opts{fileinfo}{'Content-Type'} eq 'application/x-bittorrent';
 
         # Add new torrent download
         ($opts{result}, $opts{error}) = $rtpg->add($opts{fh});
