@@ -482,7 +482,7 @@ msgstr "Установить высокий приоритет для выбра
 
 #: templates/default/prop.tt.html: translate part: #10
 msgid "Select torrent to show"
-msgstr "Выбирите торрент для просмотра"
+msgstr "Выберите торрент для просмотра"
 
 #: templates/default/status.tt.html: translate part: #1
 msgid "Used"
@@ -494,7 +494,7 @@ msgstr "библиотека"
 
 #: templates/default/status.tt.html: translate part: #3
 msgid "Dmitry E. Oboukhov"
-msgstr "Дмитрий Е. Обухов"
+msgstr "Dmitry E. Oboukhov"
 
 #: templates/default/status.tt.html: translate part: #4
 msgid "Roman V. Nikolaev"
@@ -506,7 +506,7 @@ msgstr "Макс."
 
 #: templates/default/status.tt.html: translate part: #7
 msgid "Select max download speed"
-msgstr "Выбирите максимальную скорость загрузки"
+msgstr "Выберите максимальную скорость загрузки"
 
 #: templates/default/status.tt.html: translate part: #8
 msgid "Unlimited"
@@ -514,7 +514,7 @@ msgstr "Неограничено"
 
 #: templates/default/status.tt.html: translate part: #11
 msgid "Select max upload speed"
-msgstr "Выбирите максимальную скорость раздачи"
+msgstr "Выберите максимальную скорость раздачи"
 
 #: templates/default/string.tt.js: translate part: #2
 msgid "No current torrent selected"
