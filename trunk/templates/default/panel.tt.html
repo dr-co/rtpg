@@ -57,15 +57,17 @@
             </option>
         [% END %]
     </select>
-    <select id="skin" title="[% gettext('Select skin') | html %]">
-        [% FOR sk IN skins %]
-            <option
-                value="[% sk.key | html %]"
-                [% IF data.skin == sk.key %]selected="selected"[% END %]>
-                    [% gettext(sk.value) | html %]
-            </option>
-        [% END %]
-    </select>
+    [% IF skins.size > 1 %]
+        <select id="skin" title="[% gettext('Select skin') | html %]">
+            [% FOR sk IN skins %]
+                <option
+                    value="[% sk.key | html %]"
+                    [% IF data.skin == sk.key %]selected="selected"[% END %]>
+                        [% gettext(sk.value) | html %]
+                </option>
+            [% END %]
+        </select>
+    [% END %]
     <select id="locale" title="[% gettext('Select language') | html %]">
         [% FOR lg = langs %]
             <option
