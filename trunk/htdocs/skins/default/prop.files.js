@@ -48,7 +48,7 @@ function on_folder_click()
 {
     // Get current row
     var objCheckbox = $(this);
-    var objTr = objCheckbox.parents('tbody tr.folder');
+    var objTr = objCheckbox.parents('tr.folder:first');
 
     // Get corrent direcory level
     var reLevel = new RegExp("level(\\d+)");
