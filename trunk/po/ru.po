@@ -409,23 +409,23 @@ msgstr "Всего для пира"
 
 #: templates/default/prop.peers.tt.html: translate part: #23
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: templates/default/prop.peers.tt.html: translate part: #24
 msgid "Inc"
-msgstr ""
+msgstr "Inc"
 
 #: templates/default/prop.peers.tt.html: translate part: #25
 msgid "Enc"
-msgstr ""
+msgstr "Enc"
 
 #: templates/default/prop.peers.tt.html: translate part: #26
 msgid "Obf"
-msgstr ""
+msgstr "Obf"
 
 #: templates/default/prop.peers.tt.html: translate part: #27
 msgid "Snub"
-msgstr ""
+msgstr "Snub"
 
 #: lib/RTPG/WWW/Frame/Prop.pm: translate part: #1
 #: templates/default/prop.tt.html: #11
