@@ -133,3 +133,6 @@ else
     $file       = $params{show} . '.tt.html';
 }
 $template->process( $file, \%params );
+
+__DATA__
+lock area
