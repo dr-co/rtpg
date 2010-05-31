@@ -48,7 +48,6 @@ sub new
         ($opts{info}, $error) = $rtpg->torrent_info( $opts{current} );
         if( $error )
         {
-            $opts{error} ||= $error;
             # Drop current if not in list
             cfg->set('current', '');
             $opts{current} = '';
