@@ -825,9 +825,10 @@ sub add
 
     for (@$param)
     {
-        if('IO::Handle' eq ref $_ )
+        if(ref $_)
         {
             local $/;
+            binmode $_;
             my $torrent = RPC::XML::base64->new(<$_>);
             ($res, $error) = $self->rpc_command(load_raw => $torrent);
         }

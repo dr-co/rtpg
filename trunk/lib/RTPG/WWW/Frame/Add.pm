@@ -24,48 +24,60 @@ Get params
 
 sub new
 {
-    my ($class, %opts) = @_;
-
-    $opts{$_} = cfg->get($_) for qw(file link);
+    my ($class) = @_;
 
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
+    my ($file, $link) = map { cfg->get($_) } qw(file link);
 
-    # Add new file/links
-    if( $opts{link} )
-    {
-        # Split array of links and add them to download
-        $opts{link} = [ grep {m/^\S+$/} split "\r?\n", $opts{link} ];
-        ($opts{result}, $opts{error}) = $rtpg->add( $opts{link} );
+
+    my @added;
+
+    if ($link) {
+        if (my @urls = grep /\S/, split /\s+/sgm, $link) {
+            for (@urls) {
+                my ($res, $err) = $rtpg->add($_);
+                push @added, {
+                    result  => $res,
+                    error   => $err,
+                    torrent => $_,
+                    type    => 'link',
+                };
+            }
+        }
     }
-    elsif( $opts{file} )
-    {{
-        # Get info about file
-        $opts{fh}       = cfg->upload('file');
-        $opts{fileinfo} = cfg->upload_info('file');
 
-        # Check for file type present
-        $opts{message} = 'Undefined file type',
-        last
-            unless exists $opts{fileinfo}{'Content-Type'};
-        # Check for .torrent file
-        $opts{message} = 'This is not torrent file',
-        last unless
-            $opts{fileinfo}{'Content-Type'} eq 'application/x-bittorrent';
+    if ($file) {
+        my $fh = cfg->upload('file');
+        my $info = cfg->upload_info('file');
 
-        # Add new torrent download
-        ($opts{result}, $opts{error}) = $rtpg->add($opts{fh});
-    }}
+        unless (exists $info->{'Content-Type'}) {
+            push @added, {
+                result      => undef,
+                error       => 'Undefined file type',
+                torrent     => $file,
+                type        => 'file',
+            }
+        } elsif ( $info->{'Content-Type'} ne 'application/x-bittorrent') {
+            push @added, {
+                result      => undef,
+                error       => 'This is not torrent file',
+                torrent     => $file,
+                type        => 'file',
+            }
+        } else {
+            my ($res, $err) = $rtpg->add($fh);
+            push @added, {
+                result      => $res,
+                error       => $err,
+                torrent     => $file,
+                type        => 'file',
+            };
+        }
+    }
 
-    # Set source string
-    $opts{source}  = ($opts{link}) ?'link' :($opts{file}) ?'file' :'';
-    # If no error message and not set result string then set filename
-    $opts{result} ||=
-        ($opts{link}) ?$opts{link} :($opts{file}) ?$opts{file} :undef
-            unless $opts{message};
-
-    my $self = bless \%opts, $class;
-
-    return $self;
+    return bless {
+        added   => \@added,
+    }, $class;
 }
 
 1;
