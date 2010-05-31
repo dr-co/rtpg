@@ -27,13 +27,13 @@ sub new
     my ($class) = @_;
 
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
-    my ($file, $link) = map { cfg->get($_) } qw(file link);
+    my ($file, $link) = map { cfg->get($_) // '' } qw(file link);
 
 
     my @added;
 
     if ($link) {
-        if (my @urls = grep /\S/, split /\s+/sgm, $link) {
+        if (my @urls = grep /\S/, split /\s+/, $link) {
             for (@urls) {
                 my ($res, $err) = $rtpg->add($_);
                 push @added, {
