@@ -89,7 +89,10 @@
                 <td class="size">[% file.data.size_bytes.as_human_size %]</td>
                 <td class="percent">
                     [% file.data.percent %]
-                    <div class="percent" style="width: [% file.data.percent %];"/>
+                    <div class="indicator">
+                        <div class="percent"
+                            style="width: [% file.data.percent %];"/>
+                    </div>
                 </td>
                 <td class="chunks">[% file.data.size_chunks %]</td>
                 <td class="priority">[% gettext(file.data.priority_str) %]</td>

@@ -103,7 +103,10 @@
             </td>
             <td class="percent">
                 [% peer.completed_percent %]%
-                <div class="percent" style="width: [% peer.completed_percent %]%;"/>
+                <div class="indicator">
+                    <div class="percent"
+                        style="width: [% peer.completed_percent %]%;"/>
+                </div>
             </td>
             <td class="down_speed">[% peer.down_rate.as_human_speed %]</td>
             <td class="up_speed">[%   peer.up_rate.as_human_speed   %]</td>

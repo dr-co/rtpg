@@ -195,11 +195,21 @@ table.list tbody tr:hover td.rate {
 }
 
 /********************************************************** Percent indicator */
-table.list tbody td.done div.percent{
-    background-color: InfoBackground;
+table.list tbody td.done div.indicator
+{
+    width: 100%;
     border: 1px Highlight solid;
     height: 4px;
     min-height: 4px;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+table.list tbody td.done div.percent{
+    background-color: InfoBackground;
+    border-right: 1px Highlight solid;
+    height: 100%;
+    min-height: 100%;
     min-width: 0%;
     max-width: 100%;
 }

@@ -74,8 +74,16 @@ function refresh_frame( iFrame, strCommand )
         break;
     case NUM_PROP_FRAME:
         var objDoc = $(window.parent.frames[ NUM_PROP_FRAME ].document);
-        objDoc.find('#do').val(strCommand);
-        objDoc.find('#form').submit();
+        if( objDoc.find('#form').lenght )
+        {
+            objDoc.find('#do').val(strCommand);
+            objDoc.find('#form').submit();
+        }
+        else
+        {
+            window.parent.frames[ NUM_PROP_FRAME ].document
+                .location.reload(true);
+        }
         break;
     case NUM_STATUS_FRAME:
         window.parent.frames[ NUM_STATUS_FRAME ].document.location.reload(true);
