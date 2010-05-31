@@ -276,7 +276,7 @@ msgstr "Пиров подключено"
 
 #: templates/default/prop.info.tt.html: translate part: #6
 msgid "from"
-msgstr "от"
+msgstr "из"
 
 #: templates/default/prop.info.tt.html: translate part: #7
 msgid "Uploaded"
