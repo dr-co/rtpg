@@ -535,7 +535,7 @@ msgid "Active"
 msgstr "Активные"
 
 msgid "Started"
-msgstr "Закачивается"
+msgstr "Запущено"
 
 msgid "Stopped"
 msgstr "Остановлено"
