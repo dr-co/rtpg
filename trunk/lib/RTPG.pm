@@ -498,13 +498,9 @@ This method updates priorities of all files in one torrent
 
 sub set_files_priorities
 {
-    my ($self, $id, $pri, @file_index) = @_;
-
-
+    my ($self, $id, $pri)=@_;
     my ($list, $error) =
-        $self->rpc_command(
-            'f.multicall', $id, '', "f.set_priority=$pri", @file_index
-        );
+        $self->rpc_command('f.multicall', $id, '', "f.set_priority=$pri");
     return $error if defined wantarray;
     die $error if $error;
     return undef;
