@@ -29,6 +29,8 @@ sub new
     $opts{hash} = { map { $_ => 'checked' } cfg->get('hash[]') }
         if cfg->get('hash[]');
 
+    $opts{do} ||= 'refresh';
+
     # If priority command then get priority level
     if($opts{do} =~ m/^(off|low|normal|high)$/i)
     {
@@ -36,10 +38,12 @@ sub new
         $opts{do}       = 'priority';
     }
 
+
     # Get RTPG object
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
 
     {{
+        last if $opts{do} eq 'refresh';
         my $error;
         # Check exists current
         ($opts{list}, $error) = $rtpg->torrents_list;
@@ -61,14 +65,11 @@ sub new
         # Get torrents hash from checked torrents or current torrent
         my @torrents = keys %{ $opts{hash} };
         push @torrents, $opts{current} unless @torrents;
-        # Do command if it`s not just refresh
-        if( $command ne 'refresh' )
-        {
-            $rtpg->$command( $_, $opts{param} ) for @torrents;
 
-            # If "delete" command drop current value
-            cfg->set('current', $opts{current} = '') if $command eq 'delete';
-        }
+        $rtpg->$command( $_, $opts{param} ) for @torrents;
+
+        # If "delete" command drop current value
+        cfg->set('current', $opts{current} = '') if $command eq 'delete';
 
     }}
 
