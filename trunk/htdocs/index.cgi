@@ -33,6 +33,11 @@ use RTPG::WWW::Template;
 use RTPG::WWW::Locale;
 use RTPG;
 
+use Fcntl qw(:flock);
+
+# Only one client can follow then
+flock DATA, LOCK_EX;
+
 my %params = (version => $VERSION);
 
 # Get params ###################################################################

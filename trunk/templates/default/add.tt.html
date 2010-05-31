@@ -1,12 +1,11 @@
 <body>
 
-<form action="index.cgi" method="post">
+<form action="index.cgi" method="post" enctype="multipart/form-data">
 <input type="hidden" name="show" value="add" />
     <table class="source">
         <colgroup>
             <col width="15%"/>
             <col/>
-            <col width="20%"/>
         </colgroup>
 
         <tbody>
@@ -19,13 +18,8 @@
                     title="[% gettext('One link per line') %]"
                     ></textarea>
             </td>
-            <td class="submit">
-                <button>
-                    <img src="[% config.url.skin.panel %]/add.png" />
-                    [% gettext('Add') %]
-                </button>
-            </td>
         </tr>
+
         <tr>
             <td/>
             <td class="note">
@@ -37,20 +31,9 @@
             </td>
             <td/>
         </tr>
-        </tbody>
-    </table>
-</form>
 
-<form action="index.cgi" method="post" enctype="multipart/form-data">
-<input type="hidden" name="show" value="add" />
-    <table class="source">
-        <colgroup>
-            <col width="15%"/>
-            <col/>
-            <col width="20%"/>
-        </colgroup>
+        <tr><td colspan="2">&nbsp;</td></tr>
 
-        <tbody>
         <tr>
             <td class="label">
                 <label for="file">[% gettext('File') %]:</label>
@@ -58,58 +41,52 @@
             <td class="input">
                 <input type="file" name="file" id="file" />
             </td>
-            <td class="submit">
-                <button>
-                    <img src="[% config.url.skin.panel %]/add.png" />
-                    [% gettext('Add') %]
-                </button>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <table width="100%">
+                    <tr>
+                        <td width="50%" align="right">
+                            <button>
+                                <img src="[% config.url.skin.panel %]/add.png" />
+                                [% gettext('Add') %]
+                            </button>
+                        </td>
+                        <td width="50%" align="right">
+                            <button class="close">
+                                <img src="[% config.url.skin.panel %]/close.png" />
+                                [% gettext('Close') %]
+                            </button>
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
         </tbody>
     </table>
 </form>
 
-<table class="keys">
-    <colgroup>
-        <col/>
-        <col width="20%"/>
-    </colgroup>
 
-    <tbody>
-    <tr>
-        <td/>
-        <td class="submit">
-            <button class="close">
-                <img src="[% config.url.skin.panel %]/close.png" />
-                [% gettext('Close') %]
-            </button>
-        </td>
-    </tr>
-    </tbody>
-</table>
+[% FOREACH one = data.added %]
+    <div class="message" [% IF one.error %]class="error"[% END %]>
+        [% SWITCH one.type %]
+            [% CASE 'file' %]
+                [% gettext('Adding file: ') %]
+            [% CASE 'link' %]
+                [% gettext('Adding link: ') %]
+            [% CASE DEFAULT %]
+                [% gettext('Internal error: ') %]
+        [% END %]
+        [% one.torrent %]
 
-[% IF data.source %]
-    <div class="message" >
-        [% IF data.result %]
-            [% SWITCH data.source %]
-            [% CASE 'file'; gettext('Add from file') _ ': ';%]
-                <span class="source">
-                    [% data.result %]
-                </span>
-            [% CASE 'link'; gettext('Add by link') _ ': '%]
-                <span class="source">
-                    [% FOR row = data.result.list %]
-                        [% IF loop.first and loop.size > 1 %]<br/>[% END %]
-                        [% gettext(row) | html %]
-                        [% UNLESS loop.last %]<br/>[% END %]
-                    [% END %]
-                </span>
-            [% CASE DEFAULT; gettext('Unknown') %]
-            [% END %]
+        [% IF one.error %]
+            <span class="error"> - [% one.error %]</span>
         [% ELSE %]
-            <span class="source">[% gettext(data.message) | html %]</span>
+            [% gettext('... Done') %]
         [% END %]
     </div>
 [% END %]
+
 
 </body>
