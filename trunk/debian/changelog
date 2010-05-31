@@ -1,3 +1,9 @@
+rtpg (0.2.3-1) experimental; urgency=low
+
+  * A few speed optimizations and bugfixes.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Mon, 31 May 2010 15:38:24 +0400
+
 rtpg (0.2.2-1) experimental; urgency=low
 
   * Fixed uploading torrents in Debian/stable (it has old CGI).
