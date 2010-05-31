@@ -87,7 +87,7 @@ for (qw(current default))
 # For some frame type add some resources
 if(    $params{show} eq 'panel' )
 {
-    push @{ cfg->{url}{skin}{js} }, 'index.cgi?show=string';
+    push @{ cfg->{url}{skin}{js} }, 'index.cgi?show=string&';
 }
 elsif( $params{show} eq 'prop' )
 {
