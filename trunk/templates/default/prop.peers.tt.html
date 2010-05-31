@@ -49,7 +49,6 @@
         <col/>
         <col width="15%" />
         <col width="10%" />
-        <col width="5%" />
         <col width="10%" />
         <col width="5%" />
         <col width="5%" />
@@ -64,7 +63,6 @@
             <th>[% gettext('Client')                %]</th>
             <th>[% gettext('Flags')                 %]</th>
             <th>[% gettext('Available')             %]</th>
-            <th>[% gettext('%')                     %]</th>
             <th>[% gettext('Down Speed')            %]</th>
             <th>[% gettext('Up Speed')              %]</th>
             <th>[% gettext('Peer Rate')             %]</th>
@@ -103,13 +101,9 @@
                     IF peer.is_snubbed;    ' ' _ gettext('Snub'); END;
                 %]
             </td>
-            <td class="done">[% peer.completed_percent %]%</td>
             <td class="percent">
-                <div class="percent"
-                     style="width: [% peer.completed_percent %]%;"
-                >
-                    &nbsp;
-                </div>
+                [% peer.completed_percent %]%
+                <div class="percent" style="width: [% peer.completed_percent %];"/>
             </td>
             <td class="down_speed">[% peer.down_rate.as_human_speed %]</td>
             <td class="up_speed">[%   peer.up_rate.as_human_speed   %]</td>

@@ -102,7 +102,7 @@ msgid "Pr"
 msgstr "Пр"
 
 #: templates/default/list.tt.html: translate part: #6
-#: templates/default/prop.files.tt.html: #7
+#: templates/default/prop.files.tt.html:
 msgid "Priority"
 msgstr "Приоритет"
 
@@ -142,8 +142,7 @@ msgstr "СЗ"
 
 #: templates/default/list.tt.html: translate part: #16
 #: templates/default/prop.info.tt.html: #4
-#: templates/default/prop.peers.tt.html: #17 templates/default/status.tt.html:
-#: #5
+#: templates/default/prop.peers.tt.html: templates/default/status.tt.html: #5
 msgid "Down Speed"
 msgstr "Загрузка"
 
@@ -153,7 +152,8 @@ msgstr "СР"
 
 #: templates/default/list.tt.html: translate part: #18
 #: templates/default/prop.info.tt.html: #8
-#: templates/default/prop.peers.tt.html: templates/default/status.tt.html: #9
+#: templates/default/prop.peers.tt.html: #17 templates/default/status.tt.html:
+#: #9
 msgid "Up Speed"
 msgstr "Раздача"
 
@@ -256,12 +256,7 @@ msgid "Path"
 msgstr "Путь"
 
 #: templates/default/prop.files.tt.html: translate part: #5
-#: templates/default/prop.peers.tt.html: #16
-msgid "%"
-msgstr "%"
-
-#: templates/default/prop.files.tt.html: translate part: #6
-#: templates/default/prop.info.tt.html: #14 templates/default/prop.tt.html: #5
+#: templates/default/prop.info.tt.html: #14 templates/default/prop.tt.html:
 msgid "Chunks"
 msgstr "Блоков"
 
@@ -400,39 +395,39 @@ msgstr "Флаги"
 msgid "Available"
 msgstr "Доступно"
 
-#: templates/default/prop.peers.tt.html: translate part: #19
+#: templates/default/prop.peers.tt.html: translate part: #18
 msgid "Peer Rate"
 msgstr "Скорость пира"
 
-#: templates/default/prop.peers.tt.html: translate part: #20
+#: templates/default/prop.peers.tt.html: translate part: #19
 msgid "Down Total"
 msgstr "Закачено"
 
-#: templates/default/prop.peers.tt.html: translate part: #21
+#: templates/default/prop.peers.tt.html: translate part: #20
 msgid "Up Total"
 msgstr "Роздано"
 
-#: templates/default/prop.peers.tt.html: translate part: #22
+#: templates/default/prop.peers.tt.html: translate part: #21
 msgid "Peer Total"
 msgstr "Всего для пира"
 
-#: templates/default/prop.peers.tt.html: translate part: #23
+#: templates/default/prop.peers.tt.html: translate part: #22
 msgid "Id"
 msgstr "Id"
 
-#: templates/default/prop.peers.tt.html: translate part: #24
+#: templates/default/prop.peers.tt.html: translate part: #23
 msgid "Inc"
 msgstr "Inc"
 
-#: templates/default/prop.peers.tt.html: translate part: #25
+#: templates/default/prop.peers.tt.html: translate part: #24
 msgid "Enc"
 msgstr "Enc"
 
-#: templates/default/prop.peers.tt.html: translate part: #26
+#: templates/default/prop.peers.tt.html: translate part: #25
 msgid "Obf"
 msgstr "Obf"
 
-#: templates/default/prop.peers.tt.html: translate part: #27
+#: templates/default/prop.peers.tt.html: translate part: #26
 msgid "Snub"
 msgstr "Snub"
 
@@ -595,6 +590,9 @@ msgstr "/"
 
 msgid "s"
 msgstr "с"
+
+#~ msgid "%"
+#~ msgstr "%"
 
 #~ msgid "Unknown"
 #~ msgstr "Неизвестно"

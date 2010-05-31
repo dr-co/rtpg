@@ -7,7 +7,6 @@
         <col width="1%" />
         <col/>
         <col width="5%" />
-        <col width="5%" />
         <col width="10%" />
         <col width="5%" />
         <col width="5%" />
@@ -26,7 +25,6 @@
             </th>
             <th>[% gettext('Size')          %]</th>
             <th>[% gettext('Done')          %]</th>
-            <th>[% gettext('%')             %]</th>
             <th>[% gettext('Chunks')        %]</th>
             <th>[% gettext('Priority')      %]</th>
         </tr>
@@ -89,11 +87,9 @@
                     [% IF file.dlink %]</a>[% END %]
                 </td>
                 <td class="size">[% file.data.size_bytes.as_human_size %]</td>
-                <td class="spercent">[% file.data.percent %]</td>
                 <td class="percent">
-                    <div class="percent" style="width: [% file.data.percent %];">
-                        &nbsp;
-                    </div>
+                    [% file.data.percent %]
+                    <div class="percent" style="width: [% file.data.percent %];"/>
                 </td>
                 <td class="chunks">[% file.data.size_chunks %]</td>
                 <td class="priority">[% gettext(file.data.priority_str) %]</td>

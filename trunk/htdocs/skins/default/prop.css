@@ -73,14 +73,11 @@ div.properties table tbody tr.even td.address {
 }
 
 /********************************************************** Percent indicator */
-div.properties table tbody td.percent {
+div.properties table tbody td.percent div.percent{
+    background-color: InfoBackground;
     border: 1px Highlight solid;
-}
-
-div.properties table tbody td.percent div.percent {
-    background-color: Highlight;
-    min-height: 100%;
-    height: 100%;
+    height: 4px;
+    min-height: 4px;
     min-width: 0%;
     max-width: 100%;
 }
