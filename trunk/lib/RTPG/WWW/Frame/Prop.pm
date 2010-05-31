@@ -58,8 +58,6 @@ sub new
         # Get info by page name
         if( $opts{prop} eq 'info')
         {
-            ($opts{info}, $opts{error}) = $rtpg->torrent_info( $opts{current} );
-
             # Count space for future downloads. And set warning flag in no space
             my $need = 0;
             $need += ($_->{size_bytes} - $_->{left_bytes}) for @{ $opts{list} };
@@ -68,11 +66,9 @@ sub new
         }
         elsif($opts{prop} eq 'peers')
         {
-            my ($error1, $error2);
-            ($opts{info}, $error1) = $rtpg->torrent_info( $opts{current} );
-            ($opts{list}, $error2) = $rtpg->peer_list( $opts{current} );
-
-            $opts{error} = $error1 || $error2 || '';
+            my ($error);
+            ($opts{list}, $error) = $rtpg->peer_list( $opts{current} );
+            $opts{error} ||= $error;
 
             if( cfg->is_geo_ip and eval "require Geo::IPfree" and !$@)
             {
@@ -98,7 +94,6 @@ sub new
                     for keys %{ $opts{index} };
             }
 
-            ($opts{info}, $opts{error}) = $rtpg->torrent_info( $opts{current} );
             ($opts{list}, $opts{error}) = $rtpg->file_list( $opts{current} );
 
             # Tree view simle for HTML usage
