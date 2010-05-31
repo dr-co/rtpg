@@ -56,11 +56,11 @@ msgstr "Закрыть"
 
 #: templates/default/add.tt.html: translate part: #8
 msgid "Adding file"
-msgstr "Добавлен файл"
+msgstr "Добавление файла"
 
 #: templates/default/add.tt.html: translate part: #9
 msgid "Adding link"
-msgstr "Добавлен по ссылке"
+msgstr "Добавление по ссылке"
 
 #: templates/default/add.tt.html: translate part: #10
 msgid "Internal error"
