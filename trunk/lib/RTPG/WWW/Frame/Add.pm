@@ -15,6 +15,7 @@ Class for javascript localization support
 package RTPG::WWW::Frame::Add;
 use RTPG;
 use RTPG::WWW::Config;
+use RTPG::WWW::Locale qw(gettext);
 
 =head2 new
 
@@ -24,21 +25,20 @@ Get params
 
 sub new
 {
-    my ($class) = @_;
+    my ($class, %opts) = @_;
+
+    map { $opts{$_} = cfg->get($_) // '' } qw(file link);
 
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
-    my ($file, $link) = map { cfg->get($_) // '' } qw(file link);
 
-
-    my @added;
-
-    if ($link) {
-        if (my @urls = grep /\S/, split /\s+/, $link) {
+    # Add by links
+    if ($opts{link}) {
+        if (my @urls = grep /\S/, split /\s+/, $opts{link}) {
             for (@urls) {
-                my ($res, $err) = $rtpg->add($_);
-                push @added, {
-                    result  => $res,
-                    error   => $err,
+                my ($result, $error) = $rtpg->add($_);
+                push @{$opts{result}}, {
+                    result  => $result,
+                    error   => $error,
                     torrent => $_,
                     type    => 'link',
                 };
@@ -46,38 +46,37 @@ sub new
         }
     }
 
-    if ($file) {
-        my $fh = cfg->upload('file');
+    # Add by uploaded files
+    if ($opts{file}) {
+        my $fh   = cfg->upload('file');
         my $info = cfg->upload_info('file');
 
         unless (exists $info->{'Content-Type'}) {
-            push @added, {
+            push @{$opts{result}}, {
                 result      => undef,
-                error       => 'Undefined file type',
-                torrent     => $file,
+                error       => gettext('Undefined file type'),
+                torrent     => $opts{file},
                 type        => 'file',
             }
         } elsif ( $info->{'Content-Type'} ne 'application/x-bittorrent') {
-            push @added, {
+            push @{$opts{result}}, {
                 result      => undef,
-                error       => 'This is not torrent file',
-                torrent     => $file,
+                error       => gettext('This is not torrent file'),
+                torrent     => $opts{file},
                 type        => 'file',
             }
         } else {
-            my ($res, $err) = $rtpg->add($fh);
-            push @added, {
-                result      => $res,
-                error       => $err,
-                torrent     => $file,
+            my ($result, $error) = $rtpg->add($fh);
+            push @{$opts{result}}, {
+                result      => $result,
+                error       => gettext($error),
+                torrent     => $opts{file},
                 type        => 'file',
             };
         }
     }
 
-    return bless {
-        added   => \@added,
-    }, $class;
+    my $self = bless \%opts, $class;
 }
 
 1;

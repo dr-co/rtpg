@@ -23,6 +23,7 @@ use open qw(:std :utf8);
 use CGI::Carp qw(fatalsToBrowser);
 use File::Basename;
 use File::Spec;
+use Fcntl qw(:flock);
 
 our $VERSION = "0.2.2";
 our $PROJECT_NAME = "rtpg";
@@ -33,14 +34,11 @@ use RTPG::WWW::Template;
 use RTPG::WWW::Locale;
 use RTPG;
 
-use Fcntl qw(:flock);
-
-# Only one client can follow then
+# Only one client can follow then ##############################################
 flock DATA, LOCK_EX;
 
-my %params = (version => $VERSION);
-
 # Get params ###################################################################
+my %params = (version => $VERSION);
 $params{show} = cfg->get('show') || 'index';
 
 # Load module and get data #####################################################

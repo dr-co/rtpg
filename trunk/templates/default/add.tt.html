@@ -6,6 +6,7 @@
         <colgroup>
             <col width="15%"/>
             <col/>
+            <col width="15%"/>
         </colgroup>
 
         <tbody>
@@ -13,7 +14,7 @@
             <td class="label">
                 <label for="link">[% gettext('Link') %]:</label>
             </td>
-            <td class="input">
+            <td class="input" colspan="2">
                 <textarea rows="4" name="link" id="link"
                     title="[% gettext('One link per line') %]"
                     ></textarea>
@@ -22,71 +23,65 @@
 
         <tr>
             <td/>
-            <td class="note">
+            <td class="note" colspan="2">
                 [%
                   gettext('Note: rTorrent don`t notify you about broken links.')
                   _ ' ' _
                   gettext('Just attempt to load this links.')
                 %]
             </td>
-            <td/>
         </tr>
-
-        <tr><td colspan="2">&nbsp;</td></tr>
 
         <tr>
             <td class="label">
                 <label for="file">[% gettext('File') %]:</label>
             </td>
-            <td class="input">
+            <td class="input" colspan="2">
                 <input type="file" name="file" id="file" />
             </td>
         </tr>
 
         <tr>
-            <td colspan="2">
-                <table width="100%">
-                    <tr>
-                        <td width="50%" align="right">
-                            <button>
-                                <img src="[% config.url.skin.panel %]/add.png" />
-                                [% gettext('Add') %]
-                            </button>
-                        </td>
-                        <td width="50%" align="right">
-                            <button class="close">
-                                <img src="[% config.url.skin.panel %]/close.png" />
-                                [% gettext('Close') %]
-                            </button>
-                        </td>
-                    </tr>
-                </table>
+            <td/>
+            <td class="add">
+                <button>
+                    <img src="[% config.url.skin.panel %]/add.png" />
+                    [% gettext('Add') %]
+                </button>
+            </td>
+            <td class="close">
+                <button class="close">
+                    <img src="[% config.url.skin.panel %]/close.png" />
+                    [% gettext('Close') %]
+                </button>
             </td>
         </tr>
         </tbody>
     </table>
 </form>
 
-
-[% FOREACH one = data.added %]
-    <div class="message" [% IF one.error %]class="error"[% END %]>
-        [% SWITCH one.type %]
+[% FOREACH result = data.result %]
+    [%
+        SET class = ['message'];
+        IF one.error; class.push('error'); END;
+    %]
+    <div class="[% class.join(' ') %]">
+        [% SWITCH result.type %]
             [% CASE 'file' %]
-                [% gettext('Adding file: ') %]
+                [% gettext('Adding file') %]:
             [% CASE 'link' %]
-                [% gettext('Adding link: ') %]
+                [% gettext('Adding link') %]:
             [% CASE DEFAULT %]
-                [% gettext('Internal error: ') %]
+                [% gettext('Internal error') %]:
         [% END %]
-        [% one.torrent %]
-
-        [% IF one.error %]
-            <span class="error"> - [% one.error %]</span>
+        <span class="source">[% result.torrent %]</span>
+        -
+        [% IF result.error %]
+            <span class="error">[% result.error %]</span>
         [% ELSE %]
-            [% gettext('... Done') %]
+            ... [% gettext('Done') %]
         [% END %]
     </div>
 [% END %]
-
 
 </body>

@@ -42,15 +42,24 @@ button img{
 }
 
 /********************************************************************* Common */
-table.keys,
 table.source{
     width: 100%;
     margin-top: 10px;
 }
 
-table.keys button,
-table.source button{
-    width: 100%;
+table.source td.add{
+    text-align: center;
+}
+
+table.source td.close{
+    text-align: right;
+}
+
+table.source tr td.label,
+table.source tr td.input,
+table.source tr td.add,
+table.source tr td.close{
+    padding-top: 30px;
 }
 
 /********************************************************************** Forms */
@@ -75,4 +84,9 @@ div.message{
 
 div.message span.source{
     font-weight: bold;
+}
+
+div.message span.error{
+    font-weight: bold;
+    color: red;
 }
