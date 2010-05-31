@@ -99,7 +99,7 @@ sub new
 
     # Get current skin and check for skin available
     my $skin = $self->get('skin');
-    unless( $self->get('skin') ~~ keys %{$self->skins} )
+    unless( $self->get('skin') ~~ @{[ keys %{$self->skins} ]} )
     {
         $skin = 'default';
         $self->set('skin', $skin);
