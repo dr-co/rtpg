@@ -502,7 +502,7 @@ msgstr "Dmitry E. Oboukhov"
 
 #: templates/default/status.tt.html: translate part: #4
 msgid "Roman V. Nikolaev"
-msgstr "Роман В. Николаев"
+msgstr "Roman V. Nikolaev"
 
 #: templates/default/status.tt.html: translate part: #6
 msgid "Max"

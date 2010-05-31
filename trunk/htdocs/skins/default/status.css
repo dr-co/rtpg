@@ -32,13 +32,7 @@ body {
     font-size: 8pt;
     font-family: sans;
     margin: 0px;
-    padding: 4px;
-}
-
-div {
-    margin-left: 3%;
-    height: 100%;
-    display: table-cell;
+    padding: 0px;
 }
 
 a,
@@ -58,18 +52,33 @@ select {
 }
 
 /********************************************************************* Status */
-#status {
-    float: left;
+
+table.status {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 32px;
+    max-height: 32px;
 }
 
-/****************************************************************** Copyright */
-#copyright {
-    float: right;
-    margin-right: 3%;
+table.status td.version{
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: middle;
 }
 
-/********************************************************************** Speed */
-#speed {
-    float: right;
-    margin-right: 3%;
+table.status td.speed{
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+table.status td.copyright{
+    text-align: right;
+    vertical-align: middle;
+}
+
+table.status td.copyright span.nowrap,
+table.status td.copyright a.nowrap{
+    white-space: nowrap;
 }
