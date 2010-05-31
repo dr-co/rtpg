@@ -571,15 +571,24 @@ sub system_information
     return $res;
 }
 
-=head2 view_list
+=head2 view_list([ARGS])
 
 The method returns information about views in rtorrent.
+There are a few additional named arguments:
+
+=over
+
+=item full
+
+if TRUE, method will return additional information about view.
+
+=back
 
 =cut
 
 sub view_list
 {
-    my ($self)=@_;
+    my ($self, %opts) = @_;
 
     my $info;
 
@@ -592,6 +601,26 @@ sub view_list
         return undef, "$@" if wantarray;
         die $@;
     }
+
+
+    if ($opts{full}) {
+        for (@$info) {
+            my ($tl, $err) = $self->rpc_command(
+                'd.multicall', $_, 'd.get_state='
+            );
+
+            if ($err) {
+                return undef, $err if wantarray;
+                die $err;
+            }
+
+            $_ = {
+                name    => $_,
+                count   => scalar(@$tl)
+            }
+        }
+    }
+
     return $info;
 }
 

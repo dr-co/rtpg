@@ -30,46 +30,18 @@ sub new
     # Get RTPG object
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
     # Get list
-    ($opts{list}, $opts{error}) = $rtpg->view_list();
+    ($opts{list}, $opts{error}) = $rtpg->view_list(full => 1);
 
-    # Remove dublicate
-    my @list = grep { $_ !~ m/^(main|name)$/ } @{ $opts{list} };
-    # Clear object list
-    $opts{list} = [];
+    # removed duplicates
+    @{ $opts{list} } = grep { $_->{name} !~ /^(main|name)$/ } @{ $opts{list} };
 
-    for my $action ( @list )
-    {
-        # Set name to show
-        my $name = ucfirst $action;
-        # Fix name for default action
-        $name = 'All' if $name eq 'Default';
-        # Get count (don`t beat me =) )
-        my ($list, $error) = $rtpg->torrents_list( $action );
-        my $count = ($error) ? '?' : scalar @$list;
-        # Set names and titles for actions
-        push @{ $opts{list} },
-            { action => $action, name => $name, count => $count};
+    # making action and name
+    for (@{ $opts{list} }) {
+        $_->{action} = $_->{name};
+        $_->{name} = ucfirst $_->{name};
     }
 
-    # Add uploaded file
-#    if( $opts{upload} )
-#    {
-#        my $fh = CGI::upload('upload');
-#        unless ($fh)
-#        {
-#            $opts{error} = gettext('Error upload torrent');
-#            last;
-#        }
-#        local $/;
-#
-#        my $torrent = RPC::XML::base64->new(<$fh>);
-#        ($opts{info}, $opts{error}) =
-#            $rtorrent->rpc_command(load_raw => $torrent);
-#    }
-
-    my $self = bless \%opts, $class;
-
-    return $self;
+    return bless \%opts, $class;
 }
 
 1;
