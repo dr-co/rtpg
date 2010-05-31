@@ -37,22 +37,23 @@ sub new
     $opts{folder} = { map { $_ => 'checked' } @folder } if @folder;
 
     {
+        # Exit if no current selected
+        last unless $opts{current};
+
         # Get RTPG object
         my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
         my $error;
 
         # Check exists current
-        ($opts{list}, $error) = $rtpg->torrents_list;
-        $opts{error} ||= $error;
-        unless( grep {$_->{hash} eq $opts{current}} @{ $opts{list} } )
+        ($opts{info}, $error) = $rtpg->torrent_info( $opts{current} );
+        if( $error )
         {
+            $opts{error} ||= $error;
             # Drop current if not in list
             cfg->set('current', '');
             $opts{current} = '';
+            last;
         }
-
-        # Exit if no current selected
-        last unless $opts{current};
 
         # Get info by page name
         if( $opts{prop} eq 'info')
