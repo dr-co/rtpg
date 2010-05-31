@@ -28,18 +28,21 @@
         <meta name="robots"   content="noindex, nofollow" />
 
         <link rel="shortcut icon"
-            href="[% config.url.skin.current %]/favicon.ico" />
+            href="[% config.url.skin.current %]/favicon.ico?[% version %]" />
 
         [% FOR css = config.url.skin.css.list %]
-            <link rel="stylesheet" type="text/css" href="[% css %]" />
+            <link rel="stylesheet" type="text/css"
+                href="[% css %]?[% version %]" />
         [% END %]
 
-        <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="js/jquery/jquery.cookie.js">
-        </script>
+        <script type="text/javascript"
+            src="js/jquery/jquery.min.js?[% version %]"></script>
+        <script type="text/javascript"
+            src="js/jquery/jquery.cookie.js?[% version %]"></script>
 
         [% FOR js = config.url.skin.js.list %]
-            <script type="text/javascript" src="[% js %]"></script>
+            <script type="text/javascript" src="[% js %]?[% version %]">
+            </script>
         [% END %]
     </head>
 
