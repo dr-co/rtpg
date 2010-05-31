@@ -18,6 +18,14 @@ msgstr ""
 msgid "Error upload torrent"
 msgstr "Ошибка загрузки торрента"
 
+#: lib/RTPG/WWW/Frame/Add.pm: translate part: #1
+msgid "Undefined file type"
+msgstr "Неопределен тип файла"
+
+#: lib/RTPG/WWW/Frame/Add.pm: translate part: #2
+msgid "This is not torrent file"
+msgstr "Это не торрент файл"
+
 #: templates/default/add.tt.html: translate part: #1
 msgid "Link"
 msgstr "Ссылка"
@@ -27,36 +35,42 @@ msgid "One link per line"
 msgstr "Одна ссылка на строку"
 
 #: templates/default/add.tt.html: translate part: #3
-msgid "Add"
-msgstr "Добавить"
-
-#: templates/default/add.tt.html: translate part: #4
 msgid "Note: rTorrent don`t notify you about broken links."
 msgstr "Внимание! rTorrent не уведомляет о сломанных ссылках."
 
-#: templates/default/add.tt.html: translate part: #5
+#: templates/default/add.tt.html: translate part: #4
 msgid "Just attempt to load this links."
 msgstr "Только пытается загрузить файлы по этим ссылкам."
 
-#: templates/default/add.tt.html: translate part: #6
+#: templates/default/add.tt.html: translate part: #5
 msgid "File"
 msgstr "Файл"
 
-#: templates/default/add.tt.html: translate part: #8
+#: templates/default/add.tt.html: translate part: #6
+msgid "Add"
+msgstr "Добавить"
+
+#: templates/default/add.tt.html: translate part: #7
 msgid "Close"
 msgstr "Закрыть"
 
-#: templates/default/add.tt.html: translate part: #9
-msgid "Add from file"
+#: templates/default/add.tt.html: translate part: #8
+msgid "Adding file"
 msgstr "Добавлен файл"
 
-#: templates/default/add.tt.html: translate part: #10
-msgid "Add by link"
+#: templates/default/add.tt.html: translate part: #9
+msgid "Adding link"
 msgstr "Добавлен по ссылке"
 
+#: templates/default/add.tt.html: translate part: #10
+msgid "Internal error"
+msgstr "Интервал"
+
 #: templates/default/add.tt.html: translate part: #11
-msgid "Unknown"
-msgstr "Неизвестно"
+#: templates/default/list.tt.html: #10 templates/default/prop.files.tt.html:
+#: #4
+msgid "Done"
+msgstr "Готово"
 
 #: templates/default/error.tt.html: translate part: #1
 msgid "Error"
@@ -103,11 +117,6 @@ msgstr "Размер"
 
 #: templates/default/list.tt.html: translate part: #9
 msgid "Dn"
-msgstr "%"
-
-#: templates/default/list.tt.html: translate part: #10
-#: templates/default/prop.files.tt.html: #4
-msgid "Done"
 msgstr "%"
 
 #: templates/default/list.tt.html: translate part: #11
@@ -586,6 +595,9 @@ msgstr "/"
 
 msgid "s"
 msgstr "с"
+
+#~ msgid "Unknown"
+#~ msgstr "Неизвестно"
 
 #~ msgid "Skip selected torrents"
 #~ msgstr "Остановить выделенные торренты"

@@ -18,6 +18,14 @@ msgstr ""
 msgid "Error upload torrent"
 msgstr "Error upload torrent"
 
+#: lib/RTPG/WWW/Frame/Add.pm: translate part: #1
+msgid "Undefined file type"
+msgstr "Undefined file type"
+
+#: lib/RTPG/WWW/Frame/Add.pm: translate part: #2
+msgid "This is not torrent file"
+msgstr "This is not torrent file"
+
 #: templates/default/add.tt.html: translate part: #1
 msgid "Link"
 msgstr "Link"
@@ -27,36 +35,42 @@ msgid "One link per line"
 msgstr "One link per line"
 
 #: templates/default/add.tt.html: translate part: #3
-msgid "Add"
-msgstr "Add"
-
-#: templates/default/add.tt.html: translate part: #4
 msgid "Note: rTorrent don`t notify you about broken links."
 msgstr "Note: rTorrent don`t notify you about broken links."
 
-#: templates/default/add.tt.html: translate part: #5
+#: templates/default/add.tt.html: translate part: #4
 msgid "Just attempt to load this links."
 msgstr "Just attempt to load this links."
 
-#: templates/default/add.tt.html: translate part: #6
+#: templates/default/add.tt.html: translate part: #5
 msgid "File"
 msgstr "File"
 
-#: templates/default/add.tt.html: translate part: #8
+#: templates/default/add.tt.html: translate part: #6
+msgid "Add"
+msgstr "Add"
+
+#: templates/default/add.tt.html: translate part: #7
 msgid "Close"
 msgstr "Close"
 
+#: templates/default/add.tt.html: translate part: #8
+msgid "Adding file"
+msgstr "Adding file"
+
 #: templates/default/add.tt.html: translate part: #9
-msgid "Add from file"
-msgstr "Add from file"
+msgid "Adding link"
+msgstr "Adding link"
 
 #: templates/default/add.tt.html: translate part: #10
-msgid "Add by link"
-msgstr "Add by link"
+msgid "Internal error"
+msgstr "Internal error"
 
 #: templates/default/add.tt.html: translate part: #11
-msgid "Unknown"
-msgstr "Unknown"
+#: templates/default/list.tt.html: #10 templates/default/prop.files.tt.html:
+#: #4
+msgid "Done"
+msgstr "Done"
 
 #: templates/default/error.tt.html: translate part: #1
 msgid "Error"
@@ -104,11 +118,6 @@ msgstr "Size"
 #: templates/default/list.tt.html: translate part: #9
 msgid "Dn"
 msgstr "Dn"
-
-#: templates/default/list.tt.html: translate part: #10
-#: templates/default/prop.files.tt.html: #4
-msgid "Done"
-msgstr "Done"
 
 #: templates/default/list.tt.html: translate part: #11
 msgid "St"
@@ -586,3 +595,6 @@ msgstr "/"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "Unknown"
+#~ msgstr "Unknown"

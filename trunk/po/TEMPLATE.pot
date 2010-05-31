@@ -4,6 +4,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# #-#-#-#-#  Add.pm.pot (rtpg)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 # #-#-#-#-#  add.tt.html.pot (rtpg)  #-#-#-#-#
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
@@ -91,6 +97,16 @@
 msgid ""
 msgstr ""
 "#-#-#-#-#  Action.pm.pot (rtpg)  #-#-#-#-#\n"
+"Project-Id-Version: rtpg\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  Add.pm.pot (rtpg)  #-#-#-#-#\n"
 "Project-Id-Version: rtpg\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
@@ -244,6 +260,14 @@ msgstr ""
 msgid "Error upload torrent"
 msgstr ""
 
+#: lib/RTPG/WWW/Frame/Add.pm: translate part: #1
+msgid "Undefined file type"
+msgstr ""
+
+#: lib/RTPG/WWW/Frame/Add.pm: translate part: #2
+msgid "This is not torrent file"
+msgstr ""
+
 #: templates/default/add.tt.html: translate part: #1
 msgid "Link"
 msgstr ""
@@ -253,35 +277,41 @@ msgid "One link per line"
 msgstr ""
 
 #: templates/default/add.tt.html: translate part: #3
-msgid "Add"
-msgstr ""
-
-#: templates/default/add.tt.html: translate part: #4
 msgid "Note: rTorrent don`t notify you about broken links."
 msgstr ""
 
-#: templates/default/add.tt.html: translate part: #5
+#: templates/default/add.tt.html: translate part: #4
 msgid "Just attempt to load this links."
 msgstr ""
 
-#: templates/default/add.tt.html: translate part: #6
+#: templates/default/add.tt.html: translate part: #5
 msgid "File"
 msgstr ""
 
-#: templates/default/add.tt.html: translate part: #8
+#: templates/default/add.tt.html: translate part: #6
+msgid "Add"
+msgstr ""
+
+#: templates/default/add.tt.html: translate part: #7
 msgid "Close"
 msgstr ""
 
+#: templates/default/add.tt.html: translate part: #8
+msgid "Adding file"
+msgstr ""
+
 #: templates/default/add.tt.html: translate part: #9
-msgid "Add from file"
+msgid "Adding link"
 msgstr ""
 
 #: templates/default/add.tt.html: translate part: #10
-msgid "Add by link"
+msgid "Internal error"
 msgstr ""
 
 #: templates/default/add.tt.html: translate part: #11
-msgid "Unknown"
+#: templates/default/list.tt.html: #10 templates/default/prop.files.tt.html:
+#: #4
+msgid "Done"
 msgstr ""
 
 #: templates/default/error.tt.html: translate part: #1
@@ -329,11 +359,6 @@ msgstr ""
 
 #: templates/default/list.tt.html: translate part: #9
 msgid "Dn"
-msgstr ""
-
-#: templates/default/list.tt.html: translate part: #10
-#: templates/default/prop.files.tt.html: #4
-msgid "Done"
 msgstr ""
 
 #: templates/default/list.tt.html: translate part: #11

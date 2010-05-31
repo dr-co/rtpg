@@ -69,7 +69,7 @@ sub new
             my ($result, $error) = $rtpg->add($fh);
             push @{$opts{result}}, {
                 result      => $result,
-                error       => gettext($error),
+                error       => $error,
                 torrent     => $opts{file},
                 type        => 'file',
             };
