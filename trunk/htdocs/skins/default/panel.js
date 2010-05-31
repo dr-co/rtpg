@@ -69,13 +69,27 @@ function refresh_frame( iFrame, strCommand )
         break;
     case NUM_LIST_FRAME:
         var objDoc = $(window.parent.frames[ NUM_LIST_FRAME ].document);
+        // For few checked list send request as GET ////////////////////////////
+        if( objDoc.find('#list table.list tbody > tr')
+                .find('> td:first :checkbox:checked').length <= 64)
+        {
+            objDoc.find('#form').attr('method', 'get');
+        }
+        ////////////////////////////////////////////////////////////////////////
         objDoc.find('#do').val(strCommand);
         objDoc.find('#form').submit();
         break;
     case NUM_PROP_FRAME:
         var objDoc = $(window.parent.frames[ NUM_PROP_FRAME ].document);
-        if( objDoc.find('#form').lenght )
+        if( objDoc.find('#form').length )
         {
+            // For few checked list send request as GET ////////////////////////
+            if( objDoc.find('table.files tbody > tr')
+                    .find('> td:first :checkbox:checked').length <= 256)
+            {
+                objDoc.find('#form').attr('method', 'get');
+            }
+            ////////////////////////////////////////////////////////////////////
             objDoc.find('#do').val(strCommand);
             objDoc.find('#form').submit();
         }
