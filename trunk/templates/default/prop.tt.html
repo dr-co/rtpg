@@ -13,7 +13,7 @@
         [% FOR item = menu %]
             [%
                 SET class = ['item', item.name];
-                IF data.prop == item; class.push('selected'); END;
+                IF data.prop == item.name; class.push('selected'); END;
             %]
             <div id="[% item.name %]" class="[% class.join(' ') %]" >
                 [% item.description %]
