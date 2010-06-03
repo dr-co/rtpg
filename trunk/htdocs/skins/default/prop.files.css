@@ -79,6 +79,7 @@ table.files tbody tr.file td.path div.mime {
     margin-left: 2px;
     margin-right: 2px;
     text-align: right;
+    width: 16px;
 }
 
 table.files tbody tr.folder td.path div.mime {
@@ -89,16 +90,22 @@ table.files tbody tr.folder td.path div.mime {
     margin-left: 2px;
     margin-right: 2px;
     text-align: right;
+    width: 16px;
 }
 
-table.files tbody tr.folder td.path div.mime {
+table.files tbody tr.folder.collapsed td.path div.mime {
     background-image: url('mimetypes/folder.png');
     background-repeat: no-repeat;
     background-position: right;
 }
 
-table.files tbody tr.folder.open td.path div.mime {
+table.files tbody tr.folder.expanded td.path div.mime {
     background-image: url('mimetypes/folder-open.png');
     background-repeat: no-repeat;
     background-position: right;
+}
+
+table.files tbody tr td.path span.expander{
+    clear: both;
+    float: left;
 }

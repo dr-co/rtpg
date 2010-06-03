@@ -97,10 +97,11 @@ sub new
 
             # Tree view simle for HTML usage
             my @tree;
-            # Current puth for circle
+            # Current path for circle
             my @g_path;
             # Index for files operations
-            my ($index, $dir_index) = (0, 0);
+            my ($index, $dir_index, $thru_index, $parent_index) = (0, 0, 0, 0);
+            my $last_level = 0;
 
             for my $file ( @{ $opts{list} } )
             {
@@ -117,28 +118,38 @@ sub new
                     {
                         @g_path = splice @g_path,0, $level+1;
 
+                        # Drop parent if in root
+                        $parent_index = 0  unless $level;
+
                         # Add directory in tree
                         my %node = (
-                            level   => $level,
-                            name    => $path[$level],
-                            type    => 'dir',
-                            'index' => $dir_index++,
-                            'open'  => 1,
+                            level       => $level,
+                            name        => $path[$level],
+                            type        => 'dir',
+                            'index'     => $dir_index++,
+                            thru_index  => ++$thru_index,
+                            parent_index => $parent_index,
                         );
                         push @tree, \%node;
+
+                        $parent_index = $thru_index;
                     }
                 }
 
                 # Move to path
                 @g_path = @path;
+                # Drop parent if in root
+                $parent_index = 0  unless scalar(@path);
 
                 # Add file in tree
                 my %node = (
-                    level   => scalar(@path),
-                    name    => $filename,
-                    type    => 'file',
-                    data    => $file,
-                    index   => $index++,
+                    level       => scalar(@path),
+                    name        => $filename,
+                    type        => 'file',
+                    data        => $file,
+                    'index'     => $index++,
+                    thru_index  => ++$thru_index,
+                    parent_index => $parent_index,
                 );
                 $node{complete} = 1 if $file->{percent} eq '100%';
                 $node{dlink} = cfg->get('direct_link') . $file->{path}

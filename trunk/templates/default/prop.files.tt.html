@@ -34,14 +34,22 @@
     [% FOR file = data.tree %]
         [%
             SET class = [];
-            IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END;
-            IF data.file == file.hash; class.push('selected'); END;
+            IF file.type != 'dir';
+                IF file.index % 2; class.push('odd');
+                ELSE;              class.push('even'); END;
+            END;
+            #IF data.file == file.hash; class.push('selected'); END;
+            IF file.parent_index;
+                class.push('child-of-node-' _ file.parent_index);
+            END;
+            # Reque for folder selection
             class.push('level' _ file.level);
         %]
         [% IF file.type == 'dir' %]
-            [% class.push('folder') %]
-            [% IF file.open; class.push('open'); END; %]
-            <tr class="[% class.join(' ') %]">
+            [%
+                class.push('folder');
+            %]
+            <tr id="node-[% file.thru_index %]" class="[% class.join(' ') %]">
                 <td class="select">
                     <input
                         [% IF data.folder.${file.index} %]
@@ -50,9 +58,8 @@
                         type="checkbox" class="folder" name="folder[]"
                         value="[% file.index %]"/>
                 </td>
-                <td colspan="7" class="path">
+                <td colspan="6" class="path">
                     <div class="mime"
-                         style="width: [% (file.level + 1) * 16 %]px"
                          title="folder">
                          &nbsp;
                     </div>
@@ -62,7 +69,7 @@
 
         [% ELSE %]
             [% class.push('file'); %]
-            <tr class="[% class.join(' ') %]">
+            <tr id="node-[% file.thru_index %]" class="[% class.join(' ') %]">
                 <td class="select">
                     <input
                         [% IF data.index.${file.index} %]
@@ -72,7 +79,7 @@
                         value="[% file.index %]"/>
                 </td>
                 <td class="path">
-                    <div class="mime" style="width: [% (file.level + 1) * 16 %]px">
+                    <div class="mime">
                         [% IF file.data.mime %]
                             <img
                                 alt="[% file.data.mime.type | lower %]"

@@ -110,6 +110,8 @@ elsif( $params{show} eq 'prop' )
             last;
         }
     }
+
+    push @{ cfg->{url}{skin}{js} }, 'js/jquery/jquery.treetable.min.js';
 }
 elsif( $params{show} eq 'list' )
 {

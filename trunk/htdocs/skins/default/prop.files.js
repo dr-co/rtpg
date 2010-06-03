@@ -32,8 +32,14 @@ $(document).ready(function(){
         .bind('click', on_folder_click);
 
     // Directories folding
-    $('table.files tbody tr.folder td.path div.mime')
-        .bind('click', on_mime_click);
+//    $('table.files tbody tr.folder td.path div.mime')
+//        .bind('click', on_mime_click);
+
+    $("table.files").treeTable({
+        treeColumn: 1,
+        clickableNodeNames: true,
+        indent: 16
+    });
 
     // On mass select checkbox click
     $('#all_files').bind('change', on_all_change);
@@ -65,7 +71,7 @@ function on_folder_click()
             .attr('checked', objCheckbox.attr('checked'));
     });
 }
-
+/*
 function on_mime_click()
 {
     // Get current row
@@ -90,7 +96,7 @@ function on_mime_click()
             :$(objRow).addClass('folded');
     });
 }
-
+*/
 function call( strCommand )
 {
     // Check for command
