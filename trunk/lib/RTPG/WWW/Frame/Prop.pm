@@ -106,7 +106,6 @@ sub new
             # Index for files operations
             my ($index, $dir_index, $file_index) = (1, 0, 0);
 
-
             for my $file ( @{ $opts{list} } )
             {
                 # Get current file components
@@ -119,8 +118,8 @@ sub new
                 {
                     # Find dir
                     my @chilren = $parent->getAllChildren;
-
-                    my ($node) = grep { $_->getNodeValue->{name} eq $dir } @chilren;
+                    my ($node) =
+                        grep { $_->getNodeValue->{name} eq $dir } @chilren;
 
                     # Skip add dir if it`e exists
                     if( $node )
