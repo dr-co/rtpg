@@ -30,15 +30,22 @@ $(document).ready(function(){
     // Select all subdirectories if click on folder checkbox
     $('table.files tbody tr.folder td.select :checkbox')
         .bind('click', on_folder_click);
+    // Save expanded state
+    $('table.files tbody tr.folder')
+        .bind('click', on_expanded_click);
 
-    // Directories folding
-//    $('table.files tbody tr.folder td.path div.mime')
-//        .bind('click', on_mime_click);
-
+    // Add treeview
     $("table.files").treeTable({
         treeColumn: 1,
         clickableNodeNames: true,
         indent: 16
+    });
+
+    // Restore expanded state
+    $.each(
+        'table.files tbody tr.folder > td.select:first input[name^=expanded]',
+        function(i, objExpanded){
+            alert( $( objExpanded ).val() );
     });
 
     // On mass select checkbox click
@@ -54,7 +61,7 @@ function on_folder_click()
 {
     // Get current row
     var objCheckbox = $(this);
-    var objTr = objCheckbox.parents('tr.folder:first');
+    var objTr       = objCheckbox.parents('tr.folder:first');
 
     // Get corrent direcory level
     var reLevel = new RegExp("level(\\d+)");
@@ -71,32 +78,18 @@ function on_folder_click()
             .attr('checked', objCheckbox.attr('checked'));
     });
 }
-/*
-function on_mime_click()
+
+function on_expanded_click()
 {
-    // Get current row
-    var objDiv = $(this);
-    var objTr = objDiv.parents('tbody tr.folder');
-    // Toggle folding
-    objTr.toggleClass('open');
-
-    // Get corrent direcory level
-    var reLevel = new RegExp("level(\\d+)");
-    var iLevel  = objTr.attr('class').match(reLevel)[1];
-
-    // How/Hide all subdirectories
-    $.each($(objTr).nextAll('tr'), function(i, objRow){
-        // Get row level
-        var iRowLevel = $(objRow).attr('class').match(reLevel)[1];
-        // If level <= current level then it`s not subdir and stop check
-        if(iRowLevel <= iLevel ){ return false; }
-        // Check subdir/subfile
-        (objTr.hasClass('open'))
-            ?$(objRow).removeClass('folded')
-            :$(objRow).addClass('folded');
-    });
+    // Get current row and expahded hidden input
+    var objTr       = $(this);
+    var objExpanded = objTr.find('td.select input[type=hidden]');
+    // Give name for hidden if current folder expanded. With name this hidden
+    // will send on server in next refresh
+    if( objTr.hasClass('expanded') ){ objExpanded.attr('name', 'expanded[]'); }
+    else                            { objExpanded.attr('name', ''); }
 }
-*/
+
 function call( strCommand )
 {
     // Check for command

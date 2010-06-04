@@ -10,6 +10,8 @@ RTPG::WWW::Frame::Prop
 
 package RTPG::WWW::Frame::Prop;
 
+use Tree::Simple;
+
 use RTPG;
 use RTPG::WWW::Config;
 use RTPG::WWW::Locale;
@@ -35,6 +37,10 @@ sub new
     my @folder = cfg->get('folder[]');
     $opts{folder} = {};
     $opts{folder} = { map { $_ => 'checked' } @folder } if @folder;
+    # Get expanded folder indexes
+    my @expanded = cfg->get('expanded[]');
+    $opts{expanded} = {};
+    $opts{expanded} = { map { $_ => 'expanded' } @expanded } if @expanded;
 
     {
         # Exit if no current selected
@@ -95,72 +101,72 @@ sub new
 
             ($opts{list}, $opts{error}) = $rtpg->file_list( $opts{current} );
 
-            # Tree view simle for HTML usage
-            my @tree;
-            # Current path for circle
-            my @g_path;
+            # Create folders tree
+            my $tree = Tree::Simple->new("0", Tree::Simple->ROOT);
             # Index for files operations
-            my ($index, $dir_index, $thru_index, $parent_index) = (0, 0, 0, 0);
-            my $last_level = 0;
+            my ($index, $dir_index, $file_index) = (1, 0, 0);
+
 
             for my $file ( @{ $opts{list} } )
             {
                 # Get current file components
                 my @path        = @{ $file->{path_components} };
                 my $filename    = pop @path;
+                my $parent      = $tree;
 
-                # Make catalog and left padding
-                for(my $level = 0; $level < @path; $level++)
+                # Add dirs
+                for my $dir (@path)
                 {
-                    # For new path, drop deep catalog and add new path
-                    if( !exists $g_path[$level] or
-                        $path[$level] ne $g_path[$level] )
+                    # Find dir
+                    my @chilren = $parent->getAllChildren;
+
+                    my ($node) = grep { $_->getNodeValue->{name} eq $dir } @chilren;
+
+                    # Skip add dir if it`e exists
+                    if( $node )
                     {
-                        @g_path = splice @g_path,0, $level+1;
-
-                        # Drop parent if in root
-                        $parent_index = 0  unless $level;
-
-                        # Add directory in tree
-                        my %node = (
-                            level       => $level,
-                            name        => $path[$level],
-                            type        => 'dir',
-                            'index'     => $dir_index++,
-                            thru_index  => ++$thru_index,
-                            parent_index => $parent_index,
-                        );
-                        push @tree, \%node;
-
-                        $parent_index = $thru_index;
+                        $parent = $node;
+                        next;
                     }
+
+                    # Add new dir and set as parent
+                    my %data = (
+                        name        => $dir,
+                        level       => $parent->getDepth + 1,
+                        type        => 'folder',
+                        dindex      => $dir_index++,
+                        index       => $index++,
+                        parent      => ($parent->isRoot)
+                                            ?0
+                                            :$parent->getNodeValue->{'index'},
+                    );
+                    $node = Tree::Simple->new(\%data);
+                    $parent->addChild( $node );
+                    $parent = $node;
                 }
 
-                # Move to path
-                @g_path = @path;
-                # Drop parent if in root
-                $parent_index = 0  unless scalar(@path);
-
-                # Add file in tree
-                my %node = (
-                    level       => scalar(@path),
+                # Add file
+                my %data = (
                     name        => $filename,
+                    level       => $parent->getDepth + 1,
                     type        => 'file',
+                    findex      => $file_index++,
+                    index       => $index++,
+                    parent      => ($parent->isRoot)
+                                        ?0
+                                        :$parent->getNodeValue->{'index'},
                     data        => $file,
-                    'index'     => $index++,
-                    thru_index  => ++$thru_index,
-                    parent_index => $parent_index,
                 );
-                $node{complete} = 1 if $file->{percent} eq '100%';
-                $node{dlink} = cfg->get('direct_link') . $file->{path}
-                    if cfg->get('direct_link') and $node{complete} and
+                $data{complete} = 1 if $file->{percent} eq '100%';
+                $data{dlink} = cfg->get('direct_link') . $file->{path}
+                    if cfg->get('direct_link') and $data{complete} and
                        $opts{info}{complete};
-
-                push @tree, \%node;
-#DieDumper \@tree, \@g_path, \@path, $filename if $filename =~ m{\.pdf};
+                my $node = Tree::Simple->new(\%data);
+                $parent->addChild( $node );
             }
 
-            $opts{tree} = \@tree;
+            # Map tree to list
+            $tree->traverse( sub{ push @{$opts{tree}}, shift->getNodeValue; } );
         }
         elsif($opts{prop} eq 'trackers')
         {

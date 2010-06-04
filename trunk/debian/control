@@ -11,7 +11,8 @@ Package: rtpg-www
 Architecture: all
 Depends: librpc-xml-perl, libjson-xs-perl, libjs-jquery, libtemplate-perl,
  rtorrent (>= 0.7.9), debconf, apache2 | httpd, ${misc:Depends},
- liblocale-po-perl, libgeo-ipfree-perl, libmime-types-perl, famfamfam-flag-png
+ liblocale-po-perl, libgeo-ipfree-perl, libmime-types-perl, famfamfam-flag-png,
+ libtree-simple-perl
 Recommends: libapache2-mod-scgi, apache2
 Description: web based front end for rTorrent
  RTPG (rTorrent Perl GUI) is a simple web interface for rTorrent. Users

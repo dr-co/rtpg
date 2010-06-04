@@ -31,78 +31,79 @@
     </thead>
 
     <tbody>
-    [% FOR file = data.tree %]
+    [% FOR node = data.tree %]
         [%
             SET class = [];
-            IF file.type != 'dir';
-                IF file.index % 2; class.push('odd');
+            IF node.type != 'folder';
+                IF node.findex % 2; class.push('odd');
                 ELSE;              class.push('even'); END;
             END;
-            #IF data.file == file.hash; class.push('selected'); END;
-            IF file.parent_index;
-                class.push('child-of-node-' _ file.parent_index);
+            IF node.parent;
+                class.push('child-of-node-' _ node.parent);
             END;
             # Reque for folder selection
-            class.push('level' _ file.level);
+            class.push('level' _ node.level);
         %]
-        [% IF file.type == 'dir' %]
+
+        [% IF node.type == 'folder' %]
             [%
                 class.push('folder');
             %]
-            <tr id="node-[% file.thru_index %]" class="[% class.join(' ') %]">
+            <tr id="node-[% node.index %]" class="[% class.join(' ') %]">
                 <td class="select">
                     <input
-                        [% IF data.folder.${file.index} %]
+                        [% IF data.folder.${node.dindex} %]
                             checked="checked"
                         [% END %]
                         type="checkbox" class="folder" name="folder[]"
-                        value="[% file.index %]"/>
+                        value="[% node.dindex %]"/>
+                    <input type="hidden" value="[% node.dindex %]"
+                        [% IF data.expanded.${node.dindex} %]
+                            name="expanded[]"
+                        [% END %]/>
                 </td>
                 <td colspan="6" class="path">
-                    <div class="mime"
-                         title="folder">
-                         &nbsp;
-                    </div>
-                    [% file.name %]
+                    <div class="mime">&nbsp;</div>
+                    [% node.name %]
                 </td>
             </tr>
 
         [% ELSE %]
             [% class.push('file'); %]
-            <tr id="node-[% file.thru_index %]" class="[% class.join(' ') %]">
+            <tr id="node-[% node.index %]" class="[% class.join(' ') %]">
                 <td class="select">
                     <input
-                        [% IF data.index.${file.index} %]
+                        [% IF data.index.${node.findex} %]
                             checked="checked"
                         [% END %]
                         type="checkbox" name="index[]"
-                        value="[% file.index %]"/>
+                        value="[% node.findex %]"/>
                 </td>
                 <td class="path">
                     <div class="mime">
-                        [% IF file.data.mime %]
+                        [% IF node.data.mime %]
                             <img
-                                alt="[% file.data.mime.type | lower %]"
-                                title="[% file.data.mime.type %]"
+                                alt="[% node.data.mime.type | lower %]"
+                                title="[% node.data.mime.type %]"
                                 src="[% config.url.skin.mime _ '/' _
-                                        file.data.mime.mediaType _ '.png' | lower %]"
+                                        node.data.mime.mediaType _ '.png' | lower %]"
                             />
                         [% END %]
                     </div>
-                    [% IF file.dlink %]<a href="[% file.dlink %]">[% END %]
-                    [% file.name %]
-                    [% IF file.dlink %]</a>[% END %]
+                    [% IF node.dlink %]<a href="[% node.dlink %]">[% END %]
+                    [% node.name %]
+                    [% IF node.dlink %]</a>[% END %]
                 </td>
-                <td class="size">[% file.data.size_bytes.as_human_size %]</td>
+                <td class="size">[% node.data.size_bytes.as_human_size %]</td>
                 <td class="percent">
-                    [% file.data.percent %]
+                    [% node.data.percent %]
                     <div class="indicator">
                         <div class="percent"
-                            style="width: [% file.data.percent %];"/>
+                            style="width: [% node.data.percent %];"/>
                     </div>
                 </td>
-                <td class="chunks">[% file.data.size_chunks %]</td>
-                <td class="priority">[% gettext(file.data.priority_str) %]</td>
+                <td class="chunks">[% node.data.size_chunks %]</td>
+                <td class="priority">[% gettext(node.data.priority_str) %]</td>
             </tr>
         [% END %]
     [% END %]
