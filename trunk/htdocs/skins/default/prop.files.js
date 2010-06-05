@@ -42,11 +42,12 @@ $(document).ready(function(){
     });
 
     // Restore expanded state
-//    $.each(
-//        'table.files tbody tr.folder > td.select:first input[name^=expanded]',
-//        function(i, objExpanded){
-//            alert( $( objExpanded ).val() );
-//    });
+    $.each(
+        $('table.files tbody tr.folder')
+            .find('> td.select:first input[name=expanded\[\]]'),
+        function(i, objExpanded){
+            $( objExpanded ).parents('td:first').siblings('td.path').click();
+    });
 
     // On mass select checkbox click
     $('#all_files').bind('change', on_all_change);

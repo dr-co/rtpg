@@ -121,7 +121,7 @@ sub new
                     my ($node) =
                         grep { $_->getNodeValue->{name} eq $dir } @chilren;
 
-                    # Skip add dir if it`e exists
+                    # Skip add dir if it`s exists
                     if( $node )
                     {
                         $parent = $node;
