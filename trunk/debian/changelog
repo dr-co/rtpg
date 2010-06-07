@@ -1,3 +1,9 @@
+rtpg (0.2.4-1) experimental; urgency=low
+
+  * detecting if upload file is torrent processes more properly.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Mon, 07 Jun 2010 12:33:22 +0400
+
 rtpg (0.2.3-1) experimental; urgency=low
 
   * A few speed optimizations and bugfixes.
