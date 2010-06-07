@@ -72,6 +72,26 @@ div.properties table tbody tr.even td.address {
     background-color: #f0f0f0;
 }
 
+/****************************************************************** Hover row */
+
+div.properties table tbody tr:hover td.size,
+div.properties table tbody tr:hover td.percent,
+div.properties table tbody tr:hover td.chunks,
+div.properties table tbody tr:hover td.priority,
+div.properties table tbody tr:hover td.client,
+div.properties table tbody tr:hover td.flag,
+div.properties table tbody tr:hover td.down_speed,
+div.properties table tbody tr:hover td.up_speed,
+div.properties table tbody tr:hover td.peer_rate,
+div.properties table tbody tr:hover td.down_total,
+div.properties table tbody tr:hover td.up_total,
+div.properties table tbody tr:hover td.peer_total,
+div.properties table tbody tr:hover td.enabled,
+div.properties table tbody tr:hover td.interval,
+div.properties table tbody tr:hover td.last_update {
+    background-color: #f0f0f0;
+}
+
 /********************************************************** Percent indicator */
 div.properties table tbody td.percent div.indicator
 {
