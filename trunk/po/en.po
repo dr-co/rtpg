@@ -590,9 +590,3 @@ msgstr "/"
 
 msgid "s"
 msgstr "s"
-
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgid "Unknown"
-#~ msgstr "Unknown"

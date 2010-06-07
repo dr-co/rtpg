@@ -590,12 +590,3 @@ msgstr "/"
 
 msgid "s"
 msgstr "с"
-
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgid "Unknown"
-#~ msgstr "Неизвестно"
-
-#~ msgid "Skip selected torrents"
-#~ msgstr "Остановить выделенные торренты"
