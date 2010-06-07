@@ -34,28 +34,23 @@
         title="[% gettext('Refresh') %]"/>
 </div>
 <div id="settings">
-    <select id="refresh" title="[% gettext('Select refresh interval') | html %]">
-        [% SET str_sec = gettext('sec.') %]
-        [% SET str_min = gettext('min.') %]
-        [% SET time = [
-                {'0'     => gettext('Never')},
-                {'10'    => '10 ' _ str_sec},
-                {'30'    => '30 ' _ str_sec},
-                {'60'    => '1  ' _ str_min},
-                {'180'   => '3  ' _ str_min},
-                {'300'   => '5  ' _ str_min},
-                {'600'   => '10 ' _ str_min},
-                {'1800'  => '30 ' _ str_min},
-            ]
+    <select id="layout" title="[% gettext('Select layout') | html %]">
+        [%
+            SET layout = {
+                '0'    => gettext('All'),
+                '1'    => gettext('List'),
+                '2'    => gettext('List and Properties'),
+                '3'    => gettext('List and Action'),
+            };
         %]
-        [% FOR tm = time %]
-            <option
-                value="[% tm.keys.0 %]"
-                [% IF data.refresh == tm.keys.0 %]selected="selected"[% END %]>
-                    [% tm.values.0 %]
+        [% FOR ly IN layout %]
+            <option value="[% ly.key %]"
+                [% IF data.layout == ly.key %]selected="selected"[% END %]>
+                [% ly.value %]
             </option>
         [% END %]
     </select>
+
     [% IF skins.size > 1 %]
         <select id="skin" title="[% gettext('Select skin') | html %]">
             [% FOR sk IN skins %]
@@ -67,6 +62,7 @@
             [% END %]
         </select>
     [% END %]
+
     <select id="locale" title="[% gettext('Select language') | html %]">
         [% FOR lg = langs %]
             <option
