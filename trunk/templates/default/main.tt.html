@@ -46,6 +46,23 @@
         [% END %]
     </head>
 
-    [% content || '<body/>' %]
+    [% IF show != 'index' %]
+        [%
+            # Class for body
+            SET class = show;
+            # For Prop frame set class by current property page
+            IF show == 'prop'; class = data.prop; END;
+        %]
+
+        <body [% IF class %]class="[% class %]"[% END %]>
+    [% END %]
+
+        [% content %]
+
+    [% IF show != 'index' %]
+            <div id="refreshing" class="refreshing" />
+        </body>
+    [% END %]
+
 </html>
 [% END %]

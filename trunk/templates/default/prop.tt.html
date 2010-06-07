@@ -1,55 +1,53 @@
-<body class="[% data.prop %]">
-    <div class="inlays">
-        [% # Menu
-            SET menu = [
-                { name => 'info',       description => gettext('Info')      },
-                { name => 'peers',      description => gettext('Peers')     },
-                { name => 'files',      description => gettext('Files')     },
-                { name => 'trackers',   description => gettext('Trackers')  },
-                #{ name => 'chunks',     description => gettext('Chunks')    },
-                #{ name => 'transfer',   description => gettext('Transfer')  },
-            ];
+<div class="inlays">
+    [% # Menu
+        SET menu = [
+            { name => 'info',       description => gettext('Info')      },
+            { name => 'peers',      description => gettext('Peers')     },
+            { name => 'files',      description => gettext('Files')     },
+            { name => 'trackers',   description => gettext('Trackers')  },
+            #{ name => 'chunks',     description => gettext('Chunks')    },
+            #{ name => 'transfer',   description => gettext('Transfer')  },
+        ];
+    %]
+    [% FOR item = menu %]
+        [%
+            SET class = ['item', item.name];
+            IF data.prop == item.name; class.push('selected'); END;
         %]
-        [% FOR item = menu %]
-            [%
-                SET class = ['item', item.name];
-                IF data.prop == item.name; class.push('selected'); END;
-            %]
-            <div id="[% item.name %]" class="[% class.join(' ') %]" >
-                [% item.description %]
-            </div>
-        [% END %]
-        [% IF data.prop == 'files' %]
-            <div class="priority">
-                <input type="button" class="inlays priority off"
-                    title="[% gettext('Skip selected files') %]"/>
-                <input type="button" class="inlays priority normal"
-                    title="[% gettext('Set normal priority for selected files') %]"/>
-                <input type="button" class="inlays priority high"
-                    title="[% gettext('Set high priority for selected files') %]"/>
-
-            </div>
-        [% END %]
-    </div>
-    [% UNLESS data.current && data.info %]
-        <div class="message">
-            [% UNLESS data.current %]
-                <br/>
-                <br/>
-                [% gettext('Select torrent to show') %]
-            [% END %]
-        </div>
-    [% ELSE %]
-        <div class="properties [% data.prop %]">
-            [% SWITCH data.prop;
-                CASE 'info';     INCLUDE 'prop.info.tt.html';
-                CASE 'peers';    INCLUDE 'prop.peers.tt.html';
-                CASE 'files';    INCLUDE 'prop.files.tt.html';
-                CASE 'trackers'; INCLUDE 'prop.trackers.tt.html';
-                CASE 'chunks';   INCLUDE 'prop.chunks.tt.html';
-                CASE 'transfer'; INCLUDE 'prop.transfer.tt.html';
-                CASE DEFAULT;    gettext('Unknown property page');
-            END %]
+        <div id="[% item.name %]" class="[% class.join(' ') %]" >
+            [% item.description %]
         </div>
     [% END %]
-</body>
+    [% IF data.prop == 'files' %]
+        <div class="priority">
+            <input type="button" class="inlays priority off"
+                title="[% gettext('Skip selected files') %]"/>
+            <input type="button" class="inlays priority normal"
+                title="[% gettext('Set normal priority for selected files') %]"/>
+            <input type="button" class="inlays priority high"
+                title="[% gettext('Set high priority for selected files') %]"/>
+
+        </div>
+    [% END %]
+</div>
+[% UNLESS data.current && data.info %]
+    <div class="message">
+        [% UNLESS data.current %]
+            <br/>
+            <br/>
+            [% gettext('Select torrent to show') %]
+        [% END %]
+    </div>
+[% ELSE %]
+    <div class="properties [% data.prop %]">
+        [% SWITCH data.prop;
+            CASE 'info';     INCLUDE 'prop.info.tt.html';
+            CASE 'peers';    INCLUDE 'prop.peers.tt.html';
+            CASE 'files';    INCLUDE 'prop.files.tt.html';
+            CASE 'trackers'; INCLUDE 'prop.trackers.tt.html';
+            CASE 'chunks';   INCLUDE 'prop.chunks.tt.html';
+            CASE 'transfer'; INCLUDE 'prop.transfer.tt.html';
+            CASE DEFAULT;    gettext('Unknown property page');
+        END %]
+    </div>
+[% END %]
