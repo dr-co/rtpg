@@ -193,6 +193,7 @@ function on_change_refresh()
     {
         idRefreshTimer = setInterval(
             function(){
+                refresh_frame(NUM_ACTION_FRAME, 'refresh');
                 refresh_frame(NUM_LIST_FRAME, 	'refresh');
                 refresh_frame(NUM_PROP_FRAME, 	'refresh');
                 refresh_frame(NUM_STATUS_FRAME, 'refresh');
