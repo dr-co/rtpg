@@ -2,6 +2,8 @@ use warnings;
 use strict;
 use utf8;
 
+
+
 =head1 NAME
 
 RTPG::WWW::Frame::Add
@@ -58,7 +60,7 @@ sub new
                 torrent     => $opts{file},
                 type        => 'file',
             }
-        } elsif ( $info->{'Content-Type'} ne 'application/x-bittorrent') {
+        } elsif ( !__PACKAGE__->_check_if_bencoded($fh) ) {
             push @{$opts{result}}, {
                 result      => undef,
                 error       => gettext('This is not torrent file'),
@@ -78,5 +80,64 @@ sub new
 
     my $self = bless \%opts, $class;
 }
+
+
+=head2 _check_if_bencoded
+
+private function. returns FALSE if input data isn't torrent file.
+It will be rewritten if L<Convert::Bencode> is added into Debian.
+
+=cut
+
+sub _check_if_bencoded {
+    my ($self, $data) = @_;
+
+    return undef unless defined $data;
+
+    # input data is FILE object
+    if (ref $data) {
+        local $/;
+        binmode $data;
+        my $d = <$data>;
+        seek $data, 0, 0; # reseek for next using
+        return $self->_check_if_bencoded($d);
+    }
+
+    # TRUE if recurse call is detected
+    my $req_call = (caller 0)[3] ~~ (caller 1)[3];
+
+    # bencode parser
+    for (my $i = 0; $i < length $data; $i++) {
+        my $ss = substr $data, $i;
+        # integers
+        if ($ss =~ /^(i-?\d+e)/) {
+            $i += -1 + length $1;
+            next;
+        }
+        # strings
+        if ($ss =~ /^(\d+):/) {
+            my $nl = $1 + 1 + length $1;
+            return undef if $nl >= length $ss;
+            $i += $nl - 1;
+            next;
+        }
+        # lists and hashes
+        if ($ss =~ /^([ld])/) {
+            return undef unless 2 < length $ss;
+            $ss = substr $ss, 1;
+            my $r = $self->_check_if_bencoded($ss);
+            return undef unless defined $r;
+            return undef if $i + $r + 1 >= length $data;
+            return undef unless 'e' eq substr $data, $i + $r + 1, 1;
+            $i += $r + 2 - 1;
+            next;
+        }
+
+        return $i if $req_call;
+        return undef;
+    }
+    return length $data;
+}
+
 
 1;

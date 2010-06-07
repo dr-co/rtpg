@@ -66,54 +66,51 @@ use Encode qw(decode encode);
 
 sub new
 {
-	my $inv=shift;
-	my $class=ref($inv) || $inv;
-	my %opts=@_;
+    my $inv   = shift;
+    my $class = ref($inv) || $inv;
+    my %opts  = @_;
 
-	for (keys %opts)
-	{
-		croak "Unknown option name: $_" unless /^(url)$/;
-	}
+    for ( keys %opts ) {
+        croak "Unknown option name: $_" unless /^(url)$/;
+    }
     return bless \%opts, $class;
 }
 
 sub _connect_to
 {
-	my $self=shift;
-	my $c;
-	if ($self->{url} =~ m{ ^/ }x)
-	{
-		require IO::Socket::UNIX;
-		$c=IO::Socket::UNIX->new(Peer => $self->{url});
-	}
-	else
-	{
-		require IO::Socket::INET;
-	    $c = IO::Socket::INET->new(PeerAddr => $self->{url});
-	}
-	$self->{connect_error}=decode utf8=> $! unless $c;
+    my $self = shift;
+    my $c;
+    if ( $self->{url} =~ m{ ^/ }x ) {
+        require IO::Socket::UNIX;
+        $c = IO::Socket::UNIX->new( Peer => $self->{url} );
+    } else {
+        require IO::Socket::INET;
+        $c = IO::Socket::INET->new( PeerAddr => $self->{url} );
+    }
+    $self->{connect_error} = decode utf8 => $! unless $c;
     return $c;
 }
 
 sub send_request
 {
-    my ($self, $command, @args)=@_;
+    my ( $self, $command, @args ) = @_;
 
-    my $request=RPC::XML::request->new($command, @args)->as_string;
-    my $c=$self->_connect_to;
+    my $request = RPC::XML::request->new( $command, @args )->as_string;
+    my $c = $self->_connect_to;
     return sprintf "Can not connect to %s: %s",
-        $self->{url}, $self->{connect_error} unless $c;
+        $self->{url}, $self->{connect_error}
+        unless $c;
 
-    my $header=sprintf "CONTENT_LENGTH\0%d\0SCGI\0" . "1\0",
-        length $request;
+    my $header = sprintf "CONTENT_LENGTH\0%d\0SCGI\0" . "1\0", length $request;
     my $hl;
     { use bytes; $hl = length $header; }
 
     print $c "$hl:$header,$request";
-    
-    my $response; { local $/; $response = <$c> };
-    $response=(split /\n\s?\n/, $response, 2)[1];
-    my $result=RPC::XML::ParserFactory->new()->parse($response);
+
+    my $response;
+    { local $/; $response = <$c> };
+    $response = ( split /\n\s?\n/, $response, 2 )[1];
+    my $result = RPC::XML::ParserFactory->new()->parse($response);
 
     return $result->{value} if 'RPC::XML::fault' eq ref $result->{value};
     return $result->{value};
