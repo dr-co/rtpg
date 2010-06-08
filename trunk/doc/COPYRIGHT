@@ -44,7 +44,7 @@ http://www.gnu.org/licenses/gpl.html
 
 
 
-htdocs/js/jquery.tablesorter.js
+htdocs/js/jquery.tablesorter.min.js
 
 TableSorter 2.0 - Client-side table sorting with ease!
 
