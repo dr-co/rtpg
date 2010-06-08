@@ -58,23 +58,6 @@
         [% END %]
     </select>
 
-    <select id="layout" title="[% gettext('Select layout') | html %]">
-        [%
-            SET layout = {
-                '0'    => gettext('All'),
-                '1'    => gettext('List'),
-                '2'    => gettext('List and Properties'),
-                '3'    => gettext('List and Action'),
-            };
-        %]
-        [% FOR ly IN layout %]
-            <option value="[% ly.key %]"
-                [% IF data.layout == ly.key %]selected="selected"[% END %]>
-                [% ly.value %]
-            </option>
-        [% END %]
-    </select>
-
     [% IF skins.size > 1 %]
         <select id="skin" title="[% gettext('Select skin') | html %]">
             [% FOR sk IN skins %]
