@@ -13,3 +13,89 @@ GNU General Public License for more details.
 
 On Debian systems, the complete text of the GNU General
 Public License can be found in `/usr/share/common-licenses/GPL'.
+
+
+
+Logo designed by Vitoshnev K.S. <vks.skv@rambler.ru>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+On Debian systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.
+
+
+
+htdocs/js/jquery.cookie.js
+
+Cookie plugin
+
+Copyright (c) 2006 Klaus Hartl (stilbuero.de)
+Dual licensed under the MIT and GPL licenses:
+http://www.opensource.org/licenses/mit-license.php
+http://www.gnu.org/licenses/gpl.html
+
+
+
+htdocs/js/jquery.tablesorter.js
+
+TableSorter 2.0 - Client-side table sorting with ease!
+
+Copyright (c) 2007 Christian Bach
+Examples and docs at: http://tablesorter.com
+Dual licensed under the MIT and GPL licenses:
+http://www.opensource.org/licenses/mit-license.php
+http://www.gnu.org/licenses/gpl.html
+
+
+
+htdocs/js/jquery.treetable.min.js
+
+jQuery treeTable Plugin 2.2.2
+
+This plugin is released under the MIT license by Ludo van den Boom
+http://ludo.cubicphuse.nl/jquery-plugins/treeTable/
+
+
+
+htdocs/skins/default/mimetypes
+htdocs/skins/default/panel
+htdocs/skins/default/status
+
+http://download.gnome.org/sources/gnome-icon-theme/
+
+Copyright © 2002-2008:
+   Ulisse Perusin <uli.peru@gmail.com>
+   Riccardo Buzzotta <raozuzu@yahoo.it>
+   Josef Vybíral <cornelius@vybiral.info>
+   Hylke Bons <h.bons@student.rug.nl>
+   Ricardo González <rick@jinlabs.com>
+   Lapo Calamandrei <calamandrei@gmail.com>
+   Rodney Dawes <dobey@novell.com>
+   Luca Ferretti <elle.uca@libero.it>
+   Tuomas Kuosmanen <tigert@gimp.org>
+   Andreas Nilsson <nisses.mail@home.se>
+   Jakub Steiner <jimmac@novell.com>
+
+Copyright:
+
+   This package is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; version 2 dated June, 1991.
+
+   This package is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this package; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
+   USA.

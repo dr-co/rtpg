@@ -7,15 +7,17 @@ use utf8;
 RTPG::WWW::Config configuration module.
 
 =cut
+
 package RTPG::WWW::Config;
 use base qw(Exporter);
 
 use CGI;
-$CGI::DISABLE_UPLOADS = 0;
-$CGI::POST_MAX = 67108864; #64Mb
-$CGI::PRIVATE_TEMPFILES = 1;
-$CGI::CLOSE_UPLOAD_FILES = 0;
-$CGI::HEADERS_ONCE = 0;
+# Set CGI file upload parameters
+$CGI::DISABLE_UPLOADS       = 0;
+$CGI::POST_MAX              = 67108864; #64Mb
+$CGI::PRIVATE_TEMPFILES     = 1;
+$CGI::CLOSE_UPLOAD_FILES    = 0;
+$CGI::HEADERS_ONCE          = 0;
 
 use File::Basename;
 use File::Spec;
@@ -350,3 +352,26 @@ sub Dumper
 }
 
 1;
+
+=head1 AUTHORS
+
+Copyright (C) 2008 Dmitry E. Oboukhov <unera@debian.org>,
+
+Copyright (C) 2008 Nikolaev Roman <rshadow@rambler.ru>
+
+=head1 LICENSE
+
+This program is free software: you can redistribute  it  and/or  modify  it
+under the terms of the GNU General Public License as published by the  Free
+Software Foundation, either version 3 of the License, or (at  your  option)
+any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even  the  implied  warranty  of  MERCHANTABILITY  or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public  License  for
+more details.
+
+You should have received a copy of the GNU  General  Public  License  along
+with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+=cut

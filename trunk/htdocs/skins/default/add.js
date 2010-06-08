@@ -23,7 +23,7 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
-    This file contain java scripts for frame 'Add'
+    This file contain java scripts for Add dialog
 */
 
 $(document).ready(function(){

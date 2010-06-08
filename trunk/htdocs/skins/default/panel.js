@@ -22,35 +22,34 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-/*
-    This file contain java scripts for Action frame
-*/
-const NUM_INDEX_FRAME	= 0;
-const NUM_ACTION_FRAME	= 1;
-const NUM_LIST_FRAME 	= 2;
-const NUM_PROP_FRAME 	= 3;
-const NUM_STATUS_FRAME 	= 4;
+/* This file contain java scripts for Panel frame */
+
+const NUM_INDEX_FRAME   = 0;
+const NUM_ACTION_FRAME  = 1;
+const NUM_LIST_FRAME    = 2;
+const NUM_PROP_FRAME    = 3;
+const NUM_STATUS_FRAME  = 4;
 
 var idRefreshTimer;
 
 $(document).ready(function(){
     // Panel buttons
-    $('input.panel.add')			.bind('click', on_add);
-    $('input.panel.delete')			.bind('click', function(){ call('delete')});
-    $('input.panel.start')			.bind('click', function(){ call('start') });
-    $('input.panel.pause')			.bind('click', function(){ call('pause') });
-    $('input.panel.stop')			.bind('click', function(){ call('stop')	 });
-    $('input.panel.check')			.bind('click', function(){ call('check') });
+    $('input.panel.add')            .bind('click', on_add);
+    $('input.panel.delete')         .bind('click', function(){ call('delete')});
+    $('input.panel.start')          .bind('click', function(){ call('start') });
+    $('input.panel.pause')          .bind('click', function(){ call('pause') });
+    $('input.panel.stop')           .bind('click', function(){ call('stop')  });
+    $('input.panel.check')          .bind('click', function(){ call('check') });
     $('input.panel.priority.off')   .bind('click', function(){ call('off')   });
     $('input.panel.priority.low')   .bind('click', function(){ call('low')   });
     $('input.panel.priority.normal').bind('click', function(){ call('normal')});
     $('input.panel.priority.high')  .bind('click', function(){ call('high')  });
-    $('input.panel.refresh')		.bind('click', on_refresh);
+    $('input.panel.refresh')        .bind('click', on_refresh);
 
     // Additional params
-    $('#locale')					.bind('change', on_change_locale);
-    $('#refresh')					.bind('change', on_change_refresh);
-    $('#skin')						.bind('change', on_change_skin);
+    $('#locale')                    .bind('change', on_change_locale);
+    $('#refresh')                   .bind('change', on_change_refresh);
+    $('#skin')                      .bind('change', on_change_skin);
 
     // Start refresh timer
     $('#refresh').change();
@@ -120,9 +119,9 @@ function call( strCommand )
 
     // If some checkboxs selected then submit form
     if( objDocList.find('input[name="hash[]"]:checked').length ){
-        refresh_frame(NUM_LIST_FRAME, 	strCommand);
+        refresh_frame(NUM_LIST_FRAME,   strCommand);
         refresh_frame(NUM_ACTION_FRAME, 'refresh');
-        refresh_frame(NUM_PROP_FRAME, 	'refresh');
+        refresh_frame(NUM_PROP_FRAME,   'refresh');
     }
     else{
         // Get current torrent hash
@@ -131,7 +130,7 @@ function call( strCommand )
         // If have current selected torrent then send them
         if( objCheckbox.length ){
             refresh_frame(NUM_ACTION_FRAME, 'refresh');
-            refresh_frame(NUM_PROP_FRAME, 	'refresh');
+            refresh_frame(NUM_PROP_FRAME,   'refresh');
             window.parent.frames[ NUM_LIST_FRAME   ].document.location =
                 'index.cgi?show=list' +
                 '&do=' + strCommand +
@@ -160,9 +159,9 @@ function on_add()
 
     // If return TRUE then reftesh all frames
     if(retVal){
-        refresh_frame(NUM_LIST_FRAME, 	'refresh');
+        refresh_frame(NUM_LIST_FRAME,   'refresh');
         refresh_frame(NUM_ACTION_FRAME, 'refresh');
-        refresh_frame(NUM_PROP_FRAME, 	'refresh');
+        refresh_frame(NUM_PROP_FRAME,   'refresh');
     }
 }
 
@@ -194,8 +193,8 @@ function on_change_refresh()
         idRefreshTimer = setInterval(
             function(){
                 refresh_frame(NUM_ACTION_FRAME, 'refresh');
-                refresh_frame(NUM_LIST_FRAME, 	'refresh');
-                refresh_frame(NUM_PROP_FRAME, 	'refresh');
+                refresh_frame(NUM_LIST_FRAME,   'refresh');
+                refresh_frame(NUM_PROP_FRAME,   'refresh');
                 refresh_frame(NUM_STATUS_FRAME, 'refresh');
             },
             ($(this).val() || 60 ) * 1000 );

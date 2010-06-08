@@ -22,9 +22,4 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-/*
-    This file contain java scripts for Action frame
-*/
-
-$(document).ready(function(){
-});
+/* This file contain java scripts for Prop frame, Peers view */

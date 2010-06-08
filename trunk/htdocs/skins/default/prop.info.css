@@ -20,14 +20,27 @@ more details.
 You should have received a copy of the GNU  General  Public  License  along
 with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-*/ /* This file contain styles for Prop frame */
+*/
+
+/* This file contain styles for Prop frame */
 
 /**************************************************************** Fields Info */
 body.info {
     background-color: Window;
 }
 
-div.properties table.downloaded thead,div.properties table.downloaded thead tr,div.properties table.downloaded thead tr th,div.properties table.transfer thead,div.properties table.transfer thead tr,div.properties table.transfer thead tr th,div.properties table.tracker thead,div.properties table.tracker thead tr,div.properties table.tracker thead tr th,div.properties table.general thead,div.properties table.general thead tr,div.properties table.general thead tr th
+div.properties table.downloaded thead,
+div.properties table.downloaded thead tr,
+div.properties table.downloaded thead tr th,
+div.properties table.transfer thead,
+div.properties table.transfer thead tr,
+div.properties table.transfer thead tr th,
+div.properties table.tracker thead,
+div.properties table.tracker thead tr,
+div.properties table.tracker thead tr th,
+div.properties table.general thead,
+div.properties table.general thead tr,
+div.properties table.general thead tr th
     {
     text-align: left;
     color: CaptionText;

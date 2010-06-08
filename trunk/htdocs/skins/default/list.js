@@ -22,9 +22,7 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-/*
-    This file contain java scripts for List frame
-*/
+/* This file contain java scripts for List frame */
 
 const NUM_PROP_FRAME = 3;
 

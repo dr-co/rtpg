@@ -5,7 +5,7 @@ Priority: optional
 Build-Depends: cdbs, debhelper (>= 5), po-debconf
 Standards-Version: 3.8.4
 Homepage: http://rtpg.uvw.ru
-Vcs-browser: http://svn.uvw.ru/rtpg
+Vcs-browser: http://svn.rtpg2.rshadow.ru/
 
 Package: rtpg-www
 Architecture: all

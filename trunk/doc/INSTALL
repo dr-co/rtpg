@@ -1,0 +1,26 @@
+RTPG (rtorrent perl gui) is a simple GUI web for rtorrent. It allows to
+scan/delete/add torrents and also to set the priority to the certain
+torrents or their parts.
+
+SVN-repo of RTPG: http://svn.rtpg2.rshadow.ru/
+
+Depends:
+    librpc-xml-perl     http://search.cpan.org/dist/rpc-xml/
+    libjson-xs-perl     http://search.cpan.org/dist/json-xs/
+    libjs-jquery        http://jquery.com/
+    libtemplate-perl    http://search.cpan.org/dist/template-toolkit/
+    rtorrent            http://libtorrent.rakshasa.no/
+    apache2             http://httpd.apache.org/
+    liblocale-po-perl   http://search.cpan.org/dist/locale-po/
+    libmime-types-perl  http://search.cpan.org/dist/mime-types/
+    libtree-simple-perl http://search.cpan.org/dist/tree-simple/
+
+Optional for show peers flags:
+    libgeo-ipfree-perl  http://search.cpan.org/dist/geo-ipfree/
+    famfamfam-flag-png  http://www.famfamfam.com/lab/icons/flags/
+
+1. Unpack tarball
+2. Create apache virtual server, example: debian/rtpg.apache.conf
+    Environment value 'RTPG_CONFIG' must provide to config 'rtpg.conf'.
+3. Put 'jquery.js' into directory 'htdocs/js/'
+4. Tune rtorrent, example: debian/rtorrent.rc
