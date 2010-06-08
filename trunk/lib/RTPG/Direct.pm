@@ -37,7 +37,7 @@ B<send_request> method.
 
 Copyright (C) 2008 Dmitry E. Oboukhov <unera@debian.org>,
 
-Copyright (C) 2008 Nikolaev Roman <rshadow@rambler.ru>
+Copyright (C) 2008 Roman V. Nikolaev <rshadow@rambler.ru>
 
 =head1 LICENSE
 
@@ -122,7 +122,7 @@ sub send_request
 
 Copyright (C) 2008 Dmitry E. Oboukhov <unera@debian.org>,
 
-Copyright (C) 2008 Nikolaev Roman <rshadow@rambler.ru>
+Copyright (C) 2008 Roman V. Nikolaev <rshadow@rambler.ru>
 
 =head1 LICENSE
 

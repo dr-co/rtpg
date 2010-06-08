@@ -8,7 +8,7 @@ extract_po.pl - script for extraction strings for *.po files
 
 Copyright (C) 2008 Dmitry E. Oboukhov <unera@debian.org>,
 
-Copyright (C) 2008 Nikolaev Roman <rshadow@rambler.ru>
+Copyright (C) 2008 Roman V. Nikolaev <rshadow@rambler.ru>
 
 =head1 LICENSE
 

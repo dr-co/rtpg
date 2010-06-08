@@ -3,7 +3,7 @@
 AUTHORS
 
  Copyright (C) 2010 Dmitry E. Oboukhov <unera@debian.org>
- Copyright (C) 2010 Nikolaev Roman <rshadow@rambler.ru>
+ Copyright (C) 2010 Roman V. Nikolaev <rshadow@rambler.ru>
 
 LICENSE
 

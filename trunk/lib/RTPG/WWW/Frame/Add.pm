@@ -143,7 +143,7 @@ sub _check_if_bencoded {
 
 Copyright (C) 2008 Dmitry E. Oboukhov <unera@debian.org>,
 
-Copyright (C) 2008 Nikolaev Roman <rshadow@rambler.ru>
+Copyright (C) 2008 Roman V. Nikolaev <rshadow@rambler.ru>
 
 =head1 LICENSE
 
