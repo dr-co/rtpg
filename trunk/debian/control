@@ -1,6 +1,6 @@
 Source: rtpg
 Maintainer: Dmitry E. Oboukhov <unera@debian.org>
-Uploaders: Nikolaev Roman <rshadow@rambler.ru>
+Uploaders: Roman V. Nikolaev <rshadow@rambler.ru>
 Section: web
 Priority: optional
 Build-Depends: cdbs, debhelper (>= 5), po-debconf
