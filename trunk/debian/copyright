@@ -5,7 +5,7 @@ It was downloaded from: http://svn.rtpg2.rshadow.ru/
 
 Upstream Author:
     Dmitry E. Oboukhov <dimka@avanto.org>
-    Roman V. Nikolaev V. Nikolaev <rshadow@rambler.ru>
+    Roman V. Nikolaev <rshadow@rambler.ru>
 
 Copyright:
     Copyright (C) 2008 Dmitry E. Oboukhov <unera@debian.org>
@@ -97,7 +97,7 @@ Copyright:
    along with this package; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
    USA.
-   
+
    On Debian systems, the complete text of the GNU General
    Public License can be found in `/usr/share/common-licenses/GPL-2'.
 
