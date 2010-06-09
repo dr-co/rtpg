@@ -38,22 +38,22 @@
     <select id="refresh" title="[% gettext('Select refresh interval') | html %]">
         [% SET str_sec = gettext('sec.') %]
         [% SET str_min = gettext('min.') %]
-        [% SET time = {
-                '0'     => gettext('Never'),
-                '10'    => '10 ' _ str_sec,
-                '30'    => '30 ' _ str_sec,
-                '60'    => '1  ' _ str_min,
-                '180'   => '3  ' _ str_min,
-                '300'   => '5  ' _ str_min,
-                '600'   => '10 ' _ str_min,
-                '1800'  => '30 ' _ str_min,
-            };
+        [% SET time = [
+                {'0'     => gettext('Never')},
+                {'10'    => '10 ' _ str_sec},
+                {'30'    => '30 ' _ str_sec},
+                {'60'    => '1  ' _ str_min},
+                {'180'   => '3  ' _ str_min},
+                {'300'   => '5  ' _ str_min},
+                {'600'   => '10 ' _ str_min},
+                {'1800'  => '30 ' _ str_min},
+            ];
         %]
         [% FOR tm = time %]
             <option
-                value="[% tm.key %]"
-                [% IF data.refresh == tm.key %]selected="selected"[% END %]>
-                    [% tm.value %]
+                value="[% tm.keys.0 %]"
+                [% IF data.refresh == tm.keys.0 %]selected="selected"[% END %]>
+                    [% tm.values.0 %]
             </option>
         [% END %]
     </select>
