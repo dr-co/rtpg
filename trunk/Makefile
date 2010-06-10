@@ -46,7 +46,7 @@ clean:
 	rm -fr po/*.previous
 
 
-build/$(CPANMODULE): lib/RTPG.pm lib/RTPG/Direct.pm
+build/$(CPANMODULE): lib/RTPG.pm lib/RTPG/Direct.pm $(wildcard cpan/*)
 	rm -fr build/cpan
 	mkdir -p build/cpan/RTPG
 	cp -ar cpan/* build/cpan
