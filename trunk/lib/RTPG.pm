@@ -22,7 +22,7 @@ RTPG - is a module for accessing to rtorrent's SCGI functions.
 
 =head1 VERSION
 
-0.3
+0.9
 
 =cut
 
@@ -161,7 +161,7 @@ This method returns list of torrents. It is a link to array of hashes.
 
 =head3 EXAMPLE
 
-# standard version
+ # standard version
  my ($tlist, $err)=$h->torrents_list;
  my ($tlist, $err)=$h->torrents_list('started');
 
