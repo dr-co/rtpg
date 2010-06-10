@@ -1,5 +1,12 @@
 SVN = http://svn.rtpg2.rshadow.ru
 
+RTPGMVERSION    = $(shell \
+    grep '^our[[:space:]]\+\$$VERSION' lib/RTPG.pm \
+    | sed 's/^[^[:digit:]]\+//' \
+    | sed 's/[[:space:]]*;.*//' \
+)
+
+CPANMODULE	= RTPG-$(RTPGMVERSION).tar.gz
 
 DEBVERSION 	= $(shell \
 	dpkg-parsechangelog|grep ^Version:|awk '{print $$2}' \
@@ -19,7 +26,7 @@ SVERSION    = $(VERSION)+svn$(SVN_VERSION)
 LANGS		:= 	$(shell ls po/*.po|sed 's/...$$//'|sed 's/^...//')
 
 # Extract gettext strings to en.po file
-.PHONY: i18n
+.PHONY: i18n cpan
 i18n:
 	# find all gettext messages and save in *.pot
 	for file in `find templates lib -type f | grep -v '\.svn'`; do \
@@ -37,6 +44,20 @@ i18n:
 clean:
 	rm -fr build/*
 	rm -fr po/*.previous
+
+
+build/$(CPANMODULE): lib/RTPG.pm lib/RTPG/Direct.pm
+	rm -fr build/cpan
+	mkdir -p build/cpan/RTPG
+	cp -ar cpan/* build/cpan
+	cp -a $< build/cpan
+	cp -a lib/RTPG/Direct.pm build/cpan/RTPG
+	cd build/cpan && perl Makefile.PL
+	make -C build/cpan distdir
+	cd build/cpan && tar -czvf ../$(CPANMODULE) RTPG-$(RTPGMVERSION)
+
+
+cpan:	build/$(CPANMODULE)
 	
 all: po
 
