@@ -11,13 +11,8 @@ use RPC::XML::Client;
 use RPC::XML;
 use MIME::Types;
 
-    use Data::Dumper;
-
-    $Data::Dumper::Indent = 1;
-    $Data::Dumper::Terse = 1;
-    $Data::Dumper::Useqq = 1;
-    $Data::Dumper::Deepcopy = 1;
-    $Data::Dumper::Maxdepth = 0;
+# international symbols in our commands
+$RPC::XML::ENCODING = "UTF-8";
 
 my $SIZE_BY_CHUNKS_LIMIT=1024**3;
 
