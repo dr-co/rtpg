@@ -22,11 +22,11 @@ RTPG - is a module for accessing to rtorrent's SCGI functions.
 
 =head1 VERSION
 
-0.9
+0.91
 
 =cut
 
-our $VERSION=0.9;
+our $VERSION=0.91;
 
 =head1 SYNOPSIS
 
