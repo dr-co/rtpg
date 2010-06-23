@@ -248,7 +248,29 @@ sub make_tree
 
     # Map tree to list
     my @return;
-    $tree->traverse( sub{ push @return, shift->getNodeValue; } );
+    $tree->traverse( sub{
+        my $node = shift;
+
+        # Get folder information from subnodes
+        if( $node->getNodeValue->{type} eq 'folder')
+        {
+            my ($size, $chunks, $count) = 0;
+            $node->traverse( sub{
+                my $child = shift;
+                return unless $child->getNodeValue->{type} eq 'file';
+
+                $size   += $child->getNodeValue->{data}{size_bytes};
+                $chunks += $child->getNodeValue->{data}{size_chunks};
+                $count++;
+            } );
+            $node->getNodeValue->{data}{size_bytes}  = $size;
+            $node->getNodeValue->{data}{size_chunks} = $chunks;
+        }
+
+        push @return, $node->getNodeValue;
+    } );
+
+    undef $tree;
 
     return \@return;
 }

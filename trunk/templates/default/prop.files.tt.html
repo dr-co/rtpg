@@ -62,10 +62,14 @@
                             name="expanded[]"
                         [% END %]/>
                 </td>
-                <td colspan="6" class="path">
+                <td class="path">
                     <div class="mime">&nbsp;</div>
                     [% node.name %]
                 </td>
+                <td class="size">[% node.data.size_bytes.as_human_size %]</td>
+                <td/>
+                <td class="chunks">[% node.data.size_chunks %]</td>
+                <td/>
             </tr>
 
         [% ELSE %]
