@@ -23,9 +23,9 @@ use RTPG::WWW::Locale;
 # Masks for special tracker url
 use constant MASK_TRACKER_DHT       => '^dht://$';
 use constant MASK_TRACKER_RETRACKER => '^http://retracker\.local';
-
-# Proto for favicon
+# Some part of links for favicon
 use constant URL_FAVICON_PROTO  => 'http://';
+use constant URL_FAVICON_FILE   => '/favicon.ico';
 # Some part of links for wikipedia
 use constant URL_WIKI_PROTO     => 'http://';
 use constant URL_WIKI_FAVICON   => '.wikipedia.org/favicon.ico';
@@ -117,71 +117,8 @@ sub new
 
             ($opts{list}, $opts{error}) = $rtpg->file_list( $opts{current} );
 
-            # Create folders tree
-            my $tree = Tree::Simple->new("0", Tree::Simple->ROOT);
-            # Index for files operations
-            my ($index, $dir_index, $file_index) = (1, 0, 0);
-
-            for my $file ( @{ $opts{list} } )
-            {
-                # Get current file components
-                my @path        = @{ $file->{path_components} };
-                my $filename    = pop @path;
-                my $parent      = $tree;
-
-                # Add dirs
-                for my $dir (@path)
-                {
-                    # Find dir
-                    my @chilren = $parent->getAllChildren;
-                    my ($node) =
-                        grep { $_->getNodeValue->{name} eq $dir } @chilren;
-
-                    # Skip add dir if it`s exists
-                    if( $node )
-                    {
-                        $parent = $node;
-                        next;
-                    }
-
-                    # Add new dir and set as parent
-                    my %data = (
-                        name        => $dir,
-                        level       => $parent->getDepth + 1,
-                        type        => 'folder',
-                        dindex      => $dir_index++,
-                        index       => $index++,
-                        parent      => ($parent->isRoot)
-                                            ?0
-                                            :$parent->getNodeValue->{'index'},
-                    );
-                    $node = Tree::Simple->new(\%data);
-                    $parent->addChild( $node );
-                    $parent = $node;
-                }
-
-                # Add file
-                my %data = (
-                    name        => $filename,
-                    level       => $parent->getDepth + 1,
-                    type        => 'file',
-                    findex      => $file_index++,
-                    index       => $index++,
-                    parent      => ($parent->isRoot)
-                                        ?0
-                                        :$parent->getNodeValue->{'index'},
-                    data        => $file,
-                );
-                $data{complete} = 1 if $file->{percent} eq '100%';
-                $data{dlink} = cfg->get('direct_link') . $file->{path}
-                    if cfg->get('direct_link') and $data{complete} and
-                       $opts{info}{complete};
-                my $node = Tree::Simple->new(\%data);
-                $parent->addChild( $node );
-            }
-
-            # Map tree to list
-            $tree->traverse( sub{ push @{$opts{tree}}, shift->getNodeValue; } );
+            # Make directory tree
+            $opts{tree} = make_tree( \%opts );
         }
         elsif($opts{prop} eq 'trackers')
         {
@@ -215,7 +152,7 @@ sub new
 
                     # Set links on tracker
                     $tracker->{tracker} = URL_FAVICON_PROTO. $domain;
-                    $tracker->{favicon} = $tracker->{tracker} . '/favicon.ico';
+                    $tracker->{favicon} = $tracker->{tracker} .URL_FAVICON_FILE;
                 }
             }
         }
@@ -234,6 +171,86 @@ sub new
     my $self = bless \%opts, $class;
 
     return $self;
+}
+
+=head2 make_tree $opts
+
+Make directory structure tree from rtorrent info and return it.
+
+=cut
+
+sub make_tree
+{
+    my ($opts) = @_;
+
+    # Create folders tree
+    my $tree = Tree::Simple->new("0", Tree::Simple->ROOT);
+    # Index for files operations
+    my ($index, $dir_index, $file_index) = (1, 0, 0);
+
+    for my $file ( @{ $opts->{list} } )
+    {
+        # Get current file components
+        my @path        = @{ $file->{path_components} };
+        my $filename    = pop @path;
+        my $parent      = $tree;
+
+        # Add dirs
+        for my $dir (@path)
+        {
+            # Find dir
+            my @chilren = $parent->getAllChildren;
+            my ($node) =
+                grep { $_->getNodeValue->{name} eq $dir } @chilren;
+
+            # Skip add dir if it`s exists
+            if( $node )
+            {
+                $parent = $node;
+                next;
+            }
+
+            # Add new dir and set as parent
+            my %data = (
+                name        => $dir,
+                level       => $parent->getDepth + 1,
+                type        => 'folder',
+                dindex      => $dir_index++,
+                index       => $index++,
+                parent      => ($parent->isRoot)
+                                    ?0
+                                    :$parent->getNodeValue->{'index'},
+            );
+            $node = Tree::Simple->new(\%data);
+            $parent->addChild( $node );
+            $parent = $node;
+        }
+
+        # Add file
+        my %data = (
+            name        => $filename,
+            level       => $parent->getDepth + 1,
+            type        => 'file',
+            findex      => $file_index++,
+            index       => $index++,
+            parent      => ($parent->isRoot)
+                                ?0
+                                :$parent->getNodeValue->{'index'},
+            data        => $file,
+        );
+        $data{complete} = 1 if $file->{percent} eq '100%';
+        $data{dlink} = cfg->get('direct_link') . $file->{path}
+            if cfg->get('direct_link') and $data{complete} and
+               $opts->{info}{complete};
+        my $node = Tree::Simple->new(\%data);
+        $parent->addChild( $node );
+    }
+
+    # Map tree to list
+    my @return;
+    $tree->traverse( sub{ push @return, shift->getNodeValue; } );
+
+    return \@return;
 }
 
 1;
