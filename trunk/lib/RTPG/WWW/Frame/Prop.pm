@@ -20,6 +20,18 @@ use RTPG;
 use RTPG::WWW::Config;
 use RTPG::WWW::Locale;
 
+# Masks for special tracker url
+use constant MASK_TRACKER_DHT       => '^dht://$';
+use constant MASK_TRACKER_RETRACKER => '^http://retracker\.local';
+
+# Proto for favicon
+use constant URL_FAVICON_PROTO  => 'http://';
+# Some part of links for wikipedia
+use constant URL_WIKI_PROTO     => 'http://';
+use constant URL_WIKI_FAVICON   => '.wikipedia.org/favicon.ico';
+use constant URL_WIKI_DHT       => '.wikipedia.org/wiki/Distributed_Hash_Table';
+use constant URL_WIKI_RETRACKER => '.wikipedia.org/wiki/Retracker';
+
 =head2 new
 
 Get params
@@ -174,6 +186,38 @@ sub new
         elsif($opts{prop} eq 'trackers')
         {
             ($opts{info}, $opts{error}) = $rtpg->tracker_list( $opts{current} );
+            for my $tracker( @{ $opts{info} } )
+            {
+                if( $tracker->{url} =~ m/${\(MASK_TRACKER_DHT)}/ )
+                {
+                    $tracker->{tracker} =
+                        URL_WIKI_PROTO. cfg->get('locale') .URL_WIKI_DHT;
+                    $tracker->{favicon} =
+                        URL_WIKI_PROTO. cfg->get('locale') .URL_WIKI_FAVICON;
+                }
+                elsif( $tracker->{url} =~ m/${\(MASK_TRACKER_RETRACKER)}/ )
+                {
+                    $tracker->{tracker} =
+                        URL_WIKI_PROTO. cfg->get('locale') .URL_WIKI_RETRACKER;
+                    $tracker->{favicon} =
+                        URL_WIKI_PROTO. cfg->get('locale') .URL_WIKI_FAVICON;
+                }
+                else
+                {
+                    # Get second domine
+                    my $domain = $tracker->{url};
+                    s~^\w+://~~i,
+                    s~[/:].*$~~
+                        for $domain;
+                    $domain = [ split m/\./, $domain ];
+                    $domain = join '.',
+                        $domain->[$#{$domain} -1], $domain->[$#{$domain}];
+
+                    # Set links on tracker
+                    $tracker->{tracker} = URL_FAVICON_PROTO. $domain;
+                    $tracker->{favicon} = $tracker->{tracker} . '/favicon.ico';
+                }
+            }
         }
         elsif($opts{prop} eq 'chunks')
         {

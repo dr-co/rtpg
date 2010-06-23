@@ -19,19 +19,17 @@
         [% IF loop.index % 2; class.push('odd'); ELSE; class.push('even'); END %]
         <tr class="[% class.join(' ') %]">
             <td class="url">
-                [% IF tracker.url == 'dht://' %]
-                    <a href="http://[% config.get('locale') %].wikipedia.org/wiki/Distributed_Hash_Table"
-                        target="blank">
-                       [% tracker.url %]
-                    </a>
-                [% ELSE; IF tracker.url.match('^http://retracker\.local') %]
-                    <a href="http://[% config.get('locale') %].wikipedia.org/wiki/Retracker"
-                        target="blank">
-                       [% tracker.url %]
-                    </a>
-                [% ELSE %]
+                [% IF tracker.favicon %]
+                    <img
+                        src="[% tracker.favicon %]"
+                        width="16px" height="16px"
+                        align="left"
+                    />
+                    &nbsp;
+                [% END %]
+                <a href="[% tracker.tracker %]" target="blank">
                     [% tracker.url %]
-                [% END;END %]
+                </a>
             </td>
             <td class="enabled">
                 [% IF tracker.is_enabled %][% gettext('Yes') %]

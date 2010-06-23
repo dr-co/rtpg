@@ -46,7 +46,7 @@ use File::Basename;
 use File::Spec;
 use Fcntl qw(:flock);
 
-our $VERSION = "0.2.6";
+our $VERSION = "0.2.7";
 our $PROJECT_NAME = "rtpg";
 
 use lib qw(../lib);
