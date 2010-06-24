@@ -22,46 +22,16 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-/* This file contain styles for Status frame */
+/*
+    This file contain java scripts for Add dialog
+*/
 
-/********************************************************************* Global */
-body {
-    background-color: Menu;
-    color: MenuText;
-    font-size: 8pt;
-    font-family: sans;
-    margin: 0px;
-    padding: 0px;
-}
+$(document).ready(function(){
+    $('button.close')            .bind('click', on_close);
+});
 
-a,
-a:visited
+function on_close()
 {
-    color: MenuText;
-    text-decoration: none;
-}
-
-a:hover
-{
-    text-decoration: underline;
-}
-
-select {
-    cursor: pointer;
-}
-
-/********************************************************************* Status */
-
-table.status {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    height: 32px;
-    max-height: 32px;
-}
-
-table.status td.speed{
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: top;
+    window.returnValue = true;
+    window.close();
 }

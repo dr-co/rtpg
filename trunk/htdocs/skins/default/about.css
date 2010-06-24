@@ -22,16 +22,15 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-/* This file contain styles for Status frame */
+/* This file contain styles for Add dialog */
 
 /********************************************************************* Global */
 body {
-    background-color: Menu;
-    color: MenuText;
-    font-size: 8pt;
+    background-color: Background;
+    color: WindowText;
+    font-size: 10pt;
     font-family: sans;
-    margin: 0px;
-    padding: 0px;
+    margin: 2px;
 }
 
 a,
@@ -46,22 +45,41 @@ a:hover
     text-decoration: underline;
 }
 
-select {
-    cursor: pointer;
-}
-
-/********************************************************************* Status */
-
-table.status {
+div {
+    clear: both;
     width: 100%;
-    padding: 0;
-    margin: 0;
-    height: 32px;
-    max-height: 32px;
+    text-align: center;
+    margin-top: 2%;
 }
 
-table.status td.speed{
-    text-align: center;
+/******************************************************************** Buttons */
+button {
     white-space: nowrap;
-    vertical-align: top;
+}
+button img {
+    text-align: center;
+    vertical-align: middle;
+    direction: ltr;
+}
+
+/********************************************************************* Layout */
+
+div.copyright span.nowrap,
+div.copyright a.nowrap{
+    white-space: nowrap;
+}
+
+div.logo {
+    margin-top: 10%;
+}
+
+div.version {
+    margin-top: 1%;
+    font-size: 16pt;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+div.close {
+    margin-top: 20%;
 }

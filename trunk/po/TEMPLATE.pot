@@ -1,4 +1,4 @@
-# #-#-#-#-#  Action.pm.pot (rtpg)  #-#-#-#-#
+# #-#-#-#-#  about.tt.html.pot (rtpg)  #-#-#-#-#
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -96,7 +96,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"#-#-#-#-#  Action.pm.pot (rtpg)  #-#-#-#-#\n"
+"#-#-#-#-#  about.tt.html.pot (rtpg)  #-#-#-#-#\n"
 "Project-Id-Version: rtpg\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
@@ -256,8 +256,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/RTPG/WWW/Frame/Action.pm: translate part: #1
-msgid "Error upload torrent"
+#: templates/default/about.tt.html: translate part: #1
+msgid "Dmitry E. Oboukhov"
+msgstr ""
+
+#: templates/default/about.tt.html: translate part: #2
+msgid "Roman V. Nikolaev"
+msgstr ""
+
+#: templates/default/about.tt.html: translate part: #3
+msgid "Official site and bugtracker"
+msgstr ""
+
+#: templates/default/about.tt.html: translate part: #4
+msgid "Used"
+msgstr ""
+
+#: templates/default/about.tt.html: translate part: #5
+msgid "library"
+msgstr ""
+
+#: templates/default/about.tt.html: translate part: #6
+#: templates/default/add.tt.html: #7
+msgid "Close"
 msgstr ""
 
 #: lib/RTPG/WWW/Frame/Add.pm: translate part: #1
@@ -290,10 +311,6 @@ msgstr ""
 
 #: templates/default/add.tt.html: translate part: #6
 msgid "Add"
-msgstr ""
-
-#: templates/default/add.tt.html: translate part: #7
-msgid "Close"
 msgstr ""
 
 #: templates/default/add.tt.html: translate part: #8
@@ -384,7 +401,7 @@ msgstr ""
 
 #: templates/default/list.tt.html: translate part: #16
 #: templates/default/prop.info.tt.html: #4
-#: templates/default/prop.peers.tt.html: templates/default/status.tt.html: #5
+#: templates/default/prop.peers.tt.html: templates/default/status.tt.html: #1
 msgid "Down Speed"
 msgstr ""
 
@@ -395,7 +412,7 @@ msgstr ""
 #: templates/default/list.tt.html: translate part: #18
 #: templates/default/prop.info.tt.html: #8
 #: templates/default/prop.peers.tt.html: #17 templates/default/status.tt.html:
-#: #9
+#: #5
 msgid "Up Speed"
 msgstr ""
 
@@ -469,27 +486,31 @@ msgid "Refresh"
 msgstr ""
 
 #: templates/default/panel.tt.html: translate part: #12
-msgid "Select refresh interval"
+msgid "About"
 msgstr ""
 
 #: templates/default/panel.tt.html: translate part: #13
-msgid "sec."
+msgid "Select refresh interval"
 msgstr ""
 
 #: templates/default/panel.tt.html: translate part: #14
-msgid "min."
+msgid "sec."
 msgstr ""
 
 #: templates/default/panel.tt.html: translate part: #15
+msgid "min."
+msgstr ""
+
+#: templates/default/panel.tt.html: translate part: #16
 #: templates/default/prop.trackers.tt.html: #7
 msgid "Never"
 msgstr ""
 
-#: templates/default/panel.tt.html: translate part: #16
+#: templates/default/panel.tt.html: translate part: #17
 msgid "Select skin"
 msgstr ""
 
-#: templates/default/panel.tt.html: translate part: #17
+#: templates/default/panel.tt.html: translate part: #18
 msgid "Select language"
 msgstr ""
 
@@ -730,35 +751,19 @@ msgstr ""
 msgid "Select torrent to show"
 msgstr ""
 
-#: templates/default/status.tt.html: translate part: #1
-msgid "Used"
-msgstr ""
-
 #: templates/default/status.tt.html: translate part: #2
-msgid "library"
-msgstr ""
-
-#: templates/default/status.tt.html: translate part: #3
-msgid "Dmitry E. Oboukhov"
-msgstr ""
-
-#: templates/default/status.tt.html: translate part: #4
-msgid "Roman V. Nikolaev"
-msgstr ""
-
-#: templates/default/status.tt.html: translate part: #6
 msgid "Max"
 msgstr ""
 
-#: templates/default/status.tt.html: translate part: #7
+#: templates/default/status.tt.html: translate part: #3
 msgid "Select max download speed"
 msgstr ""
 
-#: templates/default/status.tt.html: translate part: #8
+#: templates/default/status.tt.html: translate part: #4
 msgid "Unlimited"
 msgstr ""
 
-#: templates/default/status.tt.html: translate part: #11
+#: templates/default/status.tt.html: translate part: #7
 msgid "Select max upload speed"
 msgstr ""
 

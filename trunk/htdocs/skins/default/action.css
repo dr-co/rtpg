@@ -128,12 +128,3 @@ tbody.item.seeding td.img {
 tbody.item.hashing td.img {
     background-image: url("status/hashing.png");
 }
-
-/*********************************************************************** Logo */
-#logo {
-    width: 100%;
-    text-align: center;
-    height: 64px;
-    bottom: 5%;
-    position: fixed;
-}

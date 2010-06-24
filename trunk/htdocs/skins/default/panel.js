@@ -45,6 +45,7 @@ $(document).ready(function(){
     $('input.panel.priority.normal').bind('click', function(){ call('normal')});
     $('input.panel.priority.high')  .bind('click', function(){ call('high')  });
     $('input.panel.refresh')        .bind('click', on_refresh);
+    $('input.panel.about')          .bind('click', on_about);
 
     // Additional params
     $('#locale')                    .bind('change', on_change_locale);
@@ -169,6 +170,20 @@ function on_refresh()
 {
     // Update all frames
     refresh_frame(NUM_INDEX_FRAME, 'refresh');
+}
+
+function on_about()
+{
+    const WIDTH  = 640;
+    const HEIGHT = 480;
+    var iTop   = parseInt((screen.availHeight/2) - (HEIGHT/2));
+    var iLeft  = parseInt((screen.availWidth/2) - (WIDTH/2));
+    var retVal = window.showModalDialog('index.cgi?show=about', 'about',
+        'resizable:yes;status:no;center:yes;unadorned:yes'  +
+        ';dialogHeight:' + HEIGHT + ';dialogWidth:' + WIDTH +
+        ';screenX:' + iLeft + ';left:' + iLeft + ';dialogLeft:' + iLeft +
+        ';screenY:' + iTop  + ';top:'  + iTop  + ';dialogTop:'  + iTop
+    );
 }
 
 function on_change_locale()

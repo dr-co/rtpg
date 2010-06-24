@@ -1,0 +1,40 @@
+
+<div class="logo">
+    <img alt="RTPG" src="[% config.url.skin.current _ '/logo.png' %]" />
+</div>
+<div class="version">
+    RTPG v.[% version %]
+</div>
+<div class="copyright">
+    <span class="nowrap">
+        Copyright &copy; 2008 - 2010
+    </span>
+    <a href="mailto:unera@debian.org" class="nowrap">
+        [% gettext('Dmitry E. Oboukhov') %]
+    </a>,
+    <a href="mailto:rshadow@rambler.ru" class="nowrap">
+        [% gettext('Roman V. Nikolaev') %]
+    </a>
+</div>
+<div class="links">
+    [% gettext('Official site and bugtracker')%]:
+    <a
+        href="http://rtpg2.rshadow.ru"
+        target="blank"
+    >
+        http://rtpg2.rshadow.ru
+    </a>
+</div>
+<div class="stat">
+    [% gettext('Used') %]:
+    <br/>
+    rTorrent [% data.info.client_version %]
+    <br/>
+    [% gettext('library') %] [% data.info.library_version %]
+</div>
+<div class="close">
+    <button class="close">
+        <img src="[% config.url.skin.panel %]/close.png" />
+        [% gettext('Close') %]
+    </button>
+</div>

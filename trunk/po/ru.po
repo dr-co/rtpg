@@ -14,9 +14,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/RTPG/WWW/Frame/Action.pm: translate part: #1
-msgid "Error upload torrent"
-msgstr "Ошибка загрузки торрента"
+#: templates/default/about.tt.html: translate part: #1
+msgid "Dmitry E. Oboukhov"
+msgstr "Dmitry E. Oboukhov"
+
+#: templates/default/about.tt.html: translate part: #2
+msgid "Roman V. Nikolaev"
+msgstr "Roman V. Nikolaev"
+
+#: templates/default/about.tt.html: translate part: #3
+msgid "Official site and bugtracker"
+msgstr "Официальный сайт и багтрекер"
+
+#: templates/default/about.tt.html: translate part: #4
+msgid "Used"
+msgstr "Используется"
+
+#: templates/default/about.tt.html: translate part: #5
+msgid "library"
+msgstr "библиотека"
+
+#: templates/default/about.tt.html: translate part: #6
+#: templates/default/add.tt.html: #7
+msgid "Close"
+msgstr "Закрыть"
 
 #: lib/RTPG/WWW/Frame/Add.pm: translate part: #1
 msgid "Undefined file type"
@@ -49,10 +70,6 @@ msgstr "Файл"
 #: templates/default/add.tt.html: translate part: #6
 msgid "Add"
 msgstr "Добавить"
-
-#: templates/default/add.tt.html: translate part: #7
-msgid "Close"
-msgstr "Закрыть"
 
 #: templates/default/add.tt.html: translate part: #8
 msgid "Adding file"
@@ -142,7 +159,7 @@ msgstr "СЗ"
 
 #: templates/default/list.tt.html: translate part: #16
 #: templates/default/prop.info.tt.html: #4
-#: templates/default/prop.peers.tt.html: templates/default/status.tt.html: #5
+#: templates/default/prop.peers.tt.html: templates/default/status.tt.html: #1
 msgid "Down Speed"
 msgstr "Загрузка"
 
@@ -153,7 +170,7 @@ msgstr "СР"
 #: templates/default/list.tt.html: translate part: #18
 #: templates/default/prop.info.tt.html: #8
 #: templates/default/prop.peers.tt.html: #17 templates/default/status.tt.html:
-#: #9
+#: #5
 msgid "Up Speed"
 msgstr "Раздача"
 
@@ -227,27 +244,31 @@ msgid "Refresh"
 msgstr "Обновить"
 
 #: templates/default/panel.tt.html: translate part: #12
+msgid "About"
+msgstr "О программе"
+
+#: templates/default/panel.tt.html: translate part: #13
 msgid "Select refresh interval"
 msgstr "Выбрать интервал обновления"
 
-#: templates/default/panel.tt.html: translate part: #13
+#: templates/default/panel.tt.html: translate part: #14
 msgid "sec."
 msgstr "сек."
 
-#: templates/default/panel.tt.html: translate part: #14
+#: templates/default/panel.tt.html: translate part: #15
 msgid "min."
 msgstr "мин."
 
-#: templates/default/panel.tt.html: translate part: #15
+#: templates/default/panel.tt.html: translate part: #16
 #: templates/default/prop.trackers.tt.html: #7
 msgid "Never"
 msgstr "Никогда"
 
-#: templates/default/panel.tt.html: translate part: #16
+#: templates/default/panel.tt.html: translate part: #17
 msgid "Select skin"
 msgstr "Выбрать обложку"
 
-#: templates/default/panel.tt.html: translate part: #17
+#: templates/default/panel.tt.html: translate part: #18
 msgid "Select language"
 msgstr "Выбрать язык"
 
@@ -488,35 +509,19 @@ msgstr "Установить высокий приоритет для выбра
 msgid "Select torrent to show"
 msgstr "Выберите торрент для просмотра"
 
-#: templates/default/status.tt.html: translate part: #1
-msgid "Used"
-msgstr "Используется"
-
 #: templates/default/status.tt.html: translate part: #2
-msgid "library"
-msgstr "библиотека"
-
-#: templates/default/status.tt.html: translate part: #3
-msgid "Dmitry E. Oboukhov"
-msgstr "Dmitry E. Oboukhov"
-
-#: templates/default/status.tt.html: translate part: #4
-msgid "Roman V. Nikolaev"
-msgstr "Roman V. Nikolaev"
-
-#: templates/default/status.tt.html: translate part: #6
 msgid "Max"
 msgstr "Макс."
 
-#: templates/default/status.tt.html: translate part: #7
+#: templates/default/status.tt.html: translate part: #3
 msgid "Select max download speed"
 msgstr "Выберите максимальную скорость загрузки"
 
-#: templates/default/status.tt.html: translate part: #8
+#: templates/default/status.tt.html: translate part: #4
 msgid "Unlimited"
 msgstr "Неограничено"
 
-#: templates/default/status.tt.html: translate part: #11
+#: templates/default/status.tt.html: translate part: #7
 msgid "Select max upload speed"
 msgstr "Выберите максимальную скорость раздачи"
 

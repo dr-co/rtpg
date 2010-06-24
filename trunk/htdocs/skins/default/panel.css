@@ -105,6 +105,10 @@ input.panel.refresh {
     background-image: url("panel/refresh.png");
 }
 
+input.panel.about {
+    background-image: url("panel/about.png");
+}
+
 /******************************************************************* Settings */
 #settings {
     float: right;

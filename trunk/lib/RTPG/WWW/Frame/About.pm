@@ -4,17 +4,18 @@ use utf8;
 
 =head1 NAME
 
-RTPG::WWW::Frame::Status
+RTPG::WWW::Frame::About
 
 =head1 DESCRIPTION
 
-Class for manage Status frame
+Class for manage About dialog
 
 =cut
 
-package RTPG::WWW::Frame::Status;
+package RTPG::WWW::Frame::About;
 use RTPG;
 use RTPG::WWW::Config;
+use RTPG::WWW::Locale qw(gettext);
 
 =head2 new
 
@@ -26,37 +27,12 @@ sub new
 {
     my ($class, %opts) = @_;
 
-    # Get current state
-    $opts{$_} = cfg->get($_) for qw(download_rate upload_rate);
-
-    # Get RTPG object
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
 
-    # Do commands
-    $rtpg->set_download_rate($opts{download_rate})
-        if $opts{download_rate} =~ m/^\d+$/;
-    $rtpg->set_upload_rate($opts{upload_rate})
-        if $opts{upload_rate} =~ m/^\d+$/;
-
-    my $error;
-
-    # Get information about rates
-    ($opts{rates}, $error) = $rtpg->rates;
-    $opts{error} ||= $error;
-
-    # Sum current rates
-    ($opts{list}, $error) = $rtpg->torrents_list;
-    $opts{error} ||= $error;
-    $opts{rates}{current_upload_rate} = 0;
-    $opts{rates}{current_download_rate} = 0;
-    map {
-        $opts{rates}{current_upload_rate}   += $_->{up_rate};
-        $opts{rates}{current_download_rate} += $_->{down_rate};
-    } @{ $opts{list} };
+    # Get information about system
+    ($opts{info}, $opts{error}) = $rtpg->system_information;
 
     my $self = bless \%opts, $class;
-
-    return $self;
 }
 
 1;

@@ -14,9 +14,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/RTPG/WWW/Frame/Action.pm: translate part: #1
-msgid "Error upload torrent"
-msgstr "Error upload torrent"
+#: templates/default/about.tt.html: translate part: #1
+msgid "Dmitry E. Oboukhov"
+msgstr "Dmitry E. Oboukhov"
+
+#: templates/default/about.tt.html: translate part: #2
+msgid "Roman V. Nikolaev"
+msgstr "Roman V. Nikolaev"
+
+#: templates/default/about.tt.html: translate part: #3
+msgid "Official site and bugtracker"
+msgstr "Official site and bugtracker"
+
+#: templates/default/about.tt.html: translate part: #4
+msgid "Used"
+msgstr "Used"
+
+#: templates/default/about.tt.html: translate part: #5
+msgid "library"
+msgstr "library"
+
+#: templates/default/about.tt.html: translate part: #6
+#: templates/default/add.tt.html: #7
+msgid "Close"
+msgstr "Close"
 
 #: lib/RTPG/WWW/Frame/Add.pm: translate part: #1
 msgid "Undefined file type"
@@ -49,10 +70,6 @@ msgstr "File"
 #: templates/default/add.tt.html: translate part: #6
 msgid "Add"
 msgstr "Add"
-
-#: templates/default/add.tt.html: translate part: #7
-msgid "Close"
-msgstr "Close"
 
 #: templates/default/add.tt.html: translate part: #8
 msgid "Adding file"
@@ -142,7 +159,7 @@ msgstr "DS"
 
 #: templates/default/list.tt.html: translate part: #16
 #: templates/default/prop.info.tt.html: #4
-#: templates/default/prop.peers.tt.html: templates/default/status.tt.html: #5
+#: templates/default/prop.peers.tt.html: templates/default/status.tt.html: #1
 msgid "Down Speed"
 msgstr "Down Speed"
 
@@ -153,7 +170,7 @@ msgstr "US"
 #: templates/default/list.tt.html: translate part: #18
 #: templates/default/prop.info.tt.html: #8
 #: templates/default/prop.peers.tt.html: #17 templates/default/status.tt.html:
-#: #9
+#: #5
 msgid "Up Speed"
 msgstr "Up Speed"
 
@@ -227,27 +244,31 @@ msgid "Refresh"
 msgstr "Refresh"
 
 #: templates/default/panel.tt.html: translate part: #12
+msgid "About"
+msgstr "About"
+
+#: templates/default/panel.tt.html: translate part: #13
 msgid "Select refresh interval"
 msgstr "Select refresh interval"
 
-#: templates/default/panel.tt.html: translate part: #13
+#: templates/default/panel.tt.html: translate part: #14
 msgid "sec."
 msgstr "sec."
 
-#: templates/default/panel.tt.html: translate part: #14
+#: templates/default/panel.tt.html: translate part: #15
 msgid "min."
 msgstr "min."
 
-#: templates/default/panel.tt.html: translate part: #15
+#: templates/default/panel.tt.html: translate part: #16
 #: templates/default/prop.trackers.tt.html: #7
 msgid "Never"
 msgstr "Never"
 
-#: templates/default/panel.tt.html: translate part: #16
+#: templates/default/panel.tt.html: translate part: #17
 msgid "Select skin"
 msgstr "Select skin"
 
-#: templates/default/panel.tt.html: translate part: #17
+#: templates/default/panel.tt.html: translate part: #18
 msgid "Select language"
 msgstr "Select language"
 
@@ -488,35 +509,19 @@ msgstr "Set high priority for selected files"
 msgid "Select torrent to show"
 msgstr "Select torrent to show"
 
-#: templates/default/status.tt.html: translate part: #1
-msgid "Used"
-msgstr "Used"
-
 #: templates/default/status.tt.html: translate part: #2
-msgid "library"
-msgstr "library"
-
-#: templates/default/status.tt.html: translate part: #3
-msgid "Dmitry E. Oboukhov"
-msgstr "Dmitry E. Oboukhov"
-
-#: templates/default/status.tt.html: translate part: #4
-msgid "Roman V. Nikolaev"
-msgstr "Roman V. Nikolaev"
-
-#: templates/default/status.tt.html: translate part: #6
 msgid "Max"
 msgstr "Max"
 
-#: templates/default/status.tt.html: translate part: #7
+#: templates/default/status.tt.html: translate part: #3
 msgid "Select max download speed"
 msgstr "Select max download speed"
 
-#: templates/default/status.tt.html: translate part: #8
+#: templates/default/status.tt.html: translate part: #4
 msgid "Unlimited"
 msgstr "Unlimited"
 
-#: templates/default/status.tt.html: translate part: #11
+#: templates/default/status.tt.html: translate part: #7
 msgid "Select max upload speed"
 msgstr "Select max upload speed"
 

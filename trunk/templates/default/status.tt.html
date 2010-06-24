@@ -1,23 +1,10 @@
 <table class="status">
     <colgroup>
-        <col width="25%" />
         <col/>
-        <col width="25%" />
     </colgroup>
 
     <tbody>
         <tr>
-            <td class="version">
-                <a href="http://rtpg2.rshadow.ru"
-                   title="[% gettext('Used') _': ' _
-                             'rtorrent ' _ data.info.client_version _ ', ' _
-                             gettext('library') _ ' ' _
-                             data.info.library_version %]"
-                   target="blank"
-                >
-                    RTPG v.[% version %]
-                </a>
-            </td>
             <td class="speed">
                 [%
                     SET speed = [
@@ -96,17 +83,6 @@
                         </option>
                     [% END %]
                 </select>
-            </td>
-            <td class="copyright">
-                <span class="nowrap">
-                    Copyright &copy; 2008 - 2010
-                </span>
-                <a href="mailto:unera@debian.org" class="nowrap">
-                    [% gettext('Dmitry E. Oboukhov') %]
-                </a>,
-                <a href="mailto:rshadow@rambler.ru" class="nowrap">
-                    [% gettext('Roman V. Nikolaev') %]
-                </a>
             </td>
         </tr>
     </tbody>
