@@ -181,3 +181,18 @@ div.properties table {
 div.priority {
     float: right;
 }
+
+/***************************************************************** Wiki Links */
+div.image.question {
+    background-position: top left;
+    background-image: url("status/question.png");
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    float: left;
+    margin-left: 5px;
+}
+
+a.question {
+    float: left;
+}

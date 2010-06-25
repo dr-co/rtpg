@@ -31,6 +31,7 @@ use constant URL_WIKI_PROTO     => 'http://';
 use constant URL_WIKI_FAVICON   => '.wikipedia.org/favicon.ico';
 use constant URL_WIKI_DHT       => '.wikipedia.org/wiki/Distributed_Hash_Table';
 use constant URL_WIKI_RETRACKER => '.wikipedia.org/wiki/Retracker';
+use constant URL_WIKI_PEX       => '.wikipedia.org/wiki/Peer_exchange';
 
 =head2 new
 
@@ -99,6 +100,8 @@ sub new
                     $geo->LookUp( $_->{address} )
                         for @{ $opts{list} };
             }
+
+            $opts{wiki}{pex} = URL_WIKI_PROTO. cfg->get('locale') .URL_WIKI_PEX;
         }
         elsif($opts{prop} eq 'files')
         {

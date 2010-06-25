@@ -29,11 +29,12 @@ sub new
     # Get current state
     $opts{$_} = cfg->get($_) for qw(locale horizontal vertical);
 
+    # Get sysinfo to check for rtorrent started and accessible
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
-
-    $opts{methods} =[ $rtpg->_get_list_methods ] if cfg->get('debug');
-
     ($opts{info}, $opts{error}) = $rtpg->system_information;
+
+    # Get all methods list on debug
+    $opts{methods} =[ $rtpg->_get_list_methods ] if cfg->get('debug');
 
     my $self = bless \%opts, $class;
 

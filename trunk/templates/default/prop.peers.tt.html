@@ -31,7 +31,12 @@
             <td></td>
             <th></th>
             <td></td>
-            <th>[% gettext('Peers exchange') %]</th>
+            <th>
+                <a class="question" href="[% data.wiki.pex %]" target="blank">
+                    [% gettext('Peers exchange') %]
+                </a>
+                <div class="image question" />
+            </th>
             <td>
                 [% IF data.info.peer_exchange; gettext('on')  %]
                 [% ELSE;                       gettext('off') %]
