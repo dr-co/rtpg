@@ -28,7 +28,6 @@ const NUM_INDEX_FRAME   = 0;
 const NUM_ACTION_FRAME  = 1;
 const NUM_LIST_FRAME    = 2;
 const NUM_PROP_FRAME    = 3;
-const NUM_STATUS_FRAME  = 4;
 
 var idRefreshTimer;
 
@@ -98,9 +97,6 @@ function refresh_frame( iFrame, strCommand )
             window.parent.frames[ NUM_PROP_FRAME ].document
                 .location.reload(true);
         }
-        break;
-    case NUM_STATUS_FRAME:
-        window.parent.frames[ NUM_STATUS_FRAME ].document.location.reload(true);
         break;
     default:
         throw 'Undefined frame';
@@ -210,7 +206,6 @@ function on_change_refresh()
                 refresh_frame(NUM_ACTION_FRAME, 'refresh');
                 refresh_frame(NUM_LIST_FRAME,   'refresh');
                 refresh_frame(NUM_PROP_FRAME,   'refresh');
-                refresh_frame(NUM_STATUS_FRAME, 'refresh');
             },
             ($(this).val() || 60 ) * 1000 );
     }

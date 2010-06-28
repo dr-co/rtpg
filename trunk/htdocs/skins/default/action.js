@@ -28,6 +28,10 @@ const NUM_LIST_FRAME = 2;
 
 $(document).ready(function(){
     $('#action tbody.item td.select :button').bind('click', on_click_action);
+
+    // Additional params
+    $('#download_rate')             .bind('change', on_change_download_rate);
+    $('#upload_rate')               .bind('change', on_change_upload_rate);
 });
 
 function on_click_action()
@@ -42,4 +46,18 @@ function on_click_action()
     // Update List frame with new params
     var objDocList = window.parent.frames[ NUM_LIST_FRAME ].document;
     objDocList.location = 'index.cgi?show=list&action=' + $(this).attr('class');
+}
+
+function on_change_download_rate()
+{
+    // Update window with new locale
+    window.document.location =
+        'index.cgi?show=action&download_rate=' + $(this).val();
+}
+
+function on_change_upload_rate()
+{
+    // Update window with new locale
+    window.document.location =
+        'index.cgi?show=action&upload_rate=' + $(this).val();
 }

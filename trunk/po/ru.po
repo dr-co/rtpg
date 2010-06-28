@@ -39,6 +39,38 @@ msgstr "библиотека"
 msgid "Close"
 msgstr "Закрыть"
 
+#: templates/default/action.tt.html: translate part: #1
+#: templates/default/list.tt.html: #16 templates/default/prop.info.tt.html: #4
+#: templates/default/prop.peers.tt.html: templates/default/status.tt.html:
+msgid "Down Speed"
+msgstr "Загрузка"
+
+#: templates/default/action.tt.html: translate part: #2
+#: templates/default/status.tt.html:
+msgid "Max"
+msgstr "Макс."
+
+#: templates/default/action.tt.html: translate part: #3
+#: templates/default/status.tt.html:
+msgid "Select max download speed"
+msgstr "Выберите максимальную скорость загрузки"
+
+#: templates/default/action.tt.html: translate part: #4
+#: templates/default/status.tt.html:
+msgid "Unlimited"
+msgstr "Неограничено"
+
+#: templates/default/action.tt.html: translate part: #5
+#: templates/default/list.tt.html: #18 templates/default/prop.info.tt.html: #8
+#: templates/default/prop.peers.tt.html: #17 templates/default/status.tt.html:
+msgid "Up Speed"
+msgstr "Раздача"
+
+#: templates/default/action.tt.html: translate part: #7
+#: templates/default/status.tt.html:
+msgid "Select max upload speed"
+msgstr "Выберите максимальную скорость раздачи"
+
 #: lib/RTPG/WWW/Frame/Add.pm: translate part: #1
 msgid "Undefined file type"
 msgstr "Неопределен тип файла"
@@ -157,22 +189,9 @@ msgstr "Пиры"
 msgid "DS"
 msgstr "СЗ"
 
-#: templates/default/list.tt.html: translate part: #16
-#: templates/default/prop.info.tt.html: #4
-#: templates/default/prop.peers.tt.html: templates/default/status.tt.html: #1
-msgid "Down Speed"
-msgstr "Загрузка"
-
 #: templates/default/list.tt.html: translate part: #17
 msgid "US"
 msgstr "СР"
-
-#: templates/default/list.tt.html: translate part: #18
-#: templates/default/prop.info.tt.html: #8
-#: templates/default/prop.peers.tt.html: #17 templates/default/status.tt.html:
-#: #5
-msgid "Up Speed"
-msgstr "Раздача"
 
 #: templates/default/list.tt.html: translate part: #19
 msgid "Rt"
@@ -508,22 +527,6 @@ msgstr "Установить высокий приоритет для выбра
 #: templates/default/prop.tt.html: translate part: #10
 msgid "Select torrent to show"
 msgstr "Выберите торрент для просмотра"
-
-#: templates/default/status.tt.html: translate part: #2
-msgid "Max"
-msgstr "Макс."
-
-#: templates/default/status.tt.html: translate part: #3
-msgid "Select max download speed"
-msgstr "Выберите максимальную скорость загрузки"
-
-#: templates/default/status.tt.html: translate part: #4
-msgid "Unlimited"
-msgstr "Неограничено"
-
-#: templates/default/status.tt.html: translate part: #7
-msgid "Select max upload speed"
-msgstr "Выберите максимальную скорость раздачи"
 
 #: templates/default/string.tt.js: translate part: #2
 msgid "No current torrent selected"

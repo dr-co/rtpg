@@ -39,6 +39,38 @@ msgstr "library"
 msgid "Close"
 msgstr "Close"
 
+#: templates/default/action.tt.html: translate part: #1
+#: templates/default/list.tt.html: #16 templates/default/prop.info.tt.html: #4
+#: templates/default/prop.peers.tt.html: templates/default/status.tt.html:
+msgid "Down Speed"
+msgstr "Down Speed"
+
+#: templates/default/action.tt.html: translate part: #2
+#: templates/default/status.tt.html:
+msgid "Max"
+msgstr "Max"
+
+#: templates/default/action.tt.html: translate part: #3
+#: templates/default/status.tt.html:
+msgid "Select max download speed"
+msgstr "Select max download speed"
+
+#: templates/default/action.tt.html: translate part: #4
+#: templates/default/status.tt.html:
+msgid "Unlimited"
+msgstr "Unlimited"
+
+#: templates/default/action.tt.html: translate part: #5
+#: templates/default/list.tt.html: #18 templates/default/prop.info.tt.html: #8
+#: templates/default/prop.peers.tt.html: #17 templates/default/status.tt.html:
+msgid "Up Speed"
+msgstr "Up Speed"
+
+#: templates/default/action.tt.html: translate part: #7
+#: templates/default/status.tt.html:
+msgid "Select max upload speed"
+msgstr "Select max upload speed"
+
 #: lib/RTPG/WWW/Frame/Add.pm: translate part: #1
 msgid "Undefined file type"
 msgstr "Undefined file type"
@@ -157,22 +189,9 @@ msgstr "Peers"
 msgid "DS"
 msgstr "DS"
 
-#: templates/default/list.tt.html: translate part: #16
-#: templates/default/prop.info.tt.html: #4
-#: templates/default/prop.peers.tt.html: templates/default/status.tt.html: #1
-msgid "Down Speed"
-msgstr "Down Speed"
-
 #: templates/default/list.tt.html: translate part: #17
 msgid "US"
 msgstr "US"
-
-#: templates/default/list.tt.html: translate part: #18
-#: templates/default/prop.info.tt.html: #8
-#: templates/default/prop.peers.tt.html: #17 templates/default/status.tt.html:
-#: #5
-msgid "Up Speed"
-msgstr "Up Speed"
 
 #: templates/default/list.tt.html: translate part: #19
 msgid "Rt"
@@ -508,22 +527,6 @@ msgstr "Set high priority for selected files"
 #: templates/default/prop.tt.html: translate part: #10
 msgid "Select torrent to show"
 msgstr "Select torrent to show"
-
-#: templates/default/status.tt.html: translate part: #2
-msgid "Max"
-msgstr "Max"
-
-#: templates/default/status.tt.html: translate part: #3
-msgid "Select max download speed"
-msgstr "Select max download speed"
-
-#: templates/default/status.tt.html: translate part: #4
-msgid "Unlimited"
-msgstr "Unlimited"
-
-#: templates/default/status.tt.html: translate part: #7
-msgid "Select max upload speed"
-msgstr "Select max upload speed"
 
 #: templates/default/string.tt.js: translate part: #2
 msgid "No current torrent selected"

@@ -54,20 +54,24 @@ a:hover {
 }
 
 /*************************************************************** Items global */
-tbody.item td {
+table.action {
+    width: 100%;
+}
+
+table.action tbody.item td {
     padding-top: 4px;
     padding-bottom: 4px;
 }
 
-tbody.item.selected,
-tbody.item.selected tr,
-tbody.item.selected td {
+table.action tbody.item.selected,
+table.action tbody.item.selected tr,
+table.action tbody.item.selected td {
     background-color: Highlight;
     color: HighlightText;
     border-color: Highlight;
 }
 
-tbody.item td.img {
+table.action tbody.item td.img {
     width: 16px;
     height: 16px;
     background-image: url("status/other.png");
@@ -75,7 +79,7 @@ tbody.item td.img {
     background-position: center;
 }
 
-tbody.item input {
+table.action tbody.item input {
     border: none;
     background-color: white;
     width: 100%;
@@ -83,48 +87,73 @@ tbody.item input {
     cursor: pointer;
 }
 
-tbody.item.selected input {
+table.action tbody.item.selected input {
     background-color: Highlight;
     color: HighlightText;
 }
 
-tbody.item td.count {
+table.action tbody.item td.count {
     padding-right: 5px;
     color: GrayText;
     text-align: right;
 }
 
 /*********************************************************** Items by actions */
-tbody.item.default td.img {
+table.action tbody.item.default td.img {
     background-image: url("status/default.png");
 }
 
-tbody.item.active td.img {
+table.action tbody.item.active td.img {
     background-image: url("status/active.png");
 }
 
 
-tbody.item.started td.img {
+table.action tbody.item.started td.img {
     background-image: url("status/started.png");
 }
 
-tbody.item.stopped td.img {
+table.action tbody.item.stopped td.img {
     background-image: url("status/stopped.png");
 }
 
-tbody.item.incomplete td.img {
+table.action tbody.item.incomplete td.img {
     background-image: url("status/incomplete.png");
 }
 
-tbody.item.complete td.img {
+table.action tbody.item.complete td.img {
     background-image: url("status/complete.png");
 }
 
-tbody.item.seeding td.img {
+table.action tbody.item.seeding td.img {
     background-image: url("status/seeding.png");
 }
 
 
-tbody.item.hashing td.img {
+table.action tbody.item.hashing td.img {
     background-image: url("status/hashing.png");
+}
+
+/********************************************************************* Speeds */
+table.status {
+    position: absolute;
+    bottom: 2px;
+}
+
+table.status td.down_speed_max,
+table.status td.up_speed_max {
+    white-space: nowrap;
+}
+
+table.status td.down_speed {
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-image: url("status/incomplete.png");
+    padding-left: 20px;
+}
+
+table.status td.up_speed {
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-image: url("status/seeding.png");
+    padding-left: 20px;
 }

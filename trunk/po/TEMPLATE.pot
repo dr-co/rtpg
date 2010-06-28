@@ -4,6 +4,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# #-#-#-#-#  action.tt.html.pot (rtpg)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 # #-#-#-#-#  Add.pm.pot (rtpg)  #-#-#-#-#
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
@@ -97,6 +103,16 @@
 msgid ""
 msgstr ""
 "#-#-#-#-#  about.tt.html.pot (rtpg)  #-#-#-#-#\n"
+"Project-Id-Version: rtpg\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  action.tt.html.pot (rtpg)  #-#-#-#-#\n"
 "Project-Id-Version: rtpg\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
@@ -281,6 +297,38 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+#: templates/default/action.tt.html: translate part: #1
+#: templates/default/list.tt.html: #16 templates/default/prop.info.tt.html: #4
+#: templates/default/prop.peers.tt.html: templates/default/status.tt.html:
+msgid "Down Speed"
+msgstr ""
+
+#: templates/default/action.tt.html: translate part: #2
+#: templates/default/status.tt.html:
+msgid "Max"
+msgstr ""
+
+#: templates/default/action.tt.html: translate part: #3
+#: templates/default/status.tt.html:
+msgid "Select max download speed"
+msgstr ""
+
+#: templates/default/action.tt.html: translate part: #4
+#: templates/default/status.tt.html:
+msgid "Unlimited"
+msgstr ""
+
+#: templates/default/action.tt.html: translate part: #5
+#: templates/default/list.tt.html: #18 templates/default/prop.info.tt.html: #8
+#: templates/default/prop.peers.tt.html: #17 templates/default/status.tt.html:
+msgid "Up Speed"
+msgstr ""
+
+#: templates/default/action.tt.html: translate part: #7
+#: templates/default/status.tt.html:
+msgid "Select max upload speed"
+msgstr ""
+
 #: lib/RTPG/WWW/Frame/Add.pm: translate part: #1
 msgid "Undefined file type"
 msgstr ""
@@ -399,21 +447,8 @@ msgstr ""
 msgid "DS"
 msgstr ""
 
-#: templates/default/list.tt.html: translate part: #16
-#: templates/default/prop.info.tt.html: #4
-#: templates/default/prop.peers.tt.html: templates/default/status.tt.html: #1
-msgid "Down Speed"
-msgstr ""
-
 #: templates/default/list.tt.html: translate part: #17
 msgid "US"
-msgstr ""
-
-#: templates/default/list.tt.html: translate part: #18
-#: templates/default/prop.info.tt.html: #8
-#: templates/default/prop.peers.tt.html: #17 templates/default/status.tt.html:
-#: #5
-msgid "Up Speed"
 msgstr ""
 
 #: templates/default/list.tt.html: translate part: #19
@@ -749,22 +784,6 @@ msgstr ""
 
 #: templates/default/prop.tt.html: translate part: #10
 msgid "Select torrent to show"
-msgstr ""
-
-#: templates/default/status.tt.html: translate part: #2
-msgid "Max"
-msgstr ""
-
-#: templates/default/status.tt.html: translate part: #3
-msgid "Select max download speed"
-msgstr ""
-
-#: templates/default/status.tt.html: translate part: #4
-msgid "Unlimited"
-msgstr ""
-
-#: templates/default/status.tt.html: translate part: #7
-msgid "Select max upload speed"
 msgstr ""
 
 #: templates/default/string.tt.js: translate part: #2

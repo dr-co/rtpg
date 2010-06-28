@@ -1,4 +1,4 @@
-<table id="action">
+<table class="action" id="action">
     <colgroup>
         <col width="16px"/>
         <col/>
@@ -19,4 +19,108 @@
         </tr>
         </tbody>
     [% END %]
+</table>
+
+<br/>
+<br/>
+
+[%
+    SET speed = [
+        4, 8, 12, 16, 24, 48, 96, 128, 256, 512, 1024, 2048,
+        3072, 4096, 6144, 8192, 10240,  20480, 40960, 61440,
+        81920, 102400, 1048576
+    ];
+    FOR speed;
+        speed.${loop.index} = speed.${loop.index} * 1024;
+    END;
+%]
+<table class="status">
+    <colgroup>
+        <col/>
+    </colgroup>
+
+    <tbody>
+        <tr>
+            <td class="down_speed">
+                [%
+                    gettext('Down Speed') _ ': ' _
+                    data.rates.current_download_rate.as_human_speed
+                %]
+            </td>
+        </tr>
+        <tr>
+            <td class="down_speed_max">
+                [% gettext('Max') _ ':' %]
+                <select id="download_rate"
+                    title="[% gettext('Select max download speed') | html %]">
+                    <option value="0">[% gettext('Unlimited') %]</option>
+                    [% FOR val = speed %]
+                        [%
+                            SET prev = loop.index - 1;
+                            SET next = loop.index;
+                        %]
+                        [% IF speed.${prev} < data.rates.download_rate &&
+                              speed.${next} > data.rates.download_rate %]
+                            <option
+                                value="[% data.rates.download_rate %]"
+                                selected="selected"
+                            >
+                                [% data.rates.download_rate.as_human_speed %]
+                            </option>
+                        [% END %]
+
+                        <option
+                            value="[% val %]"
+                            [% IF data.rates.download_rate == val %]
+                                selected="selected"
+                            [% END %]
+                            >
+                                [% val.as_human_speed %]
+                        </option>
+                    [% END %]
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="up_speed">
+                [%
+                    gettext('Up Speed') _ ': ' _
+                    data.rates.current_upload_rate.as_human_speed
+                %]
+            </td>
+        </tr>
+        <tr>
+            <td class="up_speed_max">
+                [% gettext('Max') _ ':' %]
+                <select id="upload_rate"
+                    title="[% gettext('Select max upload speed') | html %]">
+                    <option value="0">[% gettext('Unlimited') %]</option>
+                    [% FOR val = speed %]
+                        [%
+                            SET prev = loop.index - 1;
+                            SET next = loop.index;
+                        %]
+                        [% IF speed.${prev} < data.rates.upload_rate &&
+                              speed.${next} > data.rates.upload_rate %]
+                            <option
+                                value="[% data.rates.upload_rate %]"
+                                selected="selected"
+                            >
+                                [% data.rates.upload_rate.as_human_speed %]
+                            </option>
+                        [% END %]
+
+                        <option
+                            value="[% val %]"
+                            [% IF data.rates.upload_rate == val %]
+                                selected="selected"
+                            [% END %]
+                            >
+                                [% val.as_human_speed %]
+                        </option>
+                    [% END %]
+                </select>
+            </td>
+        </tr>
+    </tbody>
 </table>

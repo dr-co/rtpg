@@ -29,12 +29,15 @@ sub new
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(action upload);
+    $opts{$_} = cfg->get($_) for qw(action upload download_rate upload_rate);
+
+    my $error;
 
     # Get RTPG object
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
     # Get list
-    ($opts{list}, $opts{error}) = $rtpg->view_list(full => 1);
+    ($opts{list}, $error) = $rtpg->view_list(full => 1);
+    $opts{error} ||= $error;
 
     # removed duplicates
     @{ $opts{list} } = grep { $_->{name} !~ /^(main|name)$/ } @{ $opts{list} };
@@ -44,6 +47,26 @@ sub new
         $_->{action} = $_->{name};
         $_->{name} = ucfirst $_->{name};
     }
+
+    # Do commands
+    $rtpg->set_download_rate($opts{download_rate})
+        if $opts{download_rate} =~ m/^\d+$/;
+    $rtpg->set_upload_rate($opts{upload_rate})
+        if $opts{upload_rate} =~ m/^\d+$/;
+
+    # Get information about rates
+    ($opts{rates}, $error) = $rtpg->rates;
+    $opts{error} ||= $error;
+
+    # Sum current rates
+    ($opts{torrents}, $error) = $rtpg->torrents_list;
+    $opts{error} ||= $error;
+    $opts{rates}{current_upload_rate} = 0;
+    $opts{rates}{current_download_rate} = 0;
+    map {
+        $opts{rates}{current_upload_rate}   += $_->{up_rate};
+        $opts{rates}{current_download_rate} += $_->{down_rate};
+    } @{ $opts{torrents} };
 
     return bless \%opts, $class;
 }

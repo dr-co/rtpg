@@ -11,4 +11,3 @@ const STR_WINDOW_ADD_NAME = "[% gettext('Add new torrent') %]";
 // Panel
 const STR_NO_SELECTED     = "[% gettext('No current torrent selected') %]";
 // Prop
-// Status
