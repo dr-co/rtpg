@@ -90,7 +90,7 @@ sub new
     # Set parameters by default, even it not declared in config file
     $self->set('action',     'default' ) unless $self->get('action');
     $self->set('locale',     $self->get('locale') || $browser_locale || 'en' );
-    $self->set('horizontal', '150,*' )   unless $self->get('horizontal');
+    $self->set('horizontal', '190,*' )   unless $self->get('horizontal');
     $self->set('vertical',   '*,300' )   unless $self->get('vertical');
 
     # Load params from file

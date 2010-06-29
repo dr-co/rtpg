@@ -36,7 +36,7 @@ body {
 a,
 a:visited
 {
-    color: MenuText;
+    color: HighlightText;
     text-decoration: none;
 }
 
