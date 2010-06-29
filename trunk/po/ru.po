@@ -389,7 +389,7 @@ msgstr "Свойства пиров"
 
 #: templates/default/prop.peers.tt.html: translate part: #3
 msgid "Peers accounted"
-msgstr "Пиров найдено"
+msgstr "Скачивают"
 
 #: templates/default/prop.peers.tt.html: translate part: #4
 msgid "Peers max"
@@ -397,7 +397,7 @@ msgstr "Максимум пиров"
 
 #: templates/default/prop.peers.tt.html: translate part: #6
 msgid "Peers complete"
-msgstr "Завершено пиров"
+msgstr "Раздают целиком"
 
 #: templates/default/prop.peers.tt.html: translate part: #7
 msgid "Peers min"
