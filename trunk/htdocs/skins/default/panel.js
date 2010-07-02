@@ -238,19 +238,19 @@ function on_change_layout()
 
         // Remove frames
         $(window.parent.document).find('#frm_action').remove();
-        $(window.parent.document).find('#frms_middle').attr('cols',  '*');
+        $(window.parent.document).find('#frms_middle').attr('cols',  '');
         $(window.parent.document).find('#frm_prop').remove();
-        $(window.parent.document).find('#frms_content').attr('rows', '*');
+        $(window.parent.document).find('#frms_content').attr('rows', '');
         break;
     case 'act_list':
         // Remove frames
         $(window.parent.document).find('#frm_prop').remove();
-        $(window.parent.document).find('#frms_content').attr('rows', '*');
+        $(window.parent.document).find('#frms_content').attr('rows', '');
         break;
     case 'list_prop':
         // Remove frames
         $(window.parent.document).find('#frm_action').remove();
-        $(window.parent.document).find('#frms_middle').attr('cols',  '*');
+        $(window.parent.document).find('#frms_middle').attr('cols',  '');
         break;
     }
 

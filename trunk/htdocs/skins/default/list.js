@@ -115,7 +115,6 @@ function on_click_list()
     $.cookie('current', strCurrent, { expires: 730 });
 
     // Update prop frame if exists
-    $.cookie('filelist', '');
     if( window.parent.frames['frm_prop'] )
     {
         window.parent.frames['frm_prop'].location =
