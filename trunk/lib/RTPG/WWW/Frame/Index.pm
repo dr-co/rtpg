@@ -27,7 +27,7 @@ sub new
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(locale horizontal vertical);
+    $opts{$_} = cfg->get($_) for qw(layout locale horizontal vertical);
 
     # Get sysinfo to check for rtorrent started and accessible
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));

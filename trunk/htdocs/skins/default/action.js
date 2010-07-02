@@ -24,8 +24,6 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* This file contain java scripts for Action frame */
 
-const NUM_LIST_FRAME = 2;
-
 $(document).ready(function(){
     $('#action tbody.item td.select :button').bind('click', on_click_action);
 
@@ -44,8 +42,9 @@ function on_click_action()
     $.cookie('action', $(this).attr('class'), { expires: 730 });
 
     // Update List frame with new params
-    var objDocList = window.parent.frames[ NUM_LIST_FRAME ].document;
-    objDocList.location = 'index.cgi?show=list&action=' + $(this).attr('class');
+//    alert( $(window.parent.frames.frm_list).attr('id') );
+    window.parent.frames['frm_list'].location =
+        'index.cgi?show=list&action=' + $(this).attr('class');
 }
 
 function on_change_download_rate()

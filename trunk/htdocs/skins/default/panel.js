@@ -24,11 +24,6 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* This file contain java scripts for Panel frame */
 
-const NUM_INDEX_FRAME   = 0;
-const NUM_ACTION_FRAME  = 1;
-const NUM_LIST_FRAME    = 2;
-const NUM_PROP_FRAME    = 3;
-
 var idRefreshTimer;
 
 $(document).ready(function(){
@@ -47,6 +42,7 @@ $(document).ready(function(){
     $('input.panel.about')          .bind('click', on_about);
 
     // Additional params
+    $('#layout')                    .bind('change', on_change_layout);
     $('#locale')                    .bind('change', on_change_locale);
     $('#refresh')                   .bind('change', on_change_refresh);
     $('#skin')                      .bind('change', on_change_skin);
@@ -56,18 +52,21 @@ $(document).ready(function(){
 });
 
 /* Refresh frame by it`s number and send some command */
-function refresh_frame( iFrame, strCommand )
+function refresh_frame( strFrame, strCommand )
 {
-    switch( iFrame )
+    switch( strFrame )
     {
-    case NUM_INDEX_FRAME:
+    case 'frm_index':
         window.parent.document.location.reload(true);
         break;
-    case NUM_ACTION_FRAME:
-        window.parent.frames[ NUM_ACTION_FRAME ].document.location.reload(true);
+    case 'frm_action':
+        // Nothing to do if frame closed
+        if(! window.parent.frames['frm_action'] ){ break; }
+
+        window.parent.frames['frm_action'].document.location.reload(true);
         break;
-    case NUM_LIST_FRAME:
-        var objDoc = $(window.parent.frames[ NUM_LIST_FRAME ].document);
+    case 'frm_list':
+        var objDoc = $(window.parent.frames['frm_list'].document);
         // For few checked list send request as GET ////////////////////////////
         if( objDoc.find('#list table.list tbody > tr')
                 .find('> td:first :checkbox:checked').length <= 64)
@@ -78,8 +77,11 @@ function refresh_frame( iFrame, strCommand )
         objDoc.find('#do').val(strCommand);
         objDoc.find('#form').submit();
         break;
-    case NUM_PROP_FRAME:
-        var objDoc = $(window.parent.frames[ NUM_PROP_FRAME ].document);
+    case 'frm_prop':
+        // Nothing to do if frame closed
+        if(! window.parent.frames['frm_prop'] ){ break; }
+
+        var objDoc = $(window.parent.frames['frm_prop'].document);
         if( objDoc.find('#form').length )
         {
             // For few checked list send request as GET ////////////////////////
@@ -94,8 +96,7 @@ function refresh_frame( iFrame, strCommand )
         }
         else
         {
-            window.parent.frames[ NUM_PROP_FRAME ].document
-                .location.reload(true);
+            window.parent.frames['frm_prop'].document.location.reload(true);
         }
         break;
     default:
@@ -112,13 +113,13 @@ function call( strCommand )
     // Restart refresh timer
     $('#refresh').change();
 
-    var objDocList = $(window.parent.frames[ NUM_LIST_FRAME ].document);
+    var objDocList = $(window.parent.frames['frm_list'].document);
 
     // If some checkboxs selected then submit form
     if( objDocList.find('input[name="hash[]"]:checked').length ){
-        refresh_frame(NUM_LIST_FRAME,   strCommand);
-        refresh_frame(NUM_ACTION_FRAME, 'refresh');
-        refresh_frame(NUM_PROP_FRAME,   'refresh');
+        refresh_frame('frm_list',   strCommand);
+        refresh_frame('frm_action', 'refresh');
+        refresh_frame('frm_prop',   'refresh');
     }
     else{
         // Get current torrent hash
@@ -126,12 +127,12 @@ function call( strCommand )
         var objCheckbox = objCurrent.find('> td:first > input[type=checkbox]');
         // If have current selected torrent then send them
         if( objCheckbox.length ){
-            refresh_frame(NUM_ACTION_FRAME, 'refresh');
-            refresh_frame(NUM_PROP_FRAME,   'refresh');
-            window.parent.frames[ NUM_LIST_FRAME   ].document.location =
+            window.parent.frames['frm_list'].document.location =
                 'index.cgi?show=list' +
-                '&do=' + strCommand +
+                '&do='      + strCommand +
                 '&current=' + objCheckbox.val();
+            refresh_frame('frm_action', 'refresh');
+            refresh_frame('frm_prop',   'refresh');
         }
         // If no selected torrents then alert about this
         else
@@ -156,16 +157,16 @@ function on_add()
 
     // If return TRUE then reftesh all frames
     if(retVal){
-        refresh_frame(NUM_LIST_FRAME,   'refresh');
-        refresh_frame(NUM_ACTION_FRAME, 'refresh');
-        refresh_frame(NUM_PROP_FRAME,   'refresh');
+        refresh_frame('frm_list',   'refresh');
+        refresh_frame('frm_action', 'refresh');
+        refresh_frame('frm_prop',   'refresh');
     }
 }
 
 function on_refresh()
 {
     // Update all frames
-    refresh_frame(NUM_INDEX_FRAME, 'refresh');
+    refresh_frame('frm_index', 'refresh');
 }
 
 function on_about()
@@ -203,9 +204,9 @@ function on_change_refresh()
     {
         idRefreshTimer = setInterval(
             function(){
-                refresh_frame(NUM_ACTION_FRAME, 'refresh');
-                refresh_frame(NUM_LIST_FRAME,   'refresh');
-                refresh_frame(NUM_PROP_FRAME,   'refresh');
+                refresh_frame('frm_action', 'refresh');
+                refresh_frame('frm_list',   'refresh');
+                refresh_frame('frm_prop',   'refresh');
             },
             ($(this).val() || 60 ) * 1000 );
     }
@@ -217,4 +218,43 @@ function on_change_skin()
     $.cookie('skin', $(this).val(), { expires: 730 });
     // Update window with new skin
     window.parent.document.location = 'index.cgi?skin=' + $(this).val();
+}
+
+function on_change_layout()
+{
+    // Save current layout information
+    var strHorizontal = $.cookie('horizontal');
+    var strVertical   = $.cookie('vertical');
+
+    // Set new value
+    $.cookie('layout', $(this).val(), { expires: 730 });
+
+    switch( $(this).val() )
+    {
+    case 'default':
+        break;
+    case 'list':
+        // If some frames not available then reload it
+
+        // Remove frames
+        $(window.parent.document).find('#frm_action').remove();
+        $(window.parent.document).find('#frms_middle').attr('cols',  '*');
+        $(window.parent.document).find('#frm_prop').remove();
+        $(window.parent.document).find('#frms_content').attr('rows', '*');
+        break;
+    case 'act_list':
+        // Remove frames
+        $(window.parent.document).find('#frm_prop').remove();
+        $(window.parent.document).find('#frms_content').attr('rows', '*');
+        break;
+    case 'list_prop':
+        // Remove frames
+        $(window.parent.document).find('#frm_action').remove();
+        $(window.parent.document).find('#frms_middle').attr('cols',  '*');
+        break;
+    }
+
+    // Restore layout information
+    $.cookie('horizontal', strHorizontal);
+    $.cookie('vertical',   strVertical);
 }

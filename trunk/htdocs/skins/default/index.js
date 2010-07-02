@@ -24,22 +24,12 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* This file contain java scripts for frameset */
 
-// Global frameset links
-var frmsMiddle;
-var frmsContent;
-
 $(document).ready(function(){
-    // Set global links
-    frmsMiddle 	= $('#frms_middle');
-    frmsContent	= $('#frms_content');
-
-    // Restore frames positions
-    frmsMiddle.attr('cols',  $.cookie('horizontal') || frmsMiddle.attr('cols'));
-    frmsContent.attr('rows', $.cookie('vertical')   || frmsContent.attr('rows'));
-
     // Save frame position on resize
     $(window[2]).bind('resize', function(){
-        $.cookie('horizontal', frmsMiddle.attr('cols'),  { expires: 730 });
-        $.cookie('vertical',   frmsContent.attr('rows'), { expires: 730 });
+        $.cookie('horizontal', $('#frms_middle').attr('cols'),
+            { expires: 730 });
+        $.cookie('vertical',   $('#frms_content').attr('rows'),
+            { expires: 730 });
     });
 });

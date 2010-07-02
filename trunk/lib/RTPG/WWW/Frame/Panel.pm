@@ -26,7 +26,7 @@ sub new
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(locale refresh skin);
+    $opts{$_} = cfg->get($_) for qw(layout locale refresh skin);
 
     my $self = bless \%opts, $class;
 

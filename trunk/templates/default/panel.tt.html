@@ -39,10 +39,29 @@
 </div>
 <div id="settings">
 
+    [%
+        SET layout = [
+            {'default'      => gettext('All')               },
+            {'list'         => gettext('List')              },
+            {'act_list'     => gettext('Actions and List')  },
+            {'list_prop'    => gettext('List and Props')    },
+        ];
+    %]
+    <select id="layout" title="[% gettext('Select layout') | html %]">
+        [% FOR ly = layout %]
+            <option
+                value="[% ly.keys.0 %]"
+                [% IF data.layout == ly.keys.0 %]selected="selected"[% END %]>
+                    [% ly.values.0 %]
+            </option>
+        [% END %]
+    </select>
+
     <select id="refresh" title="[% gettext('Select refresh interval') | html %]">
-        [% SET str_sec = gettext('sec.') %]
-        [% SET str_min = gettext('min.') %]
-        [% SET time = [
+        [%
+            SET str_sec = gettext('sec.');
+            SET str_min = gettext('min.');
+            SET time = [
                 {'0'     => gettext('Never')},
                 {'10'    => '10 ' _ str_sec},
                 {'30'    => '30 ' _ str_sec},

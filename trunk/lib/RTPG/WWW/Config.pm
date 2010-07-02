@@ -92,6 +92,7 @@ sub new
     $self->set('locale',     $self->get('locale') || $browser_locale || 'en' );
     $self->set('horizontal', '190,*' )   unless $self->get('horizontal');
     $self->set('vertical',   '*,300' )   unless $self->get('vertical');
+    $self->set('layout',     'default' ) unless $self->get('layout');
 
     # Load params from file
     $self->load_from_files;

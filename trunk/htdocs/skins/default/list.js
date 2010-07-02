@@ -24,8 +24,6 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* This file contain java scripts for List frame */
 
-const NUM_PROP_FRAME = 3;
-
 $(document).ready(function(){
     // On torrent select
     $('#list table.list tbody > tr').find('> td:gt(0)')
@@ -116,11 +114,13 @@ function on_click_list()
         $(this).parents('tr:first').find(':input[name="hash[]"]').val();
     $.cookie('current', strCurrent, { expires: 730 });
 
-    // Update prop frame
+    // Update prop frame if exists
     $.cookie('filelist', '');
-    var objDocList = window.parent.frames[ NUM_PROP_FRAME ].document;
-    objDocList.location = 'index.cgi?show=prop&current=' + strCurrent;
-
+    if( window.parent.frames['frm_prop'] )
+    {
+        window.parent.frames['frm_prop'].location =
+            'index.cgi?show=prop&current=' + strCurrent;
+    }
 }
 
 function on_all_change()
