@@ -8,13 +8,13 @@
 -%]
 [%- BLOCK Main -%]
 <?xml version="1.0" encoding="UTF-8"?>
-[% IF show == 'index' -%]
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-[%- ELSE -%]
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-[%- END %]
+[%-
+    # Set proper type
+    SET type = 'transitional';
+    IF show == 'index'; type = 'frameset'; END;
+-%]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 [% type | ucfirst %]//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-[% type %].dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xml:lang="[% data.locale %]" lang="[% data.locale %]">
     <head>
@@ -61,5 +61,6 @@
                 [% content %]
             </body>
     [% END %]
+
 </html>
 [% END %]
