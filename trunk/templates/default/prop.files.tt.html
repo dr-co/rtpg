@@ -100,9 +100,13 @@
                             />
                         [% END %]
                     </div>
-                    [% IF node.dlink %]<a href="[% node.dlink %]">[% END %]
+                    [% IF node.dlink %]
+                        <a target="_blank" href="[% node.dlink %]">
+                    [% END %]
                     [% node.name %]
-                    [% IF node.dlink %]</a>[% END %]
+                    [% IF node.dlink %]
+                        </a>
+                    [% END %]
                 </td>
                 <td class="size">[% node.data.size_bytes.as_human_size %]</td>
                 <td class="percent">
