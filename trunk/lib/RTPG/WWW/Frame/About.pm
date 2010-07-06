@@ -32,7 +32,7 @@ sub new
     # Get information about system
     ($opts{info}, $opts{error}) = $rtpg->system_information;
 
-    my $self = bless \%opts, $class;
+    return bless \%opts, $class;
 }
 
 1;

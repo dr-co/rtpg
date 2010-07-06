@@ -544,26 +544,30 @@ the version of librtorrent.
 
 sub system_information
 {
-    my $self=shift;
+    my $self = shift;
 
-    my $lv;
-    my ($rv, $err)=$self->rpc_command('system.client_version');
-    ($lv, $err)=$self->rpc_command('system.library_version') if defined $rv;
+    my @info_params = qw(client_version library_version);
 
-    unless (defined $lv)
-    {
-        return undef, $err if wantarray;
-        die $err;
+    my ($res, $err) = $self->rpc_command(
+        'system.multicall', [
+            map { { methodName => "system.$_", params => [] } } @info_params
+        ]
+    );
+
+    if ($err) {
+        die $err unless wantarray;
+        return (undef, $err);
     }
 
-    my $res=
-    {
-        client_version      => $rv,
-        library_version     => $lv,
-    };
 
-    return $res, '' if wantarray;
-    return $res;
+    my %res;
+
+    for (0 .. $#info_params) {
+        $res{ $info_params[$_] } = $res->[$_][0];
+    }
+
+    return \%res, '' if wantarray;
+    return \%res;
 }
 
 =head2 view_list([ARGS])
