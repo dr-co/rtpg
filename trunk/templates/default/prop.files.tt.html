@@ -67,7 +67,13 @@
                     [% node.name %]
                 </td>
                 <td class="size">[% node.data.size_bytes.as_human_size %]</td>
-                <td/>
+                <td class="percent">
+                    [% node.data.percent %]
+                    <div class="indicator">
+                        <div class="percent"
+                            style="width: [% node.data.percent %];"/>
+                    </div>
+                </td>
                 <td class="chunks">[% node.data.size_chunks %]</td>
                 <td/>
             </tr>

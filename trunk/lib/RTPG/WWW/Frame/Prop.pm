@@ -46,18 +46,13 @@ sub new
     # Get current state
     $opts{$_} = cfg->get($_) for qw(current prop do);
     $opts{prop} ||= 'info';
-    # Get selected files indexes
-    my @index = cfg->get('index[]');
-    $opts{index} = {};
-    $opts{index} = { map {$_ => 'checked'} @index } if @index;
-    # Get selected folder indexes
-    my @folder = cfg->get('folder[]');
-    $opts{folder} = {};
-    $opts{folder} = { map { $_ => 'checked' } @folder } if @folder;
-    # Get expanded folder indexes
-    my @expanded = cfg->get('expanded[]');
-    $opts{expanded} = {};
-    $opts{expanded} = { map { $_ => 'expanded' } @expanded } if @expanded;
+    # Get params from arrays
+    for my $name (('index[]', 'folder[]', 'expanded[]'))
+    {
+        my @param         = cfg->get( $name );
+        my ($real_name)   = $name =~ m|^(.*)\[\]$|;
+        $opts{$real_name} = { map {$_ => 'checked'} @param } if @param;
+    }
 
     {
         # Exit if no current selected
@@ -67,7 +62,7 @@ sub new
         my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
         my $error;
 
-        # Check exists current
+        # Check exists current and get info
         ($opts{info}, $error) = $rtpg->torrent_info( $opts{current} );
         if( $error )
         {
@@ -243,8 +238,7 @@ sub make_tree
         );
         $data{complete} = 1 if $file->{percent} eq '100%';
         $data{dlink} = cfg->get('direct_link') . $file->{path}
-            if cfg->get('direct_link') and $data{complete} and
-               $opts->{info}{complete};
+            if cfg->get('direct_link') and $data{complete};
         my $node = Tree::Simple->new(\%data);
         $parent->addChild( $node );
     }
@@ -257,17 +251,21 @@ sub make_tree
         # Get folder information from subnodes
         if( $node->getNodeValue->{type} eq 'folder')
         {
-            my ($size, $chunks, $count) = 0;
+            my ($size, $chunks, $c_chunks, $count) = (0, 0, 0, 0);
             $node->traverse( sub{
                 my $child = shift;
                 return unless $child->getNodeValue->{type} eq 'file';
 
-                $size   += $child->getNodeValue->{data}{size_bytes};
-                $chunks += $child->getNodeValue->{data}{size_chunks};
+                $size     += $child->getNodeValue->{data}{size_bytes};
+                $chunks   += $child->getNodeValue->{data}{size_chunks};
+                $c_chunks += $child->getNodeValue->{data}{completed_chunks};
                 $count++;
             } );
             $node->getNodeValue->{data}{size_bytes}  = $size;
             $node->getNodeValue->{data}{size_chunks} = $chunks;
+            $node->getNodeValue->{data}{completed_chunks} = $c_chunks;
+            $node->getNodeValue->{data}{percent} =
+                RTPG::_get_percent_string($c_chunks, $chunks);
         }
 
         push @return, $node->getNodeValue;

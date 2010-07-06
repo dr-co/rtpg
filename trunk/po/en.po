@@ -41,33 +41,29 @@ msgstr "Close"
 
 #: templates/default/action.tt.html: translate part: #1
 #: templates/default/list.tt.html: #16 templates/default/prop.info.tt.html: #4
-#: templates/default/prop.peers.tt.html: templates/default/status.tt.html:
+#: templates/default/prop.peers.tt.html:
 msgid "Down Speed"
 msgstr "Down Speed"
 
 #: templates/default/action.tt.html: translate part: #2
-#: templates/default/status.tt.html:
 msgid "Max"
 msgstr "Max"
 
 #: templates/default/action.tt.html: translate part: #3
-#: templates/default/status.tt.html:
 msgid "Select max download speed"
 msgstr "Select max download speed"
 
 #: templates/default/action.tt.html: translate part: #4
-#: templates/default/status.tt.html:
 msgid "Unlimited"
 msgstr "Unlimited"
 
 #: templates/default/action.tt.html: translate part: #5
 #: templates/default/list.tt.html: #18 templates/default/prop.info.tt.html: #8
-#: templates/default/prop.peers.tt.html: #17 templates/default/status.tt.html:
+#: templates/default/prop.peers.tt.html: #17
 msgid "Up Speed"
 msgstr "Up Speed"
 
 #: templates/default/action.tt.html: translate part: #7
-#: templates/default/status.tt.html:
 msgid "Select max upload speed"
 msgstr "Select max upload speed"
 
@@ -267,27 +263,47 @@ msgid "About"
 msgstr "About"
 
 #: templates/default/panel.tt.html: translate part: #13
+msgid "All"
+msgstr "All"
+
+#: templates/default/panel.tt.html: translate part: #14
+msgid "List"
+msgstr "List"
+
+#: templates/default/panel.tt.html: translate part: #15
+msgid "Actions and List"
+msgstr "Actions and List"
+
+#: templates/default/panel.tt.html: translate part: #16
+msgid "List and Props"
+msgstr "List and Props"
+
+#: templates/default/panel.tt.html: translate part: #17
+msgid "Select layout"
+msgstr "Select layout"
+
+#: templates/default/panel.tt.html: translate part: #18
 msgid "Select refresh interval"
 msgstr "Select refresh interval"
 
-#: templates/default/panel.tt.html: translate part: #14
+#: templates/default/panel.tt.html: translate part: #19
 msgid "sec."
 msgstr "sec."
 
-#: templates/default/panel.tt.html: translate part: #15
+#: templates/default/panel.tt.html: translate part: #20
 msgid "min."
 msgstr "min."
 
-#: templates/default/panel.tt.html: translate part: #16
+#: templates/default/panel.tt.html: translate part: #21
 #: templates/default/prop.trackers.tt.html: #7
 msgid "Never"
 msgstr "Never"
 
-#: templates/default/panel.tt.html: translate part: #17
+#: templates/default/panel.tt.html: translate part: #22
 msgid "Select skin"
 msgstr "Select skin"
 
-#: templates/default/panel.tt.html: translate part: #18
+#: templates/default/panel.tt.html: translate part: #23
 msgid "Select language"
 msgstr "Select language"
 
@@ -535,9 +551,6 @@ msgstr "No current torrent selected"
 #: lib/RTPG/WWW/Template.pm: translate part: #1
 msgid "File not found"
 msgstr "File not found"
-
-msgid "All"
-msgstr "All"
 
 msgid "Active"
 msgstr "Active"

@@ -222,81 +222,8 @@ function on_change_skin()
 
 function on_change_layout()
 {
-    // Save current layout information
-//    var strHorizontal = $.cookie('horizontal');
-//    var strVertical   = $.cookie('vertical');
-
     // Set new value
     $.cookie('layout', $(this).val(), { expires: 730 });
+    // Refresh all
     window.parent.document.location = 'index.cgi?layout=' + $(this).val();
-
-//    switch( $(this).val() )
-//    {
-//    case 'default':
-//        // If some frames not available then reload it
-//        if(! window.parent.frames['frm_action'] ){
-//            $('<frame/>')
-//                .attr('id',   'frm_action')
-//                .attr('name', 'frm_action')
-//                .attr('src',  'index.cgi?show=action')
-//                .prependTo( $(window.parent.document).find('#frms_middle') );
-//            $(window.parent.document).find('#frms_middle')
-//                .attr('cols', strHorizontal );
-//        }
-//
-//        // If some frames not available then reload it
-//        if(! window.parent.frames['frm_prop'] ){
-//            $('<frame/>')
-//                .attr('id',   'frm_prop')
-//                .attr('name', 'frm_prop')
-//                .attr('src',  'index.cgi?show=prop')
-//                .appendTo( $(window.parent.document).find('#frms_content') );
-//            $(window.parent.document).find('#frms_content')
-//                .attr('rows', strVertical );
-//        }
-//        break;
-//    case 'list':
-//        // Remove frames
-//        $(window.parent.document).find('#frm_action').remove();
-//        $(window.parent.document).find('#frms_middle').attr('cols',  '');
-//        $(window.parent.document).find('#frm_prop').remove();
-//        $(window.parent.document).find('#frms_content').attr('rows', '');
-//        break;
-//    case 'act_list':
-//        // Remove frames
-//        $(window.parent.document).find('#frm_prop').remove();
-//        $(window.parent.document).find('#frms_content').attr('rows', '');
-//
-//        // If some frames not available then reload it
-//        if(! window.parent.frames['frm_action'] ){
-//            $('<frame/>')
-//                .attr('id',   'frm_action')
-//                .attr('name', 'frm_action')
-//                .attr('src',  'index.cgi?show=action')
-//                .prependTo( $(window.parent.document).find('#frms_middle') );
-//            $(window.parent.document).find('#frms_middle')
-//                .attr('cols', strHorizontal );
-//        }
-//        break;
-//    case 'list_prop':
-//        // Remove frames
-//        $(window.parent.document).find('#frm_action').remove();
-//        $(window.parent.document).find('#frms_middle').attr('cols',  '');
-//
-//        // If some frames not available then reload it
-//        if(! window.parent.frames['frm_prop'] ){
-//            $('<frame/>')
-//                .attr('id',   'frm_prop')
-//                .attr('name', 'frm_prop')
-//                .attr('src',  'index.cgi?show=prop')
-//                .appendTo( $(window.parent.document).find('#frms_content') );
-//            $(window.parent.document).find('#frms_content')
-//                .attr('rows', strVertical );
-//        }
-//        break;
-//    }
-//
-//    // Restore layout information
-//    $.cookie('horizontal', strHorizontal);
-//    $.cookie('vertical',   strVertical);
 }

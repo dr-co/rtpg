@@ -49,6 +49,7 @@ sub new
     {{
         last if $opts{do} eq 'refresh';
         my $error;
+
         # Check exists current
         ($opts{list}, $error) = $rtpg->torrents_list;
         $opts{error} ||= $error;
@@ -59,8 +60,6 @@ sub new
             $opts{current} = '';
         }
 
-        # Skip if command not set
-        last unless $opts{do};
         # Skip if not checked
         last if !('HASH' eq ref $opts{hash} and %{$opts{hash}}) and
                 ! $opts{current};
