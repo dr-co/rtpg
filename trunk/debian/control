@@ -3,7 +3,7 @@ Maintainer: Dmitry E. Oboukhov <unera@debian.org>
 Uploaders: Roman V. Nikolaev <rshadow@rambler.ru>
 Section: web
 Priority: optional
-Build-Depends: cdbs, debhelper (>= 5), po-debconf
+Build-Depends: cdbs, debhelper (>= 5), po-debconf, yui-compressor
 Standards-Version: 3.8.4
 Homepage: http://rtpg2.rshadow.ru
 Vcs-browser: http://svn.rtpg2.rshadow.ru

@@ -7,3 +7,9 @@ include /usr/share/cdbs/1/rules/debhelper.mk
 clean::
 	debconf-updatepo
 	rm -f *.cdbs-config_list
+
+common-binary-post-install-indep::
+	find debian/rtpg-www -type f '(' -name '*.js' -o -name '*.css' ')' \
+		-exec \
+			yui-compressor --preserve-semi \
+				--disable-optimizations -o '{}' '{}' ';'

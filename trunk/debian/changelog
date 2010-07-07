@@ -1,3 +1,9 @@
+rtpg (0.2.7-1) unstable; urgency=low
+
+  * You can use only these frames You want.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Wed, 07 Jul 2010 16:24:43 +0400
+
 rtpg (0.2.6-1) unstable; urgency=low
 
   * Fixed sorting of refresh-time.
