@@ -18,7 +18,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xml:lang="[% data.locale %]" lang="[% data.locale %]">
     <head>
-        <title>[% config.title %]</title>
+        <title>
+            [%
+                config.title;
+                UNLESS show == 'index'; ' - ' _ show.ucfirst;  END;
+            %]
+        </title>
 
         <base href="http://[% config.url.base %]"/>
 

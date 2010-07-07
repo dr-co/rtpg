@@ -208,7 +208,7 @@ function on_change_refresh()
                 refresh_frame('frm_list',   'refresh');
                 refresh_frame('frm_prop',   'refresh');
             },
-            ($(this).val() || 60 ) * 1000 );
+            ($(this).val() || 180 ) * 1000 );
     }
 }
 
