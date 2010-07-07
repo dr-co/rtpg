@@ -87,16 +87,14 @@ sub new
 
     my ($browser_locale) = $ENV{HTTP_ACCEPT_LANGUAGE} =~ m/^(\w+)/;
 
-    # Load params from file
-    $self->load_from_files;
-
     # Set parameters by default, even it not declared in config file
     $self->set('action',     'default' ) unless $self->get('action');
     $self->set('locale',     $self->get('locale') || $browser_locale || 'en' );
     $self->set('horizontal', '190,*' )   unless $self->get('horizontal');
     $self->set('vertical',   '*,300' )   unless $self->get('vertical');
-    $self->set('layout',     'default' ) unless $self->get('layout');
-    $self->set('refresh',    180 )       unless $self->get('refresh');
+
+    # Load params from file
+    $self->load_from_files;
 
     # Get skin files path
     $self->{dir}{skin}{files}   = $opts{dir}{htdocs} . '/skins';
@@ -122,7 +120,7 @@ sub new
 
     # Init parameters from current value to cookie
     # It`s need for first time start to init all default cookie
-    $self->set($_, $self->get($_)) for qw(refresh skin);
+    $self->set($_, $self->get($_)) for qw(refresh skin layout);
 
     return $self;
 }
