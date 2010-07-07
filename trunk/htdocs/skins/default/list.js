@@ -105,6 +105,10 @@ $(document).ready(function(){
 
 function on_click_list()
 {
+    // Check for double click. Need late.
+    var bDouble = false;
+    if( $(this).parents('tr:first').hasClass('selected') ){ bDouble = true; }
+
     // Set current selected
     $('#list table.list tbody tr').removeClass('selected');
     $(this).parents('tr:first').addClass('selected');
@@ -113,6 +117,36 @@ function on_click_list()
     var strCurrent =
         $(this).parents('tr:first').find(':input[name="hash[]"]').val();
     $.cookie('current', strCurrent, { expires: 730 });
+
+    // On double click show prop frame
+    if( bDouble )
+    {
+        var objPanel  = $(window.parent.frames['frm_panel'].document);
+        var objLayout = objPanel.find('#layout');
+        switch( objLayout.val() )
+        {
+            case 'default'  :
+            case 'list_prop':
+                break;
+            case 'act_list' :
+                $.cookie('layout', 'default', { expires: 730 });
+                window.parent.document.location = 'index.cgi?layout=default';
+                break;
+            case 'list'     :
+                $.cookie('layout', 'list_prop', { expires: 730 });
+                window.parent.document.location = 'index.cgi?layout=list_prop';
+                break;
+        }
+
+// Now this good code don`t work becouse jquery bug.
+//        switch( objLayout.val() )
+//        {
+//            case 'default'  :
+//            case 'list_prop':                                       break;
+//            case 'act_list' :  objLayout.val('default').change();   break;
+//            case 'list'     :  objLayout.val('list_prop').change(); break;
+//        }
+    }
 
     // Update prop frame if exists
     if( window.parent.frames['frm_prop'] )
