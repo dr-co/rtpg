@@ -237,9 +237,13 @@ sub make_tree
             data        => $file,
         );
         $data{complete} = 1 if $file->{percent} eq '100%';
-        $data{dlink} = cfg->get('direct_link') . $opts->{info}{base_filename} .
-            '/' . $file->{path}
-                if cfg->get('direct_link') and $data{complete};
+        if( cfg->get('direct_link') and $data{complete} )
+        {
+            $data{dlink} = cfg->get('direct_link');
+            $data{dlink} .= $opts->{info}{base_filename} . '/'
+                if $opts->{info}{is_multi_file};
+            $data{dlink} .= $file->{path};
+        }
         my $node = Tree::Simple->new(\%data);
         $parent->addChild( $node );
     }
