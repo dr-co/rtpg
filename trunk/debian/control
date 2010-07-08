@@ -10,7 +10,7 @@ Vcs-browser: http://svn.rtpg2.rshadow.ru
 
 Package: rtpg-www
 Architecture: all
-Depends: librpc-xml-perl (>= 0.73),
+Depends: librpc-xml-perl (>= 0.69),
  libjson-xs-perl,
  libjs-jquery (>= 1.4.2),
  libtemplate-perl,
