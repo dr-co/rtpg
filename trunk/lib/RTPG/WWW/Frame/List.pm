@@ -30,8 +30,8 @@ sub new
     # Get current state
     $opts{$_} = cfg->get($_) for qw(action current debug do);
     $opts{hash} = {};
-    $opts{hash} = { map { $_ => 'checked' } cfg->get('hash[]') }
-        if cfg->get('hash[]');
+    $opts{hash} = { map { $_ => 'checked' } cfg->get('hash') }
+        if cfg->get('hash');
 
     $opts{do} ||= 'refresh';
 
@@ -56,7 +56,7 @@ sub new
         unless( grep {$_->{hash} eq $opts{current}} @{ $opts{list} } )
         {
             # Drop current if not in list
-            cfg->set('current', '');
+            cfg->set('current', '', 1);
             $opts{current} = '';
         }
 
@@ -72,7 +72,7 @@ sub new
         $rtpg->$command( $_, $opts{param} ) for @torrents;
 
         # If "delete" command drop current value
-        cfg->set('current', $opts{current} = '') if $command eq 'delete';
+        cfg->set('current', $opts{current} = '', 1) if $command eq 'delete';
 
     }}
 

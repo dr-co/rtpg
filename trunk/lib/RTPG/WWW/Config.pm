@@ -80,47 +80,38 @@ sub new
     $opts{url}{base}        =~ s{/[^/]*$}{/};
     $opts{url}{base}        = $ENV{SERVER_NAME} . $opts{url}{base};
 
+    # Get skin files path
+    $opts{dir}{skin}{files}   = $opts{dir}{htdocs} . '/skins';
+
     my $self = bless \%opts, $class;
 
-    my ($browser_locale) = $ENV{HTTP_ACCEPT_LANGUAGE} =~ m/^(\w+)/;
-
-    # Set parameters by default, even it not declared in config file
-    $self->set('action',     'default' ) unless $self->get('action');
-    $self->set('locale',     $self->get('locale') || $browser_locale || 'en' );
-    $self->set('horizontal', '190,*' )   unless $self->get('horizontal');
-    $self->set('vertical',   '*,300' )   unless $self->get('vertical');
-
     # Load params from file
-    $self->load_from_files;
+    $self->load_from_files or die 'Can`t load config file';
 
-    # Get skin files path
-    $self->{dir}{skin}{files}   = $opts{dir}{htdocs} . '/skins';
-
-    # Get current skin and check for skin available
-    my $skin = $self->get('skin');
-    unless( $self->get('skin') ~~ @{[ keys %{$self->skins} ]} )
-    {
-        $skin = 'default';
-        $self->set('skin', $skin);
-    }
+    # Load params from cgi
+    $self->load_from_cgi or die 'Can`t load cgi params';
 
     # Get over skin files path
-    $self->{dir}{skin}{current} = $self->{dir}{skin}{files} . '/' . $skin;
-    $self->{dir}{skin}{base}    = $self->{dir}{templates}   . '/' . $skin;
+    $self->{dir}{skin}{current} = $self->{dir}{skin}{files} . '/' .
+                                  $self->get('skin');
+    $self->{dir}{skin}{base}    = $self->{dir}{templates}   . '/' .
+                                  $self->get('skin');
     $self->{dir}{skin}{default} = $self->{dir}{templates}   . '/default';
     # Get over skin files url
-    $self->{url}{skin}{current}    = 'skins/' . $skin;
+    $self->{url}{skin}{current}    = 'skins/' . $self->get('skin');
     $self->{url}{skin}{default} = 'skins/default';
     $self->{url}{skin}{panel}   = $self->{url}{skin}{current} . '/panel';
     $self->{url}{skin}{status}  = $self->{url}{skin}{current} . '/status';
     $self->{url}{skin}{mime}    = $self->{url}{skin}{current} . '/mimetypes';
 
-    # Init parameters from current value to cookie
-    # It`s need for first time start to init all default cookie
-    $self->set($_, $self->get($_)) for qw(refresh skin layout);
-
     return $self;
 }
+
+=head2 load_from_files
+
+Load params from config file
+
+=cut
 
 sub load_from_files
 {
@@ -179,6 +170,62 @@ sub load_from_files
     return 1;
 }
 
+=head2 load_from_cgi
+
+Load params from cookie and post/get
+
+=cut
+
+sub load_from_cgi
+{
+    my ($self) = @_;
+
+    # Required params. This params stored in cookie.
+    my @names = qw(action locale horizontal vertical refresh skin layout
+        current prop);
+
+    # Load params from cookie
+    for my $name ( @names )
+    {
+        next unless defined $self->cgi->cookie($name);
+        $self->set($name, $self->cgi->cookie($name) );
+    }
+
+    # Load params from pos/get
+    for my $name ( $self->cgi->param(), @names )
+    {
+        next unless defined $self->cgi->param($name);
+        # Get value
+        my $value = ($name =~ m/\[\]$/)
+            ? [$self->cgi->param($name)]
+            : $self->cgi->param($name);
+
+        # Get clean name
+        my ($c_name) = $name =~ m/^(\w+)(?:\[\])?$/;
+        # Set persist flag
+        my $persist = 0;
+        $persist = 1 if $c_name ~~ @names;
+        # Save param value
+        $self->set($c_name, $value, $persist);
+    }
+
+    $self->set('action',     'default', 1) unless $self->get('action');
+    $self->set('horizontal', '190,*',   1) unless $self->get('horizontal');
+    $self->set('vertical',   '*,300',   1) unless $self->get('vertical');
+    $self->set('refresh',    '180',     1) unless $self->get('refresh');
+    $self->set('layout',     'default', 1) unless $self->get('layout');
+
+    # Smart get current locale from browser
+    my ($browser_locale) = $ENV{HTTP_ACCEPT_LANGUAGE} =~ m/^(\w+)/;
+    $self->set('locale', $browser_locale||'en', 1) unless $self->get('locale');
+
+    # Get current skin and check for skin available
+    $self->set('skin', 'default', 1)
+        unless( $self->get('skin') ~~ @{[ keys %{$self->skins} ]} );
+
+    return 1;
+}
+
 =head2 cgi
 
 returns CGI object
@@ -203,15 +250,12 @@ Get parameter by $name.
 sub get
 {
     my ($self, $name) = @_;
-    return ($self->cgi->param($name))
-        if defined $self->cgi->param($name)     and wantarray;
-    return ($self->cgi->cookie($name))
-        if defined $self->cgi->cookie($name)    and wantarray;
-    return ($self->{param}{$name})
-        if defined $self->{param}{$name} and wantarray;
 
-    return $self->cgi->param($name)     // $self->cgi->cookie($name) //
-           $self->{param}{$name} // '';
+    return @{$self->{param}{$name}}
+        if wantarray and
+           defined $self->{param}{$name} and
+           'ARRAY' eq ref $self->{param}{$name};
+    return $self->{param}{$name} // '';
 }
 
 =head2 upload $name
@@ -240,22 +284,28 @@ sub upload_mime_type
 }
 
 
-=head2 set $name, $value
+=head2 set $name, $value, $persist
 
-Set new $value for parameter by $name.
+Set new $value for parameter by $name. If $persist is TRUE (default: TRUE) then
+store param in cookie.
 
 =cut
 
 sub set
 {
-    my ($self, $name, $value) = @_;
+    my ($self, $name, $value, $persist) = @_;
+
+    my $expires = '+2y';
+    $expires = 'now' unless $value;
 
     # Permanent set new state into cookies
-    push @{ $self->{cookies} },
-        $self->cgi->cookie(-name => $name, -value => $value, -expires => '+2y')
-            unless $value eq $self->cgi->cookie($name);
+    push @{ $self->{cookies} }, $self->cgi->cookie(
+        -name => $name, -value => $value, -expires => $expires)
+            if $persist and $value ne $self->cgi->cookie($name);
 
     $self->{param}{$name} = $value;
+
+    return $value;
 }
 
 =head2 cookies

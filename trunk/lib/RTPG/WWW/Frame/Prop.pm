@@ -47,11 +47,10 @@ sub new
     $opts{$_} = cfg->get($_) for qw(current prop do);
     $opts{prop} ||= 'info';
     # Get params from arrays
-    for my $name (('index[]', 'folder[]', 'expanded[]'))
+    for my $name (qw(index folder expanded))
     {
-        my @param         = cfg->get( $name );
-        my ($real_name)   = $name =~ m|^(.*)\[\]$|;
-        $opts{$real_name} = { map {$_ => 'checked'} @param } if @param;
+        $opts{$name} = { map {$_ => 'checked'} cfg->get( $name ) }
+            if cfg->get( $name );
     }
 
     {
@@ -67,7 +66,7 @@ sub new
         if( $error )
         {
             # Drop current if not in list
-            cfg->set('current', '');
+            cfg->set('current', '', 1);
             $opts{current} = '';
             last;
         }
