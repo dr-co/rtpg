@@ -1,6 +1,6 @@
 [%-
     # Enable collapse for make html code less by size
-    IF config.is_collapse;
+    IF config.get('collapse');
         FILTER collapse; INCLUDE Main; END;
     ELSE;
         INCLUDE Main;

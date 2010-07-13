@@ -152,6 +152,9 @@ sub load_from_files
         $loaded = 'yes';
     }
 
+    (m/^(?:yes|on|enable)$/i) ?$self->{param}{$_} = 1 :$self->{param}{$_} = 1
+        for qw(geo_ip collapse);
+
     # Exit if no one config exists
     die 'Config file not exists' unless $loaded eq 'yes';
 
@@ -353,27 +356,6 @@ sub skins
 
     $self->{skins} = \%skins;
     return $self->{skins};
-}
-
-=head2 is_collapse
-
-Return true if html collapse enabled
-
-=cut
-
-sub is_collapse
-{
-    return ( shift->get('collapse') =~ m/^(yes|on|enable)$/i) ?1 :0;
-}
-
-=head2 is_geo_ip
-
-Return true if geo_ip enabled
-
-=cut
-sub is_geo_ip
-{
-    return ( shift->get('geo_ip') =~ m/^(yes|on|enable)$/i) ?1 :0;
 }
 
 =head2 DieDumper

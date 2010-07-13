@@ -44,7 +44,7 @@ sub new
     my ($class, %opts) = @_;
 
     # Get current state
-    $opts{$_} = cfg->get($_) for qw(current prop do);
+    $opts{$_} = cfg->get($_) for qw(current prop do geo_ip);
     $opts{prop} ||= 'info';
     # Get params from arrays
     for my $name (qw(index folder expanded))
@@ -86,7 +86,7 @@ sub new
             ($opts{list}, $error) = $rtpg->peer_list( $opts{current} );
             $opts{error} ||= $error;
 
-            if( cfg->is_geo_ip and eval "require Geo::IPfree" and !$@)
+            if( $opts{geo_ip} and eval "require Geo::IPfree" and !$@)
             {
                 my $geo = Geo::IPfree->new;
                 $geo->Faster;
