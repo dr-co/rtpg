@@ -44,7 +44,7 @@ sub new
 
 
     # Get RTPG object
-    my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
+    my $rtpg = RTPG->new(url => cfg->get('rpc_uri'), queue => 1);
 
     {{
         last if $opts{do} eq 'refresh';

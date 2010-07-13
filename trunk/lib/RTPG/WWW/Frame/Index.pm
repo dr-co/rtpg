@@ -30,7 +30,7 @@ sub new
     $opts{$_} = cfg->get($_) for qw(layout locale horizontal vertical);
 
     # Get sysinfo to check for rtorrent started and accessible
-    my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
+    my $rtpg = RTPG->new(url => cfg->get('rpc_uri'), queue => 1);
     ($opts{info}, $opts{error}) = $rtpg->system_information;
 
     # Get all methods list on debug

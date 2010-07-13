@@ -27,7 +27,7 @@ sub new
 {
     my ($class, %opts) = @_;
 
-    my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
+    my $rtpg = RTPG->new(url => cfg->get('rpc_uri'), queue => 1);
 
     # Get information about system
     ($opts{info}, $opts{error}) = $rtpg->system_information;

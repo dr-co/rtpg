@@ -44,9 +44,8 @@ use open qw(:std :utf8);
 use CGI::Carp qw(fatalsToBrowser);
 use File::Basename;
 use File::Spec;
-use Fcntl qw(:flock);
 
-our $VERSION = "0.2.7";
+our $VERSION = "0.2.8";
 our $PROJECT_NAME = "rtpg";
 
 use lib qw(../lib);
@@ -54,9 +53,6 @@ use RTPG::WWW::Config;
 use RTPG::WWW::Template;
 use RTPG::WWW::Locale;
 use RTPG;
-
-# Only one client can follow then ##############################################
-flock DATA, LOCK_EX;
 
 # Get params ###################################################################
 my %params = (version => $VERSION);
@@ -155,5 +151,3 @@ else
 }
 $template->process( $file, \%params );
 
-__DATA__
-lock area

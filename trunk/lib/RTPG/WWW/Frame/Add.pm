@@ -29,7 +29,7 @@ sub new
 
     map { $opts{$_} = cfg->get($_) // '' } qw(file link);
 
-    my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
+    my $rtpg = RTPG->new(url => cfg->get('rpc_uri'), queue => 1);
 
     # Add by links
     if ($opts{link}) {
@@ -49,9 +49,9 @@ sub new
     # Add by uploaded files
     if ($opts{file}) {
         my $fh   = cfg->upload('file');
-        my $info = cfg->upload_info('file');
+        my $mime_info = cfg->upload_mime_type('file');
 
-        unless (exists $info->{'Content-Type'}) {
+        unless ($mime_info) {
             push @{$opts{result}}, {
                 result      => undef,
                 error       => gettext('Undefined file type'),
@@ -59,6 +59,7 @@ sub new
                 type        => 'file',
             }
         } elsif ( !__PACKAGE__->_check_if_bencoded($fh) ) {
+
             push @{$opts{result}}, {
                 result      => undef,
                 error       => gettext('This is not torrent file'),

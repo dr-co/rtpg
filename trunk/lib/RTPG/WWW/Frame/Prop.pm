@@ -59,7 +59,7 @@ sub new
         last unless $opts{current};
 
         # Get RTPG object
-        my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
+        my $rtpg = RTPG->new(url => cfg->get('rpc_uri'), queue => 1);
         my $error;
 
         # Check exists current and get info

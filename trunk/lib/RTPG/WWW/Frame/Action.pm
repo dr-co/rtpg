@@ -34,7 +34,7 @@ sub new
     my $error;
 
     # Get RTPG object
-    my $rtpg = RTPG->new(url => cfg->get('rpc_uri'));
+    my $rtpg = RTPG->new(url => cfg->get('rpc_uri'), queue => 1);
     # Get list
     ($opts{list}, $error) = $rtpg->view_list(full => 1);
     $opts{error} ||= $error;

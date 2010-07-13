@@ -11,13 +11,10 @@ RTPG::WWW::Config configuration module.
 package RTPG::WWW::Config;
 use base qw(Exporter);
 
-use CGI;
+use CGI::Simple;
 # Set CGI file upload parameters
-$CGI::DISABLE_UPLOADS       = 0;
-$CGI::POST_MAX              = 67108864; #64Mb
-$CGI::PRIVATE_TEMPFILES     = 1;
-$CGI::CLOSE_UPLOAD_FILES    = 0;
-$CGI::HEADERS_ONCE          = 0;
+$CGI::Simple::POST_MAX = 1024000;
+$CGI::Simple::DISABLE_UPLOADS = 0;
 
 use File::Basename;
 use File::Spec;
@@ -84,6 +81,8 @@ sub new
     $opts{url}{base}        = $ENV{SERVER_NAME} . $opts{url}{base};
 
     my $self = bless \%opts, $class;
+
+    $self->{'_cgi'} = new CGI::Simple;
 
     my ($browser_locale) = $ENV{HTTP_ACCEPT_LANGUAGE} =~ m/^(\w+)/;
 
@@ -182,6 +181,18 @@ sub load_from_files
     return 1;
 }
 
+=head2 cgi
+
+returns CGI object
+
+=cut
+
+sub cgi
+{
+    my ($self) = @_;
+    return $self->{'_cgi'};
+}
+
 
 =head2 get $name
 
@@ -192,14 +203,14 @@ Get parameter by $name.
 sub get
 {
     my ($self, $name) = @_;
-    return (CGI::param($name))
-        if defined CGI::param($name)     and wantarray;
-    return (CGI::cookie($name))
-        if defined CGI::cookie($name)    and wantarray;
+    return ($self->cgi->param($name))
+        if defined $self->cgi->param($name)     and wantarray;
+    return ($self->cgi->cookie($name))
+        if defined $self->cgi->cookie($name)    and wantarray;
     return ($self->{param}{$name})
         if defined $self->{param}{$name} and wantarray;
 
-    return CGI::param($name)     // CGI::cookie($name) //
+    return $self->cgi->param($name)     // $self->cgi->cookie($name) //
            $self->{param}{$name} // '';
 }
 
@@ -212,20 +223,22 @@ Get uploaded file handle
 sub upload
 {
     my ($self, $name) = @_;
-    return CGI::upload($name);
+    return $self->cgi->upload($name);
 }
 
-=head2 upload $name
 
-Get uploaded file info
+=head2 upload_mime_type $name
+
+Get uploaded file mime info
 
 =cut
 
-sub upload_info
+sub upload_mime_type
 {
     my ($self, $name) = @_;
-    return CGI::uploadInfo(CGI::upload($name));
+    return $self->cgi->upload_info($self->cgi->param($name), 'mime');
 }
+
 
 =head2 set $name, $value
 
@@ -239,8 +252,8 @@ sub set
 
     # Permanent set new state into cookies
     push @{ $self->{cookies} },
-        CGI::cookie(-name => $name, -value => $value, -expires => '+2y')
-            unless $value eq CGI::cookie($name);
+        $self->cgi->cookie(-name => $name, -value => $value, -expires => '+2y')
+            unless $value eq $self->cgi->cookie($name);
 
     $self->{param}{$name} = $value;
 }
