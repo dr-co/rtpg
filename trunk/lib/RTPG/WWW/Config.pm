@@ -82,8 +82,6 @@ sub new
 
     my $self = bless \%opts, $class;
 
-    $self->{'_cgi'} = new CGI::Simple;
-
     my ($browser_locale) = $ENV{HTTP_ACCEPT_LANGUAGE} =~ m/^(\w+)/;
 
     # Set parameters by default, even it not declared in config file
@@ -190,7 +188,9 @@ returns CGI object
 sub cgi
 {
     my ($self) = @_;
-    return $self->{'_cgi'};
+
+    return $self->{'_cgi'} if $self->{'_cgi'};
+    return $self->{'_cgi'} = new CGI::Simple;
 }
 
 
