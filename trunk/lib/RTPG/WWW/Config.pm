@@ -152,6 +152,7 @@ sub load_from_files
         $loaded = 'yes';
     }
 
+    # Cast some params to boolean
     (m/^(?:yes|on|enable)$/i) ?$self->{param}{$_} = 1 :$self->{param}{$_} = 1
         for qw(geo_ip collapse);
 
