@@ -14,3 +14,6 @@
 0.9
     Added a few new commands.
     Enabled support for non-latin symbols in rpc_command.
+
+0.92
+    Added queue mode.
