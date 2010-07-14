@@ -3,8 +3,9 @@ rtpg (0.2.8-1) unstable; urgency=low
   * Since now we use CGI::Simple instead CGI (there was a bug in
     upload function in CGI module).
   * Using locks more properly.
+  * Added ukrainian trnslation.
 
- -- Dmitry E. Oboukhov <unera@debian.org>  Tue, 13 Jul 2010 12:18:10 +0400
+ -- Dmitry E. Oboukhov <unera@debian.org>  Wed, 14 Jul 2010 11:14:37 +0400
 
 rtpg (0.2.7-1) unstable; urgency=low
 
