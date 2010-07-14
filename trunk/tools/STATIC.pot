@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2010 THE PACKAGE'S COPYRIGHT HOLDER
+# RTPG static strings translation template file.
+# Copyright (C) 2008 Dmitry E. Oboukhov <unera@debian.org>
+# Copyright (C) 2008 Roman V. Nikolaev <rshadow@rambler.ru>
 # This file is distributed under the same license as the rtpg package.
 # Roman V. Nikolaev <rshadow@rambler.ru>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: rtpg\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2010-05-20 12:00+04\n"
+"Report-Msgid-Bugs-To: Roman V. Nikolaev <rshadow@rambler.ru>\n"
+"POT-Creation-Date: 2010-05-20 14:00+04\n"
+"PO-Revision-Date: 2010-05-20 18:00+04\n"
 "Last-Translator: Roman V. Nikolaev <rshadow@rambler.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

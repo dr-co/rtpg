@@ -13,7 +13,7 @@ use base qw(Exporter);
 
 use CGI::Simple;
 # Set CGI file upload parameters
-$CGI::Simple::POST_MAX = 1024000;
+$CGI::Simple::POST_MAX        = 2097152; #2Mb
 $CGI::Simple::DISABLE_UPLOADS = 0;
 
 use File::Basename;
