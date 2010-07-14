@@ -849,13 +849,14 @@ sub rates
 
 =head2 add
 
-Add new torrent for download from url list or filehandle
+Add new torrent for download from url list or filehandle. If $start is TRUE then
+torrent immediately start after load.
 
 =cut
 
 sub add
 {
-    my ($self, $param) = @_;
+    my ($self, $param, $start) = @_;
 
     $param = [ $param ] unless 'ARRAY' eq ref $param;
 
@@ -868,12 +869,16 @@ sub add
             local $/;
             binmode $_;
             my $torrent = RPC::XML::base64->new(<$_>);
-            ($res, $error) = $self->rpc_command(load_raw => $torrent);
+            my $sub = 'load_raw';
+            $sub = 'load_raw_start' if $start;
+            ($res, $error) = $self->rpc_command($sub => $torrent);
         }
         else
         {
             my $url = RPC::XML::base64->new($_);
-            ($res, $error) = $self->rpc_command(load_verbose => $url);
+            my $sub = 'load';
+            $sub = 'load_start' if $start;
+            ($res, $error) = $self->rpc_command($sub => $url);
         }
     }
 

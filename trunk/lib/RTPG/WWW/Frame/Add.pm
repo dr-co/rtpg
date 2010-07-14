@@ -27,7 +27,7 @@ sub new
 {
     my ($class, %opts) = @_;
 
-    map { $opts{$_} = cfg->get($_) // '' } qw(file link);
+    map { $opts{$_} = cfg->get($_) // '' } qw(file link start);
 
     my $rtpg = RTPG->new(url => cfg->get('rpc_uri'), queue => 1);
 
@@ -35,7 +35,7 @@ sub new
     if ($opts{link}) {
         if (my @urls = grep /\S/, split /\s+/, $opts{link}) {
             for (@urls) {
-                my ($result, $error) = $rtpg->add($_);
+                my ($result, $error) = $rtpg->add($_, $opts{start});
                 push @{$opts{result}}, {
                     result  => $result,
                     error   => $error,
@@ -67,7 +67,7 @@ sub new
                 type        => 'file',
             }
         } else {
-            my ($result, $error) = $rtpg->add($fh);
+            my ($result, $error) = $rtpg->add($fh, $opts{start});
             push @{$opts{result}}, {
                 result      => $result,
                 error       => $error,
