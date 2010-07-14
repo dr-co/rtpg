@@ -153,7 +153,7 @@ sub load_from_files
     }
 
     # Cast some params to boolean
-    (m/^(?:yes|on|enable)$/i) ?$self->{param}{$_} = 1 :$self->{param}{$_} = 1
+    (m/^(?:yes|on|enable)$/i) ?$self->{param}{$_} = 1 :$self->{param}{$_} = 0
         for qw(geo_ip collapse);
 
     # Exit if no one config exists

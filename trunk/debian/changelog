@@ -1,3 +1,9 @@
+rtpg (0.2.9-1) unstable; urgency=low
+
+  * Fix get some config params
+
+ -- Roman V. Nikolaev <rshadow@rambler.ru>  Wed, 14 Jul 2010 11:31:28 +0400
+
 rtpg (0.2.8-1) unstable; urgency=low
 
   * Since now we use CGI::Simple instead CGI (there was a bug in
