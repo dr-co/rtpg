@@ -69,11 +69,18 @@ sub new
         my @torrents = keys %{ $opts{hash} };
         push @torrents, $opts{current} unless @torrents;
 
-        $rtpg->$command( $_, $opts{param} ) for @torrents;
+        for( @torrents )
+        {
+            (undef, $error) = $rtpg->$command( $_, $opts{param} );
+            $opts{error} ||= $error;
+            # Update priorities if needed
+            (undef, $error) = $rtpg->update_priorities($_)
+                if $command eq 'priority';
+            $opts{error} ||= $error;
+        }
 
         # If "delete" command drop current value
         cfg->set('current', $opts{current} = '', 1) if $command eq 'delete';
-
     }}
 
     # Get list

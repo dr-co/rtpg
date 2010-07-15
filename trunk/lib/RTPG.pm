@@ -530,7 +530,26 @@ sub set_file_priority
     }
 
     return $res;
+}
 
+=head2 update_priorities
+
+Update priorities before set_file_priority and etc.
+
+=cut
+
+sub update_priorities
+{
+    my ($self, $id) = @_;
+
+    my ($res, $error)= $self->rpc_command('d.update_priorities', $id);
+    unless (defined $res)
+    {
+        return undef, "$error" if wantarray;
+        die $error;
+    }
+
+    return $res;
 }
 
 =head2 system_information

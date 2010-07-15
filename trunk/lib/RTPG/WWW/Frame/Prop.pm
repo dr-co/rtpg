@@ -110,6 +110,7 @@ sub new
             {
                 $rtpg->set_file_priority($opts{current}, $_, $opts{param})
                     for keys %{ $opts{index} };
+                $rtpg->update_priorities($opts{current});
             }
 
             ($opts{list}, $opts{error}) = $rtpg->file_list( $opts{current} );

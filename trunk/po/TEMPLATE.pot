@@ -89,8 +89,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # #-#-#-#-#  STATIC.pot (rtpg)  #-#-#-#-#
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2010 THE PACKAGE'S COPYRIGHT HOLDER
+# RTPG static strings translation template file.
+# Copyright (C) 2008 Dmitry E. Oboukhov <unera@debian.org>
+# Copyright (C) 2008 Roman V. Nikolaev <rshadow@rambler.ru>
 # This file is distributed under the same license as the rtpg package.
 # Roman V. Nikolaev <rshadow@rambler.ru>, 2010.
 #, fuzzy
@@ -248,9 +249,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "#-#-#-#-#  STATIC.pot (rtpg)  #-#-#-#-#\n"
 "Project-Id-Version: rtpg\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2010-05-20 12:00+04\n"
+"Report-Msgid-Bugs-To: Roman V. Nikolaev <rshadow@rambler.ru>\n"
+"POT-Creation-Date: 2010-05-20 14:00+04\n"
+"PO-Revision-Date: 2010-05-20 18:00+04\n"
 "Last-Translator: Roman V. Nikolaev <rshadow@rambler.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -277,7 +278,7 @@ msgid "library"
 msgstr ""
 
 #: templates/default/about.tt.html: translate part: #6
-#: templates/default/add.tt.html: #7
+#: templates/default/add.tt.html: #8
 msgid "Close"
 msgstr ""
 
@@ -338,22 +339,26 @@ msgid "File"
 msgstr ""
 
 #: templates/default/add.tt.html: translate part: #6
+msgid "Start torrent"
+msgstr ""
+
+#: templates/default/add.tt.html: translate part: #7
 msgid "Add"
 msgstr ""
 
-#: templates/default/add.tt.html: translate part: #8
+#: templates/default/add.tt.html: translate part: #9
 msgid "Adding file"
 msgstr ""
 
-#: templates/default/add.tt.html: translate part: #9
+#: templates/default/add.tt.html: translate part: #10
 msgid "Adding link"
 msgstr ""
 
-#: templates/default/add.tt.html: translate part: #10
+#: templates/default/add.tt.html: translate part: #11
 msgid "Internal error"
 msgstr ""
 
-#: templates/default/add.tt.html: translate part: #11
+#: templates/default/add.tt.html: translate part: #12
 #: templates/default/list.tt.html: #10 templates/default/prop.files.tt.html:
 #: #4
 msgid "Done"
