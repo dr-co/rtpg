@@ -153,8 +153,9 @@ sub load_from_files
     }
 
     # Cast some params to boolean
-    (m/^(?:yes|on|enable)$/i) ?$self->{param}{$_} = 1 :$self->{param}{$_} = 0
-        for qw(geo_ip collapse);
+    $self->{param}{$_} =
+        ($self->{param}{$_} =~ m/^(yes|on|enable|1)$/i) ?1 :0
+            for qw(geo_ip collapse);
 
     # Exit if no one config exists
     die 'Config file not exists' unless $loaded eq 'yes';
