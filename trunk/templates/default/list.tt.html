@@ -6,9 +6,14 @@
     <table class="list" summary="[% gettext('Main torrents list') %]">
     <colgroup>
         <col width="1%"/>
-        <col width="1%"/>
+        <col width="26px"/>
         <col width="47%"/>
-        <col width="1%"/>
+        <col width="24px"/>
+        <col width="24px"/>
+        <col width="24px"/>
+        <col width="24px"/>
+        <col width="24px"/>
+        <col width="24px"/>
         <col width="5%"/>
         <col width="10%"/>
         <col width="10%"/>
@@ -26,7 +31,10 @@
                     title="[% gettext('Select/Unselect all') %]"
                  />
             </th>
-            <th abbr="[% gettext('Nm') %]" colspan="3">
+            [%
+                SET max_custom = data.list.list.0.custom_count;
+            %]
+            <th abbr="[% gettext('Nm') %]" colspan="[% 3 + max_custom - 1 %]">
                 [% gettext('Name') %]
             </th>
             <th abbr="[% gettext('Pr') %]">[% gettext('Priority')   %]</th>
@@ -70,7 +78,34 @@
                         [% END %]
                     [% END %]
                 </td>
-                <td class="name">[% torrent.name %]</td>
+                [%
+                    SET custom_count    = 0;
+                    SET customs         = [1.. max_custom];
+                    FOR num IN customs;
+                        SET c = 'custom' _ num;
+                        IF torrent.${c};
+                            custom_count = custom_count + 1;
+                        END;
+                    END;
+                %]
+                <td class="name" colspan="[% max_custom - custom_count %]">
+                    [% torrent.name %]
+                </td>
+                [%
+                    FOR num IN customs;
+                        SET c = 'custom' _ num;
+                        IF torrent.${c};
+                            SET class = ['custom'];
+                            class.push('c' _ num);
+                %]
+                    <td class="[% class.join(' ') %]"
+                        title="[%
+                            gettext('Custom') _ ' ' _ num _ ': ' _
+                            torrent.${c}
+                        %]"/>
+                [%      END;
+                    END;
+                %]
                 <td
                     [%
                         SET class = ['message'];
