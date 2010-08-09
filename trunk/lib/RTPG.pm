@@ -268,13 +268,16 @@ sub torrents_list
     }
 
     # Set custom params count
-    my $count = 0;
-    for my $name ( keys %{$list->[0]} )
+    if( @$list )
     {
-        next unless $name =~ '^custom(\d+)$';
-        $count = $1 if $1 > $count;
+        my $count = 0;
+        for my $name ( keys %{$list->[0]} )
+        {
+            next unless $name =~ '^custom(\d+)$';
+            $count = $1 if $1 > $count;
+        }
+        $_->{custom_count} = $count for @$list;
     }
-    $_->{custom_count} = $count for @$list;
 
     return $list unless wantarray;
     return $list, '';
