@@ -102,7 +102,7 @@
                         title="[%
                             gettext('Custom') _ ' ' _ num _ ': ' _
                             torrent.${c}
-                        %]"/>
+                        | html %]"/>
                 [%      END;
                     END;
                 %]
@@ -113,7 +113,7 @@
                     %]
                     class="[% class.join(' ') %]"
                     [% IF torrent.message %]
-                        title="[% torrent.message %]"
+                        title="[% torrent.message | html %]"
                     [% END %]
                 />
                 <td class="num info">[% gettext(torrent.priority_str) %]</td>
