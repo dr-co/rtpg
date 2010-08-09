@@ -1,4 +1,4 @@
-# RTPG russian translation file.
+# RTPG ukrainian translation file.
 # Copyright (C) 2008 Dmitry E. Oboukhov <unera@debian.org>
 # Copyright (C) 2008 Roman V. Nikolaev <rshadow@rambler.ru>
 # This file is distributed under the same license as the rtpg package.
@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rtpg\n"
 "Report-Msgid-Bugs-To: Roman V. Nikolaev <rshadow@rambler.ru>\n"
-"POT-Creation-Date: 2010-03-09 23:00+04\n"
-"PO-Revision-Date: 2010-07-15 11:00+04\n"
-"Last-Translator: Roman V. Nikolaev <rshadow@rambler.ru>\n"
+"POT-Creation-Date: 2010-07-13 15:00+02\n"
+"PO-Revision-Date: 2010-07-15 11:00+02\n"
+"Last-Translator: Oleg Matviychuk <mathway@i.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,26 +25,26 @@ msgstr "Roman V. Nikolaev"
 
 #: templates/default/about.tt.html: translate part: #3
 msgid "Official site and bugtracker"
-msgstr "Официальный сайт и багтрекер"
+msgstr "Офіційний сайт і багтрекер"
 
 #: templates/default/about.tt.html: translate part: #4
 msgid "Used"
-msgstr "Используется"
+msgstr "Використовується"
 
 #: templates/default/about.tt.html: translate part: #5
 msgid "library"
-msgstr "библиотека"
+msgstr "бібліотека"
 
 #: templates/default/about.tt.html: translate part: #6
 #: templates/default/add.tt.html: #8
 msgid "Close"
-msgstr "Закрыть"
+msgstr "Закрити"
 
 #: templates/default/action.tt.html: translate part: #1
 #: templates/default/list.tt.html: #16 templates/default/prop.info.tt.html: #4
 #: templates/default/prop.peers.tt.html:
 msgid "Down Speed"
-msgstr "Загрузка"
+msgstr "Завантаження"
 
 #: templates/default/action.tt.html: translate part: #2
 msgid "Max"
@@ -52,45 +52,45 @@ msgstr "Макс."
 
 #: templates/default/action.tt.html: translate part: #3
 msgid "Select max download speed"
-msgstr "Выберите максимальную скорость загрузки"
+msgstr "Оберіть максимальну швидкість завантаження"
 
 #: templates/default/action.tt.html: translate part: #4
 msgid "Unlimited"
-msgstr "Неограничено"
+msgstr "Необмежено"
 
 #: templates/default/action.tt.html: translate part: #5
 #: templates/default/list.tt.html: #18 templates/default/prop.info.tt.html: #8
 #: templates/default/prop.peers.tt.html: #17
 msgid "Up Speed"
-msgstr "Раздача"
+msgstr "Роздача"
 
 #: templates/default/action.tt.html: translate part: #7
 msgid "Select max upload speed"
-msgstr "Выберите максимальную скорость раздачи"
+msgstr "Оберіть максимальну швидкість роздачі"
 
 #: lib/RTPG/WWW/Frame/Add.pm: translate part: #1
 msgid "Undefined file type"
-msgstr "Неопределен тип файла"
+msgstr "Невизначений тип файлу"
 
 #: lib/RTPG/WWW/Frame/Add.pm: translate part: #2
 msgid "This is not torrent file"
-msgstr "Это не торрент файл"
+msgstr "Це не торрент файл"
 
 #: templates/default/add.tt.html: translate part: #1
 msgid "Link"
-msgstr "Ссылка"
+msgstr "Посилання"
 
 #: templates/default/add.tt.html: translate part: #2
 msgid "One link per line"
-msgstr "Одна ссылка на строку"
+msgstr "Одне посилання на строку"
 
 #: templates/default/add.tt.html: translate part: #3
 msgid "Note: rTorrent don`t notify you about broken links."
-msgstr "Внимание! rTorrent не уведомляет о сломанных ссылках."
+msgstr "Увага! rTorrent не повідомляє про биті посилання."
 
 #: templates/default/add.tt.html: translate part: #4
 msgid "Just attempt to load this links."
-msgstr "Только пытается загрузить файлы по этим ссылкам."
+msgstr "Тільки намагається заваннтажити файли по цим посиланням."
 
 #: templates/default/add.tt.html: translate part: #5
 msgid "File"
@@ -98,23 +98,23 @@ msgstr "Файл"
 
 #: templates/default/add.tt.html: translate part: #6
 msgid "Start torrent"
-msgstr "Запустить торрент"
+msgstr "Запустити торрент"
 
 #: templates/default/add.tt.html: translate part: #7
 msgid "Add"
-msgstr "Добавить"
+msgstr "Додати"
 
 #: templates/default/add.tt.html: translate part: #9
 msgid "Adding file"
-msgstr "Добавление файла"
+msgstr "Додавання файлу"
 
 #: templates/default/add.tt.html: translate part: #10
 msgid "Adding link"
-msgstr "Добавление по ссылке"
+msgstr "Додавання за посиланням"
 
 #: templates/default/add.tt.html: translate part: #11
 msgid "Internal error"
-msgstr "Интервал"
+msgstr "Інтервал"
 
 #: templates/default/add.tt.html: translate part: #12
 #: templates/default/list.tt.html: #10 templates/default/prop.files.tt.html:
@@ -124,28 +124,28 @@ msgstr "Готово"
 
 #: templates/default/error.tt.html: translate part: #1
 msgid "Error"
-msgstr "Ошибка"
+msgstr "Помилка"
 
 #: templates/default/error.tt.html: translate part: #2
 msgid "rTorrent not started or access restricted."
-msgstr "rTorrent не запущен или доступ к нему запрещен."
+msgstr "rTorrent не запущено, або доступ до нього заборонено."
 
 #: templates/default/list.tt.html: translate part: #1
 msgid "Main torrents list"
-msgstr "Главный список торрентов"
+msgstr "Головний список торрентів"
 
 #: templates/default/list.tt.html: translate part: #2
 #: templates/default/prop.files.tt.html: #1
 msgid "Select/Unselect all"
-msgstr "Выбрать/Сбросить все"
+msgstr "Виділити/Скинути все"
 
 #: templates/default/list.tt.html: translate part: #3
 msgid "Nm"
-msgstr "Имя"
+msgstr "Ім’я"
 
 #: templates/default/list.tt.html: translate part: #4
 msgid "Name"
-msgstr "Имя файла"
+msgstr "Ім’я файлу"
 
 #: templates/default/list.tt.html: translate part: #5
 msgid "Pr"
@@ -154,7 +154,7 @@ msgstr "Пр"
 #: templates/default/list.tt.html: translate part: #6
 #: templates/default/prop.files.tt.html:
 msgid "Priority"
-msgstr "Приоритет"
+msgstr "Пріоритет"
 
 #: templates/default/list.tt.html: translate part: #7
 msgid "Sz"
@@ -163,7 +163,7 @@ msgstr "Рз"
 #: templates/default/list.tt.html: translate part: #8
 #: templates/default/prop.files.tt.html: #3
 msgid "Size"
-msgstr "Размер"
+msgstr "Розмір"
 
 #: templates/default/list.tt.html: translate part: #9
 msgid "Dn"
@@ -179,12 +179,12 @@ msgstr "Статус"
 
 #: templates/default/list.tt.html: translate part: #13
 msgid "Pe"
-msgstr "Пиры"
+msgstr "Піри"
 
 #: templates/default/list.tt.html: translate part: #14
 #: templates/default/prop.tt.html: #2
 msgid "Peers"
-msgstr "Пиры"
+msgstr "Піри"
 
 #: templates/default/list.tt.html: translate part: #15
 msgid "DS"
@@ -203,73 +203,69 @@ msgid "Rate"
 msgstr "Рейтинг"
 
 #: templates/default/list.tt.html: translate part: #21
-msgid "Custom"
-msgstr "Пользовательский параметр"
+msgid "Hashing"
+msgstr "Перевірка"
 
 #: templates/default/list.tt.html: translate part: #22
-msgid "Hashing"
-msgstr "Проверка"
+msgid "Seeding"
+msgstr "Роздача"
 
 #: templates/default/list.tt.html: translate part: #23
-msgid "Seeding"
-msgstr "Раздача"
-
-#: templates/default/list.tt.html: translate part: #24
 msgid "Finished"
 msgstr "Завершено"
 
-#: templates/default/list.tt.html: translate part: #25
+#: templates/default/list.tt.html: translate part: #24
 msgid "Downloading"
 msgstr "Закачка"
 
-#: templates/default/list.tt.html: translate part: #26
+#: templates/default/list.tt.html: translate part: #25
 msgid "Paused"
 msgstr "Пауза"
 
 #: templates/default/panel.tt.html: translate part: #1
 #: templates/default/string.tt.js:
 msgid "Add new torrent"
-msgstr "Добавить новый торрент"
+msgstr "Додати новий торрент"
 
 #: templates/default/panel.tt.html: translate part: #2
 msgid "Delete selected torrents"
-msgstr "Удалить выделенные торренты"
+msgstr "Видалити виділенні торренти"
 
 #: templates/default/panel.tt.html: translate part: #3
 msgid "Start selected torrents"
-msgstr "Запустить выделенные торренты"
+msgstr "Запустити виділенні торренти"
 
 #: templates/default/panel.tt.html: translate part: #4
 msgid "Pause selected torrents"
-msgstr "Приостановить выделенные торренты"
+msgstr "Призупинити виділенні торренти"
 
 #: templates/default/panel.tt.html: translate part: #5
 msgid "Stop selected torrents"
-msgstr "Остановить выделенные торренты"
+msgstr "Зуинити виділенні торренти"
 
 #: templates/default/panel.tt.html: translate part: #6
 msgid "Check selected torrents for errors"
-msgstr "Проверить выделенные торренты на ошибки"
+msgstr "Перевірити виділенні торренти на помилки"
 
 #: templates/default/panel.tt.html: translate part: #8
 msgid "Set low priority for selected torrents"
-msgstr "Установить минимальный приоритет для выделенных торрентов"
+msgstr "Встановити мінімальний пріоритет для виділенних торрентів"
 
 #: templates/default/panel.tt.html: translate part: #9
 msgid "Set normal priority for selected torrents"
-msgstr "Установить обычный приоритет для выделенных торрентов"
+msgstr "Встановити звичайний пріоритет для виділенних торрентів"
 
 #: templates/default/panel.tt.html: translate part: #10
 msgid "Set high priority for selected torrents"
-msgstr "Установить высокий приоритет для выделенных торрентов"
+msgstr "Встановити високий пріоритет для виділенних торрентів"
 
 #: templates/default/panel.tt.html: translate part: #11
 msgid "Refresh"
-msgstr "Обновить"
+msgstr "Поновити"
 
 #: templates/default/panel.tt.html: translate part: #12
 msgid "About"
-msgstr "О программе"
+msgstr "Про программу"
 
 #: templates/default/panel.tt.html: translate part: #13
 msgid "All"
@@ -281,19 +277,19 @@ msgstr "Список"
 
 #: templates/default/panel.tt.html: translate part: #15
 msgid "Actions and List"
-msgstr "Действия и Список"
+msgstr "Дії та Список"
 
 #: templates/default/panel.tt.html: translate part: #16
 msgid "List and Props"
-msgstr "Список и Свойства"
+msgstr "Список та Властивості"
 
 #: templates/default/panel.tt.html: translate part: #17
 msgid "Select layout"
-msgstr "Выбрать расположение"
+msgstr "Обрати розміщення"
 
 #: templates/default/panel.tt.html: translate part: #18
 msgid "Select refresh interval"
-msgstr "Выбрать интервал обновления"
+msgstr "Обрати інтервал оновлення"
 
 #: templates/default/panel.tt.html: translate part: #19
 msgid "sec."
@@ -301,29 +297,29 @@ msgstr "сек."
 
 #: templates/default/panel.tt.html: translate part: #20
 msgid "min."
-msgstr "мин."
+msgstr "хв."
 
 #: templates/default/panel.tt.html: translate part: #21
 #: templates/default/prop.trackers.tt.html: #7
 msgid "Never"
-msgstr "Никогда"
+msgstr "Ніколи"
 
 #: templates/default/panel.tt.html: translate part: #22
 msgid "Select skin"
-msgstr "Выбрать обложку"
+msgstr "Обрати тему"
 
 #: templates/default/panel.tt.html: translate part: #23
 msgid "Select language"
-msgstr "Выбрать язык"
+msgstr "Обрати мову"
 
 #: templates/default/prop.files.tt.html: translate part: #2
 msgid "Path"
-msgstr "Путь"
+msgstr "Шлях"
 
 #: templates/default/prop.files.tt.html: translate part: #5
 #: templates/default/prop.info.tt.html: #14 templates/default/prop.tt.html:
 msgid "Chunks"
-msgstr "Блоков"
+msgstr "Блоків"
 
 #: templates/default/prop.info.tt.html: translate part: #1
 msgid "Downloaded"
@@ -337,11 +333,11 @@ msgstr "Передача"
 #: templates/default/prop.info.tt.html: translate part: #5
 #: templates/default/prop.peers.tt.html: #2
 msgid "Peers connected"
-msgstr "Пиров подключено"
+msgstr "Пірів підключено"
 
 #: templates/default/prop.info.tt.html: translate part: #6
 msgid "from"
-msgstr "из"
+msgstr "з"
 
 #: templates/default/prop.info.tt.html: translate part: #7
 msgid "Uploaded"
@@ -350,7 +346,7 @@ msgstr "Роздано"
 #: templates/default/prop.info.tt.html: translate part: #9
 #: templates/default/prop.peers.tt.html: #5
 msgid "Peers not connected"
-msgstr "Пиров ожидает"
+msgstr "Пірів очікує"
 
 #: templates/default/prop.info.tt.html: translate part: #10
 msgid "Tracker"
@@ -358,15 +354,15 @@ msgstr "Трекер"
 
 #: templates/default/prop.info.tt.html: translate part: #11
 msgid "Message"
-msgstr "Сообщение"
+msgstr "Повідомлення"
 
 #: templates/default/prop.info.tt.html: translate part: #12
 msgid "General"
-msgstr "Общий"
+msgstr "Загальний"
 
 #: templates/default/prop.info.tt.html: translate part: #13
 msgid "Directory"
-msgstr "Директория"
+msgstr "Директорія"
 
 #: templates/default/prop.info.tt.html: translate part: #15
 msgid "x"
@@ -378,19 +374,19 @@ msgstr "завершено"
 
 #: templates/default/prop.info.tt.html: translate part: #17
 msgid "Total size"
-msgstr "Размер"
+msgstr "Розмір"
 
 #: templates/default/prop.info.tt.html: translate part: #19
 msgid "free diskspace"
-msgstr "свободно на диске"
+msgstr "вільно на диску"
 
 #: templates/default/prop.info.tt.html: translate part: #20
 msgid "need more"
-msgstr "нужно"
+msgstr "потрібно"
 
 #: templates/default/prop.info.tt.html: translate part: #21
 msgid "Low disk space"
-msgstr "На диске осталось мало места"
+msgstr "На диску лишилось мало місця"
 
 #: templates/default/prop.info.tt.html: translate part: #22
 msgid "Hash"
@@ -398,51 +394,51 @@ msgstr "Хеш"
 
 #: templates/default/prop.info.tt.html: translate part: #23
 msgid "Created On"
-msgstr "Создан"
+msgstr "Створений"
 
 #: templates/default/prop.info.tt.html: translate part: #24
 msgid "Local ID"
-msgstr "Локальный ID"
+msgstr "Локальний ID"
 
 #: templates/default/prop.info.tt.html: translate part: #25
 msgid "Comment"
-msgstr "Комментарий"
+msgstr "Коментар"
 
 #: templates/default/prop.peers.tt.html: translate part: #1
 msgid "Peers properties"
-msgstr "Свойства пиров"
+msgstr "Властивості пірів"
 
 #: templates/default/prop.peers.tt.html: translate part: #3
 msgid "Peers accounted"
-msgstr "Скачивают"
+msgstr "Закачують"
 
 #: templates/default/prop.peers.tt.html: translate part: #4
 msgid "Peers max"
-msgstr "Максимум пиров"
+msgstr "Максимум пірів"
 
 #: templates/default/prop.peers.tt.html: translate part: #6
 msgid "Peers complete"
-msgstr "Раздают целиком"
+msgstr "Роздають увесь"
 
 #: templates/default/prop.peers.tt.html: translate part: #7
 msgid "Peers min"
-msgstr "Минимум пиров"
+msgstr "Мінімум пірів"
 
 #: templates/default/prop.peers.tt.html: translate part: #8
 msgid "Peers exchange"
-msgstr "Обмен пирами"
+msgstr "Обмін пірами"
 
 #: templates/default/prop.peers.tt.html: translate part: #9
 msgid "on"
-msgstr "включено"
+msgstr "ввімкнено"
 
 #: templates/default/prop.peers.tt.html: translate part: #10
 msgid "off"
-msgstr "выключено"
+msgstr "вимкнено"
 
 #: templates/default/prop.peers.tt.html: translate part: #11
 msgid "Peers list"
-msgstr "Список пиров"
+msgstr "Список пірів"
 
 #: templates/default/prop.peers.tt.html: translate part: #12
 msgid "IP : Port"
@@ -450,11 +446,11 @@ msgstr "IP : Порт"
 
 #: templates/default/prop.peers.tt.html: translate part: #13
 msgid "Client"
-msgstr "Клиент"
+msgstr "Клієнт"
 
 #: templates/default/prop.peers.tt.html: translate part: #14
 msgid "Flags"
-msgstr "Флаги"
+msgstr "Прапорці"
 
 #: templates/default/prop.peers.tt.html: translate part: #15
 msgid "Available"
@@ -462,11 +458,11 @@ msgstr "Доступно"
 
 #: templates/default/prop.peers.tt.html: translate part: #18
 msgid "Peer Rate"
-msgstr "Скорость пира"
+msgstr "Швидкість піра"
 
 #: templates/default/prop.peers.tt.html: translate part: #19
 msgid "Down Total"
-msgstr "Закачено"
+msgstr "Закачано"
 
 #: templates/default/prop.peers.tt.html: translate part: #20
 msgid "Up Total"
@@ -474,7 +470,7 @@ msgstr "Роздано"
 
 #: templates/default/prop.peers.tt.html: translate part: #21
 msgid "Peer Total"
-msgstr "Всего для пира"
+msgstr "Всього для піра"
 
 #: templates/default/prop.peers.tt.html: translate part: #22
 msgid "Id"
@@ -499,39 +495,39 @@ msgstr "Snub"
 #: lib/RTPG/WWW/Frame/Prop.pm: translate part: #1
 #: templates/default/prop.tt.html: #11
 msgid "Unknown property page"
-msgstr "Неизвестная страница свойств"
+msgstr "Невідома сторінка властивостей"
 
 #: templates/default/prop.trackers.tt.html: translate part: #1
 msgid "Url"
-msgstr "Адрес"
+msgstr "Адреса"
 
 #: templates/default/prop.trackers.tt.html: translate part: #2
 msgid "Enabled"
-msgstr "Включено"
+msgstr "Ввімкнено"
 
 #: templates/default/prop.trackers.tt.html: translate part: #3
 msgid "Interval"
-msgstr "Интервал"
+msgstr "Інтервал"
 
 #: templates/default/prop.trackers.tt.html: translate part: #4
 msgid "Last Update"
-msgstr "Последнее обновление"
+msgstr "Останнє оновлення"
 
 #: templates/default/prop.trackers.tt.html: translate part: #5
 msgid "Yes"
-msgstr "Да"
+msgstr "Так"
 
 #: templates/default/prop.trackers.tt.html: translate part: #6
 msgid "No"
-msgstr "Нет"
+msgstr "Ні"
 
 #: templates/default/prop.tt.html: translate part: #1
 msgid "Info"
-msgstr "Инфо"
+msgstr "Інфо"
 
 #: templates/default/prop.tt.html: translate part: #3
 msgid "Files"
-msgstr "Файлы"
+msgstr "Файли"
 
 #: templates/default/prop.tt.html: translate part: #4
 msgid "Trackers"
@@ -539,36 +535,36 @@ msgstr "Трекер"
 
 #: templates/default/prop.tt.html: translate part: #7
 msgid "Skip selected files"
-msgstr "Пропустить выбранные файлы"
+msgstr "Пропустити обрані файли"
 
 #: templates/default/prop.tt.html: translate part: #8
 msgid "Set normal priority for selected files"
-msgstr "Установить обычный приоритет для выбранных файлов"
+msgstr "Встановити звичайний пріоритет для обраних файлів"
 
 #: templates/default/prop.tt.html: translate part: #9
 msgid "Set high priority for selected files"
-msgstr "Установить высокий приоритет для выбранных файлов"
+msgstr "Встановити високий пріоритет для обраних файлів"
 
 #: templates/default/prop.tt.html: translate part: #10
 msgid "Select torrent to show"
-msgstr "Выберите торрент для просмотра"
+msgstr "Оберіть торрент для перегляду"
 
 #: templates/default/string.tt.js: translate part: #2
 msgid "No current torrent selected"
-msgstr "Не выбран торрент"
+msgstr "Не обрано торрент"
 
 #: lib/RTPG/WWW/Template.pm: translate part: #1
 msgid "File not found"
-msgstr "Файл не найден"
+msgstr "Файл не знайдено"
 
 msgid "Active"
-msgstr "Активные"
+msgstr "Активні"
 
 msgid "Started"
 msgstr "Запущено"
 
 msgid "Stopped"
-msgstr "Остановлено"
+msgstr "Зупинено"
 
 msgid "Complete"
 msgstr "Завершено"
@@ -577,19 +573,19 @@ msgid "Incomplete"
 msgstr "Не завершено"
 
 msgid "Default"
-msgstr "По умолчанию"
+msgstr "По замовчуванню"
 
 msgid "low"
-msgstr "низкий"
+msgstr "низький"
 
 msgid "normal"
-msgstr "обычный"
+msgstr "звичайний"
 
 msgid "high"
-msgstr "высокий"
+msgstr "високий"
 
 msgid "unknown"
-msgstr "неизвестно"
+msgstr "невідомо"
 
 msgid "K"
 msgstr "К"

@@ -445,22 +445,26 @@ msgid "Rate"
 msgstr ""
 
 #: templates/default/list.tt.html: translate part: #21
-msgid "Hashing"
+msgid "Custom"
 msgstr ""
 
 #: templates/default/list.tt.html: translate part: #22
-msgid "Seeding"
+msgid "Hashing"
 msgstr ""
 
 #: templates/default/list.tt.html: translate part: #23
-msgid "Finished"
+msgid "Seeding"
 msgstr ""
 
 #: templates/default/list.tt.html: translate part: #24
-msgid "Downloading"
+msgid "Finished"
 msgstr ""
 
 #: templates/default/list.tt.html: translate part: #25
+msgid "Downloading"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #26
 msgid "Paused"
 msgstr ""
 

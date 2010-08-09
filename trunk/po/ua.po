@@ -203,22 +203,26 @@ msgid "Rate"
 msgstr "Рейтинг"
 
 #: templates/default/list.tt.html: translate part: #21
+msgid "Custom"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #22
 msgid "Hashing"
 msgstr "Перевірка"
 
-#: templates/default/list.tt.html: translate part: #22
+#: templates/default/list.tt.html: translate part: #23
 msgid "Seeding"
 msgstr "Роздача"
 
-#: templates/default/list.tt.html: translate part: #23
+#: templates/default/list.tt.html: translate part: #24
 msgid "Finished"
 msgstr "Завершено"
 
-#: templates/default/list.tt.html: translate part: #24
+#: templates/default/list.tt.html: translate part: #25
 msgid "Downloading"
 msgstr "Закачка"
 
-#: templates/default/list.tt.html: translate part: #25
+#: templates/default/list.tt.html: translate part: #26
 msgid "Paused"
 msgstr "Пауза"
 
