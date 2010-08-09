@@ -199,7 +199,7 @@ This method returns list of torrents. It is a link to array of hashes.
 
 =cut
 
-our $exclude_d_mask = qr{^d\.(?:get_mode|get_custom_.*|get_bitfield)$};
+our $exclude_d_mask = qr{^d\.(?:get_mode|get_custom\D*|get_bitfield)$};
 
 sub torrents_list
 {
