@@ -1,3 +1,9 @@
+rtpg (0.2.10) unstable; urgency=low
+
+  * Fix params cast
+
+ -- Roman V. Nikolaev <rshadow@rambler.ru>  Mon, 09 Aug 2010 10:42:00 +0400
+
 rtpg (0.2.9-1) unstable; urgency=low
 
   * Fix get some config params
