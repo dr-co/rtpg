@@ -1,3 +1,10 @@
+rtpg (0.2.11-1) unstable; urgency=low
+
+  * Fix uk language code.
+  * Add language names tooltip.
+
+ -- Roman V. Nikolaev <rshadow@rambler.ru>  Thu, 12 Aug 2010 15:53:29 +0400
+
 rtpg (0.2.10-1) unstable; urgency=low
 
   * Fix params cast.
@@ -140,28 +147,28 @@ rtpg (0.1.0-1) unstable; urgency=low
 rtpg (0.0.7-1) unstable; urgency=low
 
   * The description and debconf's template have been patched, closes: #511284,
-  	thanks Christian Perrier <bubulle@debian.org>.
+      thanks Christian Perrier <bubulle@debian.org>.
   * Updated or added debconf's:
     * Czech translation,
-    	thanks Daniel Kavan <kuan@maradan.org>, closes: #512017;
+        thanks Daniel Kavan <kuan@maradan.org>, closes: #512017;
     * Russian translation,
-    	thanks Yuri Kozlov <yuray@komyakino.ru>, closes: #512166;
+        thanks Yuri Kozlov <yuray@komyakino.ru>, closes: #512166;
     * Portuguese translation,
-    	thanks Américo Monteiro <a_monteiro@netcabo.pt>, closes: #512057;
+        thanks Américo Monteiro <a_monteiro@netcabo.pt>, closes: #512057;
     * Swedish translation,
-    	thanks Martin Bagge <brother@bsnet.se>,	closes: #511568;
-    * French translation, 
-      	thanks Jean-Baka Domelevo-Entfellner <domelevo@gmail.com>,
-      	closes: #512468;
+        thanks Martin Bagge <brother@bsnet.se>,	closes: #511568;
+    * French translation,
+          thanks Jean-Baka Domelevo-Entfellner <domelevo@gmail.com>,
+          closes: #512468;
     * Finnish translation, thanks Esko Arajärvi <edu@iki.fi>, closes: #512218;
     * Romanian translation,
-    	thanks Eddy Petrișor <eddy.petrisor@gmail.com>, closes: #512708;
+        thanks Eddy Petrișor <eddy.petrisor@gmail.com>, closes: #512708;
     * German translation,
-    	thanks Helge Kreutzmann <debian@helgefjell.de>, closes: #512127;
+        thanks Helge Kreutzmann <debian@helgefjell.de>, closes: #512127;
     * Basque translation,
-    	thanks Piarres Beobide <pi+debian@beobide.net>,	closes: #513220;
-    * Spanish translation, thanks 
-    	Francisco Javier Cuadrado <fcocuadrado@gmail.com>, closes: #512769.
+        thanks Piarres Beobide <pi+debian@beobide.net>,	closes: #513220;
+    * Spanish translation, thanks
+        Francisco Javier Cuadrado <fcocuadrado@gmail.com>, closes: #512769.
 
  -- Dmitry E. Oboukhov <unera@debian.org>  Fri, 30 Jan 2009 15:17:50 +0300
 

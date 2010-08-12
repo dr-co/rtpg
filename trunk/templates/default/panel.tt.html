@@ -96,9 +96,10 @@
     <select id="locale" title="[% gettext('Select language') | html %]">
         [% FOR lg = langs %]
             <option
-                value="[% lg | html %]"
-                [% IF data.locale == lg %]selected="selected"[% END %]>
-                    [% lg | upper | html %]
+                value="[% lg.code | html %]"
+                title="[% lg.name %]"
+                [% IF data.locale == lg.code %]selected="selected"[% END %]>
+                    [% lg.code | upper | html %]
             </option>
         [% END %]
     </select>

@@ -45,7 +45,7 @@ use CGI::Carp qw(fatalsToBrowser);
 use File::Basename;
 use File::Spec;
 
-our $VERSION = "0.2.10";
+our $VERSION = "0.2.11";
 our $PROJECT_NAME = "rtpg";
 
 use lib qw(../lib);

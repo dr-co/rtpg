@@ -16,7 +16,7 @@ DEBFULLVERSION 	= $(shell \
 	dpkg-parsechangelog|grep ^Version:|awk '{print $$2}')
 
 VERSION		= $(shell \
-	grep VERSION index.cgi |grep ^our \
+	grep VERSION htdocs/index.cgi |grep ^our \
 	|sed 's/^[^[:digit:]]\+//' |sed 's/".*//')
 
 SVN_VERSION = $(shell svn info|grep ^Revision:|awk '{print $$2}')
@@ -67,6 +67,9 @@ DEB		=	build/rtpg-www_$(DEBFULLVERSION)_all.deb
 ORIG		=	build/rtpg_$(DEBVERSION).orig.tar.gz
 
 deb-package: build/stamp $(DEB)
+
+deb-changelog:
+	dch --newversion $(VERSION)
 
 build/stamp:
 	mkdir -p build

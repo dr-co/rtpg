@@ -45,7 +45,7 @@ sub new
     $opts{language} ||= cfg->get('locale');
 
     # Get available translations
-    my @langs = available();
+    my @langs = map {$_->{code}} available();
     warn 'No translation files' unless @langs;
 
     # Check for pod file and drop to default if not exists
@@ -127,8 +127,12 @@ Get available translations
 
 sub available
 {
+    use Locale::Language;
+
     # Get available translations
-    return map { m|/(\w*?).po$| } glob sprintf '%s/*.po', cfg()->{dir}{po};
+    return
+        map { { code => $_, name => code2language $_} }
+        map { m|/(\w*?).po$| } glob sprintf '%s/*.po', cfg()->{dir}{po};
 }
 
 1;
