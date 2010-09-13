@@ -466,7 +466,7 @@ msgstr "Скорость пира"
 
 #: templates/default/prop.peers.tt.html: translate part: #19
 msgid "Down Total"
-msgstr "Закачено"
+msgstr "Закачано"
 
 #: templates/default/prop.peers.tt.html: translate part: #20
 msgid "Up Total"
