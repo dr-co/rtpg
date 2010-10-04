@@ -1,6 +1,7 @@
 use warnings;
 use strict;
 use utf8;
+use 5.10.0;
 
 =head1 RTPG::WWW::Locale
 
