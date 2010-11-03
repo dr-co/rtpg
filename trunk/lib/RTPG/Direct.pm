@@ -13,7 +13,7 @@ RTPG::Direct - is a driver for L<RTPG>.
 
 =cut
 
-our $VERSION=0.92;
+our $VERSION=0.93;
 
 =head1 SYNOPSIS
 
