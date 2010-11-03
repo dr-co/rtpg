@@ -56,10 +56,13 @@ sub new
     $Template::Stash::SCALAR_OPS->{ucfirst} = sub { return ucfirst shift };
 
     # Debug function
-    $Template::Stash::ROOT_OPS->{dump} =
-    $Template::Stash::SCALAR_OPS->{dump} =
-    $Template::Stash::HASH_OPS->{dump} =
-    $Template::Stash::LIST_OPS->{dump} = sub {'###'.Dumper(@_).'###'};
+    {
+        no warnings qw(once);
+        $Template::Stash::ROOT_OPS->{dump}   =
+        $Template::Stash::SCALAR_OPS->{dump} =
+        $Template::Stash::HASH_OPS->{dump}   =
+        $Template::Stash::LIST_OPS->{dump}   = sub {'###'.Dumper(@_).'###'};
+    }
 
     my %opts = (
         RELATIVE        => 1,

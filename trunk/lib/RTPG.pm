@@ -675,16 +675,19 @@ sub start
 {
     my ($self, $id) = @_;
 
-    my $res;
+    my ($res, $err);
 
     eval
     {
-        $res = $self->rpc_command('d.start', $id);
+        ($res, $err) = $self->rpc_command('d.start',  $id);
+        die $err if $err;
+        ($res, $err) = $self->rpc_command('d.resume', $id);
+        die $err if $err;
     };
     if ($@)
     {
         return undef, "$@" if wantarray;
-        die $@;
+        die "$@";
     }
 
     return $res;
@@ -700,11 +703,12 @@ sub stop
 {
     my ($self, $id) = @_;
 
-    my $res;
+    my ($res, $err);
 
     eval
     {
-        $res = $self->rpc_command('d.stop', $id);
+        ($res, $err) = $self->rpc_command('d.stop', $id);
+        die $err if $err;
     };
     if ($@)
     {
@@ -725,11 +729,12 @@ sub delete
 {
     my ($self, $id) = @_;
 
-    my $res;
+    my ($res, $err);
 
     eval
     {
-        $res = $self->rpc_command('d.erase', $id);
+        ($res, $err) = $self->rpc_command('d.erase', $id);
+        die $err if $err;
     };
     if ($@)
     {
@@ -750,11 +755,12 @@ sub pause
 {
     my ($self, $id) = @_;
 
-    my $res;
+    my ($res, $err);
 
     eval
     {
-        $res = $self->rpc_command('d.pause', $id);
+        ($res, $err) = $self->rpc_command('d.pause', $id);
+        die $err if $err;
     };
     if ($@)
     {
@@ -775,11 +781,12 @@ sub check
 {
     my ($self, $id) = @_;
 
-    my $res;
+    my ($res, $err);
 
     eval
     {
-        $res = $self->rpc_command('d.check_hash', $id);
+        ($res, $err) = $self->rpc_command('d.check_hash', $id);
+        die $err if $err;
     };
     if ($@)
     {
@@ -800,11 +807,12 @@ sub priority
 {
     my ($self, $id, $priority) = @_;
 
-    my $res;
+    my ($res, $err);
 
     eval
     {
-        $res = $self->rpc_command('d.set_priority', $id, $priority);
+        ($res, $err) = $self->rpc_command('d.set_priority', $id, $priority);
+        die $err if $err;
     };
     if ($@)
     {
