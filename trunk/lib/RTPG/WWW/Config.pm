@@ -218,7 +218,8 @@ sub load_from_cgi
     $self->set('action',     'default', 1) unless $self->get('action');
     $self->set('horizontal', '190,*',   1) unless $self->get('horizontal');
     $self->set('vertical',   '*,300',   1) unless $self->get('vertical');
-    $self->set('refresh',    '180',     1) unless $self->get('refresh');
+    $self->set('refresh',    '180',     1)
+        unless $self->get('refresh') =~ m/^\d+$/;
     $self->set('layout',     'default', 1) unless $self->get('layout');
 
     # Smart get current locale from browser
