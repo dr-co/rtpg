@@ -37,7 +37,7 @@ $(document).ready(function(){
 //        debug: true,
         headers: {
             0: { sorter: false 		},
-            1: { sorter: 'text' 	},
+            1: { sorter: false		},
             2: { sorter: 'text' 	},
             3: { sorter: false 		},
             4: { sorter: false 		},

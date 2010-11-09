@@ -171,16 +171,22 @@ table.list tbody td.img div.img.seeding{
     background-image: url("status/seeding.png");
 }
 
-table.list tbody td.img div.img.seeding_inactive{
-    background-image: url("status/seeding_inactive.png");
+table.list tbody td.img div.img.seeding.paused{
+    background-image: url("status/paused.png");
+}
+table.list tbody td.img div.img.seeding.stoped{
+    background-image: url("status/stopped.png");
 }
 
 table.list tbody td.img div.img.downloading{
     background-image: url("status/downloading.png");
 }
 
-table.list tbody td.img div.img.downloading_inactive{
-    background-image: url("status/downloading_inactive.png");
+table.list tbody td.img div.img.downloading.paused{
+    background-image: url("status/paused.png");
+}
+table.list tbody td.img div.img.downloading.stoped{
+    background-image: url("status/stopped.png");
 }
 
 /*************************************************************** Selected row */

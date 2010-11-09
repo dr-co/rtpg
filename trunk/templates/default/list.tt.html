@@ -85,11 +85,21 @@
                     [% IF torrent.hashing %]<div class="img hashing"/>
                     [% ELSIF torrent.complete %]
                         [% IF torrent.is_active %]<div class="img seeding"/>
-                        [% ELSE %]<div class="img seeding_inactive"/>
+                        [% ELSE %]
+                            [% IF torrent.state %]
+                                <div class="img seeding paused"/>
+                            [% ELSE %]
+                                <div class="img seeding stoped"/>
+                            [% END %]
                         [% END %]
                     [% ELSE %]
                         [% IF torrent.is_active %]<div class="img downloading"/>
-                        [% ELSE %]<div class="img downloading_inactive"/>
+                        [% ELSE %]
+                            [% IF torrent.state %]
+                                <div class="img downloading paused"/>
+                            [% ELSE %]
+                                <div class="img downloading stoped"/>
+                            [% END %]
                         [% END %]
                     [% END %]
                 </td>
@@ -141,7 +151,12 @@
                             END;
                         ELSE;
                             IF torrent.is_active;   gettext('Downloading');
-                            ELSE;                   gettext('Paused');
+                            ELSE;
+                                IF torrent.state;
+                                    gettext('Paused');
+                                ELSE;
+                                    gettext('Stoped');
+                                END;
                             END;
                         END;
                     %]
