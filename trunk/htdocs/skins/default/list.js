@@ -23,7 +23,7 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /* This file contain java scripts for List frame */
-
+var m = 0;
 $(document).ready(function(){
     // On torrent select
     $('#list table.list tbody > tr').find('> td:gt(0)')
@@ -39,13 +39,16 @@ $(document).ready(function(){
             0: { sorter: false 		},
             1: { sorter: 'text' 	},
             2: { sorter: 'text' 	},
-            3: { sorter: 'digit' 	},
-            4: { sortet: 'procent'	},
+            3: { sorter: false 		},
+            4: { sorter: false 		},
             5: { sorter: 'text' 	},
             6: { sorter: 'digit' 	},
-            7: { sorter: 'digit' 	},
-            8: { sorter: 'digit' 	},
+            7: { sortet: 'procent'	},
+            8: { sorter: 'text' 	},
             9: { sorter: 'digit' 	},
+           10: { sorter: 'digit' 	},
+           11: { sorter: 'digit' 	},
+           12: { sorter: 'digit' 	},
         },
         cssAsc:  		'asc',
         cssDesc: 		'desc',
@@ -54,51 +57,7 @@ $(document).ready(function(){
         widgets: 		['zebra'],
         textExtraction: function( objTd )
         {
-            var vReturn  = '';
-            var strClass = $(objTd).attr('class');
-
-            // Because we use colspan, we must shift column data
-            if(      $(objTd).hasClass('img')  )
-            {
-                vReturn = $(objTd).siblings('td.name').text();
-            }
-            else if( $(objTd).hasClass('name') )
-            {
-                vReturn = $(objTd).siblings('td.num').text();
-            }
-            else if( $(objTd).hasClass('message') )
-            {
-                vReturn = $(objTd).siblings('td.size')
-                    .find('span.data').text();
-            }
-            else if( $(objTd).hasClass('num') )
-            {
-                vReturn = $(objTd).siblings('td.done').text();
-            }
-            else if( $(objTd).hasClass('size') )
-            {
-                vReturn = $(objTd).siblings('td.status').text();
-            }
-            else if( $(objTd).hasClass('done') )
-            {
-                vReturn = $(objTd).siblings('td.peers').text();
-            }
-            else if( $(objTd).hasClass('status') )
-            {
-                vReturn = $(objTd).siblings('td.down_speed')
-                    .find('span.data').text();
-            }
-            else if( $(objTd).hasClass('peers') )
-            {
-                vReturn = $(objTd).siblings('td.up_speed')
-                    .find('span.data').text();
-            }
-            else if( $(objTd).hasClass('down_speed') )
-            {
-                vReturn = $(objTd).siblings('td.rate').text();
-            }
-
-            return vReturn;
+            return $(objTd).find('span.data').text() || $(objTd).text();
         }
     });
 });

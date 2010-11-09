@@ -96,20 +96,8 @@ table.list tbody td.custom {
     background-repeat: no-repeat;
 }
 
-table.list tbody td.custom.c1 {
-    background-image: url("status/c1.png");
-}
-table.list tbody td.custom.c2 {
-    background-image: url("status/c2.png");
-}
-table.list tbody td.custom.c3 {
-    background-image: url("status/c3.png");
-}
-table.list tbody td.custom.c4 {
-    background-image: url("status/c4.png");
-}
-table.list tbody td.custom.c5 {
-    background-image: url("status/c5.png");
+table.list tbody td.custom.has_custom {
+    background-image: url("status/info.png");
 }
 
 table.list tbody td.message {

@@ -10,10 +10,6 @@
         <col width="47%"/>
         <col width="24px"/>
         <col width="24px"/>
-        <col width="24px"/>
-        <col width="24px"/>
-        <col width="24px"/>
-        <col width="24px"/>
         <col width="5%"/>
         <col width="10%"/>
         <col width="10%"/>
@@ -25,26 +21,45 @@
     </colgroup>
     <thead>
         <tr>
-            <th>
+            <th class="select">
                 <input type="checkbox" class="all" id="all"
                     [% IF data.all == 'true' %]checked="checked"[% END %]
                     title="[% gettext('Select/Unselect all') %]"
                  />
             </th>
-            [%
-                SET max_custom = data.list.list.0.custom_count;
-            %]
-            <th abbr="[% gettext('Nm') %]" colspan="[% 3 + max_custom - 1 %]">
+            <th class="img" abbr="[% gettext('St') %]"
+                title="[% gettext('Status') %]"/>
+            <th class="name" abbr="[% gettext('Nm') %]">
                 [% gettext('Name') %]
             </th>
-            <th abbr="[% gettext('Pr') %]">[% gettext('Priority')   %]</th>
-            <th abbr="[% gettext('Sz') %]">[% gettext('Size')       %]</th>
-            <th abbr="[% gettext('Dn') %]">[% gettext('Done')       %]</th>
-            <th abbr="[% gettext('St') %]">[% gettext('Status')     %]</th>
-            <th abbr="[% gettext('Pe') %]">[% gettext('Peers')      %]</th>
-            <th abbr="[% gettext('DS') %]">[% gettext('Down Speed') %]</th>
-            <th abbr="[% gettext('US') %]">[% gettext('Up Speed')   %]</th>
-            <th abbr="[% gettext('Rt') %]">[% gettext('Rate')       %]</th>
+            <th class="custom" abbr="[% gettext('Cs') %]"
+                title="[% gettext('Custom') %]"/>
+            <th class="message" abbr="[% gettext('Msg') %]"
+                title="[% gettext('Message') %]"/>
+            <th class="num" abbr="[% gettext('Pr') %]">
+                [% gettext('Priority') %]
+            </th>
+            <th class="size" abbr="[% gettext('Sz') %]">
+                [% gettext('Size') %]
+            </th>
+            <th class="done" abbr="[% gettext('Dn') %]">
+                [% gettext('Done') %]
+            </th>
+            <th class="status" abbr="[% gettext('St') %]">
+                [% gettext('Status') %]
+            </th>
+            <th class="peers" abbr="[% gettext('Pe') %]">
+                [% gettext('Peers') %]
+            </th>
+            <th class="down_speed" abbr="[% gettext('DS') %]">
+                [% gettext('Down Speed') %]
+            </th>
+            <th class="up_speed" abbr="[% gettext('US') %]">
+                [% gettext('Up Speed') %]
+            </th>
+            <th class="rate" abbr="[% gettext('Rt') %]">
+                [% gettext('Rate') %]
+            </th>
         </tr>
     </thead>
 
@@ -78,34 +93,23 @@
                         [% END %]
                     [% END %]
                 </td>
+                <td class="name">[% torrent.name %]</td>
                 [%
-                    SET custom_count    = 0;
-                    SET customs         = [1.. max_custom];
+                    SET message     = [];
+                    SET max_custom  = data.list.list.0.custom_count || 5;
+                    SET customs     = [ 1.. max_custom];
                     FOR num IN customs;
                         SET c = 'custom' _ num;
                         IF torrent.${c};
-                            custom_count = custom_count + 1;
+                            message.push(gettext('Custom') _ ' ' _ num _ ': ' _
+                                torrent.${c});
                         END;
                     END;
+                    SET class = ['custom'];
+                    class.push('has_custom') IF message.size;
                 %]
-                <td class="name" colspan="[% max_custom - custom_count %]">
-                    [% torrent.name %]
-                </td>
-                [%
-                    FOR num IN customs;
-                        SET c = 'custom' _ num;
-                        IF torrent.${c};
-                            SET class = ['custom'];
-                            class.push('c' _ num);
-                %]
-                    <td class="[% class.join(' ') %]"
-                        title="[%
-                            gettext('Custom') _ ' ' _ num _ ': ' _
-                            torrent.${c}
-                        | html %]"/>
-                [%      END;
-                    END;
-                %]
+                <td class="[% class.join(' ')%]"
+                    title='[% message.join("\n") | html %]'/>
                 <td
                     [%
                         SET class = ['message'];
