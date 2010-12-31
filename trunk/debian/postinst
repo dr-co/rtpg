@@ -1,18 +1,22 @@
 #!/bin/sh
 
+set -e
 
-#TODO: add config ask for this actions
+. /usr/share/debconf/confmodule
 
-update_hosts()
-{
-    	echo 127.0.0.1 rtpg rtpg-scgi.localhost >> /etc/hosts
-}
+if ! test -f /etc/hosts; then
+    exit 0
+fi
 
-if test -f /etc/hosts; then
-    grep -q rtpg-scgi /etc/hosts ||	update_hosts
-else
-	    umask 022
-    	update_hosts
+if grep -q rtpg /etc/hosts; then
+    exit 0
+fi
+
+db_get rtpg-www/change_host
+
+if test "$RET" = true; then
+    umask 022
+    echo 127.0.0.1 rtpg rtpg-scgi.localhost >> /etc/hosts
 fi
 
 #DEBHELPER#

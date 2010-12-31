@@ -1,9 +1,13 @@
 rtpg (0.2.11-1) unstable; urgency=low
 
+  [ Roman V. Nikolaev ]
   * Fix uk language code.
   * Add language names tooltip.
 
- -- Roman V. Nikolaev <rshadow@rambler.ru>  Thu, 12 Aug 2010 15:53:29 +0400
+  [ Dmitry E. Oboukhov ]
+  Added debconf's question about changing /etc/hosts. Closes: #608451.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Fri, 31 Dec 2010 16:20:05 +0300
 
 rtpg (0.2.10-1) unstable; urgency=low
 
