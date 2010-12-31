@@ -283,8 +283,8 @@ msgid "Close"
 msgstr ""
 
 #: templates/default/action.tt.html: translate part: #1
-#: templates/default/list.tt.html: #16 templates/default/prop.info.tt.html: #4
-#: templates/default/prop.peers.tt.html:
+#: templates/default/list.tt.html: #22 templates/default/prop.info.tt.html: #4
+#: templates/default/prop.peers.tt.html: #16
 msgid "Down Speed"
 msgstr ""
 
@@ -301,7 +301,7 @@ msgid "Unlimited"
 msgstr ""
 
 #: templates/default/action.tt.html: translate part: #5
-#: templates/default/list.tt.html: #18 templates/default/prop.info.tt.html: #8
+#: templates/default/list.tt.html: #24 templates/default/prop.info.tt.html: #8
 #: templates/default/prop.peers.tt.html: #17
 msgid "Up Speed"
 msgstr ""
@@ -359,7 +359,7 @@ msgid "Internal error"
 msgstr ""
 
 #: templates/default/add.tt.html: translate part: #12
-#: templates/default/list.tt.html: #10 templates/default/prop.files.tt.html:
+#: templates/default/list.tt.html: #16 templates/default/prop.files.tt.html:
 #: #4
 msgid "Done"
 msgstr ""
@@ -382,90 +382,107 @@ msgid "Select/Unselect all"
 msgstr ""
 
 #: templates/default/list.tt.html: translate part: #3
-msgid "Nm"
+msgid "St"
 msgstr ""
 
 #: templates/default/list.tt.html: translate part: #4
-msgid "Name"
+msgid "Status"
 msgstr ""
 
 #: templates/default/list.tt.html: translate part: #5
-msgid "Pr"
+msgid "Nm"
 msgstr ""
 
 #: templates/default/list.tt.html: translate part: #6
-#: templates/default/prop.files.tt.html:
-msgid "Priority"
+msgid "Name"
 msgstr ""
 
 #: templates/default/list.tt.html: translate part: #7
-msgid "Sz"
+msgid "Cs"
 msgstr ""
 
 #: templates/default/list.tt.html: translate part: #8
+msgid "Custom"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #9
+msgid "Msg"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #10
+#: templates/default/prop.info.tt.html: #11
+msgid "Message"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #11
+msgid "Pr"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #12
+#: templates/default/prop.files.tt.html: #6
+msgid "Priority"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #13
+msgid "Sz"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #14
 #: templates/default/prop.files.tt.html: #3
 msgid "Size"
 msgstr ""
 
-#: templates/default/list.tt.html: translate part: #9
+#: templates/default/list.tt.html: translate part: #15
 msgid "Dn"
 msgstr ""
 
-#: templates/default/list.tt.html: translate part: #11
-msgid "St"
-msgstr ""
-
-#: templates/default/list.tt.html: translate part: #12
-msgid "Status"
-msgstr ""
-
-#: templates/default/list.tt.html: translate part: #13
+#: templates/default/list.tt.html: translate part: #19
 msgid "Pe"
 msgstr ""
 
-#: templates/default/list.tt.html: translate part: #14
+#: templates/default/list.tt.html: translate part: #20
 #: templates/default/prop.tt.html: #2
 msgid "Peers"
 msgstr ""
 
-#: templates/default/list.tt.html: translate part: #15
+#: templates/default/list.tt.html: translate part: #21
 msgid "DS"
 msgstr ""
 
-#: templates/default/list.tt.html: translate part: #17
+#: templates/default/list.tt.html: translate part: #23
 msgid "US"
 msgstr ""
 
-#: templates/default/list.tt.html: translate part: #19
+#: templates/default/list.tt.html: translate part: #25
 msgid "Rt"
 msgstr ""
 
-#: templates/default/list.tt.html: translate part: #20
+#: templates/default/list.tt.html: translate part: #26
 msgid "Rate"
 msgstr ""
 
-#: templates/default/list.tt.html: translate part: #21
-msgid "Custom"
-msgstr ""
-
-#: templates/default/list.tt.html: translate part: #22
+#: templates/default/list.tt.html: translate part: #28
 msgid "Hashing"
 msgstr ""
 
-#: templates/default/list.tt.html: translate part: #23
+#: templates/default/list.tt.html: translate part: #29
 msgid "Seeding"
 msgstr ""
 
-#: templates/default/list.tt.html: translate part: #24
+#: templates/default/list.tt.html: translate part: #30
 msgid "Finished"
 msgstr ""
 
-#: templates/default/list.tt.html: translate part: #25
+#: templates/default/list.tt.html: translate part: #31
 msgid "Downloading"
 msgstr ""
 
-#: templates/default/list.tt.html: translate part: #26
+#: templates/default/list.tt.html: translate part: #32
 msgid "Paused"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #33
+msgid "Stoped"
 msgstr ""
 
 #: templates/default/panel.tt.html: translate part: #1
@@ -596,10 +613,6 @@ msgstr ""
 
 #: templates/default/prop.info.tt.html: translate part: #10
 msgid "Tracker"
-msgstr ""
-
-#: templates/default/prop.info.tt.html: translate part: #11
-msgid "Message"
 msgstr ""
 
 #: templates/default/prop.info.tt.html: translate part: #12

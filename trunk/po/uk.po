@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rtpg\n"
-"Report-Msgid-Bugs-To: Roman V. Nikolaev <rshadow@rambler.ru>\n"
-"POT-Creation-Date: 2010-07-13 15:00+02\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
 "PO-Revision-Date: 2010-07-15 11:00+02\n"
 "Last-Translator: Oleg Matviychuk <mathway@i.ua>\n"
 "MIME-Version: 1.0\n"
@@ -41,8 +41,8 @@ msgid "Close"
 msgstr "Закрити"
 
 #: templates/default/action.tt.html: translate part: #1
-#: templates/default/list.tt.html: #16 templates/default/prop.info.tt.html: #4
-#: templates/default/prop.peers.tt.html:
+#: templates/default/list.tt.html: #22 templates/default/prop.info.tt.html: #4
+#: templates/default/prop.peers.tt.html: #16
 msgid "Down Speed"
 msgstr "Завантаження"
 
@@ -59,7 +59,7 @@ msgid "Unlimited"
 msgstr "Необмежено"
 
 #: templates/default/action.tt.html: translate part: #5
-#: templates/default/list.tt.html: #18 templates/default/prop.info.tt.html: #8
+#: templates/default/list.tt.html: #24 templates/default/prop.info.tt.html: #8
 #: templates/default/prop.peers.tt.html: #17
 msgid "Up Speed"
 msgstr "Роздача"
@@ -117,7 +117,7 @@ msgid "Internal error"
 msgstr "Інтервал"
 
 #: templates/default/add.tt.html: translate part: #12
-#: templates/default/list.tt.html: #10 templates/default/prop.files.tt.html:
+#: templates/default/list.tt.html: #16 templates/default/prop.files.tt.html:
 #: #4
 msgid "Done"
 msgstr "Готово"
@@ -140,91 +140,111 @@ msgid "Select/Unselect all"
 msgstr "Виділити/Скинути все"
 
 #: templates/default/list.tt.html: translate part: #3
+msgid "St"
+msgstr "Ст"
+
+#: templates/default/list.tt.html: translate part: #4
+msgid "Status"
+msgstr "Статус"
+
+#: templates/default/list.tt.html: translate part: #5
 msgid "Nm"
 msgstr "Ім’я"
 
-#: templates/default/list.tt.html: translate part: #4
+#: templates/default/list.tt.html: translate part: #6
 msgid "Name"
 msgstr "Ім’я файлу"
 
-#: templates/default/list.tt.html: translate part: #5
+#: templates/default/list.tt.html: translate part: #7
+#, fuzzy
+msgid "Cs"
+msgstr "с"
+
+#: templates/default/list.tt.html: translate part: #8
+msgid "Custom"
+msgstr ""
+
+#: templates/default/list.tt.html: translate part: #9
+#, fuzzy
+msgid "Msg"
+msgstr "Повідомлення"
+
+#: templates/default/list.tt.html: translate part: #10
+#: templates/default/prop.info.tt.html: #11
+msgid "Message"
+msgstr "Повідомлення"
+
+#: templates/default/list.tt.html: translate part: #11
 msgid "Pr"
 msgstr "Пр"
 
-#: templates/default/list.tt.html: translate part: #6
-#: templates/default/prop.files.tt.html:
+#: templates/default/list.tt.html: translate part: #12
+#: templates/default/prop.files.tt.html: #6
 msgid "Priority"
 msgstr "Пріоритет"
 
-#: templates/default/list.tt.html: translate part: #7
+#: templates/default/list.tt.html: translate part: #13
 msgid "Sz"
 msgstr "Рз"
 
-#: templates/default/list.tt.html: translate part: #8
+#: templates/default/list.tt.html: translate part: #14
 #: templates/default/prop.files.tt.html: #3
 msgid "Size"
 msgstr "Розмір"
 
-#: templates/default/list.tt.html: translate part: #9
+#: templates/default/list.tt.html: translate part: #15
 msgid "Dn"
 msgstr "%"
 
-#: templates/default/list.tt.html: translate part: #11
-msgid "St"
-msgstr "Ст"
-
-#: templates/default/list.tt.html: translate part: #12
-msgid "Status"
-msgstr "Статус"
-
-#: templates/default/list.tt.html: translate part: #13
+#: templates/default/list.tt.html: translate part: #19
 msgid "Pe"
 msgstr "Піри"
 
-#: templates/default/list.tt.html: translate part: #14
+#: templates/default/list.tt.html: translate part: #20
 #: templates/default/prop.tt.html: #2
 msgid "Peers"
 msgstr "Піри"
 
-#: templates/default/list.tt.html: translate part: #15
+#: templates/default/list.tt.html: translate part: #21
 msgid "DS"
 msgstr "СЗ"
 
-#: templates/default/list.tt.html: translate part: #17
+#: templates/default/list.tt.html: translate part: #23
 msgid "US"
 msgstr "СР"
 
-#: templates/default/list.tt.html: translate part: #19
+#: templates/default/list.tt.html: translate part: #25
 msgid "Rt"
 msgstr "Р"
 
-#: templates/default/list.tt.html: translate part: #20
+#: templates/default/list.tt.html: translate part: #26
 msgid "Rate"
 msgstr "Рейтинг"
 
-#: templates/default/list.tt.html: translate part: #21
-msgid "Custom"
-msgstr ""
-
-#: templates/default/list.tt.html: translate part: #22
+#: templates/default/list.tt.html: translate part: #28
 msgid "Hashing"
 msgstr "Перевірка"
 
-#: templates/default/list.tt.html: translate part: #23
+#: templates/default/list.tt.html: translate part: #29
 msgid "Seeding"
 msgstr "Роздача"
 
-#: templates/default/list.tt.html: translate part: #24
+#: templates/default/list.tt.html: translate part: #30
 msgid "Finished"
 msgstr "Завершено"
 
-#: templates/default/list.tt.html: translate part: #25
+#: templates/default/list.tt.html: translate part: #31
 msgid "Downloading"
 msgstr "Закачка"
 
-#: templates/default/list.tt.html: translate part: #26
+#: templates/default/list.tt.html: translate part: #32
 msgid "Paused"
 msgstr "Пауза"
+
+#: templates/default/list.tt.html: translate part: #33
+#, fuzzy
+msgid "Stoped"
+msgstr "Зупинено"
 
 #: templates/default/panel.tt.html: translate part: #1
 #: templates/default/string.tt.js:
@@ -355,10 +375,6 @@ msgstr "Пірів очікує"
 #: templates/default/prop.info.tt.html: translate part: #10
 msgid "Tracker"
 msgstr "Трекер"
-
-#: templates/default/prop.info.tt.html: translate part: #11
-msgid "Message"
-msgstr "Повідомлення"
 
 #: templates/default/prop.info.tt.html: translate part: #12
 msgid "General"

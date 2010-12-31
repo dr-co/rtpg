@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rtpg\n"
 "Report-Msgid-Bugs-To: rtpg@packages.debian.org\n"
-"POT-Creation-Date: 2009-01-12 07:02+0100\n"
+"POT-Creation-Date: 2009-01-11 10:49+0300\n"
 "PO-Revision-Date: 2009-02-07 00:30+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,12 +25,18 @@ msgstr "Pridať záznam virtuálneho servera do /etc/hosts?"
 #. Type: boolean
 #. Description
 #: ../rtpg-www.templates:2001
-msgid "This package may define a virtual server in the web server configuration."
-msgstr "Tento balík môže definovať virtuálny server v konfigurácii webového servera."
+msgid ""
+"This package may define a virtual server in the web server configuration."
+msgstr ""
+"Tento balík môže definovať virtuálny server v konfigurácii webového servera."
 
 #. Type: boolean
 #. Description
 #: ../rtpg-www.templates:2001
-msgid "For this to be fully functional, an entry is needed in the /etc/hosts file for the virtual server. This operation can be made automatic by enabling this option."
-msgstr "Aby to úplne fungovalo, virtuálny server musí mať záznam v súbore /etc/hosts. Túto operáciu možno vykonať automaticky zapnutím tejto voľby."
-
+msgid ""
+"For this to be fully functional, an entry is needed in the /etc/hosts file "
+"for the virtual server. This operation can be made automatic by enabling "
+"this option."
+msgstr ""
+"Aby to úplne fungovalo, virtuálny server musí mať záznam v súbore /etc/"
+"hosts. Túto operáciu možno vykonať automaticky zapnutím tejto voľby."
