@@ -5,7 +5,6 @@ DEB_DH_INSTALL_ARGS = --exclude=.svn --exclude=po/TEMPLATE.pot
 include /usr/share/cdbs/1/rules/debhelper.mk
 
 clean::
-	debconf-updatepo
 	rm -f *.cdbs-config_list
 
 common-binary-post-install-indep::
