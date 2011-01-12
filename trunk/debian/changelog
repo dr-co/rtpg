@@ -1,3 +1,9 @@
+rtpg (0.2.11-2) unstable; urgency=low
+
+  * Removed postinst/configure scripts, closes: #608451.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Wed, 12 Jan 2011 10:31:02 +0300
+
 rtpg (0.2.11-1) unstable; urgency=low
 
   [ Roman V. Nikolaev ]
