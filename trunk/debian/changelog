@@ -1,3 +1,9 @@
+rtpg (0.2.11-3) unstable; urgency=low
+
+  * removed artefact. Thanks for Pavel Arkhipov <poul-hip@yandex.ru>.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Fri, 11 Feb 2011 16:01:37 +0300
+
 rtpg (0.2.11-2) unstable; urgency=low
 
   * Removed postinst/configure scripts, closes: #608451.
